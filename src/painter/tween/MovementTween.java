@@ -11,7 +11,6 @@ public class MovementTween extends Tween {
     public MovementTween(int start, int duration, Point end, Drawable drawable) {
         super(start, duration, drawable);
         this.end = end;
-        this.start = new Point(drawable.x, drawable.y);
     }
 
     @Override

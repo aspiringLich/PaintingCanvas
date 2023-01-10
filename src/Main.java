@@ -11,8 +11,8 @@ public class Main extends App {
     public void setup() {
         var text = new Text(100, 100, "Hello World").setColor(Color.RED);
         text.setText("Hello World!");
-        text.moveTo(200, 200, 100);
-        text.rotateTo(360, 50);
-        text.colorTo(Color.BLUE, 50);
+        text.animate(moveTo(200, 200), 100)
+                .animate(rotateTo(360), 50)
+                .animateWith(colorTo(Color.BLUE), 50);
     }
 }

@@ -6,12 +6,12 @@ public abstract class Tween {
     /**
      * The frame at witch the tween should start
      */
-    public final int startFrame;
+    public int startFrame;
     /**
      * The length of the tween in frames
      */
-    public final int duration;
-    private final Drawable drawable;
+    public int duration;
+    public Drawable drawable;
 
     Tween(int startFrame, int duration, Drawable drawable) {
         this.startFrame = startFrame;

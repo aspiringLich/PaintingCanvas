@@ -4,6 +4,7 @@ import painter.drawable.Drawable;
 import painter.tween.ColorTween;
 import painter.tween.MovementTween;
 import painter.tween.RotationTween;
+import painter.tween.Tween;
 
 import java.awt.*;
 
@@ -16,6 +17,7 @@ public abstract class App {
      */
     public static Painter painter;
     protected static int builderFrame;
+    protected static int lastBuilderFrame;
 
     public void render() {}
 
@@ -78,25 +80,21 @@ public abstract class App {
             return getThis();
         }
 
-        public T moveTo(int x, int y, int duration) {
-            painter.canvas.tweens.add(new MovementTween(builderFrame, duration, new Point(x, y), this._super));
+        public T animate(Tween tween, int duration) {
+            tween.drawable = this._super;
+            tween.startFrame = builderFrame;
+            tween.duration = duration;
+            lastBuilderFrame = builderFrame;
             builderFrame += duration;
+            painter.canvas.tweens.add(tween);
             return getThis();
         }
 
-        public T rotateTo(int angle, int duration) {
-            painter.canvas.tweens.add(new RotationTween(builderFrame, duration, Math.toRadians(angle), this._super));
-            builderFrame += duration;
-            return getThis();
-        }
-
-        public T colorTo(int r, int g, int b, int duration) {
-            return colorTo(new Color(r, g, b), duration);
-        }
-
-        public T colorTo(Color color, int duration) {
-            painter.canvas.tweens.add(new ColorTween(builderFrame, duration, color, this._super));
-            builderFrame += duration;
+        public T animateWith(Tween tween, int duration) {
+            tween.drawable = this._super;
+            tween.startFrame = lastBuilderFrame;
+            tween.duration = duration;
+            painter.canvas.tweens.add(tween);
             return getThis();
         }
     }
@@ -115,5 +113,21 @@ public abstract class App {
         public Text getThis() {
             return this;
         }
+    }
+
+    protected Tween colorTo(int r, int g, int b) {
+        return colorTo(new Color(r, g, b));
+    }
+
+    protected Tween colorTo(Color color) {
+        return new ColorTween(builderFrame, color, 0, null);
+    }
+
+    protected Tween moveTo(int x, int y) {
+        return new MovementTween(builderFrame, 0, new Point(x, y), null);
+    }
+
+    protected Tween rotateTo(int angle) {
+        return new RotationTween(builderFrame, 0, Math.toRadians(angle), null);
     }
 }

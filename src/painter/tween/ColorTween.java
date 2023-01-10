@@ -8,7 +8,7 @@ public class ColorTween extends Tween {
     private final Color end;
     private Color start;
 
-    public ColorTween(int start, int duration, Color end, Drawable drawable) {
+    public ColorTween(int start, Color end, int duration, Drawable drawable) {
         super(start, duration, drawable);
         this.end = end;
     }

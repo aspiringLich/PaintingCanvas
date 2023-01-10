@@ -13,7 +13,7 @@ import java.util.List;
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new ArrayList<>();
     public final List<Tween> tweens = new ArrayList<>();
-    public int frame = -300;
+    public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
 
 
@@ -47,7 +47,6 @@ public class Canvas extends JComponent {
         default void renderEnd(Graphics g) {}
 
         default void onResize(Canvas canvas, ComponentEvent e) {
-            System.out.printf("Resized to %dx%d%n", canvas.getWidth(), canvas.getHeight());
             canvas.repaint();
         }
     }

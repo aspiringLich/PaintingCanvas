@@ -8,7 +8,6 @@ public class RotationTween extends Tween {
 
     public RotationTween(int start, int duration, double end, Drawable drawable) {
         super(start, duration, drawable);
-        this.start = drawable.rotation;
         this.end = end;
     }
 
