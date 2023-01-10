@@ -27,11 +27,15 @@ public class Canvas extends JComponent {
         if (frame < 0) return;
 
         // Update element tweens
-        for (Tween tween : tweens) tween.update(this.frame);
+        synchronized (tweens) {
+            for (Tween tween : tweens) tween.update(this.frame);
+        }
 
         // Render elements
         renderLifecycle.renderStart(g);
-        for (Drawable element : elements) element.render(g);
+        synchronized (elements) {
+            for (Drawable element : elements) element.render(g);
+        }
         renderLifecycle.renderEnd(g);
     }
 

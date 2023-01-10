@@ -54,7 +54,9 @@ public abstract class App {
 
         public SimpleElement(Drawable drawable) {
             this._super = drawable;
-            painter.canvas.elements.add(this._super);
+            synchronized (painter.canvas.elements) {
+                painter.canvas.elements.add(this._super);
+            }
         }
 
         public abstract T getThis();
@@ -103,7 +105,9 @@ public abstract class App {
             tween.duration = duration;
             lastBuilderFrame = builderFrame;
             builderFrame += duration;
-            painter.canvas.tweens.add(tween);
+            synchronized (painter.canvas.tweens) {
+                painter.canvas.tweens.add(tween);
+            }
             return getThis();
         }
 
@@ -111,7 +115,9 @@ public abstract class App {
             tween.drawable = this._super;
             tween.startFrame = lastBuilderFrame;
             tween.duration = duration;
-            painter.canvas.tweens.add(tween);
+            synchronized (painter.canvas.tweens) {
+                painter.canvas.tweens.add(tween);
+            }
             return getThis();
         }
     }
