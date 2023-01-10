@@ -32,6 +32,23 @@ public abstract class App {
         painter.render(this);
     }
 
+    // == Define tweens ==
+    protected Tween colorTo(int r, int g, int b) {
+        return colorTo(new Color(r, g, b));
+    }
+
+    protected Tween colorTo(Color color) {
+        return new ColorTween(builderFrame, color, 0, null);
+    }
+
+    protected Tween moveTo(int x, int y) {
+        return new MovementTween(builderFrame, 0, new Point(x, y), null);
+    }
+
+    protected Tween rotateTo(int angle) {
+        return new RotationTween(builderFrame, 0, Math.toRadians(angle), null);
+    }
+
     protected abstract static class SimpleElement<T extends SimpleElement<T>> {
         Drawable _super;
 
@@ -115,19 +132,47 @@ public abstract class App {
         }
     }
 
-    protected Tween colorTo(int r, int g, int b) {
-        return colorTo(new Color(r, g, b));
+    protected static class Ellipse extends SimpleElement<Ellipse> {
+        public Ellipse(int x, int y, int w, int h) {
+            super(new painter.drawable.Ellipse(x, y, w, h));
+        }
+
+        @Override
+        public Ellipse getThis() {
+            return this;
+        }
     }
 
-    protected Tween colorTo(Color color) {
-        return new ColorTween(builderFrame, color, 0, null);
+    protected static class Circle extends SimpleElement<Circle> {
+        public Circle(int x, int y, int r) {
+            super(new painter.drawable.Ellipse(x, y, r, r));
+        }
+
+        @Override
+        public Circle getThis() {
+            return this;
+        }
     }
 
-    protected Tween moveTo(int x, int y) {
-        return new MovementTween(builderFrame, 0, new Point(x, y), null);
+    protected static class Rectangle extends SimpleElement<Rectangle> {
+        public Rectangle(int x, int y, int w, int h) {
+            super(new painter.drawable.Rectangle(x, y, w, h));
+        }
+
+        @Override
+        public Rectangle getThis() {
+            return this;
+        }
     }
 
-    protected Tween rotateTo(int angle) {
-        return new RotationTween(builderFrame, 0, Math.toRadians(angle), null);
+    protected static class Square extends SimpleElement<Square> {
+        public Square(int x, int y, int s) {
+            super(new painter.drawable.Rectangle(x, y, s, s));
+        }
+
+        @Override
+        public Square getThis() {
+            return this;
+        }
     }
 }

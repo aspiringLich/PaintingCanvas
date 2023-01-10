@@ -15,7 +15,7 @@ public class MovementTween extends Tween {
 
     @Override
     void updateTween(Drawable drawable, int frame, int duration) {
-        if (frame == 0) this.start = new Point(drawable.x, drawable.y);
+        if (frame == 0 || start == null) this.start = new Point(drawable.x, drawable.y);
         drawable.x = (int) (start.x + (end.x - start.x) * (frame / (float) duration));
         drawable.y = (int) (start.y + (end.y - start.y) * (frame / (float) duration));
     }
