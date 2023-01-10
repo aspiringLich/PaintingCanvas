@@ -1,7 +1,6 @@
 package painter.drawable;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
@@ -11,7 +10,7 @@ public abstract class Drawable {
     /**
      * Rotation of the object in radians (imagine using degrees)
      */
-    public float rotation = 0;
+    public double rotation;
     public Color color;
     public int x;
     public int y;
@@ -28,7 +27,9 @@ public abstract class Drawable {
      * @param g The graphics
      */
     public abstract void draw(Graphics g);
+
     public abstract int centerX(Graphics g);
+
     public abstract int centerY(Graphics g);
 
 
