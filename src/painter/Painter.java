@@ -8,7 +8,7 @@ public class Painter {
     // how many frames per second do we want to run at?
     public static final int fps = 24;
     private final JFrame frame;
-    public PaintingCanvas canvas;
+    public Canvas canvas;
 
     public Painter(int width, int height, String title) {
         frame = new JFrame();
@@ -17,19 +17,18 @@ public class Painter {
         frame.setTitle(title);
         frame.setVisible(true);
 
-        canvas = new PaintingCanvas();
+        canvas = new Canvas();
         frame.add(canvas);
-        frame.addComponentListener(new PaintingCanvas.ResizeListener(canvas));
+        frame.addComponentListener(new Canvas.ResizeListener(canvas));
     }
 
     /**
      * The "render function", this will run the function in app every single frame at the set fps.
      * An alternative to the main function
      *
-     * @param args Command-Line arguments
-     * @param app  contains the render function to run every frame
+     * @param app contains the render function to run every frame
      */
-    public void render(String[] args, App app) {
+    public void render(App app) {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
             app.render();
@@ -42,11 +41,8 @@ public class Painter {
 
     /**
      * This function simply re-renders the canvas every single frame
-     *
-     * @param args Command-Line arguments
-     *             \
      */
-    public void run(String[] args) {
+    public void run() {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
         new Thread(() -> {
             poolExecutor.scheduleAtFixedRate(() -> {

@@ -10,10 +10,10 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaintingCanvas extends JComponent {
+public class Canvas extends JComponent {
     public final List<Drawable> elements = new ArrayList<>();
     public final List<Tween> tweens = new ArrayList<>();
-    public int frame = -1;
+    public int frame = -300;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
 
 
@@ -24,6 +24,7 @@ public class PaintingCanvas extends JComponent {
      */
     public void paintComponent(Graphics g) {
         this.frame++;
+        if (frame < 0) return;
 
         // Update element tweens
         for (Tween tween : tweens) tween.update(this.frame);
@@ -45,17 +46,17 @@ public class PaintingCanvas extends JComponent {
 
         default void renderEnd(Graphics g) {}
 
-        default void onResize(PaintingCanvas canvas, ComponentEvent e) {
+        default void onResize(Canvas canvas, ComponentEvent e) {
             System.out.printf("Resized to %dx%d%n", canvas.getWidth(), canvas.getHeight());
             canvas.repaint();
         }
     }
 
     static class ResizeListener extends ComponentAdapter {
-        PaintingCanvas canvas;
+        Canvas canvas;
         Dimension lastSize = new Dimension();
 
-        ResizeListener(PaintingCanvas canvas) {
+        ResizeListener(Canvas canvas) {
             this.canvas = canvas;
         }
 

@@ -1,17 +1,18 @@
-import painter.Painter;
+import painter.App;
 
-public class Main {
-    public static Painter globalPainter;
+import java.awt.*;
 
-    /**
-     * The entry-point into the application
-     *
-     * @param args Commands-Line arguments
-     */
+public class Main extends App {
     public static void main(String[] args) {
-        globalPainter = new Painter(1000, 600, "Java thingy ikd");
-        painter.App.painter = globalPainter;
+        new Main().run();
+    }
 
-        globalPainter.render(args, new App());
+    @Override
+    public void setup() {
+        var text = new Text(100, 100, "Hello World").setColor(Color.RED);
+        text.setText("Hello World!");
+        text.moveTo(200, 200, 100);
+        text.rotateTo(360, 50);
+        text.colorTo(Color.BLUE, 50);
     }
 }
