@@ -5,31 +5,18 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Painter {
-    private static JFrame jFrame;
+    private JFrame jFrame;
 
-    /**
-     * The frames per second we want the application to run at
-     */
+    // how many frames per second do we want to run at?
     public static final int fps = 24;
 
-    private static PaintingCanvas canvas;
+    public PaintingCanvas canvas;
 
-    /**
-     * Gets the inner held PainingCanvas for use in other methods
-     *
-     * Do NOT run without first constructing an instance of Painter
-     *
-     * @return the globally shared PaintingCanvas object
-     */
-    public static PaintingCanvas getCanvas() {
-        return canvas;
-    }
-
-    private static void createWindow() {
+    public Painter(int width, int height, String title) {
         jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(1920, 1200);
-        jFrame.setTitle("Java graphics thingy idk");
+        jFrame.setSize(width, height);
+        jFrame.setTitle(title);
 
         canvas = new PaintingCanvas();
 
@@ -39,34 +26,36 @@ public class Painter {
 
     /**
      * The "render function", this will run the function in app every single frame at the set fps.
-     *
      * An alternative to the main function
      *
      * @param args Command-Line arguments
      * @param app contains the render function to run every frame
      */
-    public static void render(String[] args, App app) {
-        createWindow();
-
+    public void render(String[] args, App app) {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
         poolExecutor.scheduleAtFixedRate(() -> {
-            app.render(args, canvas);
+            app.render(args);
             canvas.repaint();
             SwingUtilities.updateComponentTreeUI(jFrame);
             jFrame.invalidate();
-            canvas.invalidate();
+            jFrame.validate();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 
     /**
      * This function simply re-renders the canvas every single frame
      *
-     *
-     *
      * @param args Command-Line arguments
-     * @param app contains the render function to run every frame
-     */
-    public static void main(String[] args, App app) {
-
+\     */
+    public void run(String[] args) {
+        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
+        new Thread(() -> {
+            poolExecutor.scheduleAtFixedRate(() -> {
+                canvas.repaint();
+                SwingUtilities.updateComponentTreeUI(jFrame);
+                jFrame.invalidate();
+                jFrame.validate();
+            }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        });
     }
 }
