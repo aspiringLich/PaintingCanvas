@@ -32,7 +32,7 @@ public class Painter {
     public void render(String[] args, App app) {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
-            app.render(args);
+            app.render();
             canvas.repaint();
             SwingUtilities.updateComponentTreeUI(frame);
             frame.invalidate();

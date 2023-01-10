@@ -10,7 +10,7 @@ public class Main {
      */
     public static void main(String[] args) {
         globalPainter = new Painter(1000, 600, "Java thingy ikd");
-        painter.App.globalPainter = globalPainter;
+        painter.App.painter = globalPainter;
 
         globalPainter.render(args, new App());
     }

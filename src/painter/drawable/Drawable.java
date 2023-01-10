@@ -11,6 +11,7 @@ public abstract class Drawable {
      * Rotation of the object in radians (imagine using degrees)
      */
     public double rotation;
+    public boolean visible = true;
     public Color color;
     public int x;
     public int y;
@@ -34,83 +35,12 @@ public abstract class Drawable {
 
 
     public void render(Graphics g) {
+        if (!this.visible) return;
+
         var gc = (Graphics2D) g;
         var transform = gc.getTransform();
         transform.setToRotation(this.rotation, centerX(g), centerY(g));
         gc.setTransform(transform);
         this.draw(g);
-    }
-
-
-    /**
-     * Sets the color via red green and blue arguments
-     *
-     * @param r red (0-255)
-     * @param g green (0-255)
-     * @param b blue (0-255)
-     * @return The original object to allow method chaining
-     */
-    public Drawable setColor(int r, int g, int b) {
-        this.color = new Color(r, g, b);
-        return this;
-    }
-
-    public Drawable setColor(Color color) {
-        this.color = color;
-        return this;
-    }
-
-
-    /**
-     * Get the x-position of this object
-     *
-     * @return the x-position
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Set the x-position of this object
-     *
-     * @param x the x-position
-     * @return The original object to allow method chaining
-     */
-    public Drawable setX(int x) {
-        this.x = x;
-        return this;
-    }
-
-    /**
-     * Get the y-position of this object
-     *
-     * @return the y-position
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * Set the y-position of this object
-     *
-     * @param y the y-position
-     * @return The original object to allow method chaining
-     */
-    public Drawable setY(int y) {
-        this.y = y;
-        return this;
-    }
-
-    /**
-     * Set the x and y position of this object.
-     *
-     * @param x the x-position
-     * @param y the y-position
-     * @return The original object to allow method chaining
-     */
-    public Drawable setPos(int x, int y) {
-        this.x = x;
-        this.y = y;
-        return this;
     }
 }
