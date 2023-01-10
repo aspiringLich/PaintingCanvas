@@ -7,6 +7,7 @@ import java.awt.*;
  */
 public class Text extends Drawable {
     // you can change this is you would like a different font
+    // *comic sans ms* oh god, latest its not papyrus
     static Font font = new Font("Comic Sans MS", Font.BOLD, 1);
 
     public String text;
@@ -15,22 +16,21 @@ public class Text extends Drawable {
     /**
      * <code>new Text(100, 100, "Some text.", 30)</code>
      *
-     * @param x the x-position of the text
-     * @param y the y-position of the text
+     * @param x    the x-position of the text
+     * @param y    the y-position of the text
      * @param text a string, for the text to write itself
      * @param size the size (height in px) of the text
      */
     public Text(int x, int y, String text, float size) {
-        this.x = x;
-        this.y = y;
+        super(x, y, Color.BLACK);
         this.text = text;
         this.size = size;
     }
 
     /**
-     * Set the size of the text object (basically height, 20 would mean the text is 20 px high)
+     * Set the font size of the text
      *
-     * @param size the size in pixels
+     * @param size the size in points
      * @return The original object to allow method chaining
      */
     public Drawable setSize(float size) {
@@ -40,15 +40,9 @@ public class Text extends Drawable {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(color);
-        g.setFont(font.deriveFont(size));
-
-        g.drawChars(
-                text.toCharArray(),
-                0,
-                text.length(),
-                x,
-                y
-        );
+        var gc = (Graphics2D)g;
+        gc.setColor(color);
+        gc.setFont(font.deriveFont(size));
+        gc.drawString(text, x, y);
     }
 }

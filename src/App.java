@@ -3,8 +3,8 @@ import painter.drawable.Text;
 public class App extends painter.App {
     public App() {
         // TODO: i know this is bad, will change
-        globalPainter.canvas.objects.add(new Text(100, 100, "whee", 30));
-        globalPainter.canvas.objects.add(new Text(0, 100,  "0", 30));
+        globalPainter.canvas.elements.add(new Text(100, 100, "whee", 30));
+        globalPainter.canvas.elements.add(new Text(0, 100, "0", 30));
     }
 
     /**
@@ -15,8 +15,8 @@ public class App extends painter.App {
      */
     @Override
     public void render(String[] args) {
-        Text t = (Text) globalPainter.canvas.objects.get(0);
+        Text t = (Text) globalPainter.canvas.elements.get(0);
         t.x += 1;
-        ((Text) globalPainter.canvas.objects.get(1)).text = "" + t.x;
+        ((Text) globalPainter.canvas.elements.get(1)).text = "" + t.x;
     }
 }

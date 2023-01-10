@@ -7,14 +7,23 @@ import java.awt.*;
  * Provides various common methods to draw objects to a screen
  */
 public abstract class Drawable {
+    public Color color;
+    public int x;
+    public int y;
+
+    Drawable(int x, int y, Color color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+    }
+
     /**
      * Draw the actual object onto the screen
+     *
      * @param g The graphics
      */
     public abstract void draw(Graphics g);
 
-    /** The color of the Drawable object */
-    public Color color;
 
     /**
      * Sets the color via red green and blue arguments
@@ -29,12 +38,15 @@ public abstract class Drawable {
         return this;
     }
 
-    // the x and y positions of the onject
-    public int x;
-    public int y;
+    public Drawable setColor(Color color) {
+        this.color = color;
+        return this;
+    }
+
 
     /**
      * Get the x-position of this object
+     *
      * @return the x-position
      */
     public int getX() {
@@ -42,7 +54,19 @@ public abstract class Drawable {
     }
 
     /**
+     * Set the x-position of this object
+     *
+     * @param x the x-position
+     * @return The original object to allow method chaining
+     */
+    public Drawable setX(int x) {
+        this.x = x;
+        return this;
+    }
+
+    /**
      * Get the y-position of this object
+     *
      * @return the y-position
      */
     public int getY() {
@@ -50,30 +74,19 @@ public abstract class Drawable {
     }
 
     /**
-     * Set the x-position of this object
-     * @param x the x-position
-     * @return The original object to allow method chaining
-     */
-    public Drawable setX(int x) {
-        setPos(x, y);
-        return this;
-    }
-
-    /**
      * Set the y-position of this object
+     *
      * @param y the y-position
      * @return The original object to allow method chaining
      */
     public Drawable setY(int y) {
-        setPos(x, y);
+        this.y = y;
         return this;
     }
 
-    int rawX;
-    int rawY;
-
     /**
      * Set the x and y position of this object.
+     *
      * @param x the x-position
      * @param y the y-position
      * @return The original object to allow method chaining

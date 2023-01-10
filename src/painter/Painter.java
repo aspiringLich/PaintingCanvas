@@ -5,23 +5,21 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Painter {
-    private JFrame jFrame;
-
     // how many frames per second do we want to run at?
     public static final int fps = 24;
-
+    private final JFrame frame;
     public PaintingCanvas canvas;
 
     public Painter(int width, int height, String title) {
-        jFrame = new JFrame();
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(width, height);
-        jFrame.setTitle(title);
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(width, height);
+        frame.setTitle(title);
+        frame.setVisible(true);
 
         canvas = new PaintingCanvas();
-
-        jFrame.add(canvas);
-        jFrame.setVisible(true);
+        frame.add(canvas);
+        frame.addComponentListener(new PaintingCanvas.ResizeListener(canvas));
     }
 
     /**
@@ -29,16 +27,16 @@ public class Painter {
      * An alternative to the main function
      *
      * @param args Command-Line arguments
-     * @param app contains the render function to run every frame
+     * @param app  contains the render function to run every frame
      */
     public void render(String[] args, App app) {
-        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
+        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
             app.render(args);
             canvas.repaint();
-            SwingUtilities.updateComponentTreeUI(jFrame);
-            jFrame.invalidate();
-            jFrame.validate();
+            SwingUtilities.updateComponentTreeUI(frame);
+            frame.invalidate();
+            frame.validate();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 
@@ -46,15 +44,16 @@ public class Painter {
      * This function simply re-renders the canvas every single frame
      *
      * @param args Command-Line arguments
-\     */
+     *             \
+     */
     public void run(String[] args) {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
         new Thread(() -> {
             poolExecutor.scheduleAtFixedRate(() -> {
                 canvas.repaint();
-                SwingUtilities.updateComponentTreeUI(jFrame);
-                jFrame.invalidate();
-                jFrame.validate();
+                SwingUtilities.updateComponentTreeUI(frame);
+                frame.invalidate();
+                frame.validate();
             }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
         });
     }
