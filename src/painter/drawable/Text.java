@@ -11,7 +11,6 @@ public class Text extends Drawable {
     static Font font = new Font("Comic Sans MS", Font.BOLD, 1);
 
     public String text;
-    public float size;
 
     /**
      * <code>new Text(100, 100, "Some text.", 30)</code>
@@ -24,7 +23,7 @@ public class Text extends Drawable {
     public Text(int x, int y, String text, float size) {
         super(x, y, Color.BLACK);
         this.text = text;
-        this.size = size;
+        font = font.deriveFont(size);
     }
 
     /**
@@ -34,15 +33,27 @@ public class Text extends Drawable {
      * @return The original object to allow method chaining
      */
     public Drawable setSize(float size) {
-        this.size = size;
+        font = font.deriveFont(size);
         return this;
     }
 
     @Override
     public void draw(Graphics g) {
-        var gc = (Graphics2D)g;
+        var gc = (Graphics2D) g;
         gc.setColor(color);
-        gc.setFont(font.deriveFont(size));
+        gc.setFont(font);
         gc.drawString(text, x, y);
+    }
+
+    @Override
+    public int centerX(Graphics g) {
+        var metrics = g.getFontMetrics(font);
+        return x + metrics.stringWidth(text) / 2;
+    }
+
+    @Override
+    public int centerY(Graphics g) {
+        var metrics = g.getFontMetrics(font);
+        return y - metrics.getAscent() / 4;
     }
 }

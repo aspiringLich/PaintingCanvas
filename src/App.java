@@ -16,7 +16,6 @@ public class App extends painter.App {
     @Override
     public void render(String[] args) {
         Text t = (Text) globalPainter.canvas.elements.get(0);
-        t.x += 1;
-        ((Text) globalPainter.canvas.elements.get(1)).text = "" + t.x;
+        ((Text) globalPainter.canvas.elements.get(1)).text = String.valueOf(++t.x);
     }
 }

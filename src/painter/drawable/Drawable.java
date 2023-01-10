@@ -1,12 +1,17 @@
 package painter.drawable;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
  * Provides various common methods to draw objects to a screen
  */
 public abstract class Drawable {
+    /**
+     * Rotation of the object in radians (imagine using degrees)
+     */
+    public float rotation = 0;
     public Color color;
     public int x;
     public int y;
@@ -23,6 +28,17 @@ public abstract class Drawable {
      * @param g The graphics
      */
     public abstract void draw(Graphics g);
+    public abstract int centerX(Graphics g);
+    public abstract int centerY(Graphics g);
+
+
+    public void render(Graphics g) {
+        var gc = (Graphics2D) g;
+        var transform = gc.getTransform();
+        transform.setToRotation(this.rotation, centerX(g), centerY(g));
+        gc.setTransform(transform);
+        this.draw(g);
+    }
 
 
     /**

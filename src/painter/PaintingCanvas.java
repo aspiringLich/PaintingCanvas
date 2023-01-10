@@ -21,7 +21,7 @@ public class PaintingCanvas extends JComponent {
      */
     public void paintComponent(Graphics g) {
         renderLifecycle.renderStart(g);
-        for (Drawable object : elements) object.draw(g);
+        for (Drawable object : elements) object.render(g);
         renderLifecycle.renderEnd(g);
     }
 
@@ -37,18 +37,25 @@ public class PaintingCanvas extends JComponent {
         default void renderEnd(Graphics g) {}
 
         default void onResize(PaintingCanvas canvas, ComponentEvent e) {
+            System.out.printf("Resized to %dx%d%n", canvas.getWidth(), canvas.getHeight());
             canvas.repaint();
         }
     }
 
     static class ResizeListener extends ComponentAdapter {
         PaintingCanvas canvas;
+        Dimension lastSize = new Dimension();
 
         ResizeListener(PaintingCanvas canvas) {
             this.canvas = canvas;
         }
 
         public void componentResized(ComponentEvent e) {
+            // Don't fire callback multiple times for a single event
+            var thisSize = e.getComponent().getSize();
+            if (thisSize.equals(lastSize)) return;
+            lastSize = thisSize;
+
             canvas.renderLifecycle.onResize(canvas, e);
         }
     }
