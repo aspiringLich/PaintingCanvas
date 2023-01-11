@@ -1,7 +1,7 @@
 package painter;
 
-import painter.drawable.Drawable;
 import painter.animation.Animation;
+import painter.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ import java.util.List;
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new ArrayList<>();
     public final List<Animation> animations = new ArrayList<>();
+    public final List<Event> events = new ArrayList<>();
     public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
 
@@ -26,6 +27,14 @@ public class Canvas extends JComponent {
         this.frame++;
         if (frame < 0) return;
 
+        // Check / run events
+        synchronized (events) {
+            for (Event event : events) {
+                if ((!event.repeat && event.time == frame) || (event.repeat && frame % event.time == 0))
+                    event.runner.run(this);
+            }
+        }
+
         // Update element tweens
         synchronized (animations) {
             for (Animation animation : animations) animation.update(this.frame);
@@ -38,7 +47,6 @@ public class Canvas extends JComponent {
         }
         renderLifecycle.renderEnd(g);
     }
-
 
     public interface RenderLifecycle {
         default void renderStart(Graphics g) {

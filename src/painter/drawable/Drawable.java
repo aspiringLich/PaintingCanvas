@@ -32,6 +32,7 @@ public abstract class Drawable {
 
     /**
      * Get the X-coordinate of the object's center-point
+     *
      * @param g unecessary? Maybe?
      * @return the x-coordinate of the object's center-point
      */
@@ -39,6 +40,7 @@ public abstract class Drawable {
 
     /**
      * Get the Y-coordinate of the object's center-point
+     *
      * @param g unecessary? Maybe?
      * @return the y-coordinate of the object's center-point
      */
@@ -46,11 +48,12 @@ public abstract class Drawable {
 
     /**
      * Actually render the object itself
-     *
+     * <p>
      * This calls the draw method, but does some extra steps beforehand to lay it out correctly
-     *
+     * <p>
      * TODO: Might be unecessary but possibly recalculate this whenever the position is modified but save it somewhere
      * to avoid recalculating this every frame.
+     *
      * @param g The graphics context to draw the object with
      */
     public void render(Graphics g) {

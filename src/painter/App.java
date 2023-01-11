@@ -1,10 +1,10 @@
 package painter;
 
-import painter.drawable.Drawable;
+import painter.animation.Animation;
 import painter.animation.ColorAnimation;
 import painter.animation.MovementAnimation;
 import painter.animation.RotationAnimation;
-import painter.animation.Animation;
+import painter.drawable.Drawable;
 
 import java.awt.*;
 
@@ -25,6 +25,9 @@ public abstract class App {
     public abstract void setup();
 
     public void run() {
+        // Worth a try
+        System.setProperty("sun.java2d.opengl", "true");
+
         // Init global painter
         painter = new Painter(1000, 600, "Java thingy ikd");
 
@@ -259,6 +262,40 @@ public abstract class App {
 
         @Override
         public Square getThis() {
+            return this;
+        }
+    }
+
+    protected static class Polygon extends SimpleElement<Polygon> {
+        public Polygon(int x, int y, java.awt.Polygon polygon) {
+            super(new painter.drawable.Polygon(x, y, polygon));
+        }
+
+        public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
+            super(new painter.drawable.Polygon(x, y, xPoints, yPoints));
+        }
+
+        @Override
+        public Polygon getThis() {
+            return this;
+        }
+    }
+
+    protected static class Triangle extends SimpleElement<Triangle> {
+        public Triangle(int x, int y, int w, int h) {
+            super(new painter.drawable.Polygon(x, y, new int[]{
+                    0,
+                    w / 2,
+                    w
+            }, new int[]{
+                    h,
+                    0,
+                    h
+            }));
+        }
+
+        @Override
+        public Triangle getThis() {
             return this;
         }
     }

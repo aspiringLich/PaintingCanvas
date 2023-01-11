@@ -24,8 +24,9 @@ public class ColorAnimation extends Animation {
 
     /**
      * Linearly interpolate from one color to another
-     * @param _a Color to interpolate from
-     * @param _b Color to interpolate to
+     *
+     * @param _a    Color to interpolate from
+     * @param _b    Color to interpolate to
      * @param delta How much to interpolate (0.0 - 1.0)
      * @return The color at that point in the interpolation
      */
