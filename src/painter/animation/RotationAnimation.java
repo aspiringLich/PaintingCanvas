@@ -16,7 +16,7 @@ public class RotationAnimation extends Animation {
 
     @Override
     void updateAnimation(Drawable drawable, int frame, int duration) {
-        if (frame == 0) start = drawable.rotation;
+        if (frame == 0 || start == null) start = drawable.rotation;
         drawable.rotation = start + (end - start) * (frame / (float) duration);
     }
 }

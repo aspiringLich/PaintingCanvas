@@ -1,12 +1,10 @@
 package painter;
 
-import painter.animation.Animation;
-import painter.animation.ColorAnimation;
-import painter.animation.MovementAnimation;
-import painter.animation.RotationAnimation;
+import painter.animation.*;
 import painter.drawable.Drawable;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * an abstract class to allow interfacing with the painter library whilst keeping the painter library distinct
@@ -24,6 +22,9 @@ public abstract class App {
 
     public abstract void setup();
 
+    /**
+     * Initialize and run the application
+     */
     public void run() {
         // Worth a try
         System.setProperty("sun.java2d.opengl", "true");
@@ -146,42 +147,18 @@ public abstract class App {
         }
 
         /**
-         * Animate the object, TODO: this
+         * Set the color of the object with a hex code
          *
-         * @param tween
-         * @param duration
-         * @return
+         * @param hex the hex code for the color
+         * @return The original object to allow method chaining
          */
-        public T animate(Animation tween, int duration) {
-            tween.drawable = this._super;
-            tween.startFrame = builderFrame;
-            tween.duration = duration;
-            lastBuilderFrame = builderFrame;
-            builderFrame += duration;
-            synchronized (painter.canvas.animations) {
-                painter.canvas.animations.add(tween);
-            }
-            return getThis();
+        public T setColor(int hex) {
+            return setColor(
+                    hex >> 16 & 0xff,
+                    hex >> 8 & 0xff,
+                    hex & 0xff
+            );
         }
-
-        /**
-         * Animate the object, TODO: this
-         *
-         * @param tween
-         * @param duration
-         * @return
-         */
-        public T animateWith(Animation tween, int duration) {
-            tween.drawable = this._super;
-            tween.startFrame = lastBuilderFrame;
-            tween.duration = duration;
-            synchronized (painter.canvas.animations) {
-                painter.canvas.animations.add(tween);
-            }
-            return getThis();
-        }
-
-        // TODO: ScheduleAnimation (i think that's a good name) methods to schedule an animation (wow)
 
         /**
          * Rotate this object dRotation degrees
@@ -203,6 +180,12 @@ public abstract class App {
         public T rotateTo(double rotation) {
             this._super.rotation = rotation;
             return getThis();
+        }
+
+        public AnimationBuilder animate() {
+            return new AnimationBuilder(
+                _super, painter.canvas.frame
+            );
         }
     }
 
@@ -296,6 +279,123 @@ public abstract class App {
 
         @Override
         public Triangle getThis() {
+            return this;
+        }
+    }
+
+    public static class AnimationBuilder {
+        public final Drawable drawable;
+        public int startFrame;
+        public int prevFrame;
+        public int frame;
+
+        public AnimationBuilder(Drawable drawable, int frame) {
+            this.drawable = drawable;
+            this.frame = frame;
+            this.prevFrame = frame;
+            this.startFrame = frame;
+        }
+
+        /**
+         * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
+         * <pre>
+         * // these animations will run one after the other
+         * obj.animate()
+         *    .add(moveTo(100, 100), 100)
+         *    .add(colorTo(Color.BLUE), 100);
+         * </pre>
+         * @param animation The animation type to add
+         * @param duration The amount of time the animation will last
+         * @return <code>this</code> to allow method chaining
+         */
+        public AnimationBuilder add(Animation animation, int duration) {
+            animation.drawable = this.drawable;
+            animation.startFrame = frame;
+            animation.duration = duration;
+
+            int save = prevFrame;
+            prevFrame = frame;
+            frame = save + duration;
+            synchronized (painter.canvas.animations) {
+                painter.canvas.animations.add(animation);
+            }
+            return this;
+        }
+
+        /**
+         * Add the animation alongside / with the previous animation.
+         * <pre>
+         * // these animations will run at the same time
+         * obj.animate()
+         *    .add(moveTo(100, 100), 100)
+         *    .with(colorTo(Color.BLUE), 100);
+         * </pre>
+         * @param animation The animation type to add
+         * @param duration The amount of time the animation will last
+         * @return <code>this</code> to allow method chaining
+         */
+        public AnimationBuilder with(Animation animation, int duration) {
+            animation.drawable = this.drawable;
+            animation.startFrame = prevFrame;
+
+            // the next animation should happen after this one if its longer
+            var end = animation.duration + prevFrame;
+            if (end > frame) frame = end;
+
+            animation.duration = duration;
+            var save = prevFrame;
+            prevFrame = frame;
+            frame = save + duration;
+            synchronized (painter.canvas.animations) {
+                painter.canvas.animations.add(animation);
+            }
+            return this;
+        }
+
+        /**
+         * Adds the next animation <code>frame</code> frames after it normally would.
+         * <pre>
+         * // the second animation will run 50 frames after the first one finishes
+         * obj.animate()
+         *    .add(moveTo(100, 100), 100)
+         *    .wait(50)
+         *    .add(colorTo(Color.BLUE), 100);
+         *
+         * // the second animation will run 50 frames after the first one starts
+         * obj.animate()
+         *    .add(moveTo(100, 100), 100)
+         *    .wait(50)
+         *    .with(colorTo(Color.BLUE), 100);
+         * </pre>
+         * @param frames Frames to wait
+         * @return <code>this</code> to allow method chaining
+         */
+        public AnimationBuilder wait(int frames) {
+            frame += frames;
+            prevFrame += frames;
+            return this;
+        }
+
+        /**
+         * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
+         * <pre>
+         * // this animation will run 50 frames from now and
+         * // last for 100 frames, ending 150 frames from now
+         * obj.animate()
+         *    .schedule(50, moveTo(100, 100), 100)
+         * </pre>
+         * @param time frames, after now, to add the animation
+         * @param animation The animation type to add
+         * @param duration The amount of time the animation will last
+         * @return <code>this</code> to allow method chaining
+         */
+        public AnimationBuilder schedule(int time, Animation animation, int duration) {
+            animation.drawable = this.drawable;
+            animation.startFrame = frame + time;
+            animation.duration = duration;
+            synchronized (painter.canvas.animations) {
+                painter.canvas.animations.add(animation);
+            }
             return this;
         }
     }

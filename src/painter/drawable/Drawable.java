@@ -51,7 +51,7 @@ public abstract class Drawable {
      * <p>
      * This calls the draw method, but does some extra steps beforehand to lay it out correctly
      * <p>
-     * TODO: Might be unecessary but possibly recalculate this whenever the position is modified but save it somewhere
+     * TODO: Might be unnecessary but possibly recalculate this whenever the position is modified but save it somewhere
      * to avoid recalculating this every frame.
      *
      * @param g The graphics context to draw the object with
