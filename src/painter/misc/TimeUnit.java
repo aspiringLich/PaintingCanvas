@@ -4,11 +4,12 @@ import static painter.Painter.fps;
 
 public enum TimeUnit {
     Frames(1),
+    Milliseconds(fps / 1000f),
     Seconds(fps);
 
-    final int frames;
+    final float frames;
 
-    TimeUnit(int frames) {
+    TimeUnit(float frames) {
         this.frames = frames;
     }
 

@@ -17,8 +17,8 @@ public abstract class App {
      * The global Painter all Drawables access to add themselves to.
      */
     public static Painter painter;
-    protected static int builderFrame;
-    protected static int lastBuilderFrame;
+    private static int builderFrame;
+    private static int lastBuilderFrame;
 
     public void render() {
     }
@@ -182,7 +182,7 @@ public abstract class App {
         }
 
         public AnimationBuilder animate() {
-            return new AnimationBuilder(_super, painter.canvas.frame);
+            return new AnimationBuilder(_super);
         }
     }
 
@@ -280,17 +280,14 @@ public abstract class App {
         }
     }
 
-    public static class AnimationBuilder {
+    protected static class AnimationBuilder {
         public final Drawable drawable;
-        public int startFrame;
-        public int prevFrame;
-        public int frame;
+//        public int startFrame;
+//        public int prevFrame;
+//        public int frame;
 
-        public AnimationBuilder(Drawable drawable, int frame) {
+        public AnimationBuilder(Drawable drawable) {
             this.drawable = drawable;
-            this.frame = frame;
-            this.prevFrame = frame;
-            this.startFrame = frame;
         }
 
         // TODO: Update Docs
@@ -312,12 +309,11 @@ public abstract class App {
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
-            animation.startFrame = frame;
+            animation.startFrame = builderFrame;
             animation.duration = _duration;
 
-            int save = prevFrame;
-            prevFrame = frame;
-            frame = save + _duration;
+            lastBuilderFrame = builderFrame;
+            builderFrame += _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
@@ -348,16 +344,11 @@ public abstract class App {
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
-            animation.startFrame = prevFrame;
-
-            // the next animation should happen after this one if its longer
-            var end = animation.duration + prevFrame;
-            if (end > frame) frame = end;
-
+            animation.startFrame = lastBuilderFrame;
             animation.duration = _duration;
-            var save = prevFrame;
-            prevFrame = frame;
-            frame = save + _duration;
+
+///           builderFrame +=
+//            builderFrame += _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
@@ -392,8 +383,8 @@ public abstract class App {
          */
         public AnimationBuilder wait(float duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
-            frame += _duration;
-            prevFrame += _duration;
+            lastBuilderFrame = builderFrame;
+            builderFrame += _duration;
             return this;
         }
 
@@ -429,7 +420,7 @@ public abstract class App {
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
-            animation.startFrame = frame + _time;
+            animation.startFrame = builderFrame + _time;
             animation.duration = _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
