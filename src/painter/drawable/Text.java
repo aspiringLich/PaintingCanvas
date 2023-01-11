@@ -3,11 +3,12 @@ package painter.drawable;
 import java.awt.*;
 
 /**
- * Text.
+ * Text. Pretty self-explanatory I hope.
  */
 public class Text extends Drawable {
     // you can change this is you would like a different font
     // *comic sans ms* oh god, latest its not papyrus
+    // hey coner i think you meant "at least"
     static Font font = new Font("Comic Sans MS", Font.BOLD, 1);
 
     public String text;
@@ -18,7 +19,7 @@ public class Text extends Drawable {
      * @param x    the x-position of the text
      * @param y    the y-position of the text
      * @param text a string, for the text to write itself
-     * @param size the size (height in px) of the text
+     * @param size the size of the text
      */
     public Text(int x, int y, String text, float size) {
         super(x, y, Color.BLACK);

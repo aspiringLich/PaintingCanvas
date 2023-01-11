@@ -1,7 +1,7 @@
 package painter;
 
 import painter.drawable.Drawable;
-import painter.tween.Tween;
+import painter.animation.Animation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new ArrayList<>();
-    public final List<Tween> tweens = new ArrayList<>();
+    public final List<Animation> tweens = new ArrayList<>();
     public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
 
@@ -27,7 +27,7 @@ public class Canvas extends JComponent {
         if (frame < 0) return;
 
         // Update element tweens
-        for (Tween tween : tweens) tween.update(this.frame);
+        for (Animation tween : tweens) tween.update(this.frame);
 
         // Render elements
         renderLifecycle.renderStart(g);

@@ -1,18 +1,21 @@
-package painter.tween;
+package painter.animation;
 
 import painter.drawable.Drawable;
 
-public class RotationTween extends Tween {
+/**
+ * Controls animation that is to do with rotation
+ */
+public class RotationAnimation extends Animation {
     private final double end;
     private double start;
 
-    public RotationTween(int start, int duration, double end, Drawable drawable) {
+    public RotationAnimation(int start, int duration, double end, Drawable drawable) {
         super(start, duration, drawable);
         this.end = end;
     }
 
     @Override
-    void updateTween(Drawable drawable, int frame, int duration) {
+    void updateAnimation(Drawable drawable, int frame, int duration) {
         if (frame == 0) start = drawable.rotation;
         drawable.rotation = start + (end - start) * (frame / (float) duration);
     }

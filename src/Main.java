@@ -14,5 +14,6 @@ public class Main extends App {
         text.animate(moveTo(200, 200), 100)
                 .animate(rotateTo(360), 50)
                 .animateWith(colorTo(Color.BLUE), 50);
+        System.out.print("eh");
     }
 }

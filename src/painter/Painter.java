@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Painter {
     // how many frames per second do we want to run at?
-    public static final int fps = 24;
+    public static final int fps = 30;
     private final JFrame frame;
     public Canvas canvas;
 
@@ -24,7 +24,7 @@ public class Painter {
 
     /**
      * The "render function", this will run the function in app every single frame at the set fps.
-     * An alternative to the main function
+     * An alternative to the "run" function
      *
      * @param app contains the render function to run every frame
      */
@@ -43,7 +43,7 @@ public class Painter {
      * This function simply re-renders the canvas every single frame
      */
     public void run() {
-        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(0);
+        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         new Thread(() -> {
             poolExecutor.scheduleAtFixedRate(() -> {
                 canvas.repaint();
