@@ -9,11 +9,14 @@ public class Main extends App {
 
     @Override
     public void setup() {
+        var dot = new Circle(400, 400, 50);
+        var egg = new Ellipse(200, 700, 50, 100);
         var text = new Text(100, 100, "Hello World").setColor(Color.RED);
         text.setText("Hello World!");
         text.animate(moveTo(200, 200), 100)
                 .animate(rotateTo(360), 50)
                 .animateWith(colorTo(Color.BLUE), 50);
-        System.out.print("eh");
+        dot.animateWith(moveTo(100, 100), 50);
+        egg.animateWith(moveTo(300, 100), 50);
     }
 }
