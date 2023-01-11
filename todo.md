@@ -8,6 +8,7 @@
 - [ ] Think of a nice way to allow for more advanced (repeating) animations
 - [ ] waitUntilAnimationsDone()
 - [X] make animation syntax better
+- [ ] auto-center when resizing
 - [X] More shapes
     - [x] Text
     - [x] Circle
