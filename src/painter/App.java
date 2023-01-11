@@ -19,7 +19,8 @@ public abstract class App {
     protected static int builderFrame;
     protected static int lastBuilderFrame;
 
-    public void render() {}
+    public void render() {
+    }
 
     public abstract void setup();
 
@@ -32,18 +33,38 @@ public abstract class App {
         painter.render(this);
     }
 
+    // == Define animations ==
+    protected Animation colorTo(int r, int g, int b) {
+        return colorTo(new Color(r, g, b));
+    }
+
+    protected Animation colorTo(Color color) {
+        return new ColorAnimation(builderFrame, color, 0, null);
+    }
+
+    protected Animation moveTo(int x, int y) {
+        return new MovementAnimation(builderFrame, 0, new Point(x, y), null);
+    }
+
+    protected Animation rotateTo(int angle) {
+        return new RotationAnimation(builderFrame, 0, Math.toRadians(angle), null);
+    }
+
     protected abstract static class SimpleElement<T extends SimpleElement<T>> {
         Drawable _super;
 
         public SimpleElement(Drawable drawable) {
             this._super = drawable;
-            painter.canvas.elements.add(this._super);
+            synchronized (painter.canvas.elements) {
+                painter.canvas.elements.add(this._super);
+            }
         }
 
         public abstract T getThis();
 
         /**
          * Hide the Object
+         *
          * @return The original object to allow method chaining
          */
         public T hide() {
@@ -53,6 +74,7 @@ public abstract class App {
 
         /**
          * Show the Object
+         *
          * @return The original object to allow method chaining
          */
         public T show() {
@@ -69,6 +91,7 @@ public abstract class App {
 
         /**
          * Set the X-position of the object
+         *
          * @param x the new X-position of the Object
          * @return The original object to allow method chaining
          */
@@ -86,6 +109,7 @@ public abstract class App {
 
         /**
          * Set the Y-position of the object
+         *
          * @param y the new Y-position of the Object
          * @return The original object to allow method chaining
          */
@@ -96,6 +120,7 @@ public abstract class App {
 
         /**
          * Set the color of the object with rgb
+         *
          * @param r red (0 - 255)
          * @param g green (0 - 255)
          * @param b blue (0 - 255)
@@ -108,6 +133,7 @@ public abstract class App {
 
         /**
          * Set the color of the object with a Color object
+         *
          * @param color color.
          * @return The original object to allow method chaining
          */
@@ -118,6 +144,7 @@ public abstract class App {
 
         /**
          * Animate the object, TODO: this
+         *
          * @param tween
          * @param duration
          * @return
@@ -128,12 +155,15 @@ public abstract class App {
             tween.duration = duration;
             lastBuilderFrame = builderFrame;
             builderFrame += duration;
-            painter.canvas.tweens.add(tween);
+            synchronized (painter.canvas.animations) {
+                painter.canvas.animations.add(tween);
+            }
             return getThis();
         }
 
         /**
          * Animate the object, TODO: this
+         *
          * @param tween
          * @param duration
          * @return
@@ -142,7 +172,9 @@ public abstract class App {
             tween.drawable = this._super;
             tween.startFrame = lastBuilderFrame;
             tween.duration = duration;
-            painter.canvas.tweens.add(tween);
+            synchronized (painter.canvas.animations) {
+                painter.canvas.animations.add(tween);
+            }
             return getThis();
         }
 
@@ -150,6 +182,7 @@ public abstract class App {
 
         /**
          * Rotate this object dRotation degrees
+         *
          * @param dRotation change in rotation.
          * @return The original object to allow method chaining
          */
@@ -160,6 +193,7 @@ public abstract class App {
 
         /**
          * Rotate this object to rotation degrees
+         *
          * @param rotation rotation to rotate to
          * @return The original object to allow method chaining
          */
@@ -185,19 +219,47 @@ public abstract class App {
         }
     }
 
-    protected Animation colorTo(int r, int g, int b) {
-        return colorTo(new Color(r, g, b));
+    protected static class Ellipse extends SimpleElement<Ellipse> {
+        public Ellipse(int x, int y, int w, int h) {
+            super(new painter.drawable.Ellipse(x, y, w, h));
+        }
+
+        @Override
+        public Ellipse getThis() {
+            return this;
+        }
     }
 
-    protected Animation colorTo(Color color) {
-        return new ColorAnimation(builderFrame, color, 0, null);
+    protected static class Circle extends SimpleElement<Circle> {
+        public Circle(int x, int y, int r) {
+            super(new painter.drawable.Ellipse(x, y, r, r));
+        }
+
+        @Override
+        public Circle getThis() {
+            return this;
+        }
     }
 
-    protected Animation moveTo(int x, int y) {
-        return new MovementAnimation(builderFrame, 0, new Point(x, y), null);
+    protected static class Rectangle extends SimpleElement<Rectangle> {
+        public Rectangle(int x, int y, int w, int h) {
+            super(new painter.drawable.Rectangle(x, y, w, h));
+        }
+
+        @Override
+        public Rectangle getThis() {
+            return this;
+        }
     }
 
-    protected Animation rotateTo(int angle) {
-        return new RotationAnimation(builderFrame, 0, Math.toRadians(angle), null);
+    protected static class Square extends SimpleElement<Square> {
+        public Square(int x, int y, int s) {
+            super(new painter.drawable.Rectangle(x, y, s, s));
+        }
+
+        @Override
+        public Square getThis() {
+            return this;
+        }
     }
 }

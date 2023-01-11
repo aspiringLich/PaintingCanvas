@@ -5,8 +5,8 @@
 - [ ] More shapes
   - [x] Text
   - [ ] Circle
-  - [ ] Ellipse
+  - [x] Ellipse
   - [ ] Square
-  - [ ] Rect
+  - [x] Rect
   - [ ] Polygon
-  - [ ] Triangle
+  - [x] Triangle

@@ -12,6 +12,7 @@ public abstract class Drawable {
      */
     public double rotation;
     public boolean visible = true;
+    public boolean filled = true;
     public Color color;
     public int x;
     public int y;

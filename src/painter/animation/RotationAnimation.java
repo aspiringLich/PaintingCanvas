@@ -7,7 +7,7 @@ import painter.drawable.Drawable;
  */
 public class RotationAnimation extends Animation {
     private final double end;
-    private double start;
+    private Double start = null;
 
     public RotationAnimation(int start, int duration, double end, Drawable drawable) {
         super(start, duration, drawable);

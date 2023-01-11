@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new ArrayList<>();
-    public final List<Animation> tweens = new ArrayList<>();
+    public final List<Animation> animations = new ArrayList<>();
     public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
 
@@ -27,11 +27,15 @@ public class Canvas extends JComponent {
         if (frame < 0) return;
 
         // Update element tweens
-        for (Animation tween : tweens) tween.update(this.frame);
+        synchronized (animations) {
+            for (Animation animation : animations) animation.update(this.frame);
+        }
 
         // Render elements
         renderLifecycle.renderStart(g);
-        for (Drawable element : elements) element.render(g);
+        synchronized (elements) {
+            for (Drawable element : elements) element.render(g);
+        }
         renderLifecycle.renderEnd(g);
     }
 
