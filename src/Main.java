@@ -27,11 +27,11 @@ public class Main extends App {
 
 
         text.animate()
-                .add(moveTo(200, 200), 40)
-                .wait(100)
-                .with(rotateTo(360), 50)
-                .with(rotateTo(720), 50)
-                .with(rotateTo(0), 50)
-                .add(colorTo(Color.BLUE), 50);
+                .add(moveTo(200, 200), 2)
+                .wait(1)
+                .with(rotateTo(360), 1)
+                .with(rotateTo(720), 1)
+                .with(rotateTo(0), 1)
+                .add(colorTo(Color.BLUE), 1);
     }
 }

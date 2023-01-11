@@ -1,10 +1,13 @@
 package painter;
 
-import painter.animation.*;
+import painter.animation.Animation;
+import painter.animation.ColorAnimation;
+import painter.animation.MovementAnimation;
+import painter.animation.RotationAnimation;
 import painter.drawable.Drawable;
+import painter.misc.TimeUnit;
 
 import java.awt.*;
-import java.util.List;
 
 /**
  * an abstract class to allow interfacing with the painter library whilst keeping the painter library distinct
@@ -153,11 +156,7 @@ public abstract class App {
          * @return The original object to allow method chaining
          */
         public T setColor(int hex) {
-            return setColor(
-                    hex >> 16 & 0xff,
-                    hex >> 8 & 0xff,
-                    hex & 0xff
-            );
+            return setColor(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff);
         }
 
         /**
@@ -183,9 +182,7 @@ public abstract class App {
         }
 
         public AnimationBuilder animate() {
-            return new AnimationBuilder(
-                _super, painter.canvas.frame
-            );
+            return new AnimationBuilder(_super, painter.canvas.frame);
         }
     }
 
@@ -296,6 +293,8 @@ public abstract class App {
             this.startFrame = frame;
         }
 
+        // TODO: Update Docs
+
         /**
          * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
          * <pre>
@@ -304,23 +303,33 @@ public abstract class App {
          *    .add(moveTo(100, 100), 100)
          *    .add(colorTo(Color.BLUE), 100);
          * </pre>
+         *
          * @param animation The animation type to add
-         * @param duration The amount of time the animation will last
+         * @param duration  The amount of time the animation will last
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder add(Animation animation, int duration) {
+        public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+
             animation.drawable = this.drawable;
             animation.startFrame = frame;
-            animation.duration = duration;
+            animation.duration = _duration;
 
             int save = prevFrame;
             prevFrame = frame;
-            frame = save + duration;
+            frame = save + _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
             return this;
         }
+
+        // TODO: Update Docs
+        public AnimationBuilder add(Animation animation, float duration) {
+            return add(animation, duration, TimeUnit.Seconds);
+        }
+
+        // TODO: Update Docs
 
         /**
          * Add the animation alongside / with the previous animation.
@@ -330,11 +339,14 @@ public abstract class App {
          *    .add(moveTo(100, 100), 100)
          *    .with(colorTo(Color.BLUE), 100);
          * </pre>
+         *
          * @param animation The animation type to add
-         * @param duration The amount of time the animation will last
+         * @param duration  The amount of time the animation will last
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder with(Animation animation, int duration) {
+        public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+
             animation.drawable = this.drawable;
             animation.startFrame = prevFrame;
 
@@ -342,15 +354,22 @@ public abstract class App {
             var end = animation.duration + prevFrame;
             if (end > frame) frame = end;
 
-            animation.duration = duration;
+            animation.duration = _duration;
             var save = prevFrame;
             prevFrame = frame;
-            frame = save + duration;
+            frame = save + _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
             return this;
         }
+
+        // TODO: Update Docs
+        public AnimationBuilder with(Animation animation, float duration) {
+            return with(animation, duration, TimeUnit.Seconds);
+        }
+
+        // TODO: Update Docs
 
         /**
          * Adds the next animation <code>frame</code> frames after it normally would.
@@ -367,14 +386,29 @@ public abstract class App {
          *    .wait(50)
          *    .with(colorTo(Color.BLUE), 100);
          * </pre>
-         * @param frames Frames to wait
+         *
+         * @param duration Frames to wait
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder wait(int frames) {
-            frame += frames;
-            prevFrame += frames;
+        public AnimationBuilder wait(float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+            frame += _duration;
+            prevFrame += _duration;
             return this;
         }
+
+        // TODO: Update Docs
+        public AnimationBuilder wait(float duration) {
+            return wait(duration, TimeUnit.Seconds);
+        }
+
+        // TODO: Update Docs
+        // needed to override the base object wait func
+        public AnimationBuilder wait(int duration) {
+            return wait(duration, TimeUnit.Seconds);
+        }
+
+        // TODO: Update Docs
 
         /**
          * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
@@ -384,19 +418,43 @@ public abstract class App {
          * obj.animate()
          *    .schedule(50, moveTo(100, 100), 100)
          * </pre>
-         * @param time frames, after now, to add the animation
+         *
+         * @param time      frames, after now, to add the animation
          * @param animation The animation type to add
-         * @param duration The amount of time the animation will last
+         * @param duration  The amount of time the animation will last
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder schedule(int time, Animation animation, int duration) {
+        public AnimationBuilder schedule(float time, Animation animation, float duration, TimeUnit unit) {
+            var _time = unit.asFrames(time);
+            var _duration = unit.asFrames(duration);
+
             animation.drawable = this.drawable;
-            animation.startFrame = frame + time;
-            animation.duration = duration;
+            animation.startFrame = frame + _time;
+            animation.duration = _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
             return this;
+        }
+
+        // TODO: Update Docs
+        public AnimationBuilder schedule(float time, Animation animation, float duration) {
+            return schedule(time, animation, duration, TimeUnit.Seconds);
+        }
+
+        // TODO: Update Docs
+        public AnimationBuilder schedule(float time, Event.EventRunner runner, TimeUnit unit, boolean repeat) {
+            var _time = unit.asFrames(time);
+            synchronized (painter.canvas.events) {
+                painter.canvas.events.add(new Event(_time, repeat, runner));
+            }
+
+            return this;
+        }
+
+        // TODO: Update Docs
+        public AnimationBuilder schedule(float time, boolean repeat, Event.EventRunner runner) {
+            return schedule(time, runner, TimeUnit.Seconds, repeat);
         }
     }
 }
