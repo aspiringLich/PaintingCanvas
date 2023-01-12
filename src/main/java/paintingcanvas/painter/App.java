@@ -362,21 +362,27 @@ public abstract class App {
     }
 
     /**
-     * This class provides various methods to construct and schedule animations.
-     * You can create an instance of the class by simply:
-     *
+     * <p>
+     *     This class provides various methods to construct and schedule animations.
+     *     You can create an instance of the class by simply:
+     * </p>
      * <pre>
+     *
      * obj.animate();
      * </pre>
-     * Then you are free to call any of the below methods on it to start adding animations. These methods include
-     * <code>.add()</code>, <code>.with()</code>, and <code>.schedule()</code>.
-     * <br>
-     * You should use <code>.add()</code> and <code>.with()</code> for simpler animations. <code>.add()</code>
-     * waits until all animations finish before running, and <code>.with()</code> runs the animation right now,
-     * with any previous <code>.add()</code> animations, which allows you to run multiple animations at the same time.
-     * That's probably confusing so see this piece of code down here:
-     *
+     * <p>
+     *     Then you are free to call any of the below methods on it to start adding animations. These methods include
+     *     <code>.add()</code>, <code>.with()</code>, and <code>.schedule()</code>.
+     * </p>
+     * <p>
+     *     You should use <code>.add()</code> and <code>.with()</code> for simpler animations. <code>.add()</code>
+     *     waits until all animations finish before running. <code>.with()</code> runs the animation right now,
+     *     alongside any previous <code>.add()</code> animations, which allows you to run multiple animations
+     *     at the same time.
+     *     That's probably confusing so see this piece of code down here:
+     * </p>
      * <pre>
+     *
      * // these three animations will happen all at the same time
      * square.animate()
      *       .add(moveTo(100, 100), 100)
@@ -387,16 +393,10 @@ public abstract class App {
      * // this animation will happen after all the previous animations finish
      * text.animate.add(rotateTo(360), 100);
      * </pre>
-     *
-     * as a shorthand, instead of <code>.animate().add()</code> you can instead just use <code>.animate()</code>
-     *
-     * <pre>
-     * square.animate(colorTo(Color.RED), 100);
-     * </pre>
-     *
-     * Since <code>.add()</code> and <code>.with()</code> are blocking, you can use <code>.schedule()</code>
-     * to manually specify when animations run for more complicated animations.
-     *
+     * <p>
+     *     You can use <code>.schedule()</code>
+     *     to manually specify when animations run for more complicated animations.
+     * </p>
      * <pre>
      *
      * </pre>
@@ -412,18 +412,27 @@ public abstract class App {
         }
 
         /**
-         * Add an animation to an object. If there are any currently running animations it waits until
-         * those finish before running. This ensures that whenever you call <code>.add()</code>, this animation
-         * will run after any <code>.add()</code>'s or <code>.with()</code>'s before it.
+         * <p>
+         *     Add an animation to an object. If there are any currently running animations it waits until
+         *     those finish before running. This ensures that whenever you call <code>.add()</code>, this animation
+         *     will run after any <code>.add()</code>'s or <code>.with()</code>'s before it.
+         * </p>
+         * <p>
+         *     This function also takes in a <code>TimeUnit</code> argument, to specify the time unit used.
+         *     The default being seconds if this is not specified.
+         * </p>
          * <pre>
-         * // these animations will run one after the other
+         * // these animations will run one after the other, at 30 fps they will last exactly as long (1 second)
          * obj.animate()
-         *    .add(moveTo(100, 100), 100)
-         *    .add(colorTo(Color.BLUE), 100);
+         *    .add(moveTo(100, 100), 1.0, TimeUnit.Seconds)
+         *    .add(colorTo(Color.BLUE), 30, TimeUnit.Frames);
          * </pre>
          *
          * @param animation The animation type to add
-         * @param duration  The amount of time the animation will last
+         * @param duration  The amount of time the animation will last.
+         *                  This can be an integer (<code>1</code>), which will be auto-converted, or a
+         *                  float (<code>0.25</code>).
+         * @param unit The unit for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
@@ -443,24 +452,48 @@ public abstract class App {
             return this;
         }
 
-        // TODO: Update Docs
+        /**
+         * <p>
+         *     Add an animation to an object. If there are any currently running animations it waits until
+         *     those finish before running. This ensures that whenever you call <code>.add()</code>, this animation
+         *     will run after any <code>.add()</code>'s or <code>.with()</code>'s before it.
+         * </p>
+         * <pre>
+         * // these animations will run one after another and last 1 second
+         * obj.animate()
+         *    .add(moveTo(100, 100), 1.0)
+         *    .add(colorTo(Color.BLUE), 1);
+         * </pre>
+         *
+         * @param animation The animation type to add
+         * @param duration  The amount of time the animation will last in seconds
+         * @return <code>this</code> to allow method chaining
+         */
         public AnimationBuilder add(Animation animation, float duration) {
             return add(animation, duration, TimeUnit.Seconds);
         }
 
-        // TODO: Update Docs
-
         /**
-         * Add the animation alongside / with the previous animation.
+         * <p>
+         *     Add an animation to an object. It will add the animation alongside the previous <code>.add()</code>
+         *     or <code>.with()</code>, or if there's an immediately preceding <code>.wait()</code>,
+         * </p>
+         * <p>
+         *     This function also takes in a <code>TimeUnit</code> argument, to specify the time unit used.
+         *     The default being seconds if this is not specified.
+         * </p>
          * <pre>
-         * // these animations will run at the same time
+         * // these animations will run one after the other, at 30 fps they will last exactly as long (1 second)
          * obj.animate()
-         *    .add(moveTo(100, 100), 100)
-         *    .with(colorTo(Color.BLUE), 100);
+         *    .add(moveTo(100, 100), 1.0, TimeUnit.Seconds)
+         *    .add(colorTo(Color.BLUE), 30, TimeUnit.Frames);
          * </pre>
          *
          * @param animation The animation type to add
-         * @param duration  The amount of time the animation will last
+         * @param duration  The amount of time the animation will last.
+         *                  This can be an integer (<code>1</code>), which will be auto-converted, or a
+         *                  float (<code>0.25</code>).
+         * @param unit The unit for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
@@ -486,22 +519,29 @@ public abstract class App {
         // TODO: Update Docs
 
         /**
-         * Adds the next animation <code>frame</code> frames after it normally would.
+         * <p>
+         *     Adds the next animation <code>duration</code> time units after it normally would.
+         * </p>
+         * <p>
+         *     This function also takes in a <code>TimeUnit</code> argument, to specify the time unit used.
+         *     The default being seconds if this is not specified.
+         * </p>
          * <pre>
          * // the second animation will run 50 frames after the first one finishes
          * obj.animate()
-         *    .add(moveTo(100, 100), 100)
-         *    .wait(50)
-         *    .add(colorTo(Color.BLUE), 100);
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(50, TimeUnit.Frames)
+         *    .add(colorTo(Color.BLUE), 5);
          *
          * // the second animation will run 50 frames after the first one starts
          * obj.animate()
-         *    .add(moveTo(100, 100), 100)
-         *    .wait(50)
-         *    .with(colorTo(Color.BLUE), 100);
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(50, TimeUnit.Frames)
+         *    .with(colorTo(Color.BLUE), 5);
          * </pre>
          *
-         * @param duration Frames to wait
+         * @param duration time to wait
+         * @param unit Unit used for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder wait(float duration, TimeUnit unit) {
@@ -511,31 +551,76 @@ public abstract class App {
             return this;
         }
 
-        // TODO: Update Docs
+        /**
+         * <p>
+         *     Does the next animation <code>duration</code> seconds after it normally would.
+         * </p>
+         * <pre>
+         * // the second animation will run 50 frames after the first one finishes
+         * obj.animate()
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(2)
+         *    .add(colorTo(Color.BLUE), 5);
+         *
+         * // the second animation will run 2 seconds after the first one starts
+         * obj.animate()
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(2)
+         *    .with(colorTo(Color.BLUE), 5);
+         * </pre>
+         *
+         * @param duration seconds to wait
+         * @return <code>this</code> to allow method chaining
+         */
         public AnimationBuilder wait(float duration) {
             return wait(duration, TimeUnit.Seconds);
         }
 
-        // TODO: Update Docs
-        // needed to override the base object wait func
+        /**
+         * <p>
+         *     Does the next animation <code>duration</code> seconds after it normally would.
+         * </p>
+         * <pre>
+         * // the second animation will run 50 frames after the first one finishes
+         * obj.animate()
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(2)
+         *    .add(colorTo(Color.BLUE), 5);
+         *
+         * // the second animation will run 2 seconds after the first one starts
+         * obj.animate()
+         *    .add(moveTo(100, 100), 5)
+         *    .wait(2)
+         *    .with(colorTo(Color.BLUE), 5);
+         * </pre>
+         *
+         * @param duration seconds to wait
+         * @return <code>this</code> to allow method chaining
+         */
         public AnimationBuilder wait(int duration) {
             return wait(duration, TimeUnit.Seconds);
         }
 
-        // TODO: Update Docs
-
         /**
-         * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
+         * <p>
+         *     Schedules this animation to occur exactly <code>time</code> units in the future,
+         *     and for <code>duration</code> units.
+         * </p>
+         * <p>
+         *     This function also takes in a <code>TimeUnit</code> argument, to specify the time unit used.
+         *     The default being seconds if this is not specified.
+         * </p>
          * <pre>
          * // this animation will run 50 frames from now and
          * // last for 100 frames, ending 150 frames from now
          * obj.animate()
-         *    .schedule(50, moveTo(100, 100), 100)
+         *    .schedule(50, moveTo(100, 100), 100, TimeUnit.Frames);
          * </pre>
          *
          * @param time      frames, after now, to add the animation
          * @param animation The animation type to add
          * @param duration  The amount of time the animation will last
+         * @param unit      The time unit to use for <code>duration</code> and <code>time</code>
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder schedule(float time, Animation animation, float duration, TimeUnit unit) {
@@ -551,12 +636,31 @@ public abstract class App {
             return this;
         }
 
-        // TODO: Update Docs
+        /**
+         * <p>
+         *     Schedules this animation to occur exactly <code>time</code> seconds in the future,
+         *     and for <code>duration</code> seconds.
+         * </p>
+         * <pre>
+         * // this animation will run 5 seconds from now and
+         * // last for 2 seconds, ending 7 seconds from now
+         * obj.animate()
+         *    .schedule(5, moveTo(100, 100), 2);
+         * </pre>
+         *
+         * @param time      frames, after now, to add the animation
+         * @param animation The animation type to add
+         * @param duration  The amount of time the animation will last
+         * @return <code>this</code> to allow method chaining
+         */
         public AnimationBuilder schedule(float time, Animation animation, float duration) {
             return schedule(time, animation, duration, TimeUnit.Seconds);
         }
 
-        // TODO: Update Docs
+        // TODO: conor help
+        /**
+         * not sure exactly how this works ima get conor to explain this to me
+         */
         public AnimationBuilder schedule(float time, Event.EventRunner runner, TimeUnit unit, boolean repeat) {
             var _time = unit.asFrames(time);
             synchronized (painter.canvas.events) {
@@ -567,6 +671,9 @@ public abstract class App {
         }
 
         // TODO: Update Docs
+        /**
+         * not sure exactly how this works ima get conor to explain this to me
+         */
         public AnimationBuilder schedule(float time, boolean repeat, Event.EventRunner runner) {
             return schedule(time, runner, TimeUnit.Seconds, repeat);
         }
