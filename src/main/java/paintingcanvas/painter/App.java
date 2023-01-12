@@ -1,11 +1,11 @@
-package painter;
+package paintingcanvas.painter;
 
-import painter.animation.Animation;
-import painter.animation.ColorAnimation;
-import painter.animation.MovementAnimation;
-import painter.animation.RotationAnimation;
-import painter.drawable.Drawable;
-import painter.misc.TimeUnit;
+import paintingcanvas.painter.animation.Animation;
+import paintingcanvas.painter.animation.ColorAnimation;
+import paintingcanvas.painter.animation.MovementAnimation;
+import paintingcanvas.painter.animation.RotationAnimation;
+import paintingcanvas.painter.drawable.Drawable;
+import paintingcanvas.painter.misc.TimeUnit;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -245,11 +245,11 @@ public abstract class App {
 
     protected static class Text extends SimpleElement<Text> {
         public Text(int x, int y, String text) {
-            super(new painter.drawable.Text(x, y, text, 30));
+            super(new paintingcanvas.painter.drawable.Text(x, y, text, 30));
         }
 
         public Text setFontSize(float size) {
-            var text = (painter.drawable.Text) this._super;
+            var text = (paintingcanvas.painter.drawable.Text) this._super;
             text.setSize(size);
             return this;
         }
@@ -260,18 +260,18 @@ public abstract class App {
         }
 
         public String getText() {
-            return ((painter.drawable.Text) this._super).text;
+            return ((paintingcanvas.painter.drawable.Text) this._super).text;
         }
 
         public Text setText(String text) {
-            ((painter.drawable.Text) this._super).text = text;
+            ((paintingcanvas.painter.drawable.Text) this._super).text = text;
             return this;
         }
     }
 
     protected static class Ellipse extends SimpleElement<Ellipse> {
         public Ellipse(int x, int y, int w, int h) {
-            super(new painter.drawable.Ellipse(x, y, w, h));
+            super(new paintingcanvas.painter.drawable.Ellipse(x, y, w, h));
         }
 
         @Override
@@ -282,7 +282,7 @@ public abstract class App {
 
     protected static class Circle extends SimpleElement<Circle> {
         public Circle(int x, int y, int r) {
-            super(new painter.drawable.Ellipse(x, y, r, r));
+            super(new paintingcanvas.painter.drawable.Ellipse(x, y, r, r));
         }
 
         @Override
@@ -293,7 +293,7 @@ public abstract class App {
 
     protected static class Rectangle extends SimpleElement<Rectangle> {
         public Rectangle(int x, int y, int w, int h) {
-            super(new painter.drawable.Rectangle(x, y, w, h));
+            super(new paintingcanvas.painter.drawable.Rectangle(x, y, w, h));
         }
 
         @Override
@@ -304,7 +304,7 @@ public abstract class App {
 
     protected static class Square extends SimpleElement<Square> {
         public Square(int x, int y, int s) {
-            super(new painter.drawable.Rectangle(x, y, s, s));
+            super(new paintingcanvas.painter.drawable.Rectangle(x, y, s, s));
         }
 
         @Override
@@ -315,11 +315,11 @@ public abstract class App {
 
     protected static class Polygon extends SimpleElement<Polygon> {
         public Polygon(int x, int y, java.awt.Polygon polygon) {
-            super(new painter.drawable.Polygon(x, y, polygon));
+            super(new paintingcanvas.painter.drawable.Polygon(x, y, polygon));
         }
 
         public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
-            super(new painter.drawable.Polygon(x, y, xPoints, yPoints));
+            super(new paintingcanvas.painter.drawable.Polygon(x, y, xPoints, yPoints));
         }
 
         @Override
@@ -330,7 +330,7 @@ public abstract class App {
 
     protected static class Triangle extends SimpleElement<Triangle> {
         public Triangle(int x, int y, int w, int h) {
-            super(new painter.drawable.Polygon(x, y, new int[]{
+            super(new paintingcanvas.painter.drawable.Polygon(x, y, new int[]{
                     0,
                     w / 2,
                     w

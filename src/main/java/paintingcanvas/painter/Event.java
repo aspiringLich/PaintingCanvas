@@ -1,4 +1,4 @@
-package painter;
+package paintingcanvas.painter;
 
 public class Event {
     final int time;

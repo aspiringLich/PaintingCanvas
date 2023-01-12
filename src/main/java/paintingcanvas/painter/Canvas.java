@@ -1,7 +1,7 @@
-package painter;
+package paintingcanvas.painter;
 
-import painter.animation.Animation;
-import painter.drawable.Drawable;
+import paintingcanvas.painter.animation.Animation;
+import paintingcanvas.painter.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +29,7 @@ public class Canvas extends JComponent {
 
         // Check / run events
         synchronized (events) {
-            for (Event event : events) {
+            for (var event : events) {
                 if ((!event.repeat && event.time == frame) || (event.repeat && frame % event.time == 0))
                     event.runner.run(this);
             }
@@ -37,13 +37,13 @@ public class Canvas extends JComponent {
 
         // Update element tweens
         synchronized (animations) {
-            for (Animation animation : animations) animation.update(this.frame);
+            for (var animation : animations) animation.update(this.frame);
         }
 
         // Render elements
         renderLifecycle.renderStart(g);
         synchronized (elements) {
-            for (Drawable element : elements) element.render(g);
+            for (var element : elements) element.render(g);
         }
         renderLifecycle.renderEnd(g);
     }

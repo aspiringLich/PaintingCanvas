@@ -1,6 +1,6 @@
-package painter.animation;
+package paintingcanvas.painter.animation;
 
-import painter.drawable.Drawable;
+import paintingcanvas.painter.drawable.Drawable;
 
 /**
  * A class that stores information about animations transitions

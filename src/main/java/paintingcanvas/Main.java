@@ -1,4 +1,6 @@
-import painter.App;
+package paintingcanvas;
+
+import paintingcanvas.painter.App;
 
 import java.awt.*;
 import java.io.IOException;

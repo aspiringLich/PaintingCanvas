@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+
+// what should the group-id be breon
+group 'paintingcanvas'
+version '1.0-SNAPSHOT'
+
+repositories {}
+dependencies {}

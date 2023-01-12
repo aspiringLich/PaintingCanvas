@@ -1,6 +1,6 @@
-package painter.misc;
+package paintingcanvas.painter.misc;
 
-import static painter.Painter.fps;
+import static paintingcanvas.painter.Painter.fps;
 
 public enum TimeUnit {
     Frames(1),
