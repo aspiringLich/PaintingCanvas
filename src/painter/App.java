@@ -8,6 +8,7 @@ import painter.drawable.Drawable;
 import painter.misc.TimeUnit;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
 
 /**
  * an abstract class to allow interfacing with the painter library whilst keeping the painter library distinct
@@ -16,14 +17,17 @@ public abstract class App {
     /**
      * The global Painter all Drawables access to add themselves to.
      */
-    public static Painter painter;
+    protected static Painter painter;
+    protected static Dimension lastSize;
     private static int builderFrame;
     private static int lastBuilderFrame;
+    protected int width;
+    protected int height;
 
     public void render() {
     }
 
-    public abstract void setup();
+    public abstract void setup() throws Exception;
 
     /**
      * Initialize and run the application
@@ -33,10 +37,50 @@ public abstract class App {
         System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
+        this.width = 1000;
+        this.height = 600;
         painter = new Painter(1000, 600, "Java thingy ikd");
 
+        painter.canvas.renderLifecycle = new Canvas.RenderLifecycle() {
+            @Override
+            public void onResize(Canvas canvas, ComponentEvent e) {
+                if (lastSize == null) {
+                    lastSize = e.getComponent().getSize();
+                    return;
+                }
+
+                var newSize = canvas.getSize();
+                if (lastSize.equals(newSize)) return;
+
+                var widthDiff = (newSize.width - lastSize.width) / 2f;
+                var heightDiff = (newSize.height - lastSize.height) / 2f;
+                lastSize = newSize;
+
+                synchronized (canvas.elements) {
+                    canvas.elements.forEach(s -> {
+                        s.x += widthDiff;
+                        s.y += heightDiff;
+                    });
+                }
+
+                synchronized (canvas.animations) {
+                    canvas.animations.stream().filter(a -> a instanceof MovementAnimation).forEach(s -> {
+                        var anim = (MovementAnimation) s;
+                        anim.start = new Point(anim.start.x + (int) widthDiff, anim.start.y + (int) heightDiff);
+                        anim.end = new Point(anim.end.x + (int) widthDiff, anim.end.y + (int) heightDiff);
+                    });
+                }
+
+                canvas.repaint();
+            }
+        };
+
         // Init app
-        this.setup();
+        try {
+            this.setup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         painter.render(this);
     }
 
@@ -55,6 +99,15 @@ public abstract class App {
 
     protected Animation rotateTo(int angle) {
         return new RotationAnimation(builderFrame, 0, Math.toRadians(angle), null);
+    }
+
+    public void sleep(float time, TimeUnit unit) {
+        builderFrame += unit.asFrames(time);
+        lastBuilderFrame = builderFrame;
+    }
+
+    public void sleep(float time) {
+        sleep(time, TimeUnit.Seconds);
     }
 
     protected abstract static class SimpleElement<T extends SimpleElement<T>> {
@@ -138,6 +191,10 @@ public abstract class App {
             return getThis();
         }
 
+        public Color getColor() {
+            return this._super.color;
+        }
+
         /**
          * Set the color of the object with a Color object
          *
@@ -191,13 +248,23 @@ public abstract class App {
             super(new painter.drawable.Text(x, y, text, 30));
         }
 
-        public Text setText(String text) {
-            ((painter.drawable.Text) this._super).text = text;
+        public Text setFontSize(float size) {
+            var text = (painter.drawable.Text) this._super;
+            text.setSize(size);
             return this;
         }
 
         @Override
         public Text getThis() {
+            return this;
+        }
+
+        public String getText() {
+            return ((painter.drawable.Text) this._super).text;
+        }
+
+        public Text setText(String text) {
+            ((painter.drawable.Text) this._super).text = text;
             return this;
         }
     }

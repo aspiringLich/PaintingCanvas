@@ -8,7 +8,12 @@
 - [ ] Think of a nice way to allow for more advanced (repeating) animations
 - [ ] waitUntilAnimationsDone()
 - [X] make animation syntax better
-- [ ] auto-center when resizing
+- [X] auto-center when resizing
+- [ ] Use scheduler for all element sets (some function that takes a lambda for specific code)
+    - Just use the scheduler for everything
+    - also maybe make a generic scheduler / ticker
+- [ ] Change App.(width/height) to get(Witdh/Height) funcs
+- [ ] Take doubles everyware not floats
 - [X] More shapes
     - [x] Text
     - [x] Circle

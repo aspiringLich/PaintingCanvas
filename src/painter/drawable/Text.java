@@ -9,7 +9,7 @@ public class Text extends Drawable {
     // you can change this is you would like a different font
     // *comic sans ms* oh god, latest its not papyrus
     // hey coner i think you meant "at least"
-    static Font font = new Font("Comic Sans MS", Font.BOLD, 1);
+    public Font font = new Font("Comic Sans MS", Font.BOLD, 1);
 
     public String text;
 

@@ -8,8 +8,8 @@ import java.awt.*;
  * Controls animation that is to do with position
  */
 public class MovementAnimation extends Animation {
-    private final Point end;
-    private Point start;
+    public Point end;
+    public Point start;
 
     public MovementAnimation(int start, int duration, Point end, Drawable drawable) {
         super(start, duration, drawable);
