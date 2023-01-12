@@ -85,6 +85,20 @@ public abstract class App {
     }
 
     // == Define animations ==
+
+    /**
+     * Makes an animation that sets the color of the object with rgb
+     *
+     * <pre>
+     * // this should animate the square red
+     * square.animate().add(colorTo(255, 0, 0), 100);
+     * </pre>
+     *
+     * @param r red (0 - 255)
+     * @param g green (0 - 255)
+     * @param b blue (0 - 255)
+     * @return An animation
+     */
     protected Animation colorTo(int r, int g, int b) {
         return colorTo(new Color(r, g, b));
     }
@@ -347,6 +361,46 @@ public abstract class App {
         }
     }
 
+    /**
+     * This class provides various methods to construct and schedule animations.
+     * You can create an instance of the class by simply:
+     *
+     * <pre>
+     * obj.animate();
+     * </pre>
+     * Then you are free to call any of the below methods on it to start adding animations. These methods include
+     * <code>.add()</code>, <code>.with()</code>, and <code>.schedule()</code>.
+     * <br>
+     * You should use <code>.add()</code> and <code>.with()</code> for simpler animations. <code>.add()</code>
+     * waits until all animations finish before running, and <code>.with()</code> runs the animation right now,
+     * with any previous <code>.add()</code> animations, which allows you to run multiple animations at the same time.
+     * That's probably confusing so see this piece of code down here:
+     *
+     * <pre>
+     * // these three animations will happen all at the same time
+     * square.animate()
+     *       .add(moveTo(100, 100), 100)
+     *       .with(colorTo(Color.RED), 100);
+     * circle.animate()
+     *       .with(colorTo(color.BLUE), 100);
+     *
+     * // this animation will happen after all the previous animations finish
+     * text.animate.add(rotateTo(360), 100);
+     * </pre>
+     *
+     * as a shorthand, instead of <code>.animate().add()</code> you can instead just use <code>.animate()</code>
+     *
+     * <pre>
+     * square.animate(colorTo(Color.RED), 100);
+     * </pre>
+     *
+     * Since <code>.add()</code> and <code>.with()</code> are blocking, you can use <code>.schedule()</code>
+     * to manually specify when animations run for more complicated animations.
+     *
+     * <pre>
+     *
+     * </pre>
+     */
     protected static class AnimationBuilder {
         public final Drawable drawable;
 //        public int startFrame;
@@ -357,10 +411,10 @@ public abstract class App {
             this.drawable = drawable;
         }
 
-        // TODO: Update Docs
-
         /**
-         * Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
+         * Add an animation to an object. If there are any currently running animations it waits until
+         * those finish before running. This ensures that whenever you call <code>.add()</code>, this animation
+         * will run after any <code>.add()</code>'s or <code>.with()</code>'s before it.
          * <pre>
          * // these animations will run one after the other
          * obj.animate()
@@ -373,6 +427,8 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
+            // waitUntilAnimationsDone();
+
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
