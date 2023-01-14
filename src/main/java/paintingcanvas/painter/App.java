@@ -18,7 +18,7 @@ public abstract class App {
      * The global Painter all Drawables access to add themselves to.
      */
     protected static Painter painter;
-    private static Dimension lastSize;
+    protected static Dimension lastSize;
     private static int builderFrame;
     private static int lastBuilderFrame;
     protected int width;
@@ -92,13 +92,6 @@ public abstract class App {
     protected Animation colorTo(Color color) {
         return new ColorAnimation(builderFrame, color, 0, null);
     }
-
-
-    // TODO: add docs (sory breon)
-    protected Animation colorTo(int hex) {
-        return new ColorAnimation(builderFrame, new Color(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff), 0, null);
-    }
-
 
     protected Animation moveTo(int x, int y) {
         return new MovementAnimation(builderFrame, 0, new Point(x, y), null);
@@ -377,7 +370,6 @@ public abstract class App {
          *
          * @param animation The animation type to add
          * @param duration  The amount of time the animation will last
-         * @param unit      The unit of time used for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
@@ -413,7 +405,6 @@ public abstract class App {
          *
          * @param animation The animation type to add
          * @param duration  The amount of time the animation will last
-         * @param unit      The unit of time used for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
@@ -455,7 +446,6 @@ public abstract class App {
          * </pre>
          *
          * @param duration Frames to wait
-         * @param unit     The unit of time used for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder wait(float duration, TimeUnit unit) {
@@ -490,7 +480,6 @@ public abstract class App {
          * @param time      frames, after now, to add the animation
          * @param animation The animation type to add
          * @param duration  The amount of time the animation will last
-         * @param unit      The unit of time used for duration
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder schedule(float time, Animation animation, float duration, TimeUnit unit) {
