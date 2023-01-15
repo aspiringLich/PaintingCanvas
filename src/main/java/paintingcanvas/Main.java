@@ -48,8 +48,6 @@ public class Main extends App {
             var y = (int) (Math.random() * height);
 
             var thisText = new Text(x, y, entry.getKey()).setFontSize(fontSize).setColor(color);
-            // Animation to move away from center
-            // thisText.animate().with(moveTo(width / 2 + (x - width / 2) * 2, height / 2 + (y - height / 2) * 2), 600f);
             text.add(thisText);
         }
 
@@ -68,9 +66,11 @@ public class Main extends App {
 
         for (var w : words) {
             var t = text.stream().filter(x -> x.getText().equals(w)).findFirst().orElseThrow();
-            t.animate().with(colorTo(Color.RED), 0.1f);
+            var oldColor = t.getColor();
+
+            t.setColor(Color.RED);
             sleep(0.3f);
-            t.animate().with(colorTo(t.getColor()), 0.1f);
+            t.setColor(oldColor);
         }
     }
 }
