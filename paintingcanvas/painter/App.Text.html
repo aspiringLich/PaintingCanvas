@@ -44,7 +44,7 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
@@ -83,9 +83,22 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">protected static class </span><span class="element-name type-name-label">App.Text</span>
 <span class="extends-implements">extends <a href="App.SimpleElement.html" title="class in paintingcanvas.painter">App.SimpleElement</a>&lt;<a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a>&gt;</span></div>
+<div class="block">A Text element, used for drawing text on the canvas.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ </code></pre></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-paintingcanvas.painter.App.SimpleElement">Fields inherited from class&nbsp;paintingcanvas.painter.<a href="App.SimpleElement.html" title="class in paintingcanvas.painter">App.SimpleElement</a></h3>
+<code><a href="App.SimpleElement.html#_super">_super</a></code></div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -97,7 +110,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,java.lang.String)" class="member-name-link">Text</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Create a new Text element.</div>
+</div>
 </div>
 </section>
 </li>
@@ -112,18 +127,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getText()" class="member-name-link">getText</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFontSize()" class="member-name-link">getFontSize</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the current font size of the text.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getText()" class="member-name-link">getText</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the current text of the element.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getThis()" class="member-name-link">getThis</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getThis()" class="member-name-link">getThis</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFontSize(float)" class="member-name-link">setFontSize</a><wbr>(float&nbsp;size)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the size of the text in <a href="https://en.wikipedia.org/wiki/Point_(typography)">points</a>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFontSize(float)" class="member-name-link">setFontSize</a><wbr>(float&nbsp;size)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setText(java.lang.String)" class="member-name-link">setText</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setText(java.lang.String)" class="member-name-link">setText</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the text of the element.</div>
+</div>
 </div>
 </div>
 </div>
@@ -150,6 +176,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Text</span><wbr><span class="parameters">(int&nbsp;x,
  int&nbsp;y,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
+<div class="block">Create a new Text element.
+ The default font size is 30, and the default font is <u>comic sans</u> <em>(not sorry)</em>.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - The X-position of the text</dd>
+<dd><code>y</code> - The Y-position of the text</dd>
+<dd><code>text</code> - The text</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -161,15 +198,9 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="setFontSize(float)">
-<h3>setFontSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></span>&nbsp;<span class="element-name">setFontSize</span><wbr><span class="parameters">(float&nbsp;size)</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="getThis()">
 <h3>getThis</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></span>&nbsp;<span class="element-name">getThis</span>()</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></span>&nbsp;<span class="element-name">getThis</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="App.SimpleElement.html#getThis()">getThis</a></code>&nbsp;in class&nbsp;<code><a href="App.SimpleElement.html" title="class in paintingcanvas.painter">App.SimpleElement</a>&lt;<a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a>&gt;</code></dd>
@@ -177,15 +208,86 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="getFontSize()">
+<h3>getFontSize</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getFontSize</span>()</div>
+<div class="block">Get the current font size of the text.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ text.setFontSize(40); // Set font size to 40 points
+ System.out.println(text.getFontSize()); // Prints 40
+ </code></pre></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The font size in points</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#setFontSize(float)"><code>setFontSize(float)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setFontSize(float)">
+<h3>setFontSize</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></span>&nbsp;<span class="element-name">setFontSize</span><wbr><span class="parameters">(float&nbsp;size)</span></div>
+<div class="block">Sets the size of the text in <a href="https://en.wikipedia.org/wiki/Point_(typography)">points</a>.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ text.setFontSize(40); // Set font size to 40 points
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>size</code> - Font size in points</dd>
+<dt>Returns:</dt>
+<dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#getFontSize()"><code>getFontSize()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getText()">
 <h3>getText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getText</span>()</div>
+<div class="block">Gets the current text of the element.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ System.out.println(text.getText()); // =&gt; Hello World
+ </code></pre></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The text as a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#setText(java.lang.String)"><code>setText(String)</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setText(java.lang.String)">
 <h3>setText</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></span>&nbsp;<span class="element-name">setText</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
+<div class="block">Sets the text of the element.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ text.setText("Go Go Mango");
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>text</code> - The new text for the element as a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a></dd>
+<dt>Returns:</dt>
+<dd>The original object to allow method chaining</dd>
+</dl>
 </section>
 </li>
 </ul>

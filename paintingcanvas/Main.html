@@ -97,7 +97,7 @@ loadScripts(document, 'script');</script>
 <h2>Field Summary</h2>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-paintingcanvas.painter.App">Fields inherited from class&nbsp;paintingcanvas.painter.<a href="painter/App.html" title="class in paintingcanvas.painter">App</a></h3>
-<code><a href="painter/App.html#height">height</a>, <a href="painter/App.html#lastSize">lastSize</a>, <a href="painter/App.html#painter">painter</a>, <a href="painter/App.html#width">width</a></code></div>
+<code><a href="painter/App.html#painter">painter</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -129,13 +129,15 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setup()" class="member-name-link">setup</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">This is the function that is called when the program starts.</div>
+</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-paintingcanvas.painter.App">Methods inherited from class&nbsp;paintingcanvas.painter.<a href="painter/App.html" title="class in paintingcanvas.painter">App</a></h3>
-<code><a href="painter/App.html#colorTo(int,int,int)">colorTo</a>, <a href="painter/App.html#colorTo(java.awt.Color)">colorTo</a>, <a href="painter/App.html#moveTo(int,int)">moveTo</a>, <a href="painter/App.html#render()">render</a>, <a href="painter/App.html#rotateTo(int)">rotateTo</a>, <a href="painter/App.html#run()">run</a>, <a href="painter/App.html#sleep(float)">sleep</a>, <a href="painter/App.html#sleep(float,paintingcanvas.painter.misc.TimeUnit)">sleep</a></code></div>
+<code><a href="painter/App.html#colorTo(int)">colorTo</a>, <a href="painter/App.html#colorTo(int,int,int)">colorTo</a>, <a href="painter/App.html#colorTo(java.awt.Color)">colorTo</a>, <a href="painter/App.html#height()">height</a>, <a href="painter/App.html#moveTo(int,int)">moveTo</a>, <a href="painter/App.html#render()">render</a>, <a href="painter/App.html#rotateTo(int)">rotateTo</a>, <a href="painter/App.html#run()">run</a>, <a href="painter/App.html#sleep(float)">sleep</a>, <a href="painter/App.html#sleep(float,paintingcanvas.painter.misc.TimeUnit)">sleep</a>, <a href="painter/App.html#width()">width</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -175,6 +177,10 @@ loadScripts(document, 'script');</script>
 <h3>setup</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setup</span>()
            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="painter/App.html#setup()">App</a></code></span></div>
+<div class="block">This is the function that is called when the program starts.
+ It is where you will put all your code.
+ (unless you want to be fancy)</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="painter/App.html#setup()">setup</a></code>&nbsp;in class&nbsp;<code><a href="painter/App.html" title="class in paintingcanvas.painter">App</a></code></dd>

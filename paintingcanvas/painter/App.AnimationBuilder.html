@@ -81,44 +81,12 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">protected static class </span><span class="element-name type-name-label">App.AnimationBuilder</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">This class provides various methods to construct and schedule animations.
- You can create an instance of the class by simply:
-
- <pre>
- obj.animate();
- </pre>
- Then you are free to call any of the below methods on it to start adding animations. These methods include
- <code>.add()</code>, <code>.with()</code>, and <code>.schedule()</code>.
- <br>
- You should use <code>.add()</code> and <code>.with()</code> for simpler animations. <code>.add()</code>
- waits until all animations finish before running, and <code>.with()</code> runs the animation right now,
- with any previous <code>.add()</code> animations, which allows you to run multiple animations at the same time.
- That's probably confusing so see this piece of code down here:
-
- <pre>
- // these three animations will happen all at the same time
- square.animate()
-       .add(moveTo(100, 100), 100)
-       .with(colorTo(Color.RED), 100);
- circle.animate()
-       .with(colorTo(color.BLUE), 100);
-
- // this animation will happen after all the previous animations finish
- text.animate.add(rotateTo(360), 100);
- </pre>
-
- as a shorthand, instead of <code>.animate().add()</code> you can instead just use <code>.animate()</code>
-
- <pre>
- square.animate(colorTo(Color.RED), 100);
- </pre>
-
- Since <code>.add()</code> and <code>.with()</code> are blocking, you can use <code>.schedule()</code>
- to manually specify when animations run for more complicated animations.
-
- <pre>
-
- </pre></div>
+<div class="block">A builder used to add animations to an element.
+ <pre><code>
+ Text text = new Text(100, 100, "Hello World");
+ text.animate()
+     .add(moveTo(200, 200), 3);
+ </code></pre></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -131,7 +99,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>final <a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></code></div>
+<div class="col-first even-row-color"><code>protected final <a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></code></div>
 <div class="col-second even-row-color"><code><a href="#drawable" class="member-name-link">drawable</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -142,9 +110,11 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(paintingcanvas.painter.drawable.Drawable)" class="member-name-link">AnimationBuilder</a><wbr>(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -155,7 +125,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -164,54 +134,68 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(paintingcanvas.painter.animation.Animation,float)" class="member-name-link">add</a><wbr>(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Add a new animation to the element.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(paintingcanvas.painter.animation.Animation,float,paintingcanvas.painter.misc.TimeUnit)" class="member-name-link">add</a><wbr>(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add an animation to an object.</div>
+<div class="block">Add a new animation to the element.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(float,boolean,paintingcanvas.painter.Event.EventRunner)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#schedule(float,boolean,paintingcanvas.painter.Event.EventRunner)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
  boolean&nbsp;repeat,
  <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Schedule the execution of arbitrary code with a <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> at an absolute time.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(float,paintingcanvas.painter.animation.Animation,float)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
  <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Schedule an <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> at an absolute time.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(float,paintingcanvas.painter.animation.Animation,float,paintingcanvas.painter.misc.TimeUnit)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
  <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add the animation at the end of the animation queue.</div>
+<div class="block">Schedule an <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> at an absolute time.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(float,paintingcanvas.painter.Event.EventRunner,paintingcanvas.painter.misc.TimeUnit,boolean)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#schedule(float,paintingcanvas.painter.Event.EventRunner,paintingcanvas.painter.misc.TimeUnit,boolean)" class="member-name-link">schedule</a><wbr>(float&nbsp;time,
  <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit,
  boolean&nbsp;repeat)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Schedule the execution of arbitrary code with a <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> at an absolute time.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wait(float)" class="member-name-link">wait</a><wbr>(float&nbsp;duration)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Used to add delays between animations.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wait(float,paintingcanvas.painter.misc.TimeUnit)" class="member-name-link">wait</a><wbr>(float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds the next animation <code>frame</code> frames after it normally would.</div>
+<div class="block">Used to add delays between animations.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wait(int)" class="member-name-link">wait</a><wbr>(int&nbsp;duration)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Used to add delays between animations.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#with(paintingcanvas.painter.animation.Animation,float)" class="member-name-link">with</a><wbr>(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Add the animation alongside / with the previous animation.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#with(paintingcanvas.painter.animation.Animation,float,paintingcanvas.painter.misc.TimeUnit)" class="member-name-link">with</a><wbr>(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration,
@@ -239,7 +223,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="drawable">
 <h3>drawable</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></span>&nbsp;<span class="element-name">drawable</span></div>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></span>&nbsp;<span class="element-name">drawable</span></div>
 </section>
 </li>
 </ul>
@@ -253,7 +237,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(paintingcanvas.painter.drawable.Drawable)">
 <h3>AnimationBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AnimationBuilder</span><wbr><span class="parameters">(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">AnimationBuilder</span><wbr><span class="parameters">(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</span></div>
 </section>
 </li>
 </ul>
@@ -265,24 +249,63 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="schedule(float,paintingcanvas.painter.Event.EventRunner,paintingcanvas.painter.misc.TimeUnit,boolean)">
+<h3>schedule</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(float&nbsp;time,
+ <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner,
+ <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit,
+ boolean&nbsp;repeat)</span></div>
+<div class="block">Schedule the execution of arbitrary code with a <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> at an absolute time.
+ <pre><code>
+ // Print 'hi' after 10 seconds
+ AnimationBuilder.schedule(10, c -&gt; System.out.println("hi"), TimeUnit.Seconds, false);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>time</code> - The time from the start of the program to the start of the animation</dd>
+<dd><code>runner</code> - The <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> object</dd>
+<dd><code>repeat</code> - If the event should repeat</dd>
+<dd><code>unit</code> - The <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc"><code>TimeUnit</code></a> used for <code>time</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="schedule(float,boolean,paintingcanvas.painter.Event.EventRunner)">
+<h3>schedule</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(float&nbsp;time,
+ boolean&nbsp;repeat,
+ <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner)</span></div>
+<div class="block">Schedule the execution of arbitrary code with a <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> at an absolute time.
+ <pre><code>
+ // Print 'hi' after 10 seconds
+ AnimationBuilder.schedule(10, c -&gt; System.out.println("hi"), TimeUnit.Seconds, false);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>time</code> - The time in seconds from the start of the program to the start of the animation</dd>
+<dd><code>runner</code> - The <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter"><code>Event.EventRunner</code></a> object</dd>
+<dd><code>repeat</code> - If the event should repeat</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="add(paintingcanvas.painter.animation.Animation,float,paintingcanvas.painter.misc.TimeUnit)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</span></div>
-<div class="block">Add an animation to an object. If there are any currently running animations it waits until
- those finish before running. This ensures that whenever you call <code>.add()</code>, this animation
- will run after any <code>.add()</code>'s or <code>.with()</code>'s before it.
- <pre>
+<div class="block">Add a new animation to the element.
+ <pre><code>
  // these animations will run one after the other
  obj.animate()
-    .add(moveTo(100, 100), 100)
-    .add(colorTo(Color.BLUE), 100);
- </pre></div>
+    .add(moveTo(100, 100), 100, TimeUnit.Frames)
+    .add(colorTo(Color.BLUE), 100, TimeUnit.Frames);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>animation</code> - The animation type to add</dd>
 <dd><code>duration</code> - The amount of time the animation will last</dd>
+<dd><code>unit</code> - The unit of time used for <code>duration</code></dd>
 <dt>Returns:</dt>
 <dd><code>this</code> to allow method chaining</dd>
 </dl>
@@ -293,6 +316,20 @@ loadScripts(document, 'script');</script>
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</span></div>
+<div class="block">Add a new animation to the element.
+ <pre><code>
+ // these animations will run one after the other
+ obj.animate()
+    .add(moveTo(100, 100), 10)
+    .add(colorTo(Color.BLUE), 10);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>animation</code> - The animation type to add</dd>
+<dd><code>duration</code> - The amount of time the animation will last. In seconds.</dd>
+<dt>Returns:</dt>
+<dd><code>this</code> to allow method chaining</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -302,16 +339,17 @@ loadScripts(document, 'script');</script>
  float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</span></div>
 <div class="block">Add the animation alongside / with the previous animation.
- <pre>
+ <pre><code>
  // these animations will run at the same time
  obj.animate()
-    .add(moveTo(100, 100), 100)
-    .with(colorTo(Color.BLUE), 100);
- </pre></div>
+    .add(moveTo(100, 100), 100, TimeUnit.Frames)
+    .add(colorTo(Color.BLUE), 100, TimeUnit.Frames);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>animation</code> - The animation type to add</dd>
 <dd><code>duration</code> - The amount of time the animation will last</dd>
+<dd><code>unit</code> - The unit of time used for <code>duration</code></dd>
 <dt>Returns:</dt>
 <dd><code>this</code> to allow method chaining</dd>
 </dl>
@@ -322,6 +360,20 @@ loadScripts(document, 'script');</script>
 <h3>with</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">with</span><wbr><span class="parameters">(<a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</span></div>
+<div class="block">Add the animation alongside / with the previous animation.
+ <pre><code>
+ // these animations will run at the same time
+ obj.animate()
+    .add(moveTo(100, 100), 10)
+    .with(colorTo(Color.BLUE), 10);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>animation</code> - The animation type to add</dd>
+<dd><code>duration</code> - The amount of time the animation will last</dd>
+<dt>Returns:</dt>
+<dd><code>this</code> to allow method chaining</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -329,23 +381,25 @@ loadScripts(document, 'script');</script>
 <h3>wait</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">wait</span><wbr><span class="parameters">(float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</span></div>
-<div class="block">Adds the next animation <code>frame</code> frames after it normally would.
- <pre>
+<div class="block">Used to add delays between animations.
+ <pre><code>
  // the second animation will run 50 frames after the first one finishes
  obj.animate()
     .add(moveTo(100, 100), 100)
-    .wait(50)
+    .wait(50, TimeUnit.Frames)
     .add(colorTo(Color.BLUE), 100);
 
+ // TODO: Verify that wait + with has the following behavior
  // the second animation will run 50 frames after the first one starts
  obj.animate()
     .add(moveTo(100, 100), 100)
-    .wait(50)
+    .wait(50, TimeUnit.Frames)
     .with(colorTo(Color.BLUE), 100);
- </pre></div>
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>duration</code> - Frames to wait</dd>
+<dd><code>duration</code> - Time to wait</dd>
+<dd><code>unit</code> - The <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc"><code>TimeUnit</code></a> to use for the <code>duration</code></dd>
 <dt>Returns:</dt>
 <dd><code>this</code> to allow method chaining</dd>
 </dl>
@@ -355,12 +409,54 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="wait(float)">
 <h3>wait</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">wait</span><wbr><span class="parameters">(float&nbsp;duration)</span></div>
+<div class="block">Used to add delays between animations.
+ <pre><code>
+ // the second animation will run 10 seconds after the first one finishes
+ obj.animate()
+    .add(moveTo(100, 100), 100)
+    .wait(10)
+    .add(colorTo(Color.BLUE), 100);
+
+ // TODO: Verify that wait + with has the following behavior
+ // the second animation will run 10 seconds after the first one starts
+ obj.animate()
+    .add(moveTo(100, 100), 100)
+    .wait(10)
+    .with(colorTo(Color.BLUE), 100);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>duration</code> - Frames to wait</dd>
+<dt>Returns:</dt>
+<dd><code>this</code> to allow method chaining</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="wait(int)">
 <h3>wait</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">wait</span><wbr><span class="parameters">(int&nbsp;duration)</span></div>
+<div class="block">Used to add delays between animations.
+ <pre><code>
+ // the second animation will run 10 seconds after the first one finishes
+ obj.animate()
+    .add(moveTo(100, 100), 100)
+    .wait(10)
+    .add(colorTo(Color.BLUE), 100);
+
+ // TODO: Verify that wait + with has the following behavior
+ // the second animation will run 10 seconds after the first one starts
+ obj.animate()
+    .add(moveTo(100, 100), 100)
+    .wait(10)
+    .with(colorTo(Color.BLUE), 100);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>duration</code> - Frames to wait</dd>
+<dt>Returns:</dt>
+<dd><code>this</code> to allow method chaining</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -370,20 +466,20 @@ loadScripts(document, 'script');</script>
  <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</span></div>
-<div class="block">Add the animation at the end of the animation queue. If there's no previous animations it adds the animation now.
- <pre>
- // this animation will run 50 frames from now and
- // last for 100 frames, ending 150 frames from now
+<div class="block">Schedule an <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> at an absolute time.
+ <pre><code>
+ // obj will start moving to (100, 100) 20 frames after the program states
  obj.animate()
-    .schedule(50, moveTo(100, 100), 100)
- </pre></div>
+    .schedule(20, moveTo(100, 100), 10, TimeUnit.Frames);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>time</code> - frames, after now, to add the animation</dd>
-<dd><code>animation</code> - The animation type to add</dd>
-<dd><code>duration</code> - The amount of time the animation will last</dd>
+<dd><code>time</code> - The time from the start of the program to the start of the animation</dd>
+<dd><code>animation</code> - The <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> to execute</dd>
+<dd><code>duration</code> - The length of the animation</dd>
+<dd><code>unit</code> - The <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc"><code>TimeUnit</code></a> used for <code>time</code> and <code>duration</code></dd>
 <dt>Returns:</dt>
-<dd><code>this</code> to allow method chaining</dd>
+<dd>The original object to allow method chaining</dd>
 </dl>
 </section>
 </li>
@@ -393,23 +489,20 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(float&nbsp;time,
  <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a>&nbsp;animation,
  float&nbsp;duration)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="schedule(float,paintingcanvas.painter.Event.EventRunner,paintingcanvas.painter.misc.TimeUnit,boolean)">
-<h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(float&nbsp;time,
- <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner,
- <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit,
- boolean&nbsp;repeat)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="schedule(float,boolean,paintingcanvas.painter.Event.EventRunner)">
-<h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(float&nbsp;time,
- boolean&nbsp;repeat,
- <a href="Event.EventRunner.html" title="interface in paintingcanvas.painter">Event.EventRunner</a>&nbsp;runner)</span></div>
+<div class="block">Schedule an <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> at an absolute time.
+ <pre><code>
+ // obj will start moving to (100, 100) 10 seconds after the program states
+ obj.animate()
+    .schedule(10, moveTo(100, 100), 5);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>time</code> - The time from the start of the program to the start of the animation. In seconds.</dd>
+<dd><code>animation</code> - The <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> to execute</dd>
+<dd><code>duration</code> - The length of the animation. In seconds.</dd>
+<dt>Returns:</dt>
+<dd>The original object to allow method chaining</dd>
+</dl>
 </section>
 </li>
 </ul>

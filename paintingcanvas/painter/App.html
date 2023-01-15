@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">App</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">an abstract class to allow interfacing with the painter library whilst keeping the painter library distinct</div>
+<div class="block">A simpler interface for the painter.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,32 +97,48 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="App.AnimationBuilder.html" class="type-name-link" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">This class provides various methods to construct and schedule animations.</div>
+<div class="block">A builder used to add animations to an element.</div>
 </div>
 <div class="col-first odd-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="App.Circle.html" class="type-name-link" title="class in paintingcanvas.painter">App.Circle</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">A Circle element.</div>
+</div>
 <div class="col-first even-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="App.Ellipse.html" class="type-name-link" title="class in paintingcanvas.painter">App.Ellipse</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">An <a href="https://en.wikipedia.org/wiki/Ellipse">ellipse</a> element.</div>
+</div>
 <div class="col-first odd-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="App.Polygon.html" class="type-name-link" title="class in paintingcanvas.painter">App.Polygon</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">A Polygon Element.</div>
+</div>
 <div class="col-first even-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="App.Rectangle.html" class="type-name-link" title="class in paintingcanvas.painter">App.Rectangle</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A Rectangle element.</div>
+</div>
 <div class="col-first odd-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="App.SimpleElement.html" class="type-name-link" title="class in paintingcanvas.painter">App.SimpleElement</a>&lt;<a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a> extends <a href="App.SimpleElement.html" title="class in paintingcanvas.painter">App.SimpleElement</a>&lt;<a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a>&gt;&gt;</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">A wrapper over a <a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable"><code>Drawable</code></a> with an easier to use API</div>
+</div>
 <div class="col-first even-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="App.Square.html" class="type-name-link" title="class in paintingcanvas.painter">App.Square</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A Square element.</div>
+</div>
 <div class="col-first odd-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="App.Text.html" class="type-name-link" title="class in paintingcanvas.painter">App.Text</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">A Text element, used for drawing text on the canvas.</div>
+</div>
 <div class="col-first even-row-color"><code>protected static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="App.Triangle.html" class="type-name-link" title="class in paintingcanvas.painter">App.Triangle</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A Triangle element.</div>
+</div>
 </div>
 </section>
 </li>
@@ -135,20 +151,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected int</code></div>
-<div class="col-second even-row-color"><code><a href="#height" class="member-name-link">height</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Dimension.html" title="class or interface in java.awt" class="external-link">Dimension</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#lastSize" class="member-name-link">lastSize</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>protected static <a href="Painter.html" title="class in paintingcanvas.painter">Painter</a></code></div>
 <div class="col-second even-row-color"><code><a href="#painter" class="member-name-link">painter</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The global Painter all Drawables access to add themselves to.</div>
 </div>
-<div class="col-first odd-row-color"><code>protected int</code></div>
-<div class="col-second odd-row-color"><code><a href="#width" class="member-name-link">width</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -177,40 +184,70 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorTo(int,int,int)" class="member-name-link">colorTo</a><wbr>(int&nbsp;r,
- int&nbsp;g,
- int&nbsp;b)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorTo(int)" class="member-name-link">colorTo</a><wbr>(int&nbsp;hex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Makes an animation that sets the color of the object with rgb</div>
+<div class="block">Create a new animation to <code>color</code> with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorTo(java.awt.Color)" class="member-name-link">colorTo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorTo(int,int,int)" class="member-name-link">colorTo</a><wbr>(int&nbsp;r,
+ int&nbsp;g,
+ int&nbsp;b)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#colorTo(java.awt.Color)" class="member-name-link">colorTo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Create a new animation to <code>color</code> with a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a> object.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#height()" class="member-name-link">height</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the current height of the canvas</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#moveTo(int,int)" class="member-name-link">moveTo</a><wbr>(int&nbsp;x,
  int&nbsp;y)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new position animation to <code>(x, y)</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render()" class="member-name-link">render</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block"><code>[ADVANCED]</code>
+ An overwrite-able function to let you run code every frame.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotateTo(int)" class="member-name-link">rotateTo</a><wbr>(int&nbsp;angle)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a new rotation animation to <code>angle°</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initialize and run the application</div>
+<div class="block">Initialize and run the application.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setup()" class="member-name-link">setup</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">This is the function that is called when the program starts.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sleep(float)" class="member-name-link">sleep</a><wbr>(float&nbsp;time)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Waits for the specified time in seconds.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sleep(float,paintingcanvas.painter.misc.TimeUnit)" class="member-name-link">sleep</a><wbr>(float&nbsp;time,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Waits for the specified time.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#width()" class="member-name-link">width</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Gets the current width of the canvas</div>
+</div>
 </div>
 </div>
 </div>
@@ -233,24 +270,6 @@ loadScripts(document, 'script');</script>
 <h3>painter</h3>
 <div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type"><a href="Painter.html" title="class in paintingcanvas.painter">Painter</a></span>&nbsp;<span class="element-name">painter</span></div>
 <div class="block">The global Painter all Drawables access to add themselves to.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="lastSize">
-<h3>lastSize</h3>
-<div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Dimension.html" title="class or interface in java.awt" class="external-link">Dimension</a></span>&nbsp;<span class="element-name">lastSize</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="width">
-<h3>width</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">width</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="height">
-<h3>height</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">height</span></div>
 </section>
 </li>
 </ul>
@@ -276,9 +295,53 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="width()">
+<h3>width</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">width</span>()</div>
+<div class="block">Gets the current width of the canvas</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Canvas width</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#height()"><code>height()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="height()">
+<h3>height</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">height</span>()</div>
+<div class="block">Gets the current height of the canvas</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Canvas height</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#width()"><code>width()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="render()">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span>()</div>
+<div class="block"><code>[ADVANCED]</code>
+ An overwrite-able function to let you run code every frame.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#setup()"><code>setup()</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -286,6 +349,9 @@ loadScripts(document, 'script');</script>
 <h3>setup</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setup</span>()
                     throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">This is the function that is called when the program starts.
+ It is where you will put all your code.
+ (unless you want to be fancy)</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
@@ -296,7 +362,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="run()">
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span>()</div>
-<div class="block">Initialize and run the application</div>
+<div class="block">Initialize and run the application.
+ (Don't worry about this)</div>
 </section>
 </li>
 <li>
@@ -305,19 +372,18 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></span>&nbsp;<span class="element-name">colorTo</span><wbr><span class="parameters">(int&nbsp;r,
  int&nbsp;g,
  int&nbsp;b)</span></div>
-<div class="block">Makes an animation that sets the color of the object with rgb
-
- <pre>
- // this should animate the square red
- square.animate().add(colorTo(255, 0, 0), 100);
- </pre></div>
+<div class="block">Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.animate().add(colorTo(255, 0, 0), 1);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>r</code> - red (0 - 255)</dd>
-<dd><code>g</code> - green (0 - 255)</dd>
-<dd><code>b</code> - blue (0 - 255)</dd>
+<dd><code>r</code> - The red component of the color (0-255)</dd>
+<dd><code>g</code> - The green component of the color (0-255)</dd>
+<dd><code>b</code> - The blue component of the color (0-255)</dd>
 <dt>Returns:</dt>
-<dd>An animation</dd>
+<dd>the <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> object</dd>
 </dl>
 </section>
 </li>
@@ -325,6 +391,35 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="colorTo(java.awt.Color)">
 <h3>colorTo</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></span>&nbsp;<span class="element-name">colorTo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</span></div>
+<div class="block">Create a new animation to <code>color</code> with a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a> object.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.animate().add(colorTo(Color.RED), 1);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>color</code> - The color to animate to</dd>
+<dt>Returns:</dt>
+<dd>the <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="colorTo(int)">
+<h3>colorTo</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></span>&nbsp;<span class="element-name">colorTo</span><wbr><span class="parameters">(int&nbsp;hex)</span></div>
+<div class="block">Create a new animation to <code>color</code> with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ // 0xFF0000 is hex for (255, 0, 0), which is red
+ o.animate().add(colorTo(0xFF0000), 1);
+ </code></pre></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>hex</code> - The color to animate to as a hex literal</dd>
+<dt>Returns:</dt>
+<dd>the <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> object</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -332,12 +427,28 @@ loadScripts(document, 'script');</script>
 <h3>moveTo</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></span>&nbsp;<span class="element-name">moveTo</span><wbr><span class="parameters">(int&nbsp;x,
  int&nbsp;y)</span></div>
+<div class="block">Creates a new position animation to <code>(x, y)</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - The absolute x position to animate to</dd>
+<dd><code>y</code> - The absolute y position to animate to</dd>
+<dt>Returns:</dt>
+<dd>the <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="rotateTo(int)">
 <h3>rotateTo</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="animation/Animation.html" title="class in paintingcanvas.painter.animation">Animation</a></span>&nbsp;<span class="element-name">rotateTo</span><wbr><span class="parameters">(int&nbsp;angle)</span></div>
+<div class="block">Creates a new rotation animation to <code>angle°</code>.
+ If you supply an angle <code> 360</code> it will make more than one full rotation.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>angle</code> - The absolute angle to rotate to in degrees.</dd>
+<dt>Returns:</dt>
+<dd>the <a href="animation/Animation.html" title="class in paintingcanvas.painter.animation"><code>Animation</code></a> object</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -345,12 +456,23 @@ loadScripts(document, 'script');</script>
 <h3>sleep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sleep</span><wbr><span class="parameters">(float&nbsp;time,
  <a href="misc/TimeUnit.html" title="enum class in paintingcanvas.painter.misc">TimeUnit</a>&nbsp;unit)</span></div>
+<div class="block">Waits for the specified time.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>time</code> - Time to wait</dd>
+<dd><code>unit</code> - The unit that <code>time</code> is in</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="sleep(float)">
 <h3>sleep</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sleep</span><wbr><span class="parameters">(float&nbsp;time)</span></div>
+<div class="block">Waits for the specified time in seconds.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>time</code> - The time in seconds.</dd>
+</dl>
 </section>
 </li>
 </ul>

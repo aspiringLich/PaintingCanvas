@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -75,6 +75,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - The class of the element extending <a href="App.SimpleElement.html" title="class in paintingcanvas.painter"><code>App.SimpleElement</code></a></dd>
+</dl>
+<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="App.Circle.html" title="class in paintingcanvas.painter">App.Circle</a></code>, <code><a href="App.Ellipse.html" title="class in paintingcanvas.painter">App.Ellipse</a></code>, <code><a href="App.Polygon.html" title="class in paintingcanvas.painter">App.Polygon</a></code>, <code><a href="App.Rectangle.html" title="class in paintingcanvas.painter">App.Rectangle</a></code>, <code><a href="App.Square.html" title="class in paintingcanvas.painter">App.Square</a></code>, <code><a href="App.Text.html" title="class in paintingcanvas.painter">App.Text</a></code>, <code><a href="App.Triangle.html" title="class in paintingcanvas.painter">App.Triangle</a></code></dd>
 </dl>
@@ -85,17 +89,35 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">protected abstract static class </span><span class="element-name type-name-label">App.SimpleElement&lt;T extends App.SimpleElement&lt;T&gt;&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A wrapper over a <a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable"><code>Drawable</code></a> with an easier to use API</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="caption"><span>Fields</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Field</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected final <a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></code></div>
+<div class="col-second even-row-color"><code><a href="#_super" class="member-name-link">_super</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(paintingcanvas.painter.drawable.Drawable)" class="member-name-link">SimpleElement</a><wbr>(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -114,50 +136,58 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#animate()" class="member-name-link">animate</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Create an <a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter"><code>App.AnimationBuilder</code></a>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getColor()" class="member-name-link">getColor</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the current color of an element as a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a></div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getThis()" class="member-name-link">getThis</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getX()" class="member-name-link">getX</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the X-position of the element</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getY()" class="member-name-link">getY</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the Y-position of the element.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hide()" class="member-name-link">hide</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Hide the Object</div>
+<div class="block">Hide the Object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(double)" class="member-name-link">rotate</a><wbr>(double&nbsp;dRotation)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotate(double)" class="member-name-link">rotate</a><wbr>(double&nbsp;rotation)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotate this object dRotation degrees</div>
+<div class="block">Rotate this element by <code>rotation°</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rotateTo(double)" class="member-name-link">rotateTo</a><wbr>(double&nbsp;rotation)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotate this object to rotation degrees</div>
+<div class="block">Set an elements rotation to <code>rotation°</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setColor(int)" class="member-name-link">setColor</a><wbr>(int&nbsp;hex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the color of the object with a hex code</div>
+<div class="block">Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setColor(int,int,int)" class="member-name-link">setColor</a><wbr>(int&nbsp;r,
  int&nbsp;g,
  int&nbsp;b)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the color of the object with rgb</div>
+<div class="block">Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setColor(java.awt.Color)" class="member-name-link">setColor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the color of the object with a Color object</div>
+<div class="block">Set the color of the object with a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a> object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setX(int)" class="member-name-link">setX</a><wbr>(int&nbsp;x)</code></div>
@@ -167,7 +197,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setY(int)" class="member-name-link">setY</a><wbr>(int&nbsp;y)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the Y-position of the object</div>
+<div class="block">Set the Y-position of the element</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#show()" class="member-name-link">show</a>()</code></div>
@@ -186,6 +216,20 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
+<!-- ============ FIELD DETAIL =========== -->
+<li>
+<section class="field-details" id="field-detail">
+<h2>Field Details</h2>
+<ul class="member-list">
+<li>
+<section class="detail" id="_super">
+<h3>_super</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type"><a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></span>&nbsp;<span class="element-name">_super</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -194,7 +238,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(paintingcanvas.painter.drawable.Drawable)">
 <h3>SimpleElement</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SimpleElement</span><wbr><span class="parameters">(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">SimpleElement</span><wbr><span class="parameters">(<a href="drawable/Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&nbsp;drawable)</span></div>
 </section>
 </li>
 </ul>
@@ -208,17 +252,27 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getThis()">
 <h3>getThis</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">getThis</span>()</div>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">getThis</span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="hide()">
 <h3>hide</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">hide</span>()</div>
-<div class="block">Hide the Object</div>
+<div class="block">Hide the Object.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.hide();
+ </code></pre></div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#show()"><code>show()</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -226,10 +280,20 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="show()">
 <h3>show</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">show</span>()</div>
-<div class="block">Show the Object</div>
+<div class="block">Show the Object
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.show();
+ </code></pre></div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#hide()"><code>hide()</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -237,9 +301,17 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getX()">
 <h3>getX</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getX</span>()</div>
+<div class="block">Get the X-position of the element</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the X-position of the Object</dd>
+<dd>the X-position of the element</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#getY()"><code>getY()</code></a></li>
+<li><a href="#setX(int)"><code>setX(int)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -253,6 +325,13 @@ loadScripts(document, 'script');</script>
 <dd><code>x</code> - the new X-position of the Object</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#getX()"><code>getX()</code></a></li>
+<li><a href="#setY(int)"><code>setY(int)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -260,9 +339,17 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getY()">
 <h3>getY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getY</span>()</div>
+<div class="block">Get the Y-position of the element.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the Y-position of the object</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#getY()"><code>()</code></a></li>
+<li><a href="#setX(int)"><code>setX(int)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -270,12 +357,19 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setY(int)">
 <h3>setY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">setY</span><wbr><span class="parameters">(int&nbsp;y)</span></div>
-<div class="block">Set the Y-position of the object</div>
+<div class="block">Set the Y-position of the element</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>y</code> - the new Y-position of the Object</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#setX(int)"><code>setX(int)</code></a></li>
+<li><a href="#getY()"><code>getY()</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -285,12 +379,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">setColor</span><wbr><span class="parameters">(int&nbsp;r,
  int&nbsp;g,
  int&nbsp;b)</span></div>
-<div class="block">Set the color of the object with rgb</div>
+<div class="block">Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.setColor(255, 0, 0); // Set color to red
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>r</code> - red (0 - 255)</dd>
-<dd><code>g</code> - green (0 - 255)</dd>
-<dd><code>b</code> - blue (0 - 255)</dd>
+<dd><code>r</code> - The red component of the color (0-255)</dd>
+<dd><code>g</code> - The green component of the color (0-255)</dd>
+<dd><code>b</code> - The blue component of the color (0-255)</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
 </dl>
@@ -300,13 +398,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getColor()">
 <h3>getColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a></span>&nbsp;<span class="element-name">getColor</span>()</div>
+<div class="block">Get the current color of an element as a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a> of the element</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setColor(java.awt.Color)">
 <h3>setColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">setColor</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link">Color</a>&nbsp;color)</span></div>
-<div class="block">Set the color of the object with a Color object</div>
+<div class="block">Set the color of the object with a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html" title="class or interface in java.awt" class="external-link"><code>Color</code></a> object.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.setColor(Color.RED); // Set color to red
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>color</code> - color.</dd>
@@ -319,10 +426,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setColor(int)">
 <h3>setColor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">setColor</span><wbr><span class="parameters">(int&nbsp;hex)</span></div>
-<div class="block">Set the color of the object with a hex code</div>
+<div class="block">Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
+ <pre><code>
+     Circle o = new Circle(100, 100, 20);
+ // 0xFF0000 is hex for (255, 0, 0), which is red
+ o.setColor(0xFF0000);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>hex</code> - the hex code for the color</dd>
+<dd><code>hex</code> - The color as a hex literal</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
 </dl>
@@ -331,13 +443,26 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="rotate(double)">
 <h3>rotate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(double&nbsp;dRotation)</span></div>
-<div class="block">Rotate this object dRotation degrees</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">rotate</span><wbr><span class="parameters">(double&nbsp;rotation)</span></div>
+<div class="block">Rotate this element by <code>rotation°</code>.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+
+ // Calling rotate(90) twice makes the object rotate 180°
+ o.rotate(90);
+ o.rotate(90);
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>dRotation</code> - change in rotation.</dd>
+<dd><code>rotation</code> - Change in rotation. (Degrees)</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#rotateTo(double)"><code>rotateTo(double)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -345,12 +470,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="rotateTo(double)">
 <h3>rotateTo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.SimpleElement.html" title="type parameter in App.SimpleElement">T</a></span>&nbsp;<span class="element-name">rotateTo</span><wbr><span class="parameters">(double&nbsp;rotation)</span></div>
-<div class="block">Rotate this object to rotation degrees</div>
+<div class="block">Set an elements rotation to <code>rotation°</code>.
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+ o.rotate(90); // Sets the elements rotation to 90°
+ </code></pre></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>rotation</code> - rotation to rotate to</dd>
+<dd><code>rotation</code> - Absolute rotation. (Degrees)</dd>
 <dt>Returns:</dt>
 <dd>The original object to allow method chaining</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#rotate(double)"><code>rotate(double)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -358,6 +493,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="animate()">
 <h3>animate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></span>&nbsp;<span class="element-name">animate</span>()</div>
+<div class="block">Create an <a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter"><code>App.AnimationBuilder</code></a>.
+ Used to animate different propertys of an element (position, rotation, color).
+ <pre><code>
+ Circle o = new Circle(100, 100, 20);
+
+ // Animate Circle o to move to 200, 200 for 3 seconds
+ o.animate().add(moveTo(200, 200), 3);
+ </code></pre></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><a href="App.AnimationBuilder.html" title="class in paintingcanvas.painter"><code>App.AnimationBuilder</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>
