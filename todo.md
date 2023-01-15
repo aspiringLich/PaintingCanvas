@@ -12,6 +12,7 @@
 - [ ] Change App.(width/height) to get(Witdh/Height) funcs
 - [ ] Take doubles everyware not floats
 - [ ] **Use the @see option in doc comments**
+- [ ] Add all methods to SimpleElement shapes
 - [X] More shapes
     - [x] Text
     - [x] Circle

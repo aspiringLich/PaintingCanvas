@@ -68,7 +68,7 @@ public class Main extends App {
             var t = text.stream().filter(x -> x.getText().equals(w)).findFirst().orElseThrow();
             var oldColor = t.getColor();
 
-            t.setColor(Color.RED);
+            t.setColor(0xFF0000);
             sleep(0.3f);
             t.setColor(oldColor);
         }
