@@ -325,6 +325,32 @@ public abstract class App {
         }
 
         /**
+         * Get the position of the element
+         *
+         * @return The position of the element as a {@link Point}
+         * @see #setPos(int, int)
+         */
+        public Point getPos() {
+            return new Point(_super.x, _super.y);
+        }
+
+        /**
+         * Set the position of the element.
+         *
+         * @param x The new absolute X-position of the element
+         * @param y The new absolute Y-position of the element
+         * @return The original object to allow method chaining
+         * @see #getPos()
+         * @see #setX(int)
+         * @see #setY(int)
+         */
+        public T setPos(int x, int y) {
+            _super.x = x;
+            _super.y = y;
+            return getThis();
+        }
+
+        /**
          * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
          * <pre>{@code
          * Circle o = new Circle(100, 100, 20);
