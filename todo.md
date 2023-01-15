@@ -1,19 +1,19 @@
 # ToDo
 
-- [X] Cleanup userspace interface
+- [x] Cleanup userspace interface
 - [x] Event queue so changes like color can be scheduled in constructor
 - [x] Alpha support on color tween
 - [ ] RotateAround
 - [x] consolidate center functions to just (Point center(..) {...})
 - [ ] Think of a nice way to allow for more advanced (repeating) animations
 - [ ] waitUntilAnimationsDone()
-- [X] make animation syntax better
-- [X] auto-center when resizing
-- [ ] Change App.(width/height) to get(Witdh/Height) funcs
+- [x] make animation syntax better
+- [x] auto-center when resizing
+- [x] Change App.(width/height) to get(Witdh/Height) funcs
 - [ ] Take doubles everyware not floats
-- [ ] **Use the @see option in doc comments**
-- [ ] Add all methods to SimpleElement shapes
-- [X] More shapes
+- [x] **Use the @see option in doc comments**
+- [x] Add all methods to SimpleElement shapes
+- [x] More shapes
     - [x] Text
     - [x] Circle
     - [x] Ellipse

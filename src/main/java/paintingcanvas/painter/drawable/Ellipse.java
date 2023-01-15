@@ -3,7 +3,8 @@ package paintingcanvas.painter.drawable;
 import java.awt.*;
 
 public class Ellipse extends Drawable {
-    int width, height;
+    public int width;
+    public int height;
 
     public Ellipse(int x, int y, int width, int height) {
         super(x, y, Color.BLACK);

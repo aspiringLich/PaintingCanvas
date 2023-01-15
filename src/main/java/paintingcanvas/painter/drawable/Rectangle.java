@@ -3,7 +3,8 @@ package paintingcanvas.painter.drawable;
 import java.awt.*;
 
 public class Rectangle extends Drawable {
-    int width, height;
+    public int width;
+    public int height;
 
     public Rectangle(int x, int y, int width, int height) {
         super(x, y, Color.BLACK);

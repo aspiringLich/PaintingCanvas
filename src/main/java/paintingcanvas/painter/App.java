@@ -123,8 +123,8 @@ public abstract class App {
     /**
      * Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
      * <pre>{@code
-     *     Circle o = new Circle(100, 100, 20);
-     *     o.animate().add(colorTo(255, 0, 0), 1);
+     * Circle o = new Circle(100, 100, 20);
+     * o.animate().add(colorTo(255, 0, 0), 1);
      * }</pre>
      *
      * @param r The red component of the color (0-255)
@@ -139,8 +139,8 @@ public abstract class App {
     /**
      * Create a new animation to <code>color</code> with a {@link Color} object.
      * <pre>{@code
-     *     Circle o = new Circle(100, 100, 20);
-     *     o.animate().add(colorTo(Color.RED), 1);
+     * Circle o = new Circle(100, 100, 20);
+     * o.animate().add(colorTo(Color.RED), 1);
      * }</pre>
      *
      * @param color The color to animate to
@@ -153,9 +153,9 @@ public abstract class App {
     /**
      * Create a new animation to <code>color</code> with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
      * <pre>{@code
-     *     Circle o = new Circle(100, 100, 20);
-     *     // 0xFF0000 is hex for (255, 0, 0), which is red
-     *     o.animate().add(colorTo(0xFF0000), 1);
+     * Circle o = new Circle(100, 100, 20);
+     * // 0xFF0000 is hex for (255, 0, 0), which is red
+     * o.animate().add(colorTo(0xFF0000), 1);
      * }</pre>
      *
      * @param hex The color to animate to as a hex literal
@@ -178,7 +178,7 @@ public abstract class App {
 
     /**
      * Creates a new rotation animation to <code>angle°</code>.
-     * If you supply an angle <code>> 360</code> it will make more than one full rotation.
+     * If you supply an angle <code> 360</code> it will make more than one full rotation.
      *
      * @param angle The absolute angle to rotate to in degrees.
      * @return the {@link Animation} object
@@ -220,7 +220,7 @@ public abstract class App {
     }
 
     /**
-     * A wrapper over a {@link Drawable} with a more verbose API
+     * A wrapper over a {@link Drawable} with an easier to use API
      *
      * @param <T> The class of the element extending {@link SimpleElement}
      */
@@ -239,8 +239,8 @@ public abstract class App {
         /**
          * Hide the Object.
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
-         *     o.hide();
+         * Circle o = new Circle(100, 100, 20);
+         * o.hide();
          * }</pre>
          *
          * @return The original object to allow method chaining
@@ -254,8 +254,8 @@ public abstract class App {
         /**
          * Show the Object
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
-         *     o.show();
+         * Circle o = new Circle(100, 100, 20);
+         * o.show();
          * }</pre>
          *
          * @return The original object to allow method chaining
@@ -304,6 +304,7 @@ public abstract class App {
         /**
          * Set the Y-position of the element
          *
+         * @param y the new Y-position of the Object
          * @return The original object to allow method chaining
          * @see #setX(int)
          * @see #getY()
@@ -316,8 +317,8 @@ public abstract class App {
         /**
          * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
-         *     o.setColor(255, 0, 0); // Set color to red
+         * Circle o = new Circle(100, 100, 20);
+         * o.setColor(255, 0, 0); // Set color to red
          * }</pre>
          *
          * @param r The red component of the color (0-255)
@@ -342,8 +343,8 @@ public abstract class App {
         /**
          * Set the color of the object with a {@link Color} object.
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
-         *     o.setColor(Color.RED); // Set color to red
+         * Circle o = new Circle(100, 100, 20);
+         * o.setColor(Color.RED); // Set color to red
          * }</pre>
          *
          * @param color color.
@@ -358,8 +359,8 @@ public abstract class App {
          * Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
          * <pre>{@code
          *     Circle o = new Circle(100, 100, 20);
-         *     // 0xFF0000 is hex for (255, 0, 0), which is red
-         *     o.setColor(0xFF0000);
+         * // 0xFF0000 is hex for (255, 0, 0), which is red
+         * o.setColor(0xFF0000);
          * }</pre>
          *
          * @param hex The color as a hex literal
@@ -372,11 +373,11 @@ public abstract class App {
         /**
          * Rotate this element by <code>rotation°</code>.
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
+         * Circle o = new Circle(100, 100, 20);
          *
-         *     // Calling rotate(90) twice makes the object rotate 180°
-         *     o.rotate(90);
-         *     o.rotate(90);
+         * // Calling rotate(90) twice makes the object rotate 180°
+         * o.rotate(90);
+         * o.rotate(90);
          * }</pre>
          *
          * @param rotation Change in rotation. (Degrees)
@@ -391,8 +392,8 @@ public abstract class App {
         /**
          * Set an elements rotation to <code>rotation°</code>.
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
-         *     o.rotate(90); // Sets the elements rotation to 90°
+         * Circle o = new Circle(100, 100, 20);
+         * o.rotate(90); // Sets the elements rotation to 90°
          * }</pre>
          *
          * @param rotation Absolute rotation. (Degrees)
@@ -408,10 +409,10 @@ public abstract class App {
          * Create an {@link AnimationBuilder}.
          * Used to animate different propertys of an element (position, rotation, color).
          * <pre>{@code
-         *     Circle o = new Circle(100, 100, 20);
+         * Circle o = new Circle(100, 100, 20);
          *
-         *     // Animate Circle o to move to 200, 200 for 3 seconds
-         *     o.animate().add(moveTo(200, 200), 3);
+         * // Animate Circle o to move to 200, 200 for 3 seconds
+         * o.animate().add(moveTo(200, 200), 3);
          * }</pre>
          *
          * @return {@link AnimationBuilder}
@@ -424,7 +425,7 @@ public abstract class App {
     /**
      * A Text element, used for drawing text on the canvas.
      * <pre>{@code
-     *     Text text = new Text(100, 100, "Hello World");
+     * Text text = new Text(100, 100, "Hello World");
      * }</pre>
      */
     protected static class Text extends SimpleElement<Text> {
@@ -432,7 +433,7 @@ public abstract class App {
          * Create a new Text element.
          * The default font size is 30, and the default font is <u>comic sans</u> <em>(not sorry)</em>.
          * <pre>{@code
-         *     Text text = new Text(100, 100, "Hello World");
+         * Text text = new Text(100, 100, "Hello World");
          * }</pre>
          *
          * @param x    The X-position of the text
@@ -443,31 +444,47 @@ public abstract class App {
             super(new paintingcanvas.painter.drawable.Text(x, y, text, 30));
         }
 
-        /**
-         * Sets the size of the text in <a href="https://en.wikipedia.org/wiki/Point_(typography)">points</a>.
-         * <pre>{@code
-         *     Text text = new Text(100, 100, "Hello World");
-         *     text.setFontSize(40); // Set font size to 40 points
-         * }</pre>
-         *
-         * @param size Font size in points
-         * @return The original object to allow method chaining
-         */
-        public Text setFontSize(float size) {
-            ((paintingcanvas.painter.drawable.Text) this._super).setSize(size);
-            return this;
-        }
-
         @Override
         protected Text getThis() {
             return this;
         }
 
         /**
+         * Get the current font size of the text.
+         * <pre>{@code
+         * Text text = new Text(100, 100, "Hello World");
+         * text.setFontSize(40); // Set font size to 40 points
+         * System.out.println(text.getFontSize()); // Prints 40
+         * }</pre>
+         *
+         * @return The font size in points
+         * @see #setFontSize(float)
+         */
+        public int getFontSize() {
+            return ((paintingcanvas.painter.drawable.Text) this._super).font.getSize();
+        }
+
+        /**
+         * Sets the size of the text in <a href="https://en.wikipedia.org/wiki/Point_(typography)">points</a>.
+         * <pre>{@code
+         * Text text = new Text(100, 100, "Hello World");
+         * text.setFontSize(40); // Set font size to 40 points
+         * }</pre>
+         *
+         * @param size Font size in points
+         * @return The original object to allow method chaining
+         * @see #getFontSize()
+         */
+        public Text setFontSize(float size) {
+            ((paintingcanvas.painter.drawable.Text) this._super).setSize(size);
+            return this;
+        }
+
+        /**
          * Gets the current text of the element.
          * <pre>{@code
-         *     Text text = new Text(100, 100, "Hello World");
-         *     System.out.println(text.getText()); // => Hello World
+         * Text text = new Text(100, 100, "Hello World");
+         * System.out.println(text.getText()); // => Hello World
          * }</pre>
          *
          * @return The text as a {@link String}
@@ -480,8 +497,8 @@ public abstract class App {
         /**
          * Sets the text of the element.
          * <pre>{@code
-         *     Text text = new Text(100, 100, "Hello World");
-         *     text.setText("Go Go Mango");
+         * Text text = new Text(100, 100, "Hello World");
+         * text.setText("Go Go Mango");
          * }</pre>
          *
          * @param text The new text for the element as a {@link String}
@@ -496,16 +513,16 @@ public abstract class App {
     /**
      * An <a href="https://en.wikipedia.org/wiki/Ellipse">ellipse</a> element.
      * <pre>{@code
-     *     // Create a new ellipse at (100, 100) with width 20 and height 30
-     *     Ellipse ellipse = new Ellipse(100, 100, 20, 30);
+     * // Create a new ellipse at (100, 100) with width 20 and height 30
+     * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
      * }</pre>
      */
     protected static class Ellipse extends SimpleElement<Ellipse> {
         /**
          * Create a new Ellipse element.
          * <pre>{@code
-         *     // Create a new ellipse at (100, 100) with width 20 and height 30
-         *     Ellipse ellipse = new Ellipse(100, 100, 20, 30);
+         * // Create a new ellipse at (100, 100) with width 20 and height 30
+         * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
          * }</pre>
          *
          * @param x The X-position of the ellipse
@@ -521,21 +538,69 @@ public abstract class App {
         protected Ellipse getThis() {
             return this;
         }
+
+        /**
+         * Gets the width of the ellipse.
+         *
+         * @return The width of the ellipse in pixels
+         * @see #getHeight()
+         * @see #setWidth(int)
+         */
+        public int getWidth() {
+            return ((paintingcanvas.painter.drawable.Ellipse) this._super).width;
+        }
+
+        /**
+         * Sets the width of the ellipse.
+         *
+         * @param w The new width of the ellipse in pixels
+         * @return The original object to allow method chaining
+         * @see #setHeight(int)
+         * @see #getWidth()
+         */
+        public Ellipse setWidth(int w) {
+            ((paintingcanvas.painter.drawable.Ellipse) this._super).width = w;
+            return this;
+        }
+
+        /**
+         * Gets the height of the ellipse.
+         *
+         * @return The height of the ellipse in pixels
+         * @see #getWidth()
+         * @see #setHeight(int)
+         */
+        public int getHeight() {
+            return ((paintingcanvas.painter.drawable.Ellipse) this._super).height;
+        }
+
+        /**
+         * Sets the height of the ellipse.
+         *
+         * @param h The new height of the ellipse in pixels
+         * @return The original object to allow method chaining
+         * @see #setWidth(int)
+         * @see #getHeight()
+         */
+        public Ellipse setHeight(int h) {
+            ((paintingcanvas.painter.drawable.Ellipse) this._super).height = h;
+            return this;
+        }
     }
 
     /**
      * A Circle element.
      * <pre>{@code
-     *     // Create a new Circle at (100, 100) with a radius of 20.
-     *     Circle circle = new Circle(100, 100, 20);
+     * // Create a new Circle at (100, 100) with a radius of 20.
+     * Circle circle = new Circle(100, 100, 20);
      * }</pre>
      */
     protected static class Circle extends SimpleElement<Circle> {
         /**
          * Create a new Circle element.
          * <pre>{@code
-         *     // Create a new Circle at (100, 100) with a radius of 20.
-         *     Circle circle = new Circle(100, 100, 20);
+         * // Create a new Circle at (100, 100) with a radius of 20.
+         * Circle circle = new Circle(100, 100, 20);
          * }</pre>
          *
          * @param x The X-position of the circle
@@ -550,21 +615,46 @@ public abstract class App {
         protected Circle getThis() {
             return this;
         }
+
+        /**
+         * Gets the radius of the circle.
+         *
+         * @return The radius of the circle in pixels
+         * @see #setRadius(int)
+         */
+        public int getRadius() {
+            var ellipse = (paintingcanvas.painter.drawable.Ellipse) this._super;
+            assert ellipse.width == ellipse.height;
+            return ellipse.width;
+        }
+
+        /**
+         * Sets the radius of the circle.
+         *
+         * @param r The new radius of the circle in pixels
+         * @return The original object to allow method chaining
+         * @see #getRadius()
+         */
+        public Circle setRadius(int r) {
+            ((paintingcanvas.painter.drawable.Ellipse) this._super).width = r;
+            ((paintingcanvas.painter.drawable.Ellipse) this._super).height = r;
+            return this;
+        }
     }
 
     /**
      * A Rectangle element.
      * <pre>{@code
-     *     // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
-     *     Rectangle rectangle = new Rectangle(100, 100, 20, 30);
+     * // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
+     * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
      * }</pre>
      */
     protected static class Rectangle extends SimpleElement<Rectangle> {
         /**
          * Create a new Rectangle element.
          * <pre>{@code
-         *     // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
-         *     Rectangle rectangle = new Rectangle(100, 100, 20, 30);
+         * // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
+         * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
          * }</pre>
          *
          * @param x The X-position of the rectangle
@@ -580,20 +670,68 @@ public abstract class App {
         protected Rectangle getThis() {
             return this;
         }
+
+        /**
+         * Gets the width of the rectangle.
+         *
+         * @return The width of the rectangle in pixels
+         * @see #setWidth(int)
+         * @see #getHeight()
+         */
+        public int getWidth() {
+            return ((paintingcanvas.painter.drawable.Rectangle) this._super).width;
+        }
+
+        /**
+         * Sets the width of the rectangle.
+         *
+         * @param w The new width of the rectangle in pixels
+         * @return The original object to allow method chaining
+         * @see #getWidth()
+         * @see #setHeight(int)
+         */
+        public Rectangle setWidth(int w) {
+            ((paintingcanvas.painter.drawable.Rectangle) this._super).width = w;
+            return this;
+        }
+
+        /**
+         * Gets the height of the rectangle.
+         *
+         * @return The height of the rectangle in pixels
+         * @see #getWidth()
+         * @see #setHeight(int)
+         */
+        public int getHeight() {
+            return ((paintingcanvas.painter.drawable.Rectangle) this._super).height;
+        }
+
+        /**
+         * Sets the height of the rectangle.
+         *
+         * @param h The new height of the rectangle in pixels
+         * @return The original object to allow method chaining
+         * @see #getHeight()
+         * @see #setWidth(int)
+         */
+        public Rectangle setHeight(int h) {
+            ((paintingcanvas.painter.drawable.Rectangle) this._super).height = h;
+            return this;
+        }
     }
 
     /**
      * A Square element.
      * <pre>{@code
-     *     // Create a new Square at (100, 100) with a size of 30px
-     *     Square square = new Square(100, 100, 30);
+     * // Create a new Square at (100, 100) with a size of 30px
+     * Square square = new Square(100, 100, 30);
      * }</pre>
      */
     protected static class Square extends SimpleElement<Square> {
         /**
          * Create a new Square element.
          * <pre>{@code
-         *     Square square = new Square(100, 100, 30);
+         * Square square = new Square(100, 100, 30);
          * }</pre>
          *
          * @param x The X-position of the square
@@ -608,26 +746,51 @@ public abstract class App {
         public Square getThis() {
             return this;
         }
+
+        /**
+         * Gets the size of the square.
+         *
+         * @return The size of the square in pixels
+         * @see #setSize(int)
+         */
+        public int getSize() {
+            var rectangle = (paintingcanvas.painter.drawable.Rectangle) this._super;
+            assert rectangle.width == rectangle.height;
+            return rectangle.width;
+        }
+
+        /**
+         * Sets the size of the square.
+         *
+         * @param s The new size of the square in pixels
+         * @return The original object to allow method chaining
+         * @see #getSize()
+         */
+        public Square setSize(int s) {
+            ((paintingcanvas.painter.drawable.Rectangle) this._super).width = s;
+            ((paintingcanvas.painter.drawable.Rectangle) this._super).height = s;
+            return this;
+        }
     }
 
     /**
      * A Polygon Element.
      * <pre>{@code
-     *     Polygon polygon = new Polygon(100, 100,
-     *          new int[] {0, 25, 50},
-     *          new int[] {50, 25, 0},
-     *     );
+     * Polygon polygon = new Polygon(100, 100,
+     *     new int[] {0, 25, 50},
+     *     new int[] {50, 25, 0},
+     * );
      * }</pre>
      */
     protected static class Polygon extends SimpleElement<Polygon> {
         /**
          * Create a new Polygon element from a {@link java.awt.Polygon}.
          * <pre>{@code
-         *     Polygon polygon = new Polygon(100, 100, new java.awt.Polygon(
-         *         new int[] {0, 25, 50},
-         *         new int[] {50, 25, 0},
-         *         3
-         *      ));
+         * Polygon polygon = new Polygon(100, 100, new java.awt.Polygon(
+         * new int[] {0, 25, 50},
+         *     new int[] {50, 25, 0},
+         *     3
+         * ));
          * }</pre>
          *
          * @param x       The X-position of the polygon
@@ -641,10 +804,10 @@ public abstract class App {
         /**
          * Create a new Polygon element from a list of x-points and y-points.
          * <pre>{@code
-         *     Polygon polygon = new Polygon(100, 100,
-         *          new int[] {0, 25, 50},
-         *          new int[] {50, 25, 0},
-         *     );
+         * Polygon polygon = new Polygon(100, 100,
+         *     new int[] {0, 25, 50},
+         *     new int[] {50, 25, 0},
+         * );
          * }</pre>
          *
          * @param x       The X-position of the polygon
@@ -665,16 +828,16 @@ public abstract class App {
     /**
      * A Triangle element.
      * <pre>{@code
-     *     // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
-     *     Triangle triangle = new Triangle(100, 100, 20, 30);
+     * // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
+     * Triangle triangle = new Triangle(100, 100, 20, 30);
      * }</pre>
      */
     protected static class Triangle extends SimpleElement<Triangle> {
         /**
          * Create a new Triangle element.
          * <pre>{@code
-         *     // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
-         *     Triangle triangle = new Triangle(100, 100, 20, 30);
+         * // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
+         * Triangle triangle = new Triangle(100, 100, 20, 30);
          * }</pre>
          *
          * @param x The X-position of the triangle
@@ -698,14 +861,66 @@ public abstract class App {
         protected Triangle getThis() {
             return this;
         }
+
+        /**
+         * Gets the width of the triangle.
+         *
+         * @return The width of the triangle in pixels
+         * @see #setWidth(int)
+         */
+        public int getWidth() {
+            return ((paintingcanvas.painter.drawable.Polygon) this._super).polygon.xpoints[2];
+        }
+
+        /**
+         * Sets the width of the triangle.
+         *
+         * @param w The new width of the triangle in pixels
+         * @return The original object to allow method chaining
+         * @see #getWidth()
+         */
+        public Triangle setWidth(int w) {
+            ((paintingcanvas.painter.drawable.Polygon) this._super).polygon.xpoints = new int[]{
+                    0,
+                    w / 2,
+                    w
+            };
+            return this;
+        }
+
+        /**
+         * Gets the height of the triangle.
+         *
+         * @return The height of the triangle in pixels
+         * @see #setHeight(int)
+         */
+        public int getHeight() {
+            return ((paintingcanvas.painter.drawable.Polygon) this._super).polygon.ypoints[0];
+        }
+
+        /**
+         * Sets the height of the triangle.
+         *
+         * @param h The new height of the triangle in pixels
+         * @return The original object to allow method chaining
+         * @see #getHeight()
+         */
+        public Triangle setHeight(int h) {
+            ((paintingcanvas.painter.drawable.Polygon) this._super).polygon.ypoints = new int[]{
+                    h,
+                    0,
+                    h
+            };
+            return this;
+        }
     }
 
     /**
      * A builder used to add animations to an element.
      * <pre>{@code
-     *     Text text = new Text(100, 100, "Hello World");
-     *     text.animate()
-     *         .add(moveTo(200, 200), 3);
+     * Text text = new Text(100, 100, "Hello World");
+     * text.animate()
+     *     .add(moveTo(200, 200), 3);
      * }</pre>
      */
     protected static class AnimationBuilder {
@@ -869,7 +1084,8 @@ public abstract class App {
          *    .with(colorTo(Color.BLUE), 100);
          * }</pre>
          *
-         * @param duration Frames to wait
+         * @param duration Time to wait
+         * @param unit     The {@link TimeUnit} to use for the {@code duration}
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder wait(float duration, TimeUnit unit) {

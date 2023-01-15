@@ -3,7 +3,7 @@ package paintingcanvas.painter.drawable;
 import java.awt.*;
 
 public class Polygon extends Drawable {
-    private final java.awt.Polygon polygon;
+    public final java.awt.Polygon polygon;
 
     public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
         super(x, y, Color.BLACK);
