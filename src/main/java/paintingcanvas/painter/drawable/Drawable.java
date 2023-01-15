@@ -53,8 +53,14 @@ public abstract class Drawable {
         // TODO: Might be unnecessary but possibly recalculate this whenever the position is modified but save it somewhere to avoid recalculating this every frame.
         var transform = gc.getTransform();
         var center = this.center(g);
+
         transform.setToRotation(this.rotation, center.x, center.y);
+        transform.scale(1.0, -1.0);
         gc.setTransform(transform);
-        this.draw(g);
+
+        var bounds = gc.getClipBounds();
+        gc.translate(bounds.getWidth() / 2, -bounds.getHeight() / 2);
+
+        this.draw(gc);
     }
 }

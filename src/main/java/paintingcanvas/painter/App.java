@@ -444,7 +444,7 @@ public abstract class App {
 
         /**
          * Create an {@link AnimationBuilder}.
-         * Used to animate different propertys of an element (position, rotation, color).
+         * Used to animate different properties of an element (position, rotation, color).
          * <pre>{@code
          * Circle o = new Circle(100, 100, 20);
          *

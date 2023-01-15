@@ -5,6 +5,11 @@ import java.awt.*;
 public class Polygon extends Drawable {
     public final java.awt.Polygon polygon;
 
+    public Polygon(int x, int y) {
+        super(x, y, Color.BLACK);
+        this.polygon = new java.awt.Polygon();
+    }
+
     public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
         super(x, y, Color.BLACK);
         this.polygon = new java.awt.Polygon(xPoints, yPoints, xPoints.length);
@@ -13,6 +18,15 @@ public class Polygon extends Drawable {
     public Polygon(int x, int y, java.awt.Polygon polygon) {
         super(x, y, Color.BLACK);
         this.polygon = polygon;
+    }
+
+    /**
+     * Adds a point to this polygon
+     * @param x the x-position of said point
+     * @param y the y-position of said point
+     */
+    public void point(int x, int y) {
+        polygon.addPoint(x, y);
     }
 
     @Override

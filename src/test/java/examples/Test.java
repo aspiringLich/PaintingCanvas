@@ -11,6 +11,7 @@ public class Test extends App {
     protected void setup() {
         var circle = new Circle(100, 100, 40);
         var second = new Circle(200, 100, 40);
+        var center = new Circle(-20, -20, 40);
 
         // the move should happen slightly after the color change
         circle.animate()
