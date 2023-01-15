@@ -25,13 +25,9 @@ public class Polygon extends Drawable {
         polygon.translate(-x, -y);
     }
 
-    @Override
-    public int centerX(Graphics g) {
-        return x + polygon.getBounds().width / 2;
-    }
 
     @Override
-    public int centerY(Graphics g) {
-        return y + polygon.getBounds().height / 2;
+    public Point center(Graphics g) {
+        return new Point(x + polygon.getBounds().width / 2, y + polygon.getBounds().height / 2);
     }
 }

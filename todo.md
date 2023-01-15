@@ -1,17 +1,14 @@
 # ToDo
 
 - [X] Cleanup userspace interface
-- [ ] Event queue so changes like color can be scheduled in constructor
-- [ ] Alpha support on color tween
+- [x] Event queue so changes like color can be scheduled in constructor
+- [x] Alpha support on color tween
 - [ ] RotateAround
-- [ ] consolidate center functions to just (Point center(..) {...})
+- [x] consolidate center functions to just (Point center(..) {...})
 - [ ] Think of a nice way to allow for more advanced (repeating) animations
 - [ ] waitUntilAnimationsDone()
 - [X] make animation syntax better
 - [X] auto-center when resizing
-- [ ] Use scheduler for all element sets (some function that takes a lambda for specific code)
-    - Just use the scheduler for everything
-    - also maybe make a generic scheduler / ticker (tick interface)
 - [ ] Change App.(width/height) to get(Witdh/Height) funcs
 - [ ] Take doubles everyware not floats
 - [ ] **Use the @see option in doc comments**

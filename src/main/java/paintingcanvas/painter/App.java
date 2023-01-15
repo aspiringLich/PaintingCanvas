@@ -11,10 +11,10 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 
 /**
- * an abstract class to allow interfacing with the painter library whilst keeping the painter library distinct
+ * A simpler interface for the painter.
  */
+@SuppressWarnings("unused")
 public abstract class App {
-    // TODO: Do something to not access static syncObj from Animation class
     public static final Object syncObject = new Object();
     /**
      * The global Painter all Drawables access to add themselves to.
@@ -23,8 +23,6 @@ public abstract class App {
     private static Dimension lastSize;
     private static int builderFrame;
     private static int lastBuilderFrame;
-    protected int width;
-    protected int height;
 
     private static void _syncWait() {
         try {
@@ -34,6 +32,14 @@ public abstract class App {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected int width() {
+        return painter.canvas.getWidth();
+    }
+
+    protected int height() {
+        return painter.canvas.getHeight();
     }
 
     public void render() {
@@ -49,8 +55,6 @@ public abstract class App {
         System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
-        this.width = 1000;
-        this.height = 600;
         painter = new Painter(1000, 600, "Java thingy ikd");
 
         painter.canvas.renderLifecycle = new Canvas.RenderLifecycle() {
@@ -409,6 +413,14 @@ public abstract class App {
             builderFrame += _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
+            }
+
+            synchronized (painter.canvas.events) {
+                painter.canvas.events.add(new Event(builderFrame, c -> {
+                    synchronized (syncObject) {
+                        syncObject.notify();
+                    }
+                }));
             }
             _syncWait();
             return this;

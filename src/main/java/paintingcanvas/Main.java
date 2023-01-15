@@ -44,8 +44,8 @@ public class Main extends App {
             var color = Color.getHSBColor((float) Math.random(), (float) (.25 + .70 * Math.random()),
                     (float) (.85 + .10 * Math.random()));
             var fontSize = (float) ((Math.sqrt((float) entry.getValue() / maxCount)) * 100f);
-            var x = (int) (Math.random() * width);
-            var y = (int) (Math.random() * height);
+            var x = (int) (Math.random() * width());
+            var y = (int) (Math.random() * height());
 
             var thisText = new Text(x, y, entry.getKey()).setFontSize(fontSize).setColor(color);
             text.add(thisText);

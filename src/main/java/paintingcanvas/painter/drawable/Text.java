@@ -46,15 +46,10 @@ public class Text extends Drawable {
         gc.drawString(text, x, y);
     }
 
-    @Override
-    public int centerX(Graphics g) {
-        var metrics = g.getFontMetrics(font);
-        return x + metrics.stringWidth(text) / 2;
-    }
 
     @Override
-    public int centerY(Graphics g) {
+    public Point center(Graphics g) {
         var metrics = g.getFontMetrics(font);
-        return y - metrics.getAscent() / 4;
+        return new Point(x + metrics.stringWidth(text) / 2, y - metrics.getAscent() / 4);
     }
 }

@@ -1,6 +1,5 @@
 package paintingcanvas.painter.animation;
 
-import paintingcanvas.painter.App;
 import paintingcanvas.painter.drawable.Drawable;
 
 /**
@@ -26,16 +25,7 @@ public abstract class Animation {
     public void update(int frame) {
         if (frame >= startFrame && frame <= this.startFrame + this.duration)
             this.updateAnimation(this.drawable, frame - startFrame, this.duration);
-
-        if (frame == this.startFrame + this.duration)
-            this.endAnimation(this.drawable);
     }
 
     abstract void updateAnimation(Drawable drawable, int frame, int duration);
-
-    void endAnimation(Drawable drawable) {
-        synchronized (App.syncObject) {
-            App.syncObject.notify();
-        }
-    }
 }

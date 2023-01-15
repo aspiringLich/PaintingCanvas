@@ -34,6 +34,7 @@ public class ColorAnimation extends Animation {
         var r = _a.getRed() + (_b.getRed() - _a.getRed()) * delta;
         var g = _a.getGreen() + (_b.getGreen() - _a.getGreen()) * delta;
         var b = _a.getBlue() + (_b.getBlue() - _a.getBlue()) * delta;
-        return new Color((int) r, (int) g, (int) b);
+        var a = _a.getAlpha() + (_b.getAlpha() - _a.getAlpha()) * delta;
+        return new Color((int) r, (int) g, (int) b, (int) a);
     }
 }

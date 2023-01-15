@@ -19,13 +19,9 @@ public class Rectangle extends Drawable {
         else gc.drawRect(x, y, width, height);
     }
 
-    @Override
-    public int centerX(Graphics g) {
-        return x + width / 2;
-    }
 
     @Override
-    public int centerY(Graphics g) {
-        return y + height / 2;
+    public Point center(Graphics g) {
+        return new Point(x + width / 2, y + height / 2);
     }
 }

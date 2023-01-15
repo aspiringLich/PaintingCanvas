@@ -31,28 +31,18 @@ public abstract class Drawable {
     public abstract void draw(Graphics g);
 
     /**
-     * Get the X-coordinate of the object's center-point
-     *
-     * @param g unecessary? Maybe?
-     * @return the x-coordinate of the object's center-point
-     */
-    public abstract int centerX(Graphics g);
-
-    /**
      * Get the Y-coordinate of the object's center-point
      *
-     * @param g unecessary? Maybe?
-     * @return the y-coordinate of the object's center-point
+     * @param g Graphics context
+     * @return The object's center-point
      */
-    public abstract int centerY(Graphics g);
+    public abstract Point center(Graphics g);
 
     /**
      * Actually render the object itself
      * <p>
      * This calls the draw method, but does some extra steps beforehand to lay it out correctly
      * <p>
-     * TODO: Might be unnecessary but possibly recalculate this whenever the position is modified but save it somewhere
-     * to avoid recalculating this every frame.
      *
      * @param g The graphics context to draw the object with
      */
@@ -60,8 +50,10 @@ public abstract class Drawable {
         if (!this.visible) return;
 
         var gc = (Graphics2D) g;
+        // TODO: Might be unnecessary but possibly recalculate this whenever the position is modified but save it somewhere to avoid recalculating this every frame.
         var transform = gc.getTransform();
-        transform.setToRotation(this.rotation, centerX(g), centerY(g));
+        var center = this.center(g);
+        transform.setToRotation(this.rotation, center.x, center.y);
         gc.setTransform(transform);
         this.draw(g);
     }
