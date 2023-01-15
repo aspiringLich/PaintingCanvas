@@ -59,7 +59,7 @@ public abstract class Drawable {
         gc.setTransform(transform);
 
         var bounds = gc.getClipBounds();
-        gc.translate(bounds.getWidth() / 2, -bounds.getHeight() / 2);
+        gc.translate(0.0, -bounds.getHeight());
 
         this.draw(gc);
     }
