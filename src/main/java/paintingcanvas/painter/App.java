@@ -57,11 +57,16 @@ public abstract class App {
     /**
      * <code>[ADVANCED]</code>
      * An overwrite-able function to let you run code every frame.
+     * @see #setup()
      */
     public void render() {
     }
 
-    // TODO: docs
+    /**
+     * This is the function that is called when the program starts.
+     * It is where you will put all your code.
+     * (unless you want to be fancy)
+     */
     public abstract void setup() throws Exception;
 
     /**
