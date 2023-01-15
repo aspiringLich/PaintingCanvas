@@ -22,6 +22,10 @@ public class Painter {
         frame.addComponentListener(new Canvas.ResizeListener(canvas));
     }
 
+    public void setTitle(String title) {
+        frame.setTitle(title);
+    }
+
     /**
      * The "render function", this will run the function in app every single frame at the set fps.
      * An alternative to the "run" function
@@ -29,6 +33,8 @@ public class Painter {
      * @param app contains the render function to run every frame
      */
     public void render(App app) {
+        // TODO: Account for the time it takes to run the render function
+        // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
             app.render();

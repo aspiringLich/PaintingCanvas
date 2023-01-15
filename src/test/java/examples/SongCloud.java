@@ -1,4 +1,4 @@
-package paintingcanvas;
+package examples;
 
 import paintingcanvas.painter.App;
 
@@ -14,13 +14,14 @@ import java.util.stream.Collectors;
 
 import static java.awt.Color.RGBtoHSB;
 
-public class Main extends App {
+public class SongCloud extends App {
     public static void main(String[] args) {
-        new Main().run();
+        new SongCloud().run();
     }
 
     @Override
     public void setup() throws IOException {
+        setTitle("Song Cloud");
         var rawSong = Files.readString(Path.of("song.txt"));
 
         var out = new HashMap<String, Integer>();

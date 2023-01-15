@@ -57,6 +57,7 @@ public abstract class App {
     /**
      * <code>[ADVANCED]</code>
      * An overwrite-able function to let you run code every frame.
+     *
      * @see #setup()
      */
     public void render() {
@@ -67,7 +68,7 @@ public abstract class App {
      * It is where you will put all your code.
      * (unless you want to be fancy)
      */
-    public abstract void setup() throws Exception;
+    protected abstract void setup() throws Exception;
 
     /**
      * Initialize and run the application.
@@ -121,6 +122,10 @@ public abstract class App {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void setTitle(String title) {
+        painter.setTitle(title);
     }
 
     // == Define animations ==
@@ -183,7 +188,7 @@ public abstract class App {
 
     /**
      * Creates a new rotation animation to <code>angle°</code>.
-     * If you supply an angle <code> 360</code> it will make more than one full rotation.
+     * If you supply an angle {@code > 360} it will make more than one full rotation.
      *
      * @param angle The absolute angle to rotate to in degrees.
      * @return the {@link Animation} object
@@ -198,7 +203,7 @@ public abstract class App {
      * @param time Time to wait
      * @param unit The unit that <code>time</code> is in
      */
-    public void sleep(float time, TimeUnit unit) {
+    protected void sleep(float time, TimeUnit unit) {
         builderFrame += unit.asFrames(time);
         lastBuilderFrame = builderFrame;
 
@@ -220,7 +225,7 @@ public abstract class App {
      *
      * @param time The time in seconds.
      */
-    public void sleep(float time) {
+    protected void sleep(float time) {
         sleep(time, TimeUnit.Seconds);
     }
 
