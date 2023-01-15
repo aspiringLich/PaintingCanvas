@@ -13,8 +13,7 @@ public class Ellipse extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        var gc = (Graphics2D) g;
+    public void draw(Graphics2D gc) {
         gc.setColor(color);
         if (this.filled) gc.fillOval(x, y, width, height);
         else gc.drawOval(x, y, width, height);

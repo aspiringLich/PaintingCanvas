@@ -1,6 +1,7 @@
 package examples;
 
 import paintingcanvas.painter.App;
+
 import java.awt.*;
 public class Test extends App {
     public static void main(String[] args) {

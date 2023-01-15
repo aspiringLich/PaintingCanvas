@@ -30,8 +30,7 @@ public class Polygon extends Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        var gc = (Graphics2D) g;
+    public void draw(Graphics2D gc) {
         gc.setColor(color);
         polygon.translate(x, y);
         if (this.filled) gc.fillPolygon(polygon);

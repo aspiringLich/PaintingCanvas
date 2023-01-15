@@ -28,7 +28,7 @@ public abstract class Drawable {
      *
      * @param g The graphics
      */
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics2D gc);
 
     /**
      * Get the Y-coordinate of the object's center-point
