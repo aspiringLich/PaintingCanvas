@@ -203,6 +203,7 @@ public abstract class App {
      * @param time Time to wait
      * @param unit The unit that <code>time</code> is in
      */
+    @SuppressWarnings("SameParameterValue")
     protected void sleep(float time, TimeUnit unit) {
         builderFrame += unit.asFrames(time);
         lastBuilderFrame = builderFrame;
@@ -975,8 +976,8 @@ public abstract class App {
          *
          * @param time   The time from the start of the program to the start of the animation
          * @param runner The {@link paintingcanvas.painter.Event.EventRunner} object
-         * @param repeat If the event should repeat
          * @param unit   The {@link TimeUnit} used for {@code time}
+         * @param repeat If the event should repeat
          */
         public static void schedule(float time, Event.EventRunner runner, TimeUnit unit, boolean repeat) {
             var _time = unit.asFrames(time);
@@ -993,8 +994,8 @@ public abstract class App {
          * }</pre>
          *
          * @param time   The time in seconds from the start of the program to the start of the animation
-         * @param runner The {@link paintingcanvas.painter.Event.EventRunner} object
          * @param repeat If the event should repeat
+         * @param runner The {@link paintingcanvas.painter.Event.EventRunner} object
          */
         public static void schedule(float time, boolean repeat, Event.EventRunner runner) {
             schedule(time, runner, TimeUnit.Seconds, repeat);
@@ -1015,6 +1016,10 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
+            // builderFrame should be at *least* right now
+            if (builderFrame < painter.canvas.frame) builderFrame = painter.canvas.frame;
+            var save = builderFrame;
+
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
@@ -1027,8 +1032,9 @@ public abstract class App {
                 painter.canvas.animations.add(animation);
             }
 
+            // lock thread until the animation starts
             synchronized (painter.canvas.events) {
-                painter.canvas.events.add(new Event(builderFrame, c -> {
+                painter.canvas.events.add(new Event(save, c -> {
                     synchronized (syncObject) {
                         syncObject.notify();
                     }
@@ -1070,11 +1076,19 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
+            // lastBuilderFrame should be *at least* right now
+            if (lastBuilderFrame < painter.canvas.frame) lastBuilderFrame = painter.canvas.frame;
+
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
             animation.startFrame = lastBuilderFrame;
             animation.duration = _duration;
+
+            // builderFrame should be a count of when the last animation will end
+            // and thus when to add the next one
+            // as such if lastBuilderFrame + duration exceeds it, it has to be updated
+            if (builderFrame < lastBuilderFrame + _duration) builderFrame = lastBuilderFrame + _duration;
 
 ///           builderFrame +=
 //            builderFrame += _duration;
@@ -1112,7 +1126,6 @@ public abstract class App {
          *    .wait(50, TimeUnit.Frames)
          *    .add(colorTo(Color.BLUE), 100);
          *
-         * // TODO: Verify that wait + with has the following behavior
          * // the second animation will run 50 frames after the first one starts
          * obj.animate()
          *    .add(moveTo(100, 100), 100)
@@ -1126,7 +1139,7 @@ public abstract class App {
          */
         public AnimationBuilder wait(float duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
-            lastBuilderFrame = builderFrame;
+            lastBuilderFrame += _duration;
             builderFrame += _duration;
             return this;
         }
@@ -1140,7 +1153,6 @@ public abstract class App {
          *    .wait(10)
          *    .add(colorTo(Color.BLUE), 100);
          *
-         * // TODO: Verify that wait + with has the following behavior
          * // the second animation will run 10 seconds after the first one starts
          * obj.animate()
          *    .add(moveTo(100, 100), 100)
@@ -1164,7 +1176,6 @@ public abstract class App {
          *    .wait(10)
          *    .add(colorTo(Color.BLUE), 100);
          *
-         * // TODO: Verify that wait + with has the following behavior
          * // the second animation will run 10 seconds after the first one starts
          * obj.animate()
          *    .add(moveTo(100, 100), 100)
@@ -1182,7 +1193,7 @@ public abstract class App {
         /**
          * Schedule an {@link Animation} at an absolute time.
          * <pre>{@code
-         * // obj will start moving to (100, 100) 20 frames after the program states
+         * // obj will start moving to (100, 100) 20 frames after the program starts
          * obj.animate()
          *    .schedule(20, moveTo(100, 100), 10, TimeUnit.Frames);
          * }</pre>
@@ -1198,7 +1209,7 @@ public abstract class App {
             var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
-            animation.startFrame = builderFrame + _time;
+            animation.startFrame = painter.canvas.frame + _time;
             animation.duration = _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
@@ -1209,7 +1220,7 @@ public abstract class App {
         /**
          * Schedule an {@link Animation} at an absolute time.
          * <pre>{@code
-         * // obj will start moving to (100, 100) 10 seconds after the program states
+         * // obj will start moving to (100, 100) 10 seconds after the program starts
          * obj.animate()
          *    .schedule(10, moveTo(100, 100), 5);
          * }</pre>
