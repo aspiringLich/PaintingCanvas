@@ -61,9 +61,10 @@ public class AnimalPictureProject extends App {
         while (true) {
             for (var i : new int[]{
                     0xFF0000,
+                    0xFFC90E,
                     0x97C115,
                     0x00A2E8,
-                    0xFFC90E
+                    0x9D26E5,
             }) {
                 for (var rect : colored)
                     rect.animate().with(colorTo(i), 2);

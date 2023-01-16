@@ -22,6 +22,7 @@ public class Polygon extends Drawable {
 
     /**
      * Adds a point to this polygon
+     *
      * @param x the x-position of said point
      * @param y the y-position of said point
      */

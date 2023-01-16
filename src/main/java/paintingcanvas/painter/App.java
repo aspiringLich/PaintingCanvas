@@ -1099,10 +1099,11 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+            lastAnimationFinish = Math.max(lastAnimationFinish, lastBuilderFrame + _duration);
+
             // lastBuilderFrame should be *at least* right now
             if (lastBuilderFrame < painter.canvas.frame) lastBuilderFrame = painter.canvas.frame;
-
-            var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
             animation.startFrame = lastBuilderFrame;

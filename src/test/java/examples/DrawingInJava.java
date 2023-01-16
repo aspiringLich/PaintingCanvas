@@ -24,8 +24,7 @@ public class DrawingInJava extends App {
         var door = new Rectangle(150, 300, 50, 100).setColor(0xE8191A);
 
         // == Animate to Night ==
-        sun.animate().with(moveTo(width / 2, height / 2 + 50), 7);
-        sleep(3);
+        sun.animate().add(moveTo(width / 2, height / 2 + 50), 7).wait(3);
 
         var duration = 4;
         sky.animate().with(colorTo(0xF5976C), duration);

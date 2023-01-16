@@ -26,7 +26,7 @@ public abstract class Drawable {
     /**
      * Draw the actual object onto the screen
      *
-     * @param g The graphics
+     * @param gc The graphics context
      */
     public abstract void draw(Graphics2D gc);
 
@@ -50,16 +50,9 @@ public abstract class Drawable {
         if (!this.visible) return;
 
         var gc = (Graphics2D) g;
-        // TODO: Might be unnecessary but possibly recalculate this whenever the position is modified but save it somewhere to avoid recalculating this every frame.
         var transform = gc.getTransform();
         var center = this.center(g);
-
         transform.setToRotation(this.rotation, center.x, center.y);
-        transform.scale(1.0, -1.0);
-        gc.setTransform(transform);
-
-        var bounds = gc.getClipBounds();
-        gc.translate(bounds.getWidth() / 2, -bounds.getHeight() / 2);
 
         this.draw(gc);
     }
