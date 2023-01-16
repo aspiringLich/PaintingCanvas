@@ -37,7 +37,7 @@ public class Painter {
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
-            app.render();
+            app._render();
             canvas.repaint();
             SwingUtilities.updateComponentTreeUI(frame);
             frame.invalidate();
