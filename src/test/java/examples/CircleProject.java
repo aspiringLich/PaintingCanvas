@@ -66,7 +66,7 @@ public class CircleProject extends App {
 
         // == Circle Rows (3) ==
         setTitle("Circle Projects - Circle Rows");
-        sleepUntilAnimationEnds();
+        sleep();
         for (int y = 0; y < 10; y++)
             for (int x = 0; x < 10; x++)
                 circles.get(y * 10 + x).animate().with(moveTo(width / 2 - 250 + x * 50, height / 2 - 275 + y * 50), 1);

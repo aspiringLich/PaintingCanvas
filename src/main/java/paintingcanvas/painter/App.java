@@ -47,6 +47,16 @@ public abstract class App {
         }
     }
 
+    protected static void sleep() {
+        try {
+            synchronized (userSyncObject) {
+                userSyncObject.wait();
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Gets the current width of the canvas
      *
@@ -156,11 +166,11 @@ public abstract class App {
         }
     }
 
+    // == Define animations ==
+
     protected void setTitle(String title) {
         painter.setTitle(title);
     }
-
-    // == Define animations ==
 
     /**
      * Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
@@ -251,16 +261,6 @@ public abstract class App {
 
         // Wait for unblock
         _syncWait();
-    }
-
-    protected void sleepUntilAnimationEnds() {
-        try {
-            synchronized (userSyncObject) {
-                userSyncObject.wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
@@ -1210,6 +1210,11 @@ public abstract class App {
          */
         public AnimationBuilder wait(int duration) {
             return wait(duration, TimeUnit.Seconds);
+        }
+
+        public AnimationBuilder sleep() {
+            App.sleep();
+            return this;
         }
 
         /**

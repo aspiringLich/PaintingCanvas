@@ -15,11 +15,17 @@ public abstract class Animation {
      */
     public int duration;
     public Drawable drawable;
+    public Easing easing = Easing.linear();
 
     Animation(int startFrame, int duration, Drawable drawable) {
         this.startFrame = startFrame;
         this.duration = duration;
         this.drawable = drawable;
+    }
+
+    public Animation easing(Easing easing) {
+        this.easing = easing;
+        return this;
     }
 
     public void update(int frame) {
