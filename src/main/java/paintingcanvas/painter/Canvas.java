@@ -66,7 +66,7 @@ public class Canvas extends JComponent {
     }
 
     static class ResizeListener extends ComponentAdapter {
-        Canvas canvas;
+        final Canvas canvas;
         Dimension lastSize = new Dimension();
 
         ResizeListener(Canvas canvas) {

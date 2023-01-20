@@ -485,6 +485,32 @@ public abstract class App {
         }
 
         /**
+         * Sets an element to draw filled, or as an outline.
+         * <pre>{@code
+         * Circle o = new Circle(100, 100, 20);
+         * o.setFilled(true); // Sets the element to be filled
+         * o.setFilled(false); // Sets the element to be just an outline
+         * }</pre>
+         *
+         * @param filled Whether the element should be filled or not
+         * @return The original object to allow method chaining
+         */
+        public T setFilled(boolean filled) {
+            this._super.filled = filled;
+            return getThis();
+        }
+
+        /**
+         * Returns if the object is filled or not.
+         * If it is not filled, only an outline will be drawn.
+         *
+         * @return If the object is filled or not.
+         */
+        public boolean isFilled() {
+            return this._super.filled;
+        }
+
+        /**
          * Create an {@link AnimationBuilder}.
          * Used to animate different properties of an element (position, rotation, color).
          * <pre>{@code
@@ -896,6 +922,22 @@ public abstract class App {
          */
         public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
             super(new paintingcanvas.painter.drawable.Polygon(x, y, xPoints, yPoints));
+        }
+
+        /**
+         * Create a new Polygon element from a list of x-points and y-points.
+         * <pre>{@code
+         * Polygon polygon = new Polygon(
+         *    new int[] {0, 250, 500},
+         *    new int[] {500, 250, 0},
+         * );
+         * }</pre>
+         *
+         * @param xPoints Array of absolute X-points
+         * @param yPoints Array of absolute Y-points
+         */
+        public Polygon(int[] xPoints, int[] yPoints) {
+            super(new paintingcanvas.painter.drawable.Polygon(0, 0, xPoints, yPoints));
         }
 
         @Override
