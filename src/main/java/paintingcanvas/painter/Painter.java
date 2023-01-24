@@ -8,7 +8,7 @@ public class Painter {
     // how many frames per second do we want to run at?
     public static final int fps = 30;
     private final JFrame frame;
-    public Canvas canvas;
+    public final Canvas canvas;
 
     public Painter(int width, int height, String title) {
         frame = new JFrame();
@@ -37,7 +37,7 @@ public class Painter {
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
-            app.render();
+            app._render();
             canvas.repaint();
             SwingUtilities.updateComponentTreeUI(frame);
             frame.invalidate();
@@ -50,13 +50,11 @@ public class Painter {
      */
     public void run() {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        new Thread(() -> {
-            poolExecutor.scheduleAtFixedRate(() -> {
-                canvas.repaint();
-                SwingUtilities.updateComponentTreeUI(frame);
-                frame.invalidate();
-                frame.validate();
-            }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
-        });
+        new Thread(() -> poolExecutor.scheduleAtFixedRate(() -> {
+            canvas.repaint();
+            SwingUtilities.updateComponentTreeUI(frame);
+            frame.invalidate();
+            frame.validate();
+        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS));
     }
 }

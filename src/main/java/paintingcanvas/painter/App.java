@@ -15,19 +15,42 @@ import java.awt.event.ComponentEvent;
  */
 @SuppressWarnings("unused")
 public abstract class App {
+    // Used to block on .add() calls
     private static final Object syncObject = new Object();
+    // Used to wait on sleepUntillAnimationEnds
+    private static final Object userSyncObject = new Object();
     /**
      * The global Painter all Drawables access to add themselves to.
      */
     public static Painter painter;
-    private static Dimension lastSize;
+    // The frame the builder is on (end of the last animation)
     private static int builderFrame;
+    // The start of the last animation
     private static int lastBuilderFrame;
+    // Used to make sure the first call to .add doesn't block
+    private static boolean firstBlockingAnimation = true;
+    // The frame the last animation ends on (excluding the last blocking animation)
+    private static int animationFinish = -1;
+    // The frame the last animation ends on (including the last animation)
+    private static int lastAnimationFinish = -1;
+    // The last size of the canvas, used for auto-centering of drawables
+    private static Dimension lastSize;
+
 
     private static void _syncWait() {
         try {
             synchronized (syncObject) {
                 syncObject.wait();
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected static void sleep() {
+        try {
+            synchronized (userSyncObject) {
+                userSyncObject.wait();
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -52,6 +75,25 @@ public abstract class App {
      */
     protected int height() {
         return painter.canvas.getHeight();
+    }
+
+    protected void _render() {
+        if (animationFinish != -1 && painter.canvas.frame >= animationFinish) {
+            animationFinish = -1;
+            synchronized (syncObject) {
+                syncObject.notify();
+            }
+        }
+
+        if (lastAnimationFinish != -1 && painter.canvas.frame >= lastAnimationFinish) {
+            lastAnimationFinish = -1;
+            synchronized (userSyncObject) {
+                userSyncObject.notify();
+            }
+        }
+
+        // Run user supplied render function
+        this.render();
     }
 
     /**
@@ -124,11 +166,11 @@ public abstract class App {
         }
     }
 
+    // == Define animations ==
+
     protected void setTitle(String title) {
         painter.setTitle(title);
     }
-
-    // == Define animations ==
 
     /**
      * Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
@@ -294,11 +336,17 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+            if (!firstBlockingAnimation) {
+                animationFinish = painter.canvas.animations.stream().map(a -> a.startFrame + a.duration).max(Integer::compareTo).orElse(0);
+                lastAnimationFinish = Math.max(animationFinish, builderFrame + _duration);
+                _syncWait();
+            }
+            firstBlockingAnimation = false;
+
             // builderFrame should be at *least* right now
             if (builderFrame < painter.canvas.frame) builderFrame = painter.canvas.frame;
             var save = builderFrame;
-
-            var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
             animation.startFrame = builderFrame;
@@ -310,15 +358,6 @@ public abstract class App {
                 painter.canvas.animations.add(animation);
             }
 
-            // lock thread until the animation starts
-            synchronized (painter.canvas.events) {
-                painter.canvas.events.add(new Event(save, c -> {
-                    synchronized (syncObject) {
-                        syncObject.notify();
-                    }
-                }));
-            }
-            _syncWait();
             return this;
         }
 
@@ -354,10 +393,11 @@ public abstract class App {
          * @return <code>this</code> to allow method chaining
          */
         public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
+            var _duration = unit.asFrames(duration);
+            lastAnimationFinish = Math.max(lastAnimationFinish, lastBuilderFrame + _duration);
+
             // lastBuilderFrame should be *at least* right now
             if (lastBuilderFrame < painter.canvas.frame) lastBuilderFrame = painter.canvas.frame;
-
-            var _duration = unit.asFrames(duration);
 
             animation.drawable = this.drawable;
             animation.startFrame = lastBuilderFrame;
@@ -368,8 +408,6 @@ public abstract class App {
             // as such if lastBuilderFrame + duration exceeds it, it has to be updated
             if (builderFrame < lastBuilderFrame + _duration) builderFrame = lastBuilderFrame + _duration;
 
-///           builderFrame +=
-//            builderFrame += _duration;
             synchronized (painter.canvas.animations) {
                 painter.canvas.animations.add(animation);
             }
@@ -466,6 +504,11 @@ public abstract class App {
          */
         public AnimationBuilder wait(int duration) {
             return wait(duration, TimeUnit.Seconds);
+        }
+
+        public AnimationBuilder sleep() {
+            App.sleep();
+            return this;
         }
 
         /**

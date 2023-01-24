@@ -16,7 +16,8 @@ public class Canvas extends JComponent {
     public final List<Animation> animations = new ArrayList<>();
     public final List<Event> events = new ArrayList<>();
     public int frame = -1;
-    public RenderLifecycle renderLifecycle = new RenderLifecycle() {};
+    public RenderLifecycle renderLifecycle = new RenderLifecycle() {
+    };
 
 
     /**
@@ -57,7 +58,8 @@ public class Canvas extends JComponent {
             gc.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         }
 
-        default void renderEnd(Graphics g) {}
+        default void renderEnd(Graphics g) {
+        }
 
         default void onResize(Canvas canvas, ComponentEvent e) {
             canvas.repaint();
@@ -65,7 +67,7 @@ public class Canvas extends JComponent {
     }
 
     static class ResizeListener extends ComponentAdapter {
-        Canvas canvas;
+        final Canvas canvas;
         Dimension lastSize = new Dimension();
 
         ResizeListener(Canvas canvas) {

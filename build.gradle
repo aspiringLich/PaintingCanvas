@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 // what should the group-id be breon
@@ -8,3 +9,21 @@ version '1.0-SNAPSHOT'
 
 repositories {}
 dependencies {}
+
+publishing {
+    repositories {
+        maven {
+            name = 'paintingcanvas'
+            url = uri('https://repo.repsy.io/mvn/basicprogrammer10/paintingcanvas')
+            credentials {
+                // hidden
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

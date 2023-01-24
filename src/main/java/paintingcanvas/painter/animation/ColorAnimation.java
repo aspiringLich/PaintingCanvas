@@ -19,7 +19,7 @@ public class ColorAnimation extends Animation {
     @Override
     void updateAnimation(Drawable drawable, int frame, int duration) {
         if (frame == 0 || start == null) this.start = drawable.color;
-        drawable.color = lerpColor(start, end, frame / (float) duration);
+        drawable.color = lerpColor(start, end, (float) easing.ease(frame / (double) duration));
     }
 
     /**

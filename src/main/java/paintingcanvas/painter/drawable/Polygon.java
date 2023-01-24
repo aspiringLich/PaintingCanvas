@@ -70,7 +70,7 @@ public class Polygon extends Drawable<Polygon> {
         super(x, y, Color.BLACK);
         this.polygon = new java.awt.Polygon(xPoints, yPoints, xPoints.length);
     }
-    
+
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(color);
