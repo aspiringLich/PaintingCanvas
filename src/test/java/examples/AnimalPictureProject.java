@@ -5,6 +5,9 @@ import paintingcanvas.painter.App;
 import java.awt.*;
 import java.util.ArrayList;
 
+import paintingcanvas.painter.drawable.*;
+import paintingcanvas.painter.drawable.Rectangle;
+
 public class AnimalPictureProject extends App {
     // 0 -> None; 1 -> black; 2 -> white; 3 -> color;
     // totally dident steal this idea from breon
@@ -52,7 +55,7 @@ public class AnimalPictureProject extends App {
                 else if (rawColor == 1) color = Color.BLACK;
                 else if (rawColor == 3) color = new Color(0xFF0000);
 
-                var rect = new Rectangle(xm + x * 20, ym + y * 20, 20, 20).setColor(color);
+                var rect = new Rectangle(xm + x * 20, ym + (mushroom.length - y - 1) * 20, 20, 20).setColor(color);
                 if (rawColor == 3) colored.add(rect);
             }
         }

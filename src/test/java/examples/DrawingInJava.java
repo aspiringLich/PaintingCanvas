@@ -2,6 +2,8 @@ package examples;
 
 import paintingcanvas.painter.App;
 
+import paintingcanvas.painter.drawable.*;
+
 public class DrawingInJava extends App {
     public static void main(String[] args) {
         new DrawingInJava().run();

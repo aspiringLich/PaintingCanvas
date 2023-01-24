@@ -9,9 +9,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Canvas extends JComponent {
-    public final List<Drawable> elements = new ArrayList<>();
+    public final List<Drawable> elements = new Vector<>();
     public final List<Animation> animations = new ArrayList<>();
     public final List<Event> events = new ArrayList<>();
     public int frame = -1;

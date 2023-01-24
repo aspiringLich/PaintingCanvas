@@ -12,6 +12,8 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import paintingcanvas.painter.drawable.*;
+
 import static java.awt.Color.RGBtoHSB;
 
 public class SongCloud extends App {

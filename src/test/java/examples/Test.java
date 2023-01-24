@@ -1,6 +1,7 @@
 package examples;
 
 import paintingcanvas.painter.App;
+import paintingcanvas.painter.drawable.Circle;
 
 import java.awt.*;
 public class Test extends App {
