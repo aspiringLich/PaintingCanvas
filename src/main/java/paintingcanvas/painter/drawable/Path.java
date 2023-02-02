@@ -6,6 +6,8 @@ import java.awt.geom.Path2D;
 
 /**
  * An SVG-like path used to draw lines and curves.
+ *
+ * Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.
  */
 public class Path extends Drawable<Path> {
     Path2D path;
@@ -18,6 +20,7 @@ public class Path extends Drawable<Path> {
         super(0, 0, Color.BLACK);
         this.path = new Path2D.Double();
         this.stroke = new BasicStroke(1);
+        this.filled = false;
     }
 
     /**
@@ -50,7 +53,7 @@ public class Path extends Drawable<Path> {
      * @param y The Y-position of the new cursor position
      * @return The original object to allow method chaining
      */
-    public Path moveTo(int x, int y) {
+    public Path cursorTo(int x, int y) {
         path.moveTo(x, y);
         return this;
     }
