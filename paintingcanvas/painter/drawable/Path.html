@@ -138,7 +138,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Path</span>
 extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a>&lt;<a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a>&gt;</pre>
-<div class="block">An SVG-like path used to draw lines and curves.</div>
+<div class="block">An SVG-like path used to draw lines and curves.
+
+ Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.</div>
 </li>
 </ul>
 </div>
@@ -208,6 +210,14 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cursorTo(int,int)">cursorTo</a></span>&#8203;(int&nbsp;x,
+        int&nbsp;y)</code></th>
+<td class="colLast">
+<div class="block">Move the cursor to a new position</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#curveTo(int,int,int,int,int,int)">curveTo</a></span>&#8203;(int&nbsp;x1,
        int&nbsp;y1,
        int&nbsp;x2,
@@ -218,32 +228,24 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 <div class="block">Make a cubic curve from the current cursor position to a new position.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(java.awt.Graphics2D)">draw</a></span>&#8203;(java.awt.Graphics2D&nbsp;gc)</code></th>
 <td class="colLast">
 <div class="block">Draw the actual object onto the screen</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>protected <a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getThis()">getThis</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lineTo(int,int)">lineTo</a></span>&#8203;(int&nbsp;x,
       int&nbsp;y)</code></th>
 <td class="colLast">
 <div class="block">Make a line from the current cursor position to a new position</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveTo(int,int)">moveTo</a></span>&#8203;(int&nbsp;x,
-      int&nbsp;y)</code></th>
-<td class="colLast">
-<div class="block">Move the cursor to a new position</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
@@ -353,14 +355,14 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 </dl>
 </li>
 </ul>
-<a id="moveTo(int,int)">
+<a id="cursorTo(int,int)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>moveTo</h4>
-<pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a>&nbsp;moveTo&#8203;(int&nbsp;x,
-                   int&nbsp;y)</pre>
+<h4>cursorTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a>&nbsp;cursorTo&#8203;(int&nbsp;x,
+                     int&nbsp;y)</pre>
 <div class="block">Move the cursor to a new position</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
