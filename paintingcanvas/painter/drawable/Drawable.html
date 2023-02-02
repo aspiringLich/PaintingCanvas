@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":6,"i2":6,"i3":10,"i4":10,"i5":6,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10};
+var data = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":10,"i5":6,"i6":10,"i7":10,"i8":6,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,7 +132,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="Circle.html" title="class in paintingcanvas.painter.drawable">Circle</a></code>, <code><a href="Ellipse.html" title="class in paintingcanvas.painter.drawable">Ellipse</a></code>, <code><a href="Polygon.html" title="class in paintingcanvas.painter.drawable">Polygon</a></code>, <code><a href="Rectangle.html" title="class in paintingcanvas.painter.drawable">Rectangle</a></code>, <code><a href="Square.html" title="class in paintingcanvas.painter.drawable">Square</a></code>, <code><a href="Text.html" title="class in paintingcanvas.painter.drawable">Text</a></code>, <code><a href="Triangle.html" title="class in paintingcanvas.painter.drawable">Triangle</a></code></dd>
+<dd><code><a href="Circle.html" title="class in paintingcanvas.painter.drawable">Circle</a></code>, <code><a href="Ellipse.html" title="class in paintingcanvas.painter.drawable">Ellipse</a></code>, <code><a href="Line.html" title="class in paintingcanvas.painter.drawable">Line</a></code>, <code><a href="Path.html" title="class in paintingcanvas.painter.drawable">Path</a></code>, <code><a href="Polygon.html" title="class in paintingcanvas.painter.drawable">Polygon</a></code>, <code><a href="Rectangle.html" title="class in paintingcanvas.painter.drawable">Rectangle</a></code>, <code><a href="Square.html" title="class in paintingcanvas.painter.drawable">Square</a></code>, <code><a href="Text.html" title="class in paintingcanvas.painter.drawable">Text</a></code>, <code><a href="Triangle.html" title="class in paintingcanvas.painter.drawable">Triangle</a></code></dd>
 </dl>
 <hr>
 <pre>public abstract class <span class="typeNameLabel">Drawable&lt;T extends Drawable&lt;T&gt;&gt;</span>
@@ -224,81 +224,124 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(byte,byte,byte,float)">colorTo</a></span>&#8203;(byte&nbsp;r,
+       byte&nbsp;g,
+       byte&nbsp;b,
+       float&nbsp;duration)</code></th>
+<td class="colLast">
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(int,float)">colorTo</a></span>&#8203;(int&nbsp;hex,
+       float&nbsp;duration)</code></th>
+<td class="colLast">
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(java.awt.Color,float)">colorTo</a></span>&#8203;(java.awt.Color&nbsp;color,
+       float&nbsp;duration)</code></th>
+<td class="colLast">
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(java.awt.Graphics2D)">draw</a></span>&#8203;(java.awt.Graphics2D&nbsp;gc)</code></th>
 <td class="colLast">
 <div class="block">Draw the actual object onto the screen</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.awt.Color</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getColor()">getColor</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the current color of an element as a <code>Color</code></div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.awt.Point</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPos()">getPos</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the position of the element</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected abstract <a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getThis()">getThis</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getX()">getX</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the X-position of the element</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getY()">getY</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the Y-position of the element.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hide()">hide</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Hide the Object.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveTo(int,int,float)">moveTo</a></span>&#8203;(int&nbsp;x,
+      int&nbsp;y,
+      float&nbsp;duration)</code></th>
+<td class="colLast">
+<div class="block">This method moves <code>this</code> to the specified <code>x</code> and <code>y</code> over <code>duration</code> seconds</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#render(java.awt.Graphics)">render</a></span>&#8203;(java.awt.Graphics&nbsp;g)</code></th>
 <td class="colLast">
 <div class="block">Actually render the object itself</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rotate(double)">rotate</a></span>&#8203;(double&nbsp;rotation)</code></th>
 <td class="colLast">
 <div class="block">Rotate this element by <code>rotation°</code>.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rotateTo(double)">rotateTo</a></span>&#8203;(double&nbsp;rotation)</code></th>
 <td class="colLast">
 <div class="block">Set an elements rotation to <code>rotation°</code>.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i16" class="altColor">
+<td class="colFirst"><code><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rotateTo(int,float)">rotateTo</a></span>&#8203;(int&nbsp;angle,
+        float&nbsp;duration)</code></th>
+<td class="colLast">
+<div class="block">Creates a new rotation animation to <code>angle°</code>.</div>
+</td>
+</tr>
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setColor(int)">setColor</a></span>&#8203;(int&nbsp;hex)</code></th>
 <td class="colLast">
 <div class="block">Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setColor(int,int,int)">setColor</a></span>&#8203;(int&nbsp;r,
         int&nbsp;g,
@@ -307,14 +350,21 @@ extends java.lang.Object</pre>
 <div class="block">Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setColor(java.awt.Color)">setColor</a></span>&#8203;(java.awt.Color&nbsp;color)</code></th>
 <td class="colLast">
 <div class="block">Set the color of the object with a <code>Color</code> object.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i20" class="altColor">
+<td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFilled(boolean)">setFilled</a></span>&#8203;(boolean&nbsp;filled)</code></th>
+<td class="colLast">
+<div class="block">Set whether this object is filled or not</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPos(int,int)">setPos</a></span>&#8203;(int&nbsp;x,
       int&nbsp;y)</code></th>
@@ -322,21 +372,21 @@ extends java.lang.Object</pre>
 <div class="block">Set the position of the element.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setX(int)">setX</a></span>&#8203;(int&nbsp;x)</code></th>
 <td class="colLast">
 <div class="block">Set the X-position of the object</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setY(int)">setY</a></span>&#8203;(int&nbsp;y)</code></th>
 <td class="colLast">
 <div class="block">Set the Y-position of the element</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="Drawable.html" title="type parameter in Drawable">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#show()">show</a></span>()</code></th>
 <td class="colLast">
@@ -764,10 +814,26 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="setFilled(boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setFilled</h4>
+<pre class="methodSignature">public&nbsp;<a href="Drawable.html" title="type parameter in Drawable">T</a>&nbsp;setFilled&#8203;(boolean&nbsp;filled)</pre>
+<div class="block">Set whether this object is filled or not</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>filled</code> - The value to set <code>this.filled</code> to</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The original object to allow method chaining</dd>
+</dl>
+</li>
+</ul>
 <a id="animate()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>animate</h4>
 <pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;animate()</pre>
@@ -782,6 +848,147 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd><a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter"><code>App.AnimationBuilder</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="moveTo(int,int,float)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>moveTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;moveTo&#8203;(int&nbsp;x,
+                                   int&nbsp;y,
+                                   float&nbsp;duration)</pre>
+<div class="block">This method moves <code>this</code> to the specified <code>x</code> and <code>y</code> over <code>duration</code> seconds
+
+ <pre><code>
+ Circle c = new Circle(200, 200, 50);
+ // the circle will move to (100, 100), and then to (200, 200)
+ c.moveTo(100, 100, 3).moveTo(200, 200, 3);
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>x</code> - the x-position to move to</dd>
+<dd><code>y</code> - the y-position to move to</dd>
+<dd><code>duration</code> - the number of seconds it lasts</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an <code>AnimationBuilder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#animate()"><code>animate()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="colorTo(byte,byte,byte,float)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>colorTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;colorTo&#8203;(byte&nbsp;r,
+                                    byte&nbsp;g,
+                                    byte&nbsp;b,
+                                    float&nbsp;duration)</pre>
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.
+ See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
+
+ <pre><code>
+ Circle c = new Circle(200, 200, 50);
+ // the circle will turn red, and then blue
+ c.colorTo(255, 0, 0, 3).colorTo(0, 0, 255, 3);
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>r</code> - red (0-255)</dd>
+<dd><code>g</code> - green (0-255)</dd>
+<dd><code>b</code> - blue (0-255)</dd>
+<dd><code>duration</code> - the number of seconds it lasts</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an <code>AnimationBuilder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#animate()"><code>animate()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="colorTo(int,float)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>colorTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;colorTo&#8203;(int&nbsp;hex,
+                                    float&nbsp;duration)</pre>
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.
+ See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
+
+ <pre><code>
+ Circle c = new Circle(200, 200, 50);
+ // the circle will turn red, and then blue
+ c.colorTo(0xFF0000, 3).colorTo(0x0000FF, 3);
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>hex</code> - The number describing the RGB color</dd>
+<dd><code>duration</code> - the number of seconds it lasts</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an <code>AnimationBuilder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#animate()"><code>animate()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="colorTo(java.awt.Color,float)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>colorTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;colorTo&#8203;(java.awt.Color&nbsp;color,
+                                    float&nbsp;duration)</pre>
+<div class="block">This method changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.
+ See <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html">The Oracle docs</a> for the full list of colors,
+ and constructors for this class
+
+ <pre><code>
+ Circle c = new Circle(200, 200, 50);
+ // the circle will turn red, and then blue
+ c.colorTo(Color.RED, 3).colorTo(Color.BLUE, 3);
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>color</code> - The color to fade to</dd>
+<dd><code>duration</code> - the number of seconds it lasts</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an <code>AnimationBuilder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#animate()"><code>animate()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="rotateTo(int,float)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>rotateTo</h4>
+<pre class="methodSignature">public&nbsp;<a href="../App.AnimationBuilder.html" title="class in paintingcanvas.painter">App.AnimationBuilder</a>&nbsp;rotateTo&#8203;(int&nbsp;angle,
+                                     float&nbsp;duration)</pre>
+<div class="block">Creates a new rotation animation to <code>angle°</code>.
+ If you supply an angle <code>&gt; 360</code> it will make more than one full rotation.
+
+ <pre><code>
+ Square s = new Square(200, 200, 50);
+ // the square will rotate one turn counter-clockwise, then 2 turns clockwise
+ c.rotateTo(360, 3).colorTo(-360, 3);
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>angle</code> - The absolute angle to rotate to in degrees.</dd>
+<dd><code>duration</code> - the number of seconds it lasts</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an <code>AnimationBuilder</code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#animate()"><code>animate()</code></a></dd>
 </dl>
 </li>
 </ul>

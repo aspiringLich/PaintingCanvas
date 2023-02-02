@@ -195,6 +195,19 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int%5B%5D%5B%5D)">Polygon</a></span>&#8203;(int[][]&nbsp;points)</code></th>
+<td class="colLast">
+<div class="block">Create a new Polygon element from a list of points</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int%5B%5D,int%5B%5D)">Polygon</a></span>&#8203;(int[]&nbsp;xPoints,
+       int[]&nbsp;yPoints)</code></th>
+<td class="colLast">
+<div class="block">Create a new Polygon element from a list of x-positions and y-positions</div>
+</td>
+</tr>
+<tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int)">Polygon</a></span>&#8203;(int&nbsp;x,
        int&nbsp;y)</code></th>
 <td class="colLast">
@@ -202,15 +215,23 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 </td>
 </tr>
 <tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int,int%5B%5D%5B%5D)">Polygon</a></span>&#8203;(int&nbsp;x,
+       int&nbsp;y,
+       int[][]&nbsp;points)</code></th>
+<td class="colLast">
+<div class="block">Create a new Polygon element from a list of points</div>
+</td>
+</tr>
+<tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int,int%5B%5D,int%5B%5D)">Polygon</a></span>&#8203;(int&nbsp;x,
        int&nbsp;y,
        int[]&nbsp;xPoints,
        int[]&nbsp;yPoints)</code></th>
 <td class="colLast">
-<div class="block">Create a new Polygon element from a list of x-points and y-points.</div>
+<div class="block">Create a new Polygon element from a list of x-positions and y-positions</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int,java.awt.Polygon)">Polygon</a></span>&#8203;(int&nbsp;x,
        int&nbsp;y,
        java.awt.Polygon&nbsp;polygon)</code></th>
@@ -269,7 +290,7 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;paintingcanvas.painter.drawable.<a href="Drawable.html" title="class in paintingcanvas.painter.drawable">Drawable</a></h3>
-<code><a href="Drawable.html#animate()">animate</a>, <a href="Drawable.html#getColor()">getColor</a>, <a href="Drawable.html#getPos()">getPos</a>, <a href="Drawable.html#getX()">getX</a>, <a href="Drawable.html#getY()">getY</a>, <a href="Drawable.html#hide()">hide</a>, <a href="Drawable.html#render(java.awt.Graphics)">render</a>, <a href="Drawable.html#rotate(double)">rotate</a>, <a href="Drawable.html#rotateTo(double)">rotateTo</a>, <a href="Drawable.html#setColor(int)">setColor</a>, <a href="Drawable.html#setColor(int,int,int)">setColor</a>, <a href="Drawable.html#setColor(java.awt.Color)">setColor</a>, <a href="Drawable.html#setPos(int,int)">setPos</a>, <a href="Drawable.html#setX(int)">setX</a>, <a href="Drawable.html#setY(int)">setY</a>, <a href="Drawable.html#show()">show</a></code></li>
+<code><a href="Drawable.html#animate()">animate</a>, <a href="Drawable.html#colorTo(byte,byte,byte,float)">colorTo</a>, <a href="Drawable.html#colorTo(int,float)">colorTo</a>, <a href="Drawable.html#colorTo(java.awt.Color,float)">colorTo</a>, <a href="Drawable.html#getColor()">getColor</a>, <a href="Drawable.html#getPos()">getPos</a>, <a href="Drawable.html#getX()">getX</a>, <a href="Drawable.html#getY()">getY</a>, <a href="Drawable.html#hide()">hide</a>, <a href="Drawable.html#moveTo(int,int,float)">moveTo</a>, <a href="Drawable.html#render(java.awt.Graphics)">render</a>, <a href="Drawable.html#rotate(double)">rotate</a>, <a href="Drawable.html#rotateTo(double)">rotateTo</a>, <a href="Drawable.html#rotateTo(int,float)">rotateTo</a>, <a href="Drawable.html#setColor(int)">setColor</a>, <a href="Drawable.html#setColor(int,int,int)">setColor</a>, <a href="Drawable.html#setColor(java.awt.Color)">setColor</a>, <a href="Drawable.html#setFilled(boolean)">setFilled</a>, <a href="Drawable.html#setPos(int,int)">setPos</a>, <a href="Drawable.html#setX(int)">setX</a>, <a href="Drawable.html#setY(int)">setY</a>, <a href="Drawable.html#show()">show</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -366,14 +387,14 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 <a id="&lt;init&gt;(int,int,int[],int[])">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>Polygon</h4>
 <pre>public&nbsp;Polygon&#8203;(int&nbsp;x,
                int&nbsp;y,
                int[]&nbsp;xPoints,
                int[]&nbsp;yPoints)</pre>
-<div class="block">Create a new Polygon element from a list of x-points and y-points.
+<div class="block">Create a new Polygon element from a list of x-positions and y-positions
  <pre><code>
  Polygon polygon = new Polygon(100, 100,
      new int[] {0, 25, 50},
@@ -386,6 +407,70 @@ extends <a href="Drawable.html" title="class in paintingcanvas.painter.drawable"
 <dd><code>y</code> - The Y-position of the polygon</dd>
 <dd><code>xPoints</code> - List of X-points</dd>
 <dd><code>yPoints</code> - List of Y-points</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(int[],int[])">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Polygon</h4>
+<pre>public&nbsp;Polygon&#8203;(int[]&nbsp;xPoints,
+               int[]&nbsp;yPoints)</pre>
+<div class="block">Create a new Polygon element from a list of x-positions and y-positions
+ <pre><code>
+ Polygon polygon = new Polygon(
+     new int[] {0, 25, 50},
+     new int[] {50, 25, 0},
+ );
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>xPoints</code> - List of X-points</dd>
+<dd><code>yPoints</code> - List of Y-points</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(int,int,int[][])">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Polygon</h4>
+<pre>public&nbsp;Polygon&#8203;(int&nbsp;x,
+               int&nbsp;y,
+               int[][]&nbsp;points)</pre>
+<div class="block">Create a new Polygon element from a list of points
+ <pre><code>
+ Polygon polygon = new Polygon(100, 100,
+     new int[][] {{0, 50}, {25, 25}, {50, 0}},
+ );
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>x</code> - The X-position of the polygon</dd>
+<dd><code>y</code> - The Y-position of the polygon</dd>
+<dd><code>points</code> - A 2D array containing pairs of (x, y) points</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(int[][])">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Polygon</h4>
+<pre>public&nbsp;Polygon&#8203;(int[][]&nbsp;points)</pre>
+<div class="block">Create a new Polygon element from a list of points
+ <pre><code>
+ Polygon polygon = new Polygon(
+     new int[][] {{0, 50}, {25, 25}, {50, 0}},
+ );
+ </code></pre></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>points</code> - A 2D array containing pairs of (x, y) points</dd>
 </dl>
 </li>
 </ul>
