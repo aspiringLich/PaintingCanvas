@@ -51,9 +51,9 @@ public class Polygon extends Drawable<Polygon> {
         super(x, y, Color.BLACK);
         this.polygon = polygon;
     }
-    
+
     /**
-     * Create a new Polygon element from a list of x-points and y-points.
+     * Create a new Polygon element from a list of x-positions and y-positions
      * <pre>{@code
      * Polygon polygon = new Polygon(100, 100,
      *     new int[] {0, 25, 50},
@@ -69,6 +69,61 @@ public class Polygon extends Drawable<Polygon> {
     public Polygon(int x, int y, int[] xPoints, int[] yPoints) {
         super(x, y, Color.BLACK);
         this.polygon = new java.awt.Polygon(xPoints, yPoints, xPoints.length);
+    }
+
+    /**
+     * Create a new Polygon element from a list of x-positions and y-positions
+     * <pre>{@code
+     * Polygon polygon = new Polygon(
+     *     new int[] {0, 25, 50},
+     *     new int[] {50, 25, 0},
+     * );
+     * }</pre>
+     *
+     * @param xPoints List of X-points
+     * @param yPoints List of Y-points
+     */
+    public Polygon(int[] xPoints, int[] yPoints) {
+        super(0, 0, Color.BLACK);
+        this.polygon = new java.awt.Polygon(xPoints, yPoints, xPoints.length);
+    }
+
+    /**
+     * Create a new Polygon element from a list of points
+     * <pre>{@code
+     * Polygon polygon = new Polygon(100, 100,
+     *     new int[][] {{0, 50}, {25, 25}, {50, 0}},
+     * );
+     * }</pre>
+     *
+     * @param x      The X-position of the polygon
+     * @param y      The Y-position of the polygon
+     * @param points A 2D array containing pairs of (x, y) points
+     */
+    public Polygon(int x, int y, int[][] points) {
+        super(x, y, Color.BLACK);
+        this.polygon = new java.awt.Polygon();
+        for (var p : points) {
+            this.polygon.addPoint(p[0], p[1]);
+        }
+    }
+
+    /**
+     * Create a new Polygon element from a list of points
+     * <pre>{@code
+     * Polygon polygon = new Polygon(
+     *     new int[][] {{0, 50}, {25, 25}, {50, 0}},
+     * );
+     * }</pre>
+     *
+     * @param points A 2D array containing pairs of (x, y) points
+     */
+    public Polygon(int[][] points) {
+        super(0, 0, Color.BLACK);
+        this.polygon = new java.awt.Polygon();
+        for (var p : points) {
+            this.polygon.addPoint(p[0], p[1]);
+        }
     }
 
     @Override
