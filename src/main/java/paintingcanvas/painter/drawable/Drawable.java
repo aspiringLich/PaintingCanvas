@@ -266,6 +266,17 @@ public abstract class Drawable<T extends Drawable<T>> {
     }
 
     /**
+     * Set whether this object is filled or not
+     *
+     * @param filled The value to set {@code this.filled} to
+     * @return The original object to allow method chaining
+     */
+    public T setFilled(boolean filled) {
+        this.filled = filled;
+        return getThis();
+    }
+
+    /**
      * Create an {@link App.AnimationBuilder}.
      * Used to animate different properties of an element (position, rotation, color).
      * <pre>{@code
