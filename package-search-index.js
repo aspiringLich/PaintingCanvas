@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"paintingcanvas"},{"l":"paintingcanvas.animation"},{"l":"paintingcanvas.drawable"},{"l":"paintingcanvas.misc"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"paintingcanvas.painter"},{"l":"paintingcanvas.painter.animation"},{"l":"paintingcanvas.painter.drawable"},{"l":"paintingcanvas.painter.misc"}]
