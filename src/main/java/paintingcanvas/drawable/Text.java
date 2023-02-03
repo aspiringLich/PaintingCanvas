@@ -15,19 +15,6 @@ public class Text extends Drawable<Text> {
     public Font font = new Font("Comic Sans MS", Font.BOLD, 1);
 
     public String text;
-    @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
-        gc.setFont(font);
-        gc.drawString(text, x, y);
-    }
-
-
-    @Override
-    public Point center(Graphics g) {
-        var metrics = g.getFontMetrics(font);
-        return new Point(x + metrics.stringWidth(text) / 2, y - metrics.getAscent() / 4);
-    }
 
     /**
      * Create a new Text element.
@@ -45,11 +32,42 @@ public class Text extends Drawable<Text> {
         this.text = text;
     }
 
+
+    /**
+     * Create a new Text element.
+     * The default font size is 30, and the default font is <u>comic sans</u> <em>(not sorry)</em>.
+     * <pre>{@code
+     * Text text = new Text(100, 100, "Hello World", new Color(255, 0, 0))
+     * }</pre>
+     *
+     * @param x     The X-position of the text
+     * @param y     The Y-position of the text
+     * @param color the color of the text
+     * @param text  The text
+     */
+    public Text(int x, int y, String text, Color color) {
+        super(x, y, color);
+        this.text = text;
+    }
+
+    @Override
+    public void draw(Graphics2D gc) {
+        gc.setColor(color);
+        gc.setFont(font);
+        gc.drawString(text, x, y);
+    }
+
+    @Override
+    public Point center(Graphics g) {
+        var metrics = g.getFontMetrics(font);
+        return new Point(x + metrics.stringWidth(text) / 2, y - metrics.getAscent() / 4);
+    }
+
     @Override
     protected Text getThis() {
         return this;
     }
-    
+
     /**
      * Get the current font size of the text.
      * <pre>{@code
@@ -64,7 +82,7 @@ public class Text extends Drawable<Text> {
     public int getFontSize() {
         return this.font.getSize();
     }
-    
+
     /**
      * Set the current font size of the text.
      * <pre>{@code
@@ -78,7 +96,7 @@ public class Text extends Drawable<Text> {
      * @see #getFontSize()
      */
     public Text setFontSize(double size) {
-        this.font = font.deriveFont((float)size);
+        this.font = font.deriveFont((float) size);
         return this;
     }
 

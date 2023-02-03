@@ -12,20 +12,7 @@ import java.awt.*;
 public class Rectangle extends Drawable<Rectangle> {
     public int width;
     public int height;
-    
-    @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
-        if (this.filled) gc.fillRect(x, y, width, height);
-        else gc.drawRect(x, y, width, height);
-    }
-    
-    
-    @Override
-    public Point center(Graphics g) {
-        return new Point(x + width / 2, y + height / 2);
-    }
-    
+
     /**
      * Create a new Rectangle element.
      * <pre>{@code
@@ -43,12 +30,44 @@ public class Rectangle extends Drawable<Rectangle> {
         this.width = w;
         this.height = h;
     }
-    
+
+
+    /**
+     * Create a new Rectangle element.
+     * <pre>{@code
+     * // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
+     * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
+     * }</pre>
+     *
+     * @param x     The X-position of the rectangle
+     * @param y     The Y-position of the rectangle
+     * @param w     The width of the rectangle
+     * @param h     The height of the rectangle
+     * @param color The color of the rectangle
+     */
+    public Rectangle(int x, int y, int w, int h, Color color) {
+        super(x, y, color);
+        this.width = w;
+        this.height = h;
+    }
+
+    @Override
+    public void draw(Graphics2D gc) {
+        gc.setColor(color);
+        if (this.filled) gc.fillRect(x, y, width, height);
+        else gc.drawRect(x, y, width, height);
+    }
+
+    @Override
+    public Point center(Graphics g) {
+        return new Point(x + width / 2, y + height / 2);
+    }
+
     @Override
     protected Rectangle getThis() {
         return this;
     }
-    
+
     /**
      * Gets the width of the rectangle.
      *
@@ -59,7 +78,7 @@ public class Rectangle extends Drawable<Rectangle> {
     public int getWidth() {
         return this.width;
     }
-    
+
     /**
      * Sets the width of the rectangle.
      *
@@ -72,7 +91,7 @@ public class Rectangle extends Drawable<Rectangle> {
         this.width = w;
         return this;
     }
-    
+
     /**
      * Gets the height of the rectangle.
      *
@@ -83,7 +102,7 @@ public class Rectangle extends Drawable<Rectangle> {
     public int getHeight() {
         return this.height;
     }
-    
+
     /**
      * Sets the height of the rectangle.
      *

@@ -30,6 +30,24 @@ public class Ellipse extends Drawable<Ellipse> {
         width = w;
         height = h;
     }
+
+    /**
+     * Create a new Ellipse element.
+     * <pre>{@code
+     * // Create a new ellipse at (100, 100) with width 20 and height 30
+     * Ellipse ellipse = new Ellipse(100, 100, 20, 30, new Color(255, 0, 0));
+     * }</pre>
+     *
+     * @param x The X-position of the ellipse
+     * @param y The Y-position of the ellipse
+     * @param w The width of the ellipse
+     * @param h The height of the ellipse
+     */
+    public Ellipse(int x, int y, int w, int h, Color c) {
+        super(x, y, Color.BLACK);
+        width = w;
+        height = h;
+    }
     
     @Override
     public void draw(Graphics2D gc) {

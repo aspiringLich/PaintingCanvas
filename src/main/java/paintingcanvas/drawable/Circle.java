@@ -27,6 +27,22 @@ public class Circle extends Drawable<Circle> {
         super(x, y, Color.BLACK);
         radius = r;
     }
+
+    /**
+     * Create a new Circle element.
+     * <pre>{@code
+     * // Create a new Circle at (100, 100) with a radius of 20.
+     * Circle circle = new Circle(100, 100, 20, new Color(255, 0, 0));
+     * }</pre>
+     *
+     * @param x The X-position of the circle
+     * @param y The Y-position of the circle
+     * @param r The radius of the circle
+     */
+    public Circle(int x, int y, int r, Color color) {
+        super(x, y, color);
+        radius = r;
+    }
     
     @Override
     public void draw(Graphics2D gc) {

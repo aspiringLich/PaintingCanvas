@@ -15,9 +15,36 @@ public class Path extends Drawable<Path> {
 
     /**
      * Create a new Path element. The path is initially empty.
+     *
+     * <pre>{@code
+     * Path path = new Path().lineTo(100, 100)
+     *                       .quadTo(150, 0, 200, 100)
+     *                       .lineTo(200, 200)
+     *                       .lineTo(100, 100)
+     *                       .setColor(new Color(255, 0, 0))
+     *                       .setThickness(5);
+     * }</pre>
      */
     public Path() {
         super(0, 0, Color.BLACK);
+        this.path = new Path2D.Double();
+        this.stroke = new BasicStroke(1);
+        this.filled = false;
+    }
+
+    /**
+     * Create a new Path element. The path is initially empty.
+     *
+     * <pre>{@code
+     * Path path = new Path(new Color(255, 0, 0)).lineTo(100, 100)
+     *                       .quadTo(150, 0, 200, 100)
+     *                       .lineTo(200, 200)
+     *                       .lineTo(100, 100)
+     *                       .setThickness(5);
+     * }</pre>
+     */
+    public Path(Color color) {
+        super(0, 0, color);
         this.path = new Path2D.Double();
         this.stroke = new BasicStroke(1);
         this.filled = false;

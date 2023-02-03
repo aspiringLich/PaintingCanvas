@@ -1,9 +1,9 @@
 # ToDo
 
- - Clean up imports
- - Check constructors for Color thingy
- - Change the color to to _not_ use bytes please
- - 
+ - [ ] Clean up imports
+ - [x] Check constructors for Color thingy
+ - [x] Change the color to _not_ use bytes please
+ - [x] Fix circle
 
 ## Animation System Syntax
 

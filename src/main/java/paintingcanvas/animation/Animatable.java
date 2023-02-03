@@ -174,7 +174,7 @@ public interface Animatable {
      * @see #animate()
      */
     default App.AnimationBuilder rotate(int angle, double duration) {
-        var animation = Animation.rotateTo(angle + (int)Math.toDegrees(drawable().rotation));
+        var animation = Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation));
         animation.drawable = drawable();
         return this.animate().add(animation, duration);
     }

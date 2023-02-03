@@ -31,7 +31,7 @@ public class Line extends Drawable<Line> {
      * Create a new Line element.
      * <pre>{@code
      * // Create a new Line from (100, 100) to (200, 200)
-     * Line line = new Line(100, 100, 200, 200);
+     * Line line = new Line(100, 100, 200, 200, new Color(255, 0, 0));
      * }</pre>
      *
      * @param x1    The X-position of the startpoint

@@ -12,7 +12,7 @@ import java.awt.*;
 public class Triangle extends Drawable<Triangle> {
     int width;
     int height;
-    
+
     /**
      * Create a new Triangle element.
      * <pre>{@code
@@ -30,7 +30,26 @@ public class Triangle extends Drawable<Triangle> {
         this.width = w;
         this.height = h;
     }
-    
+
+    /**
+     * Create a new Triangle element.
+     * <pre>{@code
+     * // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
+     * Triangle triangle = new Triangle(100, 100, 20, 30, new Color(255, 0, 0));
+     * }</pre>
+     *
+     * @param x     The X-position of the triangle
+     * @param y     The Y-position of the triangle
+     * @param w     The width of the triangle
+     * @param h     The height of the triangle
+     * @param color The color of the triangle
+     */
+    public Triangle(int x, int y, int w, int h, Color color) {
+        super(x, y, color);
+        this.width = w;
+        this.height = h;
+    }
+
     @Override
     public void draw(Graphics2D gc) {
         java.awt.Polygon poly = new java.awt.Polygon(
@@ -42,17 +61,17 @@ public class Triangle extends Drawable<Triangle> {
         if (filled) gc.fillPolygon(poly);
         else gc.drawPolygon(poly);
     }
-    
+
     @Override
     public Point center(Graphics g) {
         return new Point(x + width / 2, y + height / 2);
     }
-    
+
     @Override
     protected Triangle getThis() {
         return this;
     }
-    
+
     /**
      * Gets the width of the triangle.
      *
@@ -62,7 +81,7 @@ public class Triangle extends Drawable<Triangle> {
     public int getWidth() {
         return this.width;
     }
-    
+
     /**
      * Sets the width of the triangle.
      *
@@ -74,7 +93,7 @@ public class Triangle extends Drawable<Triangle> {
         this.width = w;
         return this;
     }
-    
+
     /**
      * Gets the height of the triangle.
      *
@@ -84,7 +103,7 @@ public class Triangle extends Drawable<Triangle> {
     public int getHeight() {
         return this.height;
     }
-    
+
     /**
      * Sets the height of the triangle.
      *
