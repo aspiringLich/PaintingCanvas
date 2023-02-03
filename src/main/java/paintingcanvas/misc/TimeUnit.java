@@ -10,9 +10,9 @@ public enum TimeUnit {
     Milliseconds(Painter.fps / 1000f),
     Seconds(Painter.fps);
 
-    final float frames;
+    final double frames;
 
-    TimeUnit(float frames) {
+    TimeUnit(double frames) {
         this.frames = frames;
     }
 
@@ -22,7 +22,7 @@ public enum TimeUnit {
      * @param time The number of units.
      * @return The number of frames.
      */
-    public int asFrames(float time) {
+    public int asFrames(double time) {
         return (int) (time * this.frames);
     }
 }

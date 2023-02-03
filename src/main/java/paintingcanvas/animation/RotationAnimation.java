@@ -17,7 +17,7 @@ public class RotationAnimation extends Animation {
     @Override
     void updateAnimation(Drawable drawable, int frame, int duration) {
         if (frame == 0 || start == null) start = drawable.rotation;
-        var t = (float) easing.ease(frame / (double) duration);
+        var t = (double) easing.ease(frame / (double) duration);
         drawable.rotation = start + (end - start) * t;
     }
 }

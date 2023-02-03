@@ -19,7 +19,7 @@ public class ColorAnimation extends Animation {
     @Override
     void updateAnimation(Drawable drawable, int frame, int duration) {
         if (frame == 0 || start == null) this.start = drawable.color;
-        drawable.color = lerpColor(start, end, (float) easing.ease(frame / (double) duration));
+        drawable.color = lerpColor(start, end, (double) easing.ease(frame / (double) duration));
     }
 
     /**
@@ -30,7 +30,7 @@ public class ColorAnimation extends Animation {
      * @param delta How much to interpolate (0.0 - 1.0)
      * @return The color at that point in the interpolation
      */
-    Color lerpColor(Color _a, Color _b, float delta) {
+    Color lerpColor(Color _a, Color _b, double delta) {
         var r = _a.getRed() + (_b.getRed() - _a.getRed()) * delta;
         var g = _a.getGreen() + (_b.getGreen() - _a.getGreen()) * delta;
         var b = _a.getBlue() + (_b.getBlue() - _a.getBlue()) * delta;

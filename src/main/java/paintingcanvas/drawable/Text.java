@@ -59,7 +59,7 @@ public class Text extends Drawable<Text> {
      * }</pre>
      *
      * @return The font size in points
-     * @see #setFontSize(float)
+     * @see #setFontSize(double)
      */
     public int getFontSize() {
         return this.font.getSize();
@@ -77,8 +77,8 @@ public class Text extends Drawable<Text> {
      * @return The original object to allow method chaining
      * @see #getFontSize()
      */
-    public Text setFontSize(float size) {
-        this.font = font.deriveFont(size);
+    public Text setFontSize(double size) {
+        this.font = font.deriveFont((float)size);
         return this;
     }
 
