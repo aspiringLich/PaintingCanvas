@@ -1,4 +1,4 @@
-paintingcanvas.painter
-paintingcanvas.painter.animation
-paintingcanvas.painter.drawable
-paintingcanvas.painter.misc
+paintingcanvas
+paintingcanvas.animation
+paintingcanvas.drawable
+paintingcanvas.misc
