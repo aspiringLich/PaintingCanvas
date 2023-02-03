@@ -31,10 +31,10 @@ public class Test extends App {
         curvey.moveTo(100, 100, 3)
                 .rotateTo(90, 3);
         line.rotateTo(180, 3);
-        square.rotateTo(100, 1);
+        square.rotate(180, 1);
 
         sleep();
 
-        System.out.println("eieie");
+        System.out.println("This runs after all the animations are done");
     }
 }

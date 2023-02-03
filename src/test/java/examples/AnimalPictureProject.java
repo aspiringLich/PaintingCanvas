@@ -5,6 +5,7 @@ import paintingcanvas.App;
 import java.awt.*;
 import java.util.ArrayList;
 
+import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Rectangle;
 
 public class AnimalPictureProject extends App {
@@ -38,11 +39,9 @@ public class AnimalPictureProject extends App {
     @Override
     protected void setup() {
         setTitle("Animal Picture Projects");
-        var width = 1000;
-        var height = 600;
 
-        var xm = width / 2 - mushroom.length * 10;
-        var ym = height / 2 - mushroom[0].length * 10;
+        var xm = this.width() / 2 - mushroom.length * 10;
+        var ym = this.height() / 2 - mushroom[0].length * 10;
         var colored = new ArrayList<Rectangle>();
 
         // == Mushroom ==
@@ -59,6 +58,8 @@ public class AnimalPictureProject extends App {
             }
         }
 
+        System.out.print("e");
+
         // == Animation ==
         while (true) {
             for (var i : new int[]{
@@ -69,7 +70,7 @@ public class AnimalPictureProject extends App {
                     0x9D26E5,
             }) {
                 for (var rect : colored)
-                    rect.animate().with(colorTo(i), 2);
+                    rect.animate().with(Animation.colorTo(i), 2);
                 sleep(7);
             }
         }

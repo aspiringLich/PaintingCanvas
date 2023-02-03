@@ -2,6 +2,7 @@ package examples;
 
 import paintingcanvas.App;
 
+import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.drawable.Triangle;
@@ -14,8 +15,9 @@ public class DrawingInJava extends App {
     @Override
     protected void setup() {
         setTitle("Drawing in Java");
-        var width = 1000;
-        var height = 600;
+
+        var width = width();
+        var height = height();
 
         // == Draw Landscape ==
         var sky = new Rectangle(0, 0, width, height / 2).setColor(0x87ceeb);
@@ -28,13 +30,13 @@ public class DrawingInJava extends App {
         var door = new Rectangle(150, 300, 50, 100).setColor(0xE8191A);
 
         // == Animate to Night ==
-        sun.animate().add(moveTo(width / 2, height / 2 + 50), 7).wait(3);
+        sun.animate().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
 
         var duration = 4;
-        sky.animate().with(colorTo(0xF5976C), duration);
-        grass.animate().with(colorTo(0x557C45), duration);
-        house.animate().with(colorTo(0x010089), duration);
-        roof.animate().with(colorTo(0x000000), duration);
-        door.animate().with(colorTo(0x840001), duration);
+        sky.animate().with(Animation.colorTo(0xF5976C), duration);
+        grass.animate().with(Animation.colorTo(0x557C45), duration);
+        house.animate().with(Animation.colorTo(0x010089), duration);
+        roof.animate().with(Animation.colorTo(0x000000), duration);
+        door.animate().with(Animation.colorTo(0x840001), duration);
     }
 }

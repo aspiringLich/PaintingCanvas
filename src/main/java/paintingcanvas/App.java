@@ -1,9 +1,6 @@
 package paintingcanvas;
 
-import paintingcanvas.animation.Animation;
-import paintingcanvas.animation.ColorAnimation;
-import paintingcanvas.animation.MovementAnimation;
-import paintingcanvas.animation.RotationAnimation;
+import paintingcanvas.animation.*;
 import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.TimeUnit;
 
@@ -113,15 +110,21 @@ public abstract class App {
     protected abstract void setup() throws Exception;
 
     /**
-     * Initialize and run the application.
-     * (Don't worry about this)
+     * Initialize and run the application with default width height and title parameters
      */
     public void run() {
+        run(1000, 600, "Canvas");
+    }
+
+    /**
+     * Initialize and run the application.
+     */
+    public void run(int width, int height, String title) {
         // Worth a try
         System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
-        painter = new Painter(600, 300, "Canvas");
+        painter = new Painter(width, height, title);
 
         painter.canvas.renderLifecycle = new paintingcanvas.Canvas.RenderLifecycle() {
             @Override
@@ -173,80 +176,13 @@ public abstract class App {
     }
 
     /**
-     * Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.animate().add(colorTo(255, 0, 0), 1);
-     * }</pre>
-     *
-     * @param r The red component of the color (0-255)
-     * @param g The green component of the color (0-255)
-     * @param b The blue component of the color (0-255)
-     * @return the {@link Animation} object
-     */
-    protected Animation colorTo(int r, int g, int b) {
-        return colorTo(new Color(r, g, b));
-    }
-
-    /**
-     * Create a new animation to <code>color</code> with a {@link Color} object.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.animate().add(colorTo(Color.RED), 1);
-     * }</pre>
-     *
-     * @param color The color to animate to
-     * @return the {@link Animation} object
-     */
-    protected Animation colorTo(Color color) {
-        return new ColorAnimation(builderFrame, color, 0, null);
-    }
-
-    /**
-     * Create a new animation to <code>color</code> with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * // 0xFF0000 is hex for (255, 0, 0), which is red
-     * o.animate().add(colorTo(0xFF0000), 1);
-     * }</pre>
-     *
-     * @param hex The color to animate to as a hex literal
-     * @return the {@link Animation} object
-     */
-    protected Animation colorTo(int hex) {
-        return new ColorAnimation(builderFrame, new Color(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff), 0, null);
-    }
-
-    /**
-     * Creates a new position animation to <code>(x, y)</code>.
-     *
-     * @param x The absolute x position to animate to
-     * @param y The absolute y position to animate to
-     * @return the {@link Animation} object
-     */
-    protected Animation moveTo(int x, int y) {
-        return new MovementAnimation(builderFrame, 0, new Point(x, y), null);
-    }
-
-    /**
-     * Creates a new rotation animation to <code>angle°</code>.
-     * If you supply an angle {@code > 360} it will make more than one full rotation.
-     *
-     * @param angle The absolute angle to rotate to in degrees.
-     * @return the {@link Animation} object
-     */
-    protected Animation rotateTo(int angle) {
-        return new RotationAnimation(builderFrame, 0, Math.toRadians(angle), null);
-    }
-
-    /**
      * Waits for the specified time.
      *
      * @param time Time to wait
      * @param unit The unit that <code>time</code> is in
      */
     @SuppressWarnings("SameParameterValue")
-    protected void sleep(float time, TimeUnit unit) {
+    protected void sleep(double time, TimeUnit unit) {
         builderFrame += unit.asFrames(time);
         lastBuilderFrame = builderFrame;
 
@@ -268,7 +204,7 @@ public abstract class App {
      *
      * @param time The time in seconds.
      */
-    protected void sleep(float time) {
+    protected void sleep(double time) {
         sleep(time, TimeUnit.Seconds);
     }
 
@@ -280,7 +216,7 @@ public abstract class App {
      *     .add(moveTo(200, 200), 3);
      * }</pre>
      */
-    public static class AnimationBuilder {
+    public static class AnimationBuilder implements Animatable {
         protected final Drawable drawable;
 
         public AnimationBuilder(Drawable drawable) {
@@ -299,7 +235,7 @@ public abstract class App {
          * @param unit   The {@link TimeUnit} used for {@code time}
          * @param repeat If the event should repeat
          */
-        public static void schedule(float time, paintingcanvas.Event.EventRunner runner, TimeUnit unit, boolean repeat) {
+        public static void schedule(double time, paintingcanvas.Event.EventRunner runner, TimeUnit unit, boolean repeat) {
             var _time = unit.asFrames(time);
             synchronized (painter.canvas.events) {
                 painter.canvas.events.add(new paintingcanvas.Event(_time, repeat, runner));
@@ -317,7 +253,7 @@ public abstract class App {
          * @param repeat If the event should repeat
          * @param runner The {@link paintingcanvas.Event.EventRunner} object
          */
-        public static void schedule(float time, boolean repeat, Event.EventRunner runner) {
+        public static void schedule(double time, boolean repeat, Event.EventRunner runner) {
             schedule(time, runner, TimeUnit.Seconds, repeat);
         }
 
@@ -335,7 +271,7 @@ public abstract class App {
          * @param unit      The unit of time used for {@code duration}
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder add(Animation animation, float duration, TimeUnit unit) {
+        public AnimationBuilder add(Animation animation, double duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
             if (!firstBlockingAnimation) {
                 animationFinish = painter.canvas.animations.stream().map(a -> a.startFrame + a.duration).max(Integer::compareTo).orElse(0);
@@ -374,7 +310,7 @@ public abstract class App {
          * @param duration  The amount of time the animation will last. In seconds.
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder add(Animation animation, float duration) {
+        public AnimationBuilder add(Animation animation, double duration) {
             return add(animation, duration, TimeUnit.Seconds);
         }
 
@@ -392,7 +328,7 @@ public abstract class App {
          * @param unit      The unit of time used for {@code duration}
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder with(Animation animation, float duration, TimeUnit unit) {
+        public AnimationBuilder with(Animation animation, double duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
             lastAnimationFinish = Math.max(lastAnimationFinish, lastBuilderFrame + _duration);
 
@@ -427,7 +363,7 @@ public abstract class App {
          * @param duration  The amount of time the animation will last
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder with(Animation animation, float duration) {
+        public AnimationBuilder with(Animation animation, double duration) {
             return with(animation, duration, TimeUnit.Seconds);
         }
 
@@ -453,7 +389,7 @@ public abstract class App {
          * @param unit     The {@link TimeUnit} to use for the {@code duration}
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder wait(float duration, TimeUnit unit) {
+        public AnimationBuilder wait(double duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
             lastBuilderFrame += _duration;
             builderFrame += _duration;
@@ -479,7 +415,7 @@ public abstract class App {
          * @param duration Frames to wait
          * @return <code>this</code> to allow method chaining
          */
-        public AnimationBuilder wait(float duration) {
+        public AnimationBuilder wait(double duration) {
             return wait(duration, TimeUnit.Seconds);
         }
 
@@ -525,7 +461,7 @@ public abstract class App {
          * @param unit      The {@link TimeUnit} used for {@code time} and {@code duration}
          * @return The original object to allow method chaining
          */
-        public AnimationBuilder schedule(float time, Animation animation, float duration, TimeUnit unit) {
+        public AnimationBuilder schedule(double time, Animation animation, double duration, TimeUnit unit) {
             var _time = unit.asFrames(time);
             var _duration = unit.asFrames(duration);
 
@@ -551,8 +487,18 @@ public abstract class App {
          * @param duration  The length of the animation. In seconds.
          * @return The original object to allow method chaining
          */
-        public AnimationBuilder schedule(float time, Animation animation, float duration) {
+        public AnimationBuilder schedule(double time, Animation animation, double duration) {
             return schedule(time, animation, duration, TimeUnit.Seconds);
+        }
+
+        @Override
+        public AnimationBuilder animate() {
+            return this;
+        }
+
+        @Override
+        public Drawable drawable() {
+            return this.drawable;
         }
 
         /**
@@ -569,83 +515,8 @@ public abstract class App {
          * @param duration the number of seconds it lasts
          * @return an {@code AnimationBuilder}
          */
-        public App.AnimationBuilder moveTo(int x, int y, float duration) {
+        public App.AnimationBuilder moveTo(int x, int y, double duration) {
             return this.add(new MovementAnimation(0, 0, new Point(x, y), this.drawable), duration);
-        }
-
-        /**
-         * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-         * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
-         *
-         * <pre>{@code
-         * Circle c = new Circle(200, 200, 50);
-         * // the circle will turn red, and then blue
-         * c.colorTo(255, 0, 0, 3).colorTo(0, 0, 255, 3);
-         * }</pre>
-         *
-         * @param r        red (0-255)
-         * @param g        green (0-255)
-         * @param b        blue (0-255)
-         * @param duration the number of seconds it lasts
-         * @return an {@code AnimationBuilder}
-         */
-        public App.AnimationBuilder colorTo(byte r, byte g, byte b, float duration) {
-            return this.add(new ColorAnimation(0, new Color(r, g, b), 0, this.drawable), duration);
-        }
-
-        /**
-         * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-         * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
-         *
-         * <pre>{@code
-         * Circle c = new Circle(200, 200, 50);
-         * // the circle will turn red, and then blue
-         * c.colorTo(0xFF0000, 3).colorTo(0x0000FF, 3);
-         * }</pre>
-         *
-         * @param hex      The number describing the RGB color
-         * @param duration the number of seconds it lasts
-         * @return an {@code AnimationBuilder}
-\         */
-        public App.AnimationBuilder colorTo(int hex, float duration) {
-            return this.add(new ColorAnimation(0, new Color(hex), 0, this.drawable), duration);
-        }
-
-        /**
-         * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-         * See <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html">The Oracle docs</a> for the full list of colors,
-         * and constructors for this class
-         *
-         * <pre>{@code
-         * Circle c = new Circle(200, 200, 50);
-         * // the circle will turn red, and then blue
-         * c.colorTo(Color.RED, 3).colorTo(Color.BLUE, 3);
-         * }</pre>
-         *
-         * @param color    The color to fade to
-         * @param duration the number of seconds it lasts
-         * @return an {@code AnimationBuilder}
-         */
-        public App.AnimationBuilder colorTo(Color color, float duration) {
-            return this.add(new ColorAnimation(0, color, 0, this.drawable), duration);
-        }
-
-        /**
-         * Creates a new rotation animation to <code>angle°</code>.
-         * If you supply an angle {@code > 360} it will make more than one full rotation.
-         *
-         * <pre>{@code
-         * Square s = new Square(200, 200, 50);
-         * // the square will rotate one turn counter-clockwise, then 2 turns clockwise
-         * c.rotateTo(360, 3).colorTo(-360, 3);
-         * }</pre>
-         *
-         * @param angle    The absolute angle to rotate to in degrees.
-         * @param duration the number of seconds it lasts
-         * @return an {@code AnimationBuilder}
-         */
-        public App.AnimationBuilder rotateTo(int angle, float duration) {
-            return this.add(new RotationAnimation(0, 0, Math.toRadians(angle), this.drawable), duration);
         }
     }
 }
