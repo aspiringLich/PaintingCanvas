@@ -121,7 +121,7 @@ public abstract class App {
      */
     public void run(int width, int height, String title) {
         // Worth a try
-        System.setProperty("sun.java2d.opengl", "true");
+//        System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
         painter = new Painter(width, height, title);

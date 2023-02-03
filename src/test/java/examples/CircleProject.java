@@ -2,6 +2,7 @@ package examples;
 
 import paintingcanvas.App;
 import paintingcanvas.animation.Animation;
+import paintingcanvas.animation.Easing;
 import paintingcanvas.drawable.Circle;
 
 import java.awt.*;
@@ -21,7 +22,7 @@ public class CircleProject extends App {
         // == Init Circles (2) ==
         var circles = new ArrayList<Circle>();
         for (int i = 0; i < 100; i++) {
-            var circle = new Circle(width / 2 - 50, height / 2 - 50, 50).setColor(Color.BLACK);
+            var circle = new Circle(width / 2 - 50, height / 2 - 50, 25).setColor(Color.BLACK);
             circles.add(circle);
         }
 
@@ -34,13 +35,13 @@ public class CircleProject extends App {
         sleep(3);
         setTitle("Circle Projects - Place Random");
         for (var circle : circles)
-            circle.animate().with(Animation.moveTo((int) (Math.random() * width) - 25, (int) (Math.random() * height) - 25), 1);
+            circle.animate().with(Animation.moveTo((int) (Math.random() * width) - 25, (int) (Math.random() * height) - 25).easing(Easing.inOutNth(2)), 1);
 
         // == Circle Line (2) ==
         sleep(3);
         setTitle("Circle Projects - Circle Line");
         for (int i = 0; i < circles.size(); i++)
-            circles.get(i).animate().with(Animation.moveTo((i - 2) * 10, height / 2 - 50), 1);
+            circles.get(i).animate().with(Animation.moveTo((i - 2) * 10, height / 2 - 50).easing(Easing.inOutNth(2)), 1);
 
         // == Random Color (2) ==
         sleep(3);
@@ -64,14 +65,14 @@ public class CircleProject extends App {
         sleep(3);
         setTitle("Circle Projects - Fall Down");
         for (var circle : circles)
-            circle.animate().with(Animation.moveTo(circle.getX(), height + 25), (float) (Math.random() * 3 + 1));
+            circle.animate().with(Animation.moveTo(circle.getX(), height + 25).easing(Easing.inOutNth(2)), (float) (Math.random() * 3 + 1));
 
         // == Circle Rows (3) ==
         setTitle("Circle Projects - Circle Rows");
         sleep();
         for (int y = 0; y < 10; y++)
             for (int x = 0; x < 10; x++)
-                circles.get(y * 10 + x).animate().with(Animation.moveTo(width / 2 - 250 + x * 50, height / 2 - 275 + y * 50), 1);
+                circles.get(y * 10 + x).animate().with(Animation.moveTo(width / 2 - 250 + x * 50, height / 2 - 275 + y * 50).easing(Easing.inOutNth(2)), 1);
 
         // == Hue Shift ==
         sleep(3);

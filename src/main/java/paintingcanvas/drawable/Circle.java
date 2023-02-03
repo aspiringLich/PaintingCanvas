@@ -31,7 +31,7 @@ public class Circle extends Drawable<Circle> {
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(color);
-        if (this.filled) gc.fillOval(x, y, radius, radius);
+        if (this.filled) gc.fillOval(x, y, radius * 2, radius * 2);
         else gc.drawOval(x, y, radius, radius);
     }
     

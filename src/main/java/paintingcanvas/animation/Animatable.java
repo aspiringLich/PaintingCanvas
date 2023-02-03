@@ -5,6 +5,9 @@ import paintingcanvas.drawable.Drawable;
 
 import java.awt.*;
 
+/**
+ * An interface to call animation methods on animatable objects.
+ */
 public interface Animatable {
     /**
      * Create an {@link App.AnimationBuilder}.
