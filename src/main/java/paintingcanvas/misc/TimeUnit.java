@@ -1,14 +1,14 @@
 package paintingcanvas.misc;
 
-import paintingcanvas.Painter;
+import paintingcanvas.Canvas;
 
 /**
  * Some common time units.
  */
 public enum TimeUnit {
     Frames(1),
-    Milliseconds(Painter.fps / 1000f),
-    Seconds(Painter.fps);
+    Milliseconds(Canvas.fps / 1000f),
+    Seconds(Canvas.fps);
 
     final double frames;
 

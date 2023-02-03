@@ -2,9 +2,6 @@ package paintingcanvas.drawable;
 
 import paintingcanvas.App;
 import paintingcanvas.animation.Animatable;
-import paintingcanvas.animation.ColorAnimation;
-import paintingcanvas.animation.MovementAnimation;
-import paintingcanvas.animation.RotationAnimation;
 
 import java.awt.*;
 
@@ -27,7 +24,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.x = x;
         this.y = y;
         this.color = color;
-        App.painter.canvas.elements.add(this);
+        App.canvas.elements.add(this);
     }
 
     /**

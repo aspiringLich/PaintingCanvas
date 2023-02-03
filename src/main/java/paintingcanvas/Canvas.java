@@ -10,6 +10,8 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new Vector<>();
@@ -18,6 +20,58 @@ public class Canvas extends JComponent {
     public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {
     };
+
+    // how many frames per second do we want to run at?
+    public static final int fps = 30;
+    private final JFrame jframe;
+
+    public Canvas(int width, int height, String title) {
+        super();
+        jframe = new JFrame();
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setSize(width, height);
+        jframe.setTitle(title);
+        jframe.setVisible(true);
+
+        jframe.add(this);
+        jframe.addComponentListener(new Canvas.ResizeListener(this));
+    }
+
+    public void setTitle(String title) {
+        jframe.setTitle(title);
+    }
+
+    /**
+     * The "render function", this will run the function in app every single frame at the set fps.
+     * An alternative to the "run" function
+     *
+     * @param app contains the render function to run every frame
+     */
+    public void render(App app) {
+        // TODO: Account for the time it takes to run the render function
+        // (Implement the run with a loop and thread::sleep)
+        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
+        poolExecutor.scheduleAtFixedRate(() -> {
+            app._render();
+            this.repaint();
+            SwingUtilities.updateComponentTreeUI(jframe);
+            jframe.invalidate();
+            jframe.validate();
+        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+    }
+
+    /**
+     * This function simply re-renders the canvas every single frame
+     */
+    public void run() {
+        ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
+        new Thread(() -> poolExecutor.scheduleAtFixedRate(() -> {
+            this.repaint();
+            SwingUtilities.updateComponentTreeUI(jframe);
+            jframe.invalidate();
+            jframe.validate();
+        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS));
+    }
 
 
     /**
