@@ -1,7 +1,7 @@
-package paintingcanvas.painter;
+package paintingcanvas;
 
-import paintingcanvas.painter.animation.Animation;
-import paintingcanvas.painter.drawable.Drawable;
+import paintingcanvas.drawable.Drawable;
+import paintingcanvas.animation.Animation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.util.Vector;
 public class Canvas extends JComponent {
     public final List<Drawable> elements = new Vector<>();
     public final List<Animation> animations = new ArrayList<>();
-    public final List<Event> events = new ArrayList<>();
+    public final List<Event> events = new Vector<>();
     public int frame = -1;
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {
     };

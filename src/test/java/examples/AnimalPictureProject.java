@@ -1,12 +1,11 @@
 package examples;
 
-import paintingcanvas.painter.App;
+import paintingcanvas.App;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import paintingcanvas.painter.drawable.*;
-import paintingcanvas.painter.drawable.Rectangle;
+import paintingcanvas.drawable.Rectangle;
 
 public class AnimalPictureProject extends App {
     // 0 -> None; 1 -> black; 2 -> white; 3 -> color;

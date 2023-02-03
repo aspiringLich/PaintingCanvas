@@ -1,8 +1,10 @@
 package examples;
 
-import paintingcanvas.painter.App;
+import paintingcanvas.App;
 
-import paintingcanvas.painter.drawable.*;
+import paintingcanvas.drawable.Circle;
+import paintingcanvas.drawable.Rectangle;
+import paintingcanvas.drawable.Triangle;
 
 public class DrawingInJava extends App {
     public static void main(String[] args) {

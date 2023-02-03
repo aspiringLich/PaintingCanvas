@@ -1,6 +1,6 @@
 package examples;
 
-import paintingcanvas.painter.App;
+import paintingcanvas.App;
 
 import java.awt.*;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import paintingcanvas.painter.drawable.*;
+import paintingcanvas.drawable.Text;
 
 import static java.awt.Color.RGBtoHSB;
 
@@ -61,7 +61,7 @@ public class SongCloud extends App {
             var oldColor = t.getColor();
             var color = RGBtoHSB(oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue(), null);
             var newColor = Color.getHSBColor(color[0], color[1], out.get(t.getText()) / (float) maxCount);
-            t.animate().with(colorTo(newColor), 1);
+            t.animate().with(colorTo(newColor), 1).with(rotateTo((int)(Math.random() * 100.0) - 50), 1);
         }
 
         // == Sing Song ==

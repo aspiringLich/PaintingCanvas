@@ -1,6 +1,4 @@
-package paintingcanvas.painter.drawable;
-
-import paintingcanvas.painter.App;
+package paintingcanvas.drawable;
 
 import java.awt.*;
 

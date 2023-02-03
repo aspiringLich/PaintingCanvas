@@ -1,4 +1,4 @@
-package paintingcanvas.painter.drawable;
+package paintingcanvas.drawable;
 
 import java.awt.*;
 

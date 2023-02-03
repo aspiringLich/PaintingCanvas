@@ -1,6 +1,6 @@
-package paintingcanvas.painter.animation;
+package paintingcanvas.animation;
 
-import paintingcanvas.painter.drawable.Drawable;
+import paintingcanvas.drawable.Drawable;
 
 /**
  * Controls animation that is to do with rotation

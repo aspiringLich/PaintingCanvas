@@ -1,9 +1,10 @@
 package examples;
 
-import paintingcanvas.painter.App;
-import paintingcanvas.painter.drawable.Line;
-import paintingcanvas.painter.drawable.Path;
-import paintingcanvas.painter.drawable.Polygon;
+import paintingcanvas.App;
+import paintingcanvas.drawable.Line;
+import paintingcanvas.drawable.Path;
+import paintingcanvas.drawable.Polygon;
+import paintingcanvas.drawable.Square;
 
 public class Test extends App {
 
@@ -11,18 +12,29 @@ public class Test extends App {
         new Test().run();
     }
 
-    @Override
-    protected void setup() {
+    public void setup() throws InterruptedException {
         setTitle("Test");
 
-        Line line = new Line(0, 0, 100, 100).setThickness(10);
-        Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}});
+        Line line = new Line(0, 0, 100, 100).setThickness(10)
+                .setColor(0xff0000);
+        Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}})
+                .setColor(0xffff00);
+        Square square = new Square(300, 300, 100)
+                .setColor(0x00ff00);
 
         Path curvey = new Path()
                 .setThickness(10)
                 .cursorTo(300, 300)
                 .lineTo(200, 300)
-                .quadTo(300, 300, 200, 200);
-        curvey.moveTo(100, 100, 3);
+                .quadTo(300, 300, 200, 200)
+                .setColor(0x00ffff);
+        curvey.moveTo(100, 100, 3)
+                .rotateTo(90, 3);
+        line.rotateTo(180, 3);
+        square.rotateTo(100, 1);
+
+        sleep();
+
+        System.out.println("eieie");
     }
 }

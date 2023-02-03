@@ -1,4 +1,4 @@
-package paintingcanvas.painter;
+package paintingcanvas;
 
 import javax.swing.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

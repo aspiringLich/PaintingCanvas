@@ -1,4 +1,4 @@
-package paintingcanvas.painter.animation;
+package paintingcanvas.animation;
 
 public interface Easing {
     static Easing linear() {

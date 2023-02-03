@@ -1,9 +1,9 @@
-package paintingcanvas.painter.drawable;
+package paintingcanvas.drawable;
 
-import paintingcanvas.painter.App;
-import paintingcanvas.painter.animation.ColorAnimation;
-import paintingcanvas.painter.animation.MovementAnimation;
-import paintingcanvas.painter.animation.RotationAnimation;
+import paintingcanvas.App;
+import paintingcanvas.animation.ColorAnimation;
+import paintingcanvas.animation.MovementAnimation;
+import paintingcanvas.animation.RotationAnimation;
 
 import java.awt.*;
 
@@ -59,11 +59,7 @@ public abstract class Drawable<T extends Drawable<T>> {
         var transform = gc.getTransform();
         var center = this.center(g);
         transform.setToRotation(this.rotation, center.x, center.y);
-//        transform.scale(1.0, -1.0);
-//        gc.setTransform(transform);
-//
-//        var bounds = gc.getClipBounds();
-//        gc.translate(0.0, -bounds.getHeight());
+        gc.setTransform(transform);
 
         this.draw(gc);
     }
@@ -308,7 +304,8 @@ public abstract class Drawable<T extends Drawable<T>> {
      * @see #animate()
      */
     public App.AnimationBuilder moveTo(int x, int y, float duration) {
-        return this.animate().add(new MovementAnimation(0, 0, new Point(x, y), this), duration);
+        return this.animate()
+                .add(new MovementAnimation(0, 0, new Point(x, y), this), duration);
     }
 
     /**
@@ -329,7 +326,8 @@ public abstract class Drawable<T extends Drawable<T>> {
      * @see #animate()
      */
     public App.AnimationBuilder colorTo(byte r, byte g, byte b, float duration) {
-        return this.animate().add(new ColorAnimation(0, new Color(r, g, b), 0, this), duration);
+        return this.animate()
+                .add(new ColorAnimation(0, new Color(r, g, b), 0, this), duration);
     }
 
     /**
@@ -348,7 +346,8 @@ public abstract class Drawable<T extends Drawable<T>> {
      * @see #animate()
      */
     public App.AnimationBuilder colorTo(int hex, float duration) {
-        return this.animate().add(new ColorAnimation(0, new Color(hex), 0, this), duration);
+        return this.animate()
+                .add(new ColorAnimation(0, new Color(hex), 0, this), duration);
     }
 
     /**
@@ -368,7 +367,8 @@ public abstract class Drawable<T extends Drawable<T>> {
      * @see #animate()
      */
     public App.AnimationBuilder colorTo(Color color, float duration) {
-        return this.animate().add(new ColorAnimation(0, color, 0, this), duration);
+        return this.animate()
+                .add(new ColorAnimation(0, color, 0, this), duration);
     }
 
     /**
@@ -387,6 +387,7 @@ public abstract class Drawable<T extends Drawable<T>> {
      * @see #animate()
      */
     public App.AnimationBuilder rotateTo(int angle, float duration) {
-        return this.animate().add(new RotationAnimation(0, 0, Math.toRadians(angle), this), duration);
+        return this.animate()
+                .add(new RotationAnimation(0, 0, Math.toRadians(angle), this), duration);
     }
 }

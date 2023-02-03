@@ -1,4 +1,4 @@
-package paintingcanvas.painter.drawable;
+package paintingcanvas.drawable;
 
 import java.awt.*;
 
@@ -39,8 +39,8 @@ public class Triangle extends Drawable<Triangle> {
                 3
         );
         gc.setColor(this.color);
-        if (filled) gc.drawPolygon(poly);
-        else gc.fillPolygon(poly);
+        if (filled) gc.fillPolygon(poly);
+        else gc.drawPolygon(poly);
     }
     
     @Override

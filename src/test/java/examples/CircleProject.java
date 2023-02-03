@@ -1,7 +1,7 @@
 package examples;
 
-import paintingcanvas.painter.App;
-import paintingcanvas.painter.drawable.Circle;
+import paintingcanvas.App;
+import paintingcanvas.drawable.Circle;
 
 import java.awt.*;
 import java.util.ArrayList;
