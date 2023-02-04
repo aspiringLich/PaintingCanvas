@@ -8,33 +8,38 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 
 /**
- * A simpler interface for the painter.
+ * Hi person leafing through the documentation! This class is only really still here because i was too lazy to try and integrate
+ * everything with {@link Canvas.CanvasComponent}. You can use this to make your animations and stuff, but you should really use the Canvas class
+ * <br>
+ * You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
+ * in reality its all static under the hood.
+ * <br>
  */
 @SuppressWarnings("unused")
 public abstract class App {
     // Used to block on .add() calls
-    private static final Object syncObject = new Object();
+    protected static final Object syncObject = new Object();
     // Used to wait on sleepUntillAnimationEnds
-    private static final Object userSyncObject = new Object();
+    protected static final Object userSyncObject = new Object();
     /**
      * The global Painter all Drawables access to add themselves to.
      */
-    public static Canvas canvas;
+    public static Canvas.CanvasComponent canvas;
     // The frame the builder is on (end of the last animation)
-    private static int builderFrame;
+    protected static int builderFrame;
     // The start of the last animation
-    private static int lastBuilderFrame;
+    protected static int lastBuilderFrame;
     // Used to make sure the first call to .add doesn't block
-    private static boolean firstBlockingAnimation = true;
+    protected static boolean firstBlockingAnimation = true;
     // The frame the last animation ends on (excluding the last blocking animation)
-    private static int animationFinish = -1;
+    protected static int animationFinish = -1;
     // The frame the last animation ends on (including the last animation)
-    private static int lastAnimationFinish = -1;
+    protected static int lastAnimationFinish = -1;
     // The last size of the canvas, used for auto-centering of drawables
-    private static Dimension lastSize;
+    protected static Dimension lastSize;
 
 
-    private static void _syncWait() {
+    static void _syncWait() {
         try {
             synchronized (syncObject) {
                 syncObject.wait();
@@ -42,36 +47,6 @@ public abstract class App {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    protected static void sleep() {
-        try {
-            synchronized (userSyncObject) {
-                userSyncObject.wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Gets the current width of the canvas
-     *
-     * @return Canvas width
-     * @see #height()
-     */
-    protected int width() {
-        return canvas.getWidth();
-    }
-
-    /**
-     * Gets the current height of the canvas
-     *
-     * @return Canvas height
-     * @see #width()
-     */
-    protected int height() {
-        return canvas.getHeight();
     }
 
     protected void _render() {
@@ -94,41 +69,30 @@ public abstract class App {
     }
 
     /**
-     * <code>[ADVANCED]</code>
      * An overwrite-able function to let you run code every frame.
-     *
-     * @see #setup()
      */
     public void render() {
     }
 
     /**
-     * This is the function that is called when the program starts.
-     * It is where you will put all your code.
-     * (unless you want to be fancy)
-     */
-    protected abstract void setup() throws Exception;
-
-    /**
      * Initialize and run the application with default width height and title parameters
      */
-    public void run() {
-        run(1000, 600, "Canvas");
+    public static void run(Canvas.CanvasComponent canvas) {
+        run(canvas, 1000, 600, "Canvas");
     }
 
     /**
      * Initialize and run the application.
      */
-    public void run(int width, int height, String title) {
+    public static void run(Canvas.CanvasComponent c, int width, int height, String title) {
         // Worth a try
 //        System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
-        canvas = new Canvas(width, height, title);
-
-        canvas.renderLifecycle = new Canvas.RenderLifecycle() {
+        canvas = c;
+        canvas.renderLifecycle = new Canvas.CanvasComponent.RenderLifecycle() {
             @Override
-            public void onResize(Canvas canvas, ComponentEvent e) {
+            public void onResize(Canvas.CanvasComponent canvas, ComponentEvent e) {
                 if (lastSize == null) {
                     lastSize = e.getComponent().getSize();
                     return;
@@ -161,18 +125,33 @@ public abstract class App {
         };
 
         // Init app
-        canvas.render(this);
-        try {
-            this.setup();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        canvas.render(this);
+//        try {
+//            this.setup();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
-    // == Define animations ==
+    /**
+     * Adds the element to the canvas
+     * @param drawable element to be added
+     */
+    public static void addElement(Drawable<?> drawable) {
+            canvas.elements.add(drawable);
+    }
 
-    protected void setTitle(String title) {
-        canvas.setTitle(title);
+    /**
+     * Sleeps until all the animations are finished
+     */
+    protected static void sleep() {
+        try {
+            synchronized (userSyncObject) {
+                userSyncObject.wait();
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -182,7 +161,7 @@ public abstract class App {
      * @param unit The unit that <code>time</code> is in
      */
     @SuppressWarnings("SameParameterValue")
-    protected void sleep(double time, TimeUnit unit) {
+    protected static void sleep(double time, paintingcanvas.misc.TimeUnit unit) {
         builderFrame += unit.asFrames(time);
         lastBuilderFrame = builderFrame;
 
@@ -204,8 +183,8 @@ public abstract class App {
      *
      * @param time The time in seconds.
      */
-    protected void sleep(double time) {
-        sleep(time, TimeUnit.Seconds);
+    protected static void sleep(double time) {
+        sleep(time, paintingcanvas.misc.TimeUnit.Seconds);
     }
 
     /**
@@ -217,33 +196,31 @@ public abstract class App {
      * }</pre>
      */
     public static class AnimationBuilder implements Animatable {
-        protected final Drawable drawable;
+        protected Drawable<?> drawable;
 
-        public AnimationBuilder(Drawable drawable) {
+        public AnimationBuilder(Drawable<?> drawable) {
             this.drawable = drawable;
         }
 
         /**
-         * Schedule the execution of arbitrary code with a {@link paintingcanvas.Event.EventRunner} at an absolute time.
+         * Schedule the execution of arbitrary code with a {@link Event.EventRunner} at an absolute time.
          * <pre>{@code
          * // Print 'hi' after 10 seconds
          * AnimationBuilder.schedule(10, c -> System.out.println("hi"), TimeUnit.Seconds, false);
          * }</pre>
          *
          * @param time   The time from the start of the program to the start of the animation
-         * @param runner The {@link paintingcanvas.Event.EventRunner} object
+         * @param runner The {@link Event.EventRunner} object
          * @param unit   The {@link TimeUnit} used for {@code time}
          * @param repeat If the event should repeat
          */
-        public static void schedule(double time, paintingcanvas.Event.EventRunner runner, TimeUnit unit, boolean repeat) {
+        public static void schedule(double time, Event.EventRunner runner, TimeUnit unit, boolean repeat) {
             var _time = unit.asFrames(time);
-            synchronized (canvas.events) {
-                canvas.events.add(new paintingcanvas.Event(_time, repeat, runner));
-            }
+            canvas.events.add(new Event(_time, repeat, runner));
         }
 
         /**
-         * Schedule the execution of arbitrary code with a {@link paintingcanvas.Event.EventRunner} at an absolute time.
+         * Schedule the execution of arbitrary code with a {@link Event.EventRunner} at an absolute time.
          * <pre>{@code
          * // Print 'hi' after 10 seconds
          * AnimationBuilder.schedule(10, c -> System.out.println("hi"), TimeUnit.Seconds, false);
@@ -251,7 +228,7 @@ public abstract class App {
          *
          * @param time   The time in seconds from the start of the program to the start of the animation
          * @param repeat If the event should repeat
-         * @param runner The {@link paintingcanvas.Event.EventRunner} object
+         * @param runner The {@link Event.EventRunner} object
          */
         public static void schedule(double time, boolean repeat, Event.EventRunner runner) {
             schedule(time, runner, TimeUnit.Seconds, repeat);
@@ -492,31 +469,13 @@ public abstract class App {
         }
 
         @Override
-        public AnimationBuilder animate() {
+        public AnimationBuilder getAnimationbuilder() {
             return this;
         }
 
         @Override
-        public Drawable drawable() {
+        public Drawable<?> drawable() {
             return this.drawable;
-        }
-
-        /**
-         * This method moves {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
-         *
-         * <pre>{@code
-         * Circle c = new Circle(200, 200, 50);
-         * // the circle will move to (100, 100), and then to (200, 200)
-         * c.moveTo(100, 100, 3).moveTo(200, 200, 3);
-         * }</pre>
-         *
-         * @param x        the x-position to move to
-         * @param y        the y-position to move to
-         * @param duration the number of seconds it lasts
-         * @return an {@code AnimationBuilder}
-         */
-        public App.AnimationBuilder moveTo(int x, int y, double duration) {
-            return this.add(new MovementAnimation(0, 0, new Point(x, y), this.drawable), duration);
         }
     }
 }

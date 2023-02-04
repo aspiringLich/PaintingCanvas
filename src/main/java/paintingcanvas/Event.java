@@ -18,6 +18,6 @@ public class Event {
     }
 
     public interface EventRunner {
-        void run(Canvas canvas);
+        void run(Canvas.CanvasComponent canvas);
     }
 }

@@ -1,30 +1,25 @@
 package examples;
 
-import paintingcanvas.App;
+import java.awt.Color;
 
-import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.*;
+
+import paintingcanvas.Canvas;
+import paintingcanvas.animation.*;
+import paintingcanvas.drawable.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import paintingcanvas.animation.Animation;
-import paintingcanvas.drawable.Text;
-
 import static java.awt.Color.RGBtoHSB;
 
-public class SongCloud extends App {
-    public static void main(String[] args) {
-        new SongCloud().run();
-    }
+public class SongCloud {
+    public static void main(String[] args) throws IOException {
+        Canvas canvas = new Canvas();
+        canvas.setTitle("Song Cloud");
 
-    @Override
-    public void setup() throws IOException {
-        setTitle("Song Cloud");
         var rawSong = Files.readString(Path.of("song.txt"));
 
         var out = new HashMap<String, Integer>();
@@ -48,32 +43,32 @@ public class SongCloud extends App {
             var color = Color.getHSBColor((float) Math.random(), (float) (.25 + .70 * Math.random()),
                     (float) (.85 + .10 * Math.random()));
             var fontSize = (float) ((Math.sqrt((float) entry.getValue() / maxCount)) * 100f);
-            var x = (int) (Math.random() * width());
-            var y = (int) (Math.random() * height());
+            var x = (int) (Math.random() * canvas.width());
+            var y = (int) (Math.random() * canvas.height());
 
             var thisText = new Text(x, y, entry.getKey()).setFontSize(fontSize).setColor(color);
             text.add(thisText);
         }
 
         // == Brighten ==
-        sleep(3);
+        canvas.sleep(3);
 
         for (var t : text) {
             var oldColor = t.getColor();
             var color = RGBtoHSB(oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue(), null);
             var newColor = Color.getHSBColor(color[0], color[1], out.get(t.getText()) / (float) maxCount);
-            t.animate().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int)(Math.random() * 100.0) - 50), 1);
+            t.getAnimationbuilder().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int)(Math.random() * 100.0) - 50), 1);
         }
 
         // == Sing Song ==
-        sleep(3);
+        canvas.sleep(3);
 
         for (var w : words) {
             var t = text.stream().filter(x -> x.getText().equals(w)).findFirst().orElseThrow();
             var oldColor = t.getColor();
 
             t.setColor(0xFF0000);
-            sleep(0.3f);
+            canvas.sleep(0.3);
             t.setColor(oldColor);
         }
     }

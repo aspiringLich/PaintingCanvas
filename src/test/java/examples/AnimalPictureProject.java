@@ -1,18 +1,18 @@
 package examples;
 
-import paintingcanvas.App;
+import java.awt.Color;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 
-import paintingcanvas.animation.Animation;
-import paintingcanvas.drawable.Rectangle;
+import paintingcanvas.Canvas;
+import paintingcanvas.animation.*;
+import paintingcanvas.drawable.*;
 
-public class AnimalPictureProject extends App {
+public class AnimalPictureProject {
     // 0 -> None; 1 -> black; 2 -> white; 3 -> color;
     // totally dident steal this idea from breon
     // @formatter:off
-    final int[][] mushroom = {
+    final static int[][] mushroom = {
             {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
             {0, 0, 0, 1, 1, 1, 2, 3, 3, 2, 1, 1, 1, 0, 0, 0},
             {0, 0, 1, 1, 2, 2, 2, 3, 3, 2, 2, 2, 1, 1, 0, 0},
@@ -33,15 +33,11 @@ public class AnimalPictureProject extends App {
     // @formatter:on
 
     public static void main(String[] args) {
-        new AnimalPictureProject().run();
-    }
+        Canvas canvas = new Canvas();
+        canvas.setTitle("Animal Picture Projects");
 
-    @Override
-    protected void setup() {
-        setTitle("Animal Picture Projects");
-
-        var xm = this.width() / 2 - mushroom.length * 10;
-        var ym = this.height() / 2 - mushroom[0].length * 10;
+        var xm = canvas.width() / 2 - mushroom.length * 10 + 5;
+        var ym = canvas.height() / 2 - mushroom[0].length * 10 + 5;
         var colored = new ArrayList<Rectangle>();
 
         // == Mushroom ==
@@ -70,8 +66,8 @@ public class AnimalPictureProject extends App {
                     0x9D26E5,
             }) {
                 for (var rect : colored)
-                    rect.animate().with(Animation.colorTo(i), 2);
-                sleep(7);
+                    rect.getAnimationbuilder().with(Animation.colorTo(i), 2);
+                canvas.sleep(7);
             }
         }
     }

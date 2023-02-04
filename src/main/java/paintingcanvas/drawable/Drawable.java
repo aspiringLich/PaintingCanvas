@@ -9,6 +9,7 @@ import java.awt.*;
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
  * Provides various common methods to draw objects to a screen
  */
+@SuppressWarnings("unused")
 public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Rotation of the object in radians (imagine using degrees)
@@ -24,7 +25,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.x = x;
         this.y = y;
         this.color = color;
-        App.canvas.elements.add(this);
+        App.addElement(this);
     }
 
     /**
@@ -275,7 +276,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return new App.AnimationBuilder(this);
     }
 
-    public Drawable drawable() {
+    public Drawable<?> drawable() {
         return this;
     }
 }

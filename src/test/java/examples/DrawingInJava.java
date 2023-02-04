@@ -1,23 +1,16 @@
 package examples;
 
-import paintingcanvas.App;
+import paintingcanvas.Canvas;
+import paintingcanvas.animation.*;
+import paintingcanvas.drawable.*;
 
-import paintingcanvas.animation.Animation;
-import paintingcanvas.drawable.Circle;
-import paintingcanvas.drawable.Rectangle;
-import paintingcanvas.drawable.Triangle;
-
-public class DrawingInJava extends App {
+public class DrawingInJava {
     public static void main(String[] args) {
-        new DrawingInJava().run();
-    }
+        Canvas canvas = new Canvas();
+        canvas.setTitle("Drawing in Java");
 
-    @Override
-    protected void setup() {
-        setTitle("Drawing in Java");
-
-        var width = width();
-        var height = height();
+        var width = canvas.width();
+        var height = canvas.height();
 
         // == Draw Landscape ==
         var sky = new Rectangle(0, 0, width, height / 2).setColor(0x87ceeb);
@@ -30,13 +23,13 @@ public class DrawingInJava extends App {
         var door = new Rectangle(150, 300, 50, 100).setColor(0xE8191A);
 
         // == Animate to Night ==
-        sun.animate().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
+        sun.getAnimationbuilder().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
 
         var duration = 4;
-        sky.animate().with(Animation.colorTo(0xF5976C), duration);
-        grass.animate().with(Animation.colorTo(0x557C45), duration);
-        house.animate().with(Animation.colorTo(0x010089), duration);
-        roof.animate().with(Animation.colorTo(0x000000), duration);
-        door.animate().with(Animation.colorTo(0x840001), duration);
+        sky.getAnimationbuilder().with(Animation.colorTo(0xF5976C), duration);
+        grass.getAnimationbuilder().with(Animation.colorTo(0x557C45), duration);
+        house.getAnimationbuilder().with(Animation.colorTo(0x010089), duration);
+        roof.getAnimationbuilder().with(Animation.colorTo(0x000000), duration);
+        door.getAnimationbuilder().with(Animation.colorTo(0x840001), duration);
     }
 }
