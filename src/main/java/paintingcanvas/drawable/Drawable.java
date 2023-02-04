@@ -57,6 +57,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         var transform = gc.getTransform();
         var center = this.center(g);
         transform.setToRotation(this.rotation, center.x, center.y);
+        transform.translate(center.x - x, center.y - y);
         gc.setTransform(transform);
 
         this.draw(gc);
@@ -270,7 +271,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
-    public App.AnimationBuilder animate() {
+    public App.AnimationBuilder getAnimationbuilder() {
         return new App.AnimationBuilder(this);
     }
 

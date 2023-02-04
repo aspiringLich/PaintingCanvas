@@ -21,7 +21,7 @@ public interface Animatable {
      *
      * @return {@link App.AnimationBuilder}
      */
-    App.AnimationBuilder animate();
+    App.AnimationBuilder getAnimationbuilder();
 
     /**
      * Get the {@link Drawable} element from this {@code Animatable}.
@@ -43,12 +43,12 @@ public interface Animatable {
      * @param y        the y-position to move to
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
     default App.AnimationBuilder moveTo(int x, int y, double duration) {
         var animation = Animation.moveTo(x, y);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -64,12 +64,12 @@ public interface Animatable {
      * @param y        the y to move by
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
-    default App.AnimationBuilder move(int x, int y, double duration) {
+    default App.AnimationBuilder moveBy(int x, int y, double duration) {
         var animation = Animation.moveTo(x + drawable().x, y + drawable().y);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -87,12 +87,12 @@ public interface Animatable {
      * @param b        blue (0-255)
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
     default App.AnimationBuilder colorTo(int r, int g, int b, double duration) {
         var animation = Animation.colorTo(r, g, b);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -108,12 +108,12 @@ public interface Animatable {
      * @param hex      The number describing the RGB color
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
     default App.AnimationBuilder colorTo(int hex, double duration) {
         var animation = Animation.colorTo(hex);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -130,12 +130,12 @@ public interface Animatable {
      * @param color    The color to fade to
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
     default App.AnimationBuilder colorTo(Color color, double duration) {
         var animation = Animation.colorTo(color);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -151,12 +151,12 @@ public interface Animatable {
      * @param angle    The absolute angle to rotate to in degrees.
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
     default App.AnimationBuilder rotateTo(int angle, double duration) {
         var animation = Animation.rotateTo(angle);
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 
     /**
@@ -171,11 +171,11 @@ public interface Animatable {
      * @param angle    The relative angle to rotate to in degrees.
      * @param duration the number of seconds it lasts
      * @return an {@code AnimationBuilder}
-     * @see #animate()
+     * @see #getAnimationbuilder()
      */
-    default App.AnimationBuilder rotate(int angle, double duration) {
+    default App.AnimationBuilder rotateBy(int angle, double duration) {
         var animation = Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation));
         animation.drawable = drawable();
-        return this.animate().add(animation, duration);
+        return this.getAnimationbuilder().add(animation, duration);
     }
 }

@@ -84,10 +84,10 @@ public abstract class Animation {
     }
 
     /**
-     * Creates a new position animation to <code>(x, y)</code>.
+     * Creates a new movement animation to <code>(x, y)</code>.
      *
-     * @param x The absolute x position to animate to
-     * @param y The absolute y position to animate to
+     * @param x The absolute x position to move this element to
+     * @param y The absolute y position to move this element to
      * @return the {@link Animation} object
      */
     public static Animation moveTo(int x, int y) {

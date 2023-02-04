@@ -72,20 +72,57 @@ public class Line extends Drawable<Line> {
 
     /**
      * Get the endpoint of the line
-     * @return a {@code Point} object representing the endpoint of the line
+     *
+     * <pre>{@code
+     * Point p = line.getEndpoint();
+     * int x = p.x;
+     * int y = p.y;
+     * }</pre>
+     *
+     * @return a {@link Point} object representing the startpoint of the line
      */
-    @SuppressWarnings("unused")
     public Point getEndpoint() {
         return new Point(this.x - endOffset.x, this.y - endOffset.y);
     }
 
     /**
      * Get the startpoint of the line
-     * @return a {@code Point} object representing the startpoint of the line
+     *
+     * <pre>{@code
+     * Point p = line.getStartpoint();
+     * int x = p.x;
+     * int y = p.y;
+     * }</pre>
+     *
+     * @return a {@link Point} object representing the startpoint of the line
      */
-    @SuppressWarnings("unused")
     public Point getStartpoint() {
         return new Point(this.x, this.y);
+    }
+
+    /**
+     * Get the startpoint of the line
+     *
+     * @param x The new X-position of the startpoint
+     * @param y The new Y-position of the startpoint
+     * @return The original object to allow method chaining
+     */
+    public Line setStartpoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
+    /**
+     * Set the endpoint of the line
+     *
+     * @param x The new X-position of the endpoint
+     * @param y The new Y-position of the endpoint
+     * @return The original object to allow method chaining
+     */
+    public Line setEndpoint(int x, int y) {
+        this.endOffset = new Point(this.x - x, this.y - y);
+        return this;
     }
 
     @Override
