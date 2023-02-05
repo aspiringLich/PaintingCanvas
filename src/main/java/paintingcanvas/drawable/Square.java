@@ -51,13 +51,13 @@ public class Square extends Drawable<Square> {
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(this.color);
-        if (this.filled) gc.fillRect(x, y, size, size);
-        else gc.drawRect(x, y, size, size);
+        if (this.filled) gc.fillRect(x - size / 2, y - size / 2, size, size);
+        else gc.drawRect(x - size / 2, y - size / 2, size, size);
     }
 
     @Override
     public Point center(Graphics g) {
-        return new Point(x + size / 2, y + size / 2);
+        return new Point(x, y);
     }
 
     @Override

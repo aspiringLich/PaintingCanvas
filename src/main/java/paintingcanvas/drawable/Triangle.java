@@ -59,8 +59,8 @@ public class Triangle extends Drawable<Triangle> {
     @Override
     public void draw(Graphics2D gc) {
         java.awt.Polygon poly = new java.awt.Polygon(
-                new int[]{x, x + width, x + width / 2},
-                new int[]{y + height, y + height, y},
+                new int[]{x - width / 2, x + width / 2, x},
+                new int[]{y + height / 2, y + height / 2, y - height / 2},
                 3
         );
         gc.setColor(this.color);
@@ -70,7 +70,7 @@ public class Triangle extends Drawable<Triangle> {
 
     @Override
     public Point center(Graphics g) {
-        return new Point(x + width / 2, y + height / 2);
+        return new Point(x, y);
     }
 
     @Override

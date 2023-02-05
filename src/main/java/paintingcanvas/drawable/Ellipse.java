@@ -59,13 +59,13 @@ public class Ellipse extends Drawable<Ellipse> {
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(color);
-        if (this.filled) gc.fillOval(x, y, width, height);
-        else gc.drawOval(x, y, width, height);
+        if (this.filled) gc.fillOval(x - width / 2, y - height / 2, width, height);
+        else gc.drawOval(x - width / 2, y - height / 2, width, height);
     }
 
     @Override
     public Point center(Graphics g) {
-        return new Point(x + width / 2, y + height / 2);
+        return new Point(x, y);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class Test {
 
         Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}})
                 .setColor(0xffff00);
-        Square square = new Square(300, 300, 100)
+        Square square = new Square(0, 0, 100)
                 .setColor(0x00ff00);
 
         Path curvey = new Path()
@@ -43,6 +43,6 @@ public class Test {
 
         System.out.println("This runs after all the animations are done");
 
-        curvey.erase();
+        curvey.fadeOut(10);
     }
 }
