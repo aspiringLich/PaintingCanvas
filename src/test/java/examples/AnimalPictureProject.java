@@ -36,8 +36,8 @@ public class AnimalPictureProject {
         Canvas canvas = new Canvas();
         canvas.setTitle("Animal Picture Projects");
 
-        var xm = canvas.width() / 2 - mushroom.length * 10 + 5;
-        var ym = canvas.height() / 2 - mushroom[0].length * 10 + 5;
+        var xm = canvas.width() / 2 - mushroom.length * 10;
+        var ym = canvas.height() / 2 - mushroom[0].length * 10;
         var colored = new ArrayList<Rectangle>();
 
         // == Mushroom ==
