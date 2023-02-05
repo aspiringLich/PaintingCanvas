@@ -36,7 +36,15 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public abstract void draw(Graphics2D gc);
 
     /**
-     * Get the Y-coordinate of the object's center-point
+     * Get the object's centerpoint
+     *
+     * <pre>{@code
+     * import java.awt.Point;
+     *
+     * Point p = drawable.getStartpoint();
+     * int x = p.x;
+     * int y = p.y;
+     * }</pre>
      *
      * @param g Graphics context
      * @return The object's center-point
@@ -58,7 +66,6 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         var transform = gc.getTransform();
         var center = this.center(g);
         transform.setToRotation(this.rotation, center.x, center.y);
-        transform.translate(center.x - x, center.y - y);
         gc.setTransform(transform);
 
         this.draw(gc);
@@ -272,7 +279,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
-    public App.AnimationBuilder getAnimationbuilder() {
+    public App.AnimationBuilder animate() {
         return new App.AnimationBuilder(this);
     }
 

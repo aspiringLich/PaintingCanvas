@@ -16,38 +16,38 @@ public class Triangle extends Drawable<Triangle> {
     /**
      * Create a new Triangle element.
      * <pre>{@code
-     * // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
+     * // Create a new Triangle centered at (100, 100) that is 20px wide and 30px tall
      * Triangle triangle = new Triangle(100, 100, 20, 30);
      * }</pre>
      *
-     * @param x The X-position of the triangle
-     * @param y The Y-position of the triangle
-     * @param w The width of the triangle
-     * @param h The height of the triangle
+     * @param centerX The X-position of the triangle
+     * @param centerY The Y-position of the triangle
+     * @param width   The width of the triangle
+     * @param height  The height of the triangle
      */
-    public Triangle(int x, int y, int w, int h) {
-        super(x, y, Color.BLACK);
-        this.width = w;
-        this.height = h;
+    public Triangle(int centerX, int centerY, int width, int height) {
+        super(centerX, centerY, Color.BLACK);
+        this.width = width;
+        this.height = height;
     }
 
     /**
      * Create a new Triangle element.
      * <pre>{@code
-     * // Create a new Triangle at (100, 100) that is 20px wide and 30px tall
+     * // Create a new Triangle centered at (100, 100) that is 20px wide and 30px tall
      * Triangle triangle = new Triangle(100, 100, 20, 30, new Color(255, 0, 0));
      * }</pre>
      *
-     * @param x     The X-position of the triangle
-     * @param y     The Y-position of the triangle
-     * @param w     The width of the triangle
-     * @param h     The height of the triangle
-     * @param color The color of the triangle
+     * @param centerX The X-position of the triangle
+     * @param centerY The Y-position of the triangle
+     * @param width   The width of the triangle
+     * @param height  The height of the triangle
+     * @param color   The color of the triangle
      */
-    public Triangle(int x, int y, int w, int h, Color color) {
-        super(x, y, color);
-        this.width = w;
-        this.height = h;
+    public Triangle(int centerX, int centerY, int width, int height, Color color) {
+        super(centerX, centerY, color);
+        this.width = width;
+        this.height = height;
     }
 
     @Override

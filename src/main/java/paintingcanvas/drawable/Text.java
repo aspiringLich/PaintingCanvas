@@ -17,15 +17,20 @@ public class Text extends Drawable<Text> {
     public String text;
 
     /**
-     * Create a new Text element.
-     * The default font size is 30, and the default font is <u>comic sans</u> <em>(not sorry)</em>.
+     * <p>
+     *     Create a new Text element.
+     *     The default font size is 30, and the default font is comic sans :)
+     * </p><p>
+     *     It probably won't work on replit however. Comic sans is not installed on
+     *     the replit servers by default.
+     * </p>
      * <pre>{@code
-     * Text text = new Text(100, 100, "Hello World");
+     * Text text = new Text(100, 100, "Hello World")
      * }</pre>
      *
-     * @param x    The X-position of the text
-     * @param y    The Y-position of the text
-     * @param text The text
+     * @param x     The X-position of the text
+     * @param y     The Y-position of the text
+     * @param text  The text
      */
     public Text(int x, int y, String text) {
         super(x, y, Color.BLACK);
@@ -34,16 +39,21 @@ public class Text extends Drawable<Text> {
 
 
     /**
-     * Create a new Text element.
-     * The default font size is 30, and the default font is <u>comic sans</u> <em>(not sorry)</em>.
+     * <p>
+     *     Create a new Text element.
+     *     The default font size is 30, and the default font is comic sans :)
+     * </p><p>
+     *     It probably won't work on replit however. Comic sans is not installed on
+     *     the replit servers by default.
+     * </p>
      * <pre>{@code
      * Text text = new Text(100, 100, "Hello World", new Color(255, 0, 0))
      * }</pre>
      *
      * @param x     The X-position of the text
      * @param y     The Y-position of the text
-     * @param color the color of the text
      * @param text  The text
+     * @param color the color of the text
      */
     public Text(int x, int y, String text, Color color) {
         super(x, y, color);
@@ -54,7 +64,8 @@ public class Text extends Drawable<Text> {
     public void draw(Graphics2D gc) {
         gc.setColor(color);
         gc.setFont(font);
-        gc.drawString(text, x, y);
+        var center = center(gc);
+        gc.drawString(text, 2 * x - center.x, 2 * y - center.y);
     }
 
     @Override

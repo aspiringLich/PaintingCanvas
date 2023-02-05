@@ -5,12 +5,20 @@ import paintingcanvas.drawable.Line;
 import paintingcanvas.drawable.Path;
 import paintingcanvas.drawable.Polygon;
 import paintingcanvas.drawable.Square;
+import paintingcanvas.drawable.Circle;
+
+import java.awt.Color;
 
 @SuppressWarnings("unused")
 public class Test {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
         canvas.setTitle("Test");
+
+        new Circle(0, 0, 10, Color.RED);
+        new Circle(0, canvas.height(), 10, Color.RED);
+        new Circle(canvas.width(), canvas.height(), 10, Color.RED);
+        new Circle(canvas.width(), 0, 10, Color.RED);
 
         Line line = new Line(0, 0, 100, 100).setThickness(10)
                 .setColor(0xff0000);

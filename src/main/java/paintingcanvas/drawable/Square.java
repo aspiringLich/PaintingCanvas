@@ -15,32 +15,34 @@ public class Square extends Drawable<Square> {
     /**
      * Create a new Square element.
      * <pre>{@code
+     * // Created a square centered at (100, 100) with a side length of 30px
      * Square square = new Square(100, 100, 30);
      * }</pre>
      *
-     * @param x The X-position of the square
-     * @param y The Y-position of the square
-     * @param s The size of the square
+     * @param centerX The X-position of the square
+     * @param centerY The Y-position of the square
+     * @param size    The size of the square
      */
-    public Square(int x, int y, int s) {
-        super(x, y, Color.BLACK);
-        this.size = s;
+    public Square(int centerX, int centerY, int size) {
+        super(centerX, centerY, Color.BLACK);
+        this.size = size;
     }
 
     /**
      * Create a new Square element.
      * <pre>{@code
+     * // Created a red square centered at (100, 100) with a side length of 30px
      * Square square = new Square(100, 100, 30, new Color(255, 0, 0));
      * }</pre>
      *
-     * @param x     The X-position of the square
-     * @param y     The Y-position of the square
-     * @param s     The size of the square
-     * @param color The color of the square
+     * @param centerX The X-position of the square
+     * @param centerY The Y-position of the square
+     * @param size    The size of the square
+     * @param color   The color of the square
      */
-    public Square(int x, int y, int s, Color color) {
-        super(x, y, color);
-        this.size = s;
+    public Square(int centerX, int centerY, int size, Color color) {
+        super(centerX, centerY, color);
+        this.size = size;
     }
 
     @Override

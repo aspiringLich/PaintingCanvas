@@ -16,39 +16,40 @@ public class Ellipse extends Drawable<Ellipse> {
     /**
      * Create a new Ellipse element.
      * <pre>{@code
-     * // Create a new ellipse at (100, 100) with width 20 and height 30
+     * // Create a new ellipse centered at (100, 100) with width 20 and height 30
      * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
      * }</pre>
      *
-     * @param x The X-position of the ellipse
-     * @param y The Y-position of the ellipse
-     * @param w The width of the ellipse
-     * @param h The height of the ellipse
+     * @param centerX The X-position of the ellipse
+     * @param centerY The Y-position of the ellipse
+     * @param width   The width of the ellipse
+     * @param height  The height of the ellipse
      */
-    public Ellipse(int x, int y, int w, int h) {
-        super(x, y, Color.BLACK);
-        width = w;
-        height = h;
+    public Ellipse(int centerX, int centerY, int width, int height) {
+        super(centerX, centerY, Color.BLACK);
+        this.width = width;
+        this.height = height;
     }
 
     /**
      * Create a new Ellipse element.
      * <pre>{@code
-     * // Create a new ellipse at (100, 100) with width 20 and height 30
+     * // Create a new ellipse centered at (100, 100) with width 20 and height 30
      * Ellipse ellipse = new Ellipse(100, 100, 20, 30, new Color(255, 0, 0));
      * }</pre>
      *
-     * @param x The X-position of the ellipse
-     * @param y The Y-position of the ellipse
-     * @param w The width of the ellipse
-     * @param h The height of the ellipse
+     * @param centerX The X-position of the ellipse
+     * @param centerY The Y-position of the ellipse
+     * @param width   The width of the ellipse
+     * @param height  The height of the ellipse
+     * @param color   The color of the ellipse
      */
-    public Ellipse(int x, int y, int w, int h, Color c) {
-        super(x, y, Color.BLACK);
-        width = w;
-        height = h;
+    public Ellipse(int centerX, int centerY, int width, int height, Color color) {
+        super(centerX, centerY, color);
+        this.width = width;
+        this.height = height;
     }
-    
+
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(color);

@@ -23,7 +23,7 @@ public class Line extends Drawable<Line> {
      */
     public Line(int x1, int y1, int x2, int y2) {
         super(x1, y1, Color.BLACK);
-        this.endOffset = new Point(x1 - x2, y1 - y2);
+        this.endOffset = new Point(x2 - x1, y2 - y1);
         this.stroke = new BasicStroke(1);
     }
 
@@ -43,7 +43,7 @@ public class Line extends Drawable<Line> {
     @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, Color color) {
         super(x1, y1, color);
-        this.endOffset = new Point(x1 - x2, y1 - y2);
+        this.endOffset = new Point(x2 - x1, y2 - y1);
         this.stroke = new BasicStroke(1);
     }
 
@@ -74,6 +74,8 @@ public class Line extends Drawable<Line> {
      * Get the endpoint of the line
      *
      * <pre>{@code
+     * import java.awt.Point;
+     *
      * Point p = line.getEndpoint();
      * int x = p.x;
      * int y = p.y;
@@ -89,6 +91,8 @@ public class Line extends Drawable<Line> {
      * Get the startpoint of the line
      *
      * <pre>{@code
+     * import java.awt.Point;
+     *
      * Point p = line.getStartpoint();
      * int x = p.x;
      * int y = p.y;
@@ -129,12 +133,12 @@ public class Line extends Drawable<Line> {
     public void draw(Graphics2D gc) {
         gc.setColor(color);
         gc.setStroke(stroke);
-        gc.drawLine(this.x, this.y, this.x - endOffset.x, this.y - endOffset.y);
+        gc.drawLine(this.x , this.y, this.x + endOffset.x, this.y + endOffset.y);
     }
 
     @Override
     public Point center(Graphics g) {
-        return new Point(this.x - endOffset.x / 2, this.y - endOffset.y / 2);
+        return new Point(this.x + endOffset.x / 2, this.y + endOffset.y / 2);
     }
 
     @Override

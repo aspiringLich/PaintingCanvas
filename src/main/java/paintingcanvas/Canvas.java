@@ -24,10 +24,10 @@ public class Canvas {
     CanvasComponent canvas;
 
     /**
-     * Creates a new canvas with a default size (600x400) and title ("Canvas")
+     * Creates a new canvas with a default size (900x600) and title ("Canvas")
      */
     public Canvas() {
-        canvas = new CanvasComponent(600, 400, "Canvas");
+        canvas = new CanvasComponent(900, 600, "Canvas");
     }
 
     /**
@@ -53,7 +53,7 @@ public class Canvas {
      * @return the width of the canvas
      */
     public int height() {
-        return canvas.getWidth();
+        return canvas.getHeight();
     }
 
     /**
@@ -112,24 +112,19 @@ public class Canvas {
             jframe.setTitle(title);
             jframe.setVisible(true);
 
+
             jframe.add(this);
             jframe.addComponentListener(new CanvasComponent.ResizeListener(this));
 
             App.run(this, width, height, title);
         }
 
-        /**
-         * The "render function", this will run the function in app every single frame at the set fps.
-         * An alternative to the "run" function
-         *
-         * @param app contains the render function to run every frame
-         */
-        public void render(App app) {
+        public void render() {
             // TODO: Account for the time it takes to run the render function
             // (Implement the run with a loop and thread::sleep)
             ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
             poolExecutor.scheduleAtFixedRate(() -> {
-                app._render();
+                App._render();
                 this.repaint();
                 SwingUtilities.updateComponentTreeUI(jframe);
                 jframe.invalidate();

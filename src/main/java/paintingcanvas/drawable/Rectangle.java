@@ -16,46 +16,46 @@ public class Rectangle extends Drawable<Rectangle> {
     /**
      * Create a new Rectangle element.
      * <pre>{@code
-     * // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
+     * // Create a new Rectangle centered at (100, 100) with a width of 20 and a height of 30
      * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
      * }</pre>
      *
-     * @param x The X-position of the rectangle
-     * @param y The Y-position of the rectangle
-     * @param w The width of the rectangle
-     * @param h The height of the rectangle
+     * @param centerX The X-position of the rectangle
+     * @param centerY The Y-position of the rectangle
+     * @param width   The width of the rectangle
+     * @param height  The height of the rectangle
      */
-    public Rectangle(int x, int y, int w, int h) {
-        super(x, y, Color.BLACK);
-        this.width = w;
-        this.height = h;
+    public Rectangle(int centerX, int centerY, int width, int height) {
+        super(centerX, centerY, Color.BLACK);
+        this.width = width;
+        this.height = height;
     }
 
 
     /**
      * Create a new Rectangle element.
      * <pre>{@code
-     * // Create a new Rectangle at (100, 100) with a width of 20 and a height of 30
-     * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
+     * // Create a new red Rectangle centered at (100, 100) with a width of 20 and a height of 30
+     * Rectangle rectangle = new Rectangle(100, 100, 20, 30, new Color(255, 0, 0));
      * }</pre>
      *
-     * @param x     The X-position of the rectangle
-     * @param y     The Y-position of the rectangle
-     * @param w     The width of the rectangle
-     * @param h     The height of the rectangle
-     * @param color The color of the rectangle
+     * @param centerX The X-position of the rectangle
+     * @param centerY The Y-position of the rectangle
+     * @param width   The width of the rectangle
+     * @param height  The height of the rectangle
+     * @param color   The color of the rectangle
      */
-    public Rectangle(int x, int y, int w, int h, Color color) {
-        super(x, y, color);
-        this.width = w;
-        this.height = h;
+    public Rectangle(int centerX, int centerY, int width, int height, Color color) {
+        super(centerX, centerY, color);
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public void draw(Graphics2D gc) {
         gc.setColor(color);
-        if (this.filled) gc.fillRect(x, y, width, height);
-        else gc.drawRect(x, y, width, height);
+        if (this.filled) gc.fillRect(x - width / 2, y - height / 2, width, height);
+        else gc.drawRect(x - width / 2, y - height / 2, width, height);
     }
 
     @Override

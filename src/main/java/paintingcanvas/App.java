@@ -8,15 +8,22 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 
 /**
- * Hi person leafing through the documentation! This class is only really still here because i was too lazy to try and integrate
- * everything with {@link Canvas.CanvasComponent}. You can use this to make your animations and stuff, but you should really use the Canvas class
- * <br>
- * You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
- * in reality its all static under the hood.
- * <br>
+ * <p>
+ *     Hi person leafing through the documentation! This class is only really
+ *     still here because i was too lazy to try and integrate
+ *     everything with {@link Canvas.CanvasComponent}. You can use this
+ *     to make your animations and stuff, but you should really use the Canvas class
+ * </p><p>
+ *     You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
+ *     in reality its all static under the hood.
+ * </p><p>
+ *     So thats why it breaks if you make two canvases.
+ * </p><p>
+ *     Or does it? IDK i haven't tested it.
+ * </p>
  */
 @SuppressWarnings("unused")
-public abstract class App {
+public class App {
     // Used to block on .add() calls
     protected static final Object syncObject = new Object();
     // Used to wait on sleepUntillAnimationEnds
@@ -49,7 +56,7 @@ public abstract class App {
         }
     }
 
-    protected void _render() {
+    protected static void _render() {
         if (animationFinish != -1 && canvas.frame >= animationFinish) {
             animationFinish = -1;
             synchronized (syncObject) {
@@ -63,9 +70,6 @@ public abstract class App {
                 userSyncObject.notify();
             }
         }
-
-        // Run user supplied render function
-        this.render();
     }
 
     /**
@@ -77,9 +81,9 @@ public abstract class App {
     /**
      * Initialize and run the application with default width height and title parameters
      */
-    public static void run(Canvas.CanvasComponent canvas) {
-        run(canvas, 1000, 600, "Canvas");
-    }
+//    public static void run(Canvas.CanvasComponent canvas) {
+//        run(canvas, 1000, 600, "Canvas");
+//    }
 
     /**
      * Initialize and run the application.
@@ -125,7 +129,7 @@ public abstract class App {
         };
 
         // Init app
-//        canvas.render(this);
+        canvas.render();
 //        try {
 //            this.setup();
 //        } catch (Exception e) {
@@ -261,7 +265,7 @@ public abstract class App {
             if (builderFrame < canvas.frame) builderFrame = canvas.frame;
             var save = builderFrame;
 
-            animation.drawable = this.drawable;
+            animation.init(drawable);
             animation.startFrame = builderFrame;
             animation.duration = _duration;
 
@@ -312,7 +316,7 @@ public abstract class App {
             // lastBuilderFrame should be *at least* right now
             if (lastBuilderFrame < canvas.frame) lastBuilderFrame = canvas.frame;
 
-            animation.drawable = this.drawable;
+            animation.init(drawable);
             animation.startFrame = lastBuilderFrame;
             animation.duration = _duration;
 
@@ -442,7 +446,7 @@ public abstract class App {
             var _time = unit.asFrames(time);
             var _duration = unit.asFrames(duration);
 
-            animation.drawable = this.drawable;
+            animation.init(drawable);
             animation.startFrame = canvas.frame + _time;
             animation.duration = _duration;
             synchronized (canvas.animations) {
@@ -469,7 +473,7 @@ public abstract class App {
         }
 
         @Override
-        public AnimationBuilder getAnimationbuilder() {
+        public AnimationBuilder animate() {
             return this;
         }
 
