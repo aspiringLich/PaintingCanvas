@@ -187,7 +187,7 @@ public interface Animatable {
      * <pre>{@code
      * Circle c = new Circle(200, 200, 50);
      * // the circle will move down 100, and then right 200
-     * c.moveTo(0, 100, 3).moveTo(200, 0, 3);
+     * c.moveBy(0, 100, 3).moveBy(200, 0, 3);
      * }</pre>
      *
      * @param x        the x to move by
@@ -197,5 +197,48 @@ public interface Animatable {
      */
     default App.AnimationBuilder moveBy(int x, int y, double duration) {
         return add(Animation.moveTo(x + drawable().x, y + drawable().y), duration);
+    }
+
+    /**
+     * <p>
+     *     This method moves {@code this} by the specified {@code x} horizontally.
+     *     Positive values move right, negative values move left.
+     * </p><p>
+     *     This method is equivalent to {@code moveBy(x, 0, duration)}
+     * </p>
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will move right 300 pixels over 3 seconds
+     * c.moveHorizontalBy(0, 100, 3);
+     * }</pre>
+     *
+     * @param x        the x to move by
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder moveHorizontalBy(int x,  double duration) {
+        return add(Animation.moveTo(x + drawable().x, 0), duration);
+    }
+
+    /**
+     * <p>
+     *     This method moves {@code this} by the specified {@code x} horizontally.
+     *     Positive values move right, negative values move left.
+     * </p><p>
+     *     This method is equivalent to {@code moveBy(0, y, duration)}
+     * </p>
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will move right 300 pixels over 3 seconds
+     * c.moveHorizontalBy(0, 100, 3);
+     * }</pre>
+     *
+     * @param y        the y to move by
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder moveVerticalBy(int y,  double duration) {
+        return add(Animation.moveTo(0, y + drawable().y), duration);
     }
 }
