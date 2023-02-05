@@ -9,11 +9,13 @@ import java.awt.*;
  * }</pre>
  */
 public class Text extends Drawable<Text> {
-    // you can change this is you would like a different font
-    // *comic sans ms* oh god, latest its not papyrus
-    // hey coner i think you meant "at least"
+    /**
+     * The font of the text, you can change this if you want a different font (and have it installed)
+     */
     public Font font = new Font("Comic Sans MS", Font.BOLD, 1);
-
+    /**
+     * The text to draw
+     */
     public String text;
 
     /**

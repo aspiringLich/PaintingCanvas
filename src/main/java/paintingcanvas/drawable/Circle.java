@@ -10,6 +10,9 @@ import java.awt.*;
  * }</pre>
  */
 public class Circle extends Drawable<Circle> {
+    /**
+     * The radius of the circle
+     */
     public int radius;
 
     /**

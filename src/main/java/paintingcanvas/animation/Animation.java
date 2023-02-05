@@ -26,11 +26,20 @@ public abstract class Animation {
         this.drawable = drawable;
     }
 
+    /**
+     * Sets the easing to be used by this animation
+     * @param easing the easing to be used
+     * @return this
+     */
     public Animation easing(Easing easing) {
         this.easing = easing;
         return this;
     }
 
+    /**
+     * Updates the animation with the current frame
+     * @param frame the current frame
+     */
     public void update(int frame) {
         if (frame >= startFrame && frame <= this.startFrame + this.duration)
             this.updateAnimation(this.drawable, (frame - startFrame) / (double) this.duration);
@@ -41,6 +50,11 @@ public abstract class Animation {
      */
     abstract void updateAnimation(Drawable drawable, double progress);
 
+    /**
+     * Initialize the animation with the affected drawable
+     * @param drawable the affected drawable
+     * @return this
+     */
     public Animation init(Drawable drawable) {
         this.drawable = drawable;
         this.initAnimation(drawable);

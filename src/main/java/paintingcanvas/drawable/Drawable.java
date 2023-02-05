@@ -15,10 +15,25 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * Rotation of the object in radians (imagine using degrees)
      */
     public double rotation;
+    /**
+     * Whether the object is visible or not
+     */
     public boolean visible = true;
+    /**
+     * Whether the object is filled or not
+     */
     public boolean filled = true;
+    /**
+     * The color of the object
+     */
     public Color color;
+    /**
+     * The X-position of the object
+     */
     public int x;
+    /**
+     * The Y-position of the object
+     */
     public int y;
 
     Drawable(int x, int y, Color color) {

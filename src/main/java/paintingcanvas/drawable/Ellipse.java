@@ -10,7 +10,13 @@ import java.awt.*;
  * }</pre>
  */
 public class Ellipse extends Drawable<Ellipse> {
+    /**
+     * The width of the ellipse.
+     */
     public int width;
+    /**
+     * The height of the ellipse.
+     */
     public int height;
 
     /**

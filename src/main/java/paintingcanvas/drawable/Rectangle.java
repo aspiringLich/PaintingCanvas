@@ -10,7 +10,13 @@ import java.awt.*;
  * }</pre>
  */
 public class Rectangle extends Drawable<Rectangle> {
+    /**
+     * The width of the rectangle.
+     */
     public int width;
+    /**
+     * The height of the rectangle.
+     */
     public int height;
 
     /**

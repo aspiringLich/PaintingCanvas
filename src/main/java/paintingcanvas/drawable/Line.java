@@ -6,7 +6,14 @@ import java.awt.*;
  * A line: with a startpoint and an endpoint
  */
 public class Line extends Drawable<Line> {
+    /**
+     * The offset of the endpoint from the startpoint (x, y)
+     */
     public Point endOffset;
+    /**
+     * The stroke of the line
+     * @see Stroke
+     */
     public Stroke stroke;
 
     /**

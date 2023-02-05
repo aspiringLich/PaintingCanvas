@@ -10,6 +10,9 @@ import java.awt.*;
  * }</pre>
  */
 public class Square extends Drawable<Square> {
+    /**
+     * The size / side-length of the square.
+     */
     public int size;
 
     /**

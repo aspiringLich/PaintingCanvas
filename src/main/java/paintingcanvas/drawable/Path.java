@@ -10,7 +10,15 @@ import java.awt.geom.Path2D;
  * Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.
  */
 public class Path extends Drawable<Path> {
+    /**
+     * The path to draw
+     * @see Path2D
+     */
     Path2D path;
+    /**
+     * The stroke of the line
+     * @see Stroke
+     */
     Stroke stroke;
 
     /**

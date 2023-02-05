@@ -12,6 +12,10 @@ import java.awt.*;
  * }</pre>
  */
 public class Polygon extends Drawable<Polygon> {
+    /**
+     * The internal polygon element
+     * @see java.awt.Polygon
+     */
     public java.awt.Polygon polygon;
 
     /**

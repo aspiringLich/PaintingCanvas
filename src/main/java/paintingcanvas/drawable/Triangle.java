@@ -10,7 +10,13 @@ import java.awt.*;
  * }</pre>
  */
 public class Triangle extends Drawable<Triangle> {
+    /**
+     * The width of the triangle.
+     */
     public int width;
+    /**
+     * The height of the triangle.
+     */
     public int height;
 
     /**
