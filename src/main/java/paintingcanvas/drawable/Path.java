@@ -42,6 +42,7 @@ public class Path extends Drawable<Path> {
      *                       .lineTo(100, 100)
      *                       .setThickness(5);
      * }</pre>
+     * @param color The color of the path
      */
     public Path(Color color) {
         super(0, 0, color);

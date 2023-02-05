@@ -6,8 +6,8 @@ import java.awt.*;
  * A line: with a startpoint and an endpoint
  */
 public class Line extends Drawable<Line> {
-    Point endOffset;
-    Stroke stroke;
+    public Point endOffset;
+    public Stroke stroke;
 
     /**
      * Create a new Line element.

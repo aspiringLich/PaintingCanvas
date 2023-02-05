@@ -10,8 +10,8 @@ import java.awt.*;
  * }</pre>
  */
 public class Triangle extends Drawable<Triangle> {
-    int width;
-    int height;
+    public int width;
+    public int height;
 
     /**
      * Create a new Triangle element.

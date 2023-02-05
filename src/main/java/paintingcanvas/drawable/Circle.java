@@ -10,7 +10,7 @@ import java.awt.*;
  * }</pre>
  */
 public class Circle extends Drawable<Circle> {
-    int radius;
+    public int radius;
 
     /**
      * Create a new Circle element.
@@ -38,6 +38,7 @@ public class Circle extends Drawable<Circle> {
      * @param centerX The X-position of the circle
      * @param centerY The Y-position of the circle
      * @param radius  The radius of the circle
+     * @param color   The color of the circle
      */
     public Circle(int centerX, int centerY, int radius, Color color) {
         super(centerX, centerY, color);

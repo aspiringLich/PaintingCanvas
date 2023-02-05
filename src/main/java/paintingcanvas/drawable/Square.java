@@ -10,7 +10,7 @@ import java.awt.*;
  * }</pre>
  */
 public class Square extends Drawable<Square> {
-    int size;
+    public int size;
 
     /**
      * Create a new Square element.
