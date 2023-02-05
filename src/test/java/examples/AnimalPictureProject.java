@@ -66,7 +66,7 @@ public class AnimalPictureProject {
                     0x9D26E5,
             }) {
                 for (var rect : colored)
-                    rect.getAnimationbuilder().with(Animation.colorTo(i), 2);
+                    rect.animate().with(Animation.colorTo(i), 2);
                 canvas.sleep(7);
             }
         }

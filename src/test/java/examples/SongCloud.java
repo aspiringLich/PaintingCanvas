@@ -57,7 +57,7 @@ public class SongCloud {
             var oldColor = t.getColor();
             var color = RGBtoHSB(oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue(), null);
             var newColor = Color.getHSBColor(color[0], color[1], out.get(t.getText()) / (float) maxCount);
-            t.getAnimationbuilder().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int)(Math.random() * 100.0) - 50), 1);
+            t.animate().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int)(Math.random() * 100.0) - 50), 1);
         }
 
         // == Sing Song ==

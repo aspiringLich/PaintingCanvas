@@ -23,13 +23,13 @@ public class DrawingInJava {
         var door = new Rectangle(150, 300, 50, 100).setColor(0xE8191A);
 
         // == Animate to Night ==
-        sun.getAnimationbuilder().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
+        sun.animate().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
 
         var duration = 4;
-        sky.getAnimationbuilder().with(Animation.colorTo(0xF5976C), duration);
-        grass.getAnimationbuilder().with(Animation.colorTo(0x557C45), duration);
-        house.getAnimationbuilder().with(Animation.colorTo(0x010089), duration);
-        roof.getAnimationbuilder().with(Animation.colorTo(0x000000), duration);
-        door.getAnimationbuilder().with(Animation.colorTo(0x840001), duration);
+        sky.animate().with(Animation.colorTo(0xF5976C), duration);
+        grass.animate().with(Animation.colorTo(0x557C45), duration);
+        house.animate().with(Animation.colorTo(0x010089), duration);
+        roof.animate().with(Animation.colorTo(0x000000), duration);
+        door.animate().with(Animation.colorTo(0x840001), duration);
     }
 }

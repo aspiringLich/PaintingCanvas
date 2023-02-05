@@ -21,7 +21,7 @@ public interface Animatable {
      *
      * @return {@link App.AnimationBuilder}
      */
-    App.AnimationBuilder getAnimationbuilder();
+    App.AnimationBuilder animate();
 
     /**
      * Get the {@link Drawable} element from this {@code Animatable}.
@@ -32,7 +32,7 @@ public interface Animatable {
 
     private App.AnimationBuilder add(Animation animation, double duration) {
         animation.init(drawable());
-        return getAnimationbuilder().add(animation, duration);
+        return animate().add(animation, duration);
     }
 
     /**
@@ -158,7 +158,7 @@ public interface Animatable {
      * @param angle    The absolute angle to rotate to in degrees.
      * @param duration the number of seconds it lasts
      * @return an {@link App.AnimationBuilder}
-     * @see #getAnimationbuilder()
+     * @see #animate()
      */
     default App.AnimationBuilder rotateTo(int angle, double duration) {
         return add(Animation.rotateTo(angle), duration);
