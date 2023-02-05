@@ -33,75 +33,176 @@ public abstract class Animation {
 
     public void update(int frame) {
         if (frame >= startFrame && frame <= this.startFrame + this.duration)
-            this.updateAnimation(this.drawable, frame - startFrame, this.duration);
+            this.updateAnimation(this.drawable, (frame - startFrame) / (double) this.duration);
     }
 
-    abstract void updateAnimation(Drawable drawable, int frame, int duration);
+    /**
+     * update the animation with the progress (0-1) and affected drawable
+     */
+    abstract void updateAnimation(Drawable drawable, double progress);
+
+    public Animation init(Drawable drawable) {
+        this.drawable = drawable;
+        this.initAnimation(drawable);
+        return this;
+    }
 
     /**
-     * Create a new animation to <code>color</code> in <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
+     * Initialize the animation with the affected drawable
+     */
+    abstract void initAnimation(Drawable drawable);
+
+    /**
+     * Creates an animation that moves {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
+     *
      * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.animate().add(colorTo(255, 0, 0), 1);
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will move to (100, 100), and then to (200, 200)
+     * c.moveTo(100, 100, 3).moveTo(200, 200, 3);
      * }</pre>
      *
-     * @param r The red component of the color (0-255)
-     * @param g The green component of the color (0-255)
-     * @param b The blue component of the color (0-255)
-     * @return the {@link Animation} object
-     */
-    public static Animation colorTo(int r, int g, int b) {
-        return colorTo(new Color(r, g, b));
-    }
-
-    /**
-     * Create a new animation to <code>color</code> with a {@link Color} object.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.animate().add(colorTo(Color.RED), 1);
-     * }</pre>
-     *
-     * @param color The color to animate to
-     * @return the {@link Animation} object
-     */
-    public static Animation colorTo(Color color) {
-        return new ColorAnimation(0, color, 0, null);
-    }
-
-    /**
-     * Create a new animation to <code>color</code> with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * // 0xFF0000 is hex for (255, 0, 0), which is red
-     * o.animate().add(colorTo(0xFF0000), 1);
-     * }</pre>
-     *
-     * @param hex The color to animate to as a hex literal
-     * @return the {@link Animation} object
-     */
-    public static Animation colorTo(int hex) {
-        return new ColorAnimation(0, new Color(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff), 0, null);
-    }
-
-    /**
-     * Creates a new movement animation to <code>(x, y)</code>.
-     *
-     * @param x The absolute x position to move this element to
-     * @param y The absolute y position to move this element to
-     * @return the {@link Animation} object
+     * @param x        the x-position to move to
+     * @param y        the y-position to move to
+     * @return @return an {@link Animation}
      */
     public static Animation moveTo(int x, int y) {
         return new MovementAnimation(0, 0, new Point(x, y), null);
     }
 
     /**
-     * Creates a new rotation animation to <code>angle°</code>.
+     * Creates an animation that changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(255, 0, 0, 3).colorTo(0, 0, 255, 3);
+     * }</pre>
+     *
+     * @param r        red (0-255)
+     * @param g        green (0-255)
+     * @param b        blue (0-255)
+     * @return @return an {@link Animation}
+     */
+    public static Animation colorTo(int r, int g, int b) {
+        return new ColorAnimation(0, 0, new Color(r, g, b), null);
+    }
+
+    /**
+     * Creates an animation that changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(0xFF0000, 3).colorTo(0x0000FF, 3);
+     * }</pre>
+     *
+     * @param hex      The number describing the RGB color
+     * @return @return an {@link Animation}
+     */
+    public static Animation colorTo(int hex) {
+        return new ColorAnimation(0, 0, new Color(hex), null);
+    }
+
+    /**
+     * Creates an animation that changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See {@link Color}
+     * for the full list of colors, and constructors for this class
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(Color.RED, 3).colorTo(Color.BLUE, 3);
+     * }</pre>
+     *
+     * @param color    The color to fade to
+     * @return an {@link Animation}
+     */
+    public static Animation colorTo(Color color) {
+        return new ColorAnimation(0, 0, color, null);
+    }
+
+    /**
+     * Creates an animation that fades {@code this} out over @{code duration} seconds.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will fade out, then in
+     * c.fadeOut(3).fadeIn(3);
+     * }</pre>
+     *
+     * @return an {@link Animation}
+     * @see #fadeIn()
+     */
+    public static Animation fadeOut() {
+        return new OpacityAnimation(0, 0, 0, null);
+    }
+
+    /**
+     * Creates an animation that fades {@code this} in over @{code duration} seconds.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will fade out, then in
+     * c.fadeOut(3).fadeIn(3);
+     * }</pre>
+     *
+     * @return an {@link Animation}
+     * @see #fadeOut()
+     */
+    public static Animation fadeIn() {
+        return new OpacityAnimation(0, 0, 1, null);
+    }
+
+    /**
+     * Creates an animation that rotates {@code this} to the specified <code>angle°</code>.
      * If you supply an angle {@code > 360} it will make more than one full rotation.
      *
-     * @param angle The absolute angle to rotate to in degrees.
-     * @return the {@link Animation} object
+     * <pre>{@code
+     * Square s = new Square(200, 200, 50);
+     * // the square will rotate one turn counter-clockwise, then 2 turns clockwise
+     * c.rotateTo(360, 3).colorTo(-360, 3);
+     * }</pre>
+     *
+     * @param angle    The absolute angle to rotate to in degrees.
+     * @return an {@code AnimationBuilder}
      */
     public static Animation rotateTo(int angle) {
         return new RotationAnimation(0, 0, Math.toRadians(angle), null);
+    }
+
+    /**
+     * Creates an animation that rotates {@code this} by <code>angle°</code>.
+     *
+     * <pre>{@code
+     * Square s = new Square(200, 200, 50);
+     * // the square will rotate one turn counter-clockwise, then one turns clockwise
+     * c.rotateTo(360, 3).colorTo(-360, 3);
+     * }</pre>
+     *
+     * @param angle    The relative angle to rotate to in degrees.
+     * @return an {@link Animation}
+     */
+    public static Animation rotateBy(int angle) {
+        return new RotationAnimation(0, 0, Math.toRadians(angle), null).relative();
+    }
+
+    /**
+     * Creates an animation that moves {@code this} by the specified {@code x} and {@code y}
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will move down 100, and then right 200
+     * c.moveTo(0, 100, 3).moveTo(200, 0, 3);
+     * }</pre>
+     *
+     * @param x        the x to move by
+     * @param y        the y to move by
+     * @param duration the number of seconds it lasts
+     * @return an {@link Animation}
+     */
+    public static Animation moveBy(int x, int y, double duration) {
+        return new MovementAnimation(0, 0, new Point(x, y), null).relative();
     }
 }

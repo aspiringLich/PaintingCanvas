@@ -11,15 +11,19 @@ public class ColorAnimation extends Animation {
     private final Color end;
     private Color start;
 
-    public ColorAnimation(int start, Color end, int duration, Drawable drawable) {
+    public ColorAnimation(int start, int duration, Color end, Drawable drawable) {
         super(start, duration, drawable);
         this.end = end;
     }
 
     @Override
-    void updateAnimation(Drawable drawable, int frame, int duration) {
-        if (frame == 0 || start == null) this.start = drawable.color;
-        drawable.color = lerpColor(start, end, (double) easing.ease(frame / (double) duration));
+    void updateAnimation(Drawable drawable, double progress) {
+        drawable.color = lerpColor(start, end, (double) easing.ease(progress));
+    }
+
+    @Override
+    void initAnimation(Drawable drawable) {
+        this.start = drawable.color;
     }
 
     /**

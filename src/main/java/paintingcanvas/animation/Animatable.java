@@ -28,10 +28,15 @@ public interface Animatable {
      *
      * @return the {@link Drawable}
      */
-    Drawable drawable();
+    Drawable<?> drawable();
+
+    private App.AnimationBuilder add(Animation animation, double duration) {
+        animation.init(drawable());
+        return getAnimationbuilder().add(animation, duration);
+    }
 
     /**
-     * This method moves {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
+     * Move {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
      *
      * <pre>{@code
      * Circle c = new Circle(200, 200, 50);
@@ -42,13 +47,138 @@ public interface Animatable {
      * @param x        the x-position to move to
      * @param y        the y-position to move to
      * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
+     * @return an {@link App.AnimationBuilder}
      */
     default App.AnimationBuilder moveTo(int x, int y, double duration) {
-        var animation = Animation.moveTo(x, y);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
+        return add(Animation.moveTo(x, y), duration);
+    }
+
+    /**
+     * Change the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(255, 0, 0, 3).colorTo(0, 0, 255, 3);
+     * }</pre>
+     *
+     * @param r        red (0-255)
+     * @param g        green (0-255)
+     * @param b        blue (0-255)
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder colorTo(int r, int g, int b, double duration) {
+        return add(Animation.colorTo(r, g, b), duration);
+    }
+
+    /**
+     * Change the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a>
+     * for how this works.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(0xFF0000, 3).colorTo(0x0000FF, 3);
+     * }</pre>
+     *
+     * @param hex      The number describing the RGB color
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder colorTo(int hex, double duration) {
+        return add(Animation.colorTo(hex), duration);
+    }
+
+    /**
+     * Change the color of {@code this} to the specified {@code color} over {@code duration} seconds.
+     * See {@link Color}
+     * for the full list of colors, and constructors for this class
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will turn red, and then blue
+     * c.colorTo(Color.RED, 3).colorTo(Color.BLUE, 3);
+     * }</pre>
+     *
+     * @param color    The color to fade to
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder colorTo(Color color, double duration) {
+        return add(Animation.colorTo(color), duration);
+    }
+
+    /**
+     * Fades {@code this} out over @{code duration} seconds.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will fade out, then in
+     * c.fadeOut(3).fadeIn(3);
+     * }</pre>
+     *
+     * @param duration the amount of time it takes to fade out
+     * @return an {@link App.AnimationBuilder}
+     * @see #fadeIn(double)
+     */
+    default App.AnimationBuilder fadeOut(double duration) {
+        return add(Animation.fadeOut(), duration);
+    }
+
+    /**
+     * Fades {@code this} in over @{code duration} seconds.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(200, 200, 50);
+     * // the circle will fade out, then in
+     * c.fadeOut(3).fadeIn(3);
+     * }</pre>
+     *
+     * @param duration the amount of time it takes to fade out
+     * @return an {@link App.AnimationBuilder}
+     * @see #fadeOut(double)
+     */
+    default App.AnimationBuilder fadeIn(double duration) {
+        return add(Animation.fadeIn(), duration);
+    }
+
+    /**
+     * Rotates {@code this} to the specified <code>angle°</code>.
+     * If you supply an angle {@code > 360} it will make more than one full rotation.
+     *
+     * <pre>{@code
+     * Square s = new Square(200, 200, 50);
+     * // the square will rotate one turn counter-clockwise, then 2 turns clockwise
+     * c.rotateTo(360, 3).colorTo(-360, 3);
+     * }</pre>
+     *
+     * @param angle    The absolute angle to rotate to in degrees.
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     * @see #getAnimationbuilder()
+     */
+    default App.AnimationBuilder rotateTo(int angle, double duration) {
+        return add(Animation.rotateTo(angle), duration);
+    }
+
+    /**
+     * Rotates {@code this} by <code>angle°</code>.
+     *
+     * <pre>{@code
+     * Square s = new Square(200, 200, 50);
+     * // the square will rotate one turn counter-clockwise, then one turns clockwise
+     * c.rotateTo(360, 3).colorTo(-360, 3);
+     * }</pre>
+     *
+     * @param angle    The relative angle to rotate to in degrees.
+     * @param duration the number of seconds it lasts
+     * @return an {@link App.AnimationBuilder}
+     */
+    default App.AnimationBuilder rotateBy(int angle, double duration) {
+        return add(Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation)), duration);
     }
 
     /**
@@ -63,119 +193,9 @@ public interface Animatable {
      * @param x        the x to move by
      * @param y        the y to move by
      * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
+     * @return an {@link App.AnimationBuilder}
      */
     default App.AnimationBuilder moveBy(int x, int y, double duration) {
-        var animation = Animation.moveTo(x + drawable().x, y + drawable().y);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
-    }
-
-    /**
-     * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
-     *
-     * <pre>{@code
-     * Circle c = new Circle(200, 200, 50);
-     * // the circle will turn red, and then blue
-     * c.colorTo(255, 0, 0, 3).colorTo(0, 0, 255, 3);
-     * }</pre>
-     *
-     * @param r        red (0-255)
-     * @param g        green (0-255)
-     * @param b        blue (0-255)
-     * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
-     */
-    default App.AnimationBuilder colorTo(int r, int g, int b, double duration) {
-        var animation = Animation.colorTo(r, g, b);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
-    }
-
-    /**
-     * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
-     *
-     * <pre>{@code
-     * Circle c = new Circle(200, 200, 50);
-     * // the circle will turn red, and then blue
-     * c.colorTo(0xFF0000, 3).colorTo(0x0000FF, 3);
-     * }</pre>
-     *
-     * @param hex      The number describing the RGB color
-     * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
-     */
-    default App.AnimationBuilder colorTo(int hex, double duration) {
-        var animation = Animation.colorTo(hex);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
-    }
-
-    /**
-     * This method changes the color of {@code this} to the specified {@code color} over {@code duration} seconds.
-     * See <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Color.html">The Oracle docs</a> for the full list of colors,
-     * and constructors for this class
-     *
-     * <pre>{@code
-     * Circle c = new Circle(200, 200, 50);
-     * // the circle will turn red, and then blue
-     * c.colorTo(Color.RED, 3).colorTo(Color.BLUE, 3);
-     * }</pre>
-     *
-     * @param color    The color to fade to
-     * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
-     */
-    default App.AnimationBuilder colorTo(Color color, double duration) {
-        var animation = Animation.colorTo(color);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
-    }
-
-    /**
-     * Creates a new rotation animation to <code>angle°</code>.
-     * If you supply an angle {@code > 360} it will make more than one full rotation.
-     *
-     * <pre>{@code
-     * Square s = new Square(200, 200, 50);
-     * // the square will rotate one turn counter-clockwise, then 2 turns clockwise
-     * c.rotateTo(360, 3).colorTo(-360, 3);
-     * }</pre>
-     *
-     * @param angle    The absolute angle to rotate to in degrees.
-     * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
-     */
-    default App.AnimationBuilder rotateTo(int angle, double duration) {
-        var animation = Animation.rotateTo(angle);
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
-    }
-
-    /**
-     * Creates a new rotation animation to rotate this object by <code>angle°</code>.
-     *
-     * <pre>{@code
-     * Square s = new Square(200, 200, 50);
-     * // the square will rotate one turn counter-clockwise, then one turns clockwise
-     * c.rotateTo(360, 3).colorTo(-360, 3);
-     * }</pre>
-     *
-     * @param angle    The relative angle to rotate to in degrees.
-     * @param duration the number of seconds it lasts
-     * @return an {@code AnimationBuilder}
-     * @see #getAnimationbuilder()
-     */
-    default App.AnimationBuilder rotateBy(int angle, double duration) {
-        var animation = Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation));
-        animation.drawable = drawable();
-        return this.getAnimationbuilder().add(animation, duration);
+        return add(Animation.moveTo(x + drawable().x, y + drawable().y), duration);
     }
 }
