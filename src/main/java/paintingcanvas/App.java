@@ -87,6 +87,11 @@ public class App {
 
     /**
      * Initialize and run the application.
+     *
+     * @param c The canvas to draw on
+     * @param width The width of the window
+     * @param height The height of the window
+     * @param title The title of the window
      */
     public static void run(Canvas c, int width, int height, String title) {
         // Worth a try

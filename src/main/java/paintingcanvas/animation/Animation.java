@@ -63,7 +63,7 @@ public abstract class Animation {
      *
      * @param x        the x-position to move to
      * @param y        the y-position to move to
-     * @return @return an {@link Animation}
+     * @return an {@link Animation}
      */
     public static Animation moveTo(int x, int y) {
         return new MovementAnimation(0, 0, new Point(x, y), null);
@@ -82,7 +82,7 @@ public abstract class Animation {
      * @param r        red (0-255)
      * @param g        green (0-255)
      * @param b        blue (0-255)
-     * @return @return an {@link Animation}
+     * @return an {@link Animation}
      */
     public static Animation colorTo(int r, int g, int b) {
         return new ColorAnimation(0, 0, new Color(r, g, b), null);
@@ -99,7 +99,7 @@ public abstract class Animation {
      * }</pre>
      *
      * @param hex      The number describing the RGB color
-     * @return @return an {@link Animation}
+     * @return an {@link Animation}
      */
     public static Animation colorTo(int hex) {
         return new ColorAnimation(0, 0, new Color(hex), null);

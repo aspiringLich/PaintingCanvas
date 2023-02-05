@@ -5,7 +5,7 @@ import paintingcanvas.drawable.Drawable;
 import java.awt.*;
 
 /**
- * Controls animation that is to do with colors
+ * Controls animation that is to do with opacity
  */
 public class OpacityAnimation extends Animation {
     public int start;
