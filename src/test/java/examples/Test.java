@@ -42,5 +42,7 @@ public class Test {
         canvas.sleep();
 
         System.out.println("This runs after all the animations are done");
+
+        curvey.erase();
     }
 }

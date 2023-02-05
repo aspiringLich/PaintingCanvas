@@ -279,6 +279,17 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
+    /**
+     * <p>
+     *     Erase this object from the canvas. This object will be gone and cannot* be added back!
+     * </p><p>
+     *     <sub>* It can be added back just don't tell anyone shhhh</sub>
+     * </p>
+     */
+    public void erase() {
+        App.canvas.erase(this);
+    }
+
     public App.AnimationBuilder animate() {
         return new App.AnimationBuilder(this);
     }

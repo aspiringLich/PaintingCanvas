@@ -27,7 +27,7 @@ public class Canvas {
      * Creates a new canvas with a default size (900x600) and title ("Canvas")
      */
     public Canvas() {
-        canvas = new CanvasComponent(900, 600, "Canvas");
+        this(900, 600, "Canvas");
     }
 
     /**
@@ -37,7 +37,8 @@ public class Canvas {
      * @param title the title of the canvas
      */
     public Canvas(int width, int height, String title) {
-        canvas = new CanvasComponent(width, height, title);
+        canvas = new CanvasComponent(width, height, title, this);
+        App.run(this, width, height, title);
     }
 
     /**
@@ -92,6 +93,17 @@ public class Canvas {
     }
 
     /**
+     * Erases the provided drawable from the canvas
+     *
+     * @param drawable the drawable to erase
+     */
+    public void erase(Drawable<?> drawable) {
+        synchronized (canvas.elements) {
+            canvas.elements.remove(drawable);
+        }
+    }
+
+    /**
      * The internal canvas component that is used to draw to the screen
      */
     protected static class CanvasComponent extends JComponent {
@@ -104,7 +116,7 @@ public class Canvas {
 
         final JFrame jframe;
 
-        public CanvasComponent(int width, int height, String title) {
+        public CanvasComponent(int width, int height, String title, Canvas canvas) {
             super();
             jframe = new JFrame();
             jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,8 +127,6 @@ public class Canvas {
 
             jframe.add(this);
             jframe.addComponentListener(new CanvasComponent.ResizeListener(this));
-
-            App.run(this, width, height, title);
         }
 
         public void render() {

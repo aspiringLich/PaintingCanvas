@@ -31,7 +31,7 @@ public class App {
     /**
      * The global Painter all Drawables access to add themselves to.
      */
-    public static Canvas.CanvasComponent canvas;
+    public static Canvas canvas;
     // The frame the builder is on (end of the last animation)
     protected static int builderFrame;
     // The start of the last animation
@@ -57,14 +57,14 @@ public class App {
     }
 
     protected static void _render() {
-        if (animationFinish != -1 && canvas.frame >= animationFinish) {
+        if (animationFinish != -1 && canvas.canvas.frame >= animationFinish) {
             animationFinish = -1;
             synchronized (syncObject) {
                 syncObject.notify();
             }
         }
 
-        if (lastAnimationFinish != -1 && canvas.frame >= lastAnimationFinish) {
+        if (lastAnimationFinish != -1 && canvas.canvas.frame >= lastAnimationFinish) {
             lastAnimationFinish = -1;
             synchronized (userSyncObject) {
                 userSyncObject.notify();
@@ -88,13 +88,13 @@ public class App {
     /**
      * Initialize and run the application.
      */
-    public static void run(Canvas.CanvasComponent c, int width, int height, String title) {
+    public static void run(Canvas c, int width, int height, String title) {
         // Worth a try
 //        System.setProperty("sun.java2d.opengl", "true");
 
         // Init global painter
         canvas = c;
-        canvas.renderLifecycle = new Canvas.CanvasComponent.RenderLifecycle() {
+        canvas.canvas.renderLifecycle = new Canvas.CanvasComponent.RenderLifecycle() {
             @Override
             public void onResize(Canvas.CanvasComponent canvas, ComponentEvent e) {
                 if (lastSize == null) {
@@ -129,7 +129,7 @@ public class App {
         };
 
         // Init app
-        canvas.render();
+        canvas.canvas.render();
 //        try {
 //            this.setup();
 //        } catch (Exception e) {
@@ -142,7 +142,7 @@ public class App {
      * @param drawable element to be added
      */
     public static void addElement(Drawable<?> drawable) {
-            canvas.elements.add(drawable);
+        canvas.canvas.elements.add(drawable);
     }
 
     /**
@@ -170,8 +170,8 @@ public class App {
         lastBuilderFrame = builderFrame;
 
         // Schedule unblocking thread
-        synchronized (canvas.events) {
-            canvas.events.add(new paintingcanvas.Event(builderFrame, c -> {
+        synchronized (canvas.canvas.events) {
+            canvas.canvas.events.add(new paintingcanvas.Event(builderFrame, c -> {
                 synchronized (syncObject) {
                     syncObject.notify();
                 }
@@ -220,7 +220,7 @@ public class App {
          */
         public static void schedule(double time, Event.EventRunner runner, TimeUnit unit, boolean repeat) {
             var _time = unit.asFrames(time);
-            canvas.events.add(new Event(_time, repeat, runner));
+            canvas.canvas.events.add(new Event(_time, repeat, runner));
         }
 
         /**
@@ -255,14 +255,14 @@ public class App {
         public AnimationBuilder add(Animation animation, double duration, TimeUnit unit) {
             var _duration = unit.asFrames(duration);
             if (!firstBlockingAnimation) {
-                animationFinish = canvas.animations.stream().map(a -> a.startFrame + a.duration).max(Integer::compareTo).orElse(0);
+                animationFinish = canvas.canvas.animations.stream().map(a -> a.startFrame + a.duration).max(Integer::compareTo).orElse(0);
                 lastAnimationFinish = Math.max(animationFinish, builderFrame + _duration);
                 _syncWait();
             }
             firstBlockingAnimation = false;
 
             // builderFrame should be at *least* right now
-            if (builderFrame < canvas.frame) builderFrame = canvas.frame;
+            if (builderFrame < canvas.canvas.frame) builderFrame = canvas.canvas.frame;
             var save = builderFrame;
 
             animation.init(drawable);
@@ -271,8 +271,8 @@ public class App {
 
             lastBuilderFrame = builderFrame;
             builderFrame += _duration;
-            synchronized (canvas.animations) {
-                canvas.animations.add(animation);
+            synchronized (canvas.canvas.animations) {
+                canvas.canvas.animations.add(animation);
             }
 
             return this;
@@ -314,7 +314,7 @@ public class App {
             lastAnimationFinish = Math.max(lastAnimationFinish, lastBuilderFrame + _duration);
 
             // lastBuilderFrame should be *at least* right now
-            if (lastBuilderFrame < canvas.frame) lastBuilderFrame = canvas.frame;
+            if (lastBuilderFrame < canvas.canvas.frame) lastBuilderFrame = canvas.canvas.frame;
 
             animation.init(drawable);
             animation.startFrame = lastBuilderFrame;
@@ -325,8 +325,8 @@ public class App {
             // as such if lastBuilderFrame + duration exceeds it, it has to be updated
             if (builderFrame < lastBuilderFrame + _duration) builderFrame = lastBuilderFrame + _duration;
 
-            synchronized (canvas.animations) {
-                canvas.animations.add(animation);
+            synchronized (canvas.canvas.animations) {
+                canvas.canvas.animations.add(animation);
             }
             return this;
         }
@@ -447,10 +447,10 @@ public class App {
             var _duration = unit.asFrames(duration);
 
             animation.init(drawable);
-            animation.startFrame = canvas.frame + _time;
+            animation.startFrame = canvas.canvas.frame + _time;
             animation.duration = _duration;
-            synchronized (canvas.animations) {
-                canvas.animations.add(animation);
+            synchronized (canvas.canvas.animations) {
+                canvas.canvas.animations.add(animation);
             }
             return this;
         }
