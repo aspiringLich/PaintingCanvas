@@ -193,6 +193,68 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     }
 
     /**
+     * Moves this drawable by the specified x and y.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(100, 100, 20);
+     * // moves this circle 10 pixels to the right and 10 pixels down
+     * c.move(10, 10);
+     * // moves this circle 10 pixels to the left and 10 pixels up
+     * c.move(-10, -10);
+     * }</pre>
+     *
+     * @param x The x to move by
+     * @param y The y to move by
+     * @return The original object to allow method chaining
+     * @see #setPos(int, int)
+     * @see #moveHorizontal(int)
+     * @see #moveVertical(int)
+     */
+    public T move(int x, int y) {
+        this.x += x;
+        this.y += y;
+        return getThis();
+    }
+
+    /**
+     * Moves this drawable by the specified x and y.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(100, 100, 20);
+     * // moves this circle 10 pixels to the right
+     * c.moveHorizontal(10);
+     * }</pre>
+     *
+     * @param x The x to move by
+     * @return The original object to allow method chaining
+     * @see #setPos(int, int)
+     * @see #moveVertical(int)
+     */
+    public T moveHorizontal(int x) {
+        this.x += x;
+        return getThis();
+    }
+
+    /**
+     * Moves this drawable by the specified x and y.
+     *
+     * <pre>{@code
+     * Circle c = new Circle(100, 100, 20);
+     * // moves this circle 10 pixels down
+     * c.moveVertical(10);
+     * }</pre>
+     *
+     * @param y The y to move by
+     * @return The original object to allow method chaining
+     * @see #setPos(int, int)
+     * @see #moveHorizontal(int)
+     */
+    public T moveVertical(int y) {
+        this.y += y;
+        return getThis();
+    }
+
+    /**
      * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
