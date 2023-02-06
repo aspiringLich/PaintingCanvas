@@ -20,6 +20,11 @@ public class Test {
         new Circle(canvas.width(), canvas.height(), 10, Color.RED);
         new Circle(canvas.width(), 0, 10, Color.RED);
 
+
+        Circle c = new Circle(100, 100, 20)
+                .setColor(255, 0, 0)
+                .setOutline(10);
+
         Line line = new Line(0, 0, 100, 100).setThickness(10)
                 .setColor(0xff0000);
 

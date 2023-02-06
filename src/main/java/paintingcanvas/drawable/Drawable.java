@@ -66,7 +66,6 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setOutline(int thickness) {
-        this.outlineColor = color;
         this.outlineStroke = new BasicStroke(thickness * 2);
         return this.getThis();
     }
