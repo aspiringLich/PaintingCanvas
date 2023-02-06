@@ -35,6 +35,50 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * The Y-position of the object
      */
     public int y;
+    /**
+     * The color of the outline
+     */
+    public Color outlineColor = Color.BLACK;
+    /**
+     * The stroke of the outline
+     */
+    public Stroke outlineStroke;
+    /**
+     * The stroke used to draw the outline when the object is not filled
+     */
+    public Stroke unfilledStroke = new BasicStroke(5);
+
+    /**
+     * Sets the parameters for the outline of the shape
+     * @param color the color of the outline
+     * @param thickness the thickness of the outline
+     * @return The original object to allow method chaining
+     */
+    public T setOutline(Color color, int thickness) {
+        this.outlineColor = color;
+        this.outlineStroke = new BasicStroke(thickness * 2);
+        return this.getThis();
+    }
+
+    /**
+     * Sets the parameters for the outline of the shape, with the color defaulting to black
+     * @param thickness the thickness of the outline
+     * @return The original object to allow method chaining
+     */
+    public T setOutline(int thickness) {
+        this.outlineColor = color;
+        this.outlineStroke = new BasicStroke(thickness * 2);
+        return this.getThis();
+    }
+
+    /**
+     * Removes the outline from the shape
+     * @return The original object to allow method chaining
+     */
+    public T removeOutline() {
+        this.outlineStroke = null;
+        return this.getThis();
+    }
 
     Drawable(int x, int y, Color color) {
         this.x = x;
@@ -42,13 +86,6 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.color = color;
         App.addElement(this);
     }
-
-    /**
-     * Draw the actual object onto the screen
-     *
-     * @param gc The graphics context
-     */
-    public abstract void draw(Graphics2D gc);
 
     /**
      * Get the object's centerpoint
@@ -86,7 +123,25 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.draw(gc);
     }
 
+    protected abstract void drawFilled(Graphics2D gc);
+
+    protected abstract void drawOutline(Graphics2D gc);
+
     protected abstract T getThis();
+
+    public void draw(Graphics2D gc) {
+        if (this.outlineStroke != null) {
+            gc.setColor(this.outlineColor);
+            gc.setStroke(this.outlineStroke);
+            this.drawOutline(gc);
+        }
+        gc.setColor(this.color);
+        if (this.filled) this.drawFilled(gc);
+        else {
+            gc.setStroke(this.unfilledStroke);
+            this.drawOutline(gc);
+        }
+    }
 
     /**
      * Hide the Object.

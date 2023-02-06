@@ -261,14 +261,18 @@ public class Polygon extends Drawable<Polygon> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
+    protected void drawOutline(Graphics2D gc) {
         polygon.translate(x, y);
-        if (this.filled) gc.fillPolygon(polygon);
-        else gc.drawPolygon(polygon);
+        gc.drawPolygon(polygon);
         polygon.translate(-x, -y);
     }
 
+    @Override
+    protected void drawFilled(Graphics2D gc) {
+        polygon.translate(x, y);
+        gc.fillPolygon(polygon);
+        polygon.translate(-x, -y);
+    }
 
     @Override
     public Point center(Graphics g) {

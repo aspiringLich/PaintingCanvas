@@ -58,10 +58,13 @@ public class Rectangle extends Drawable<Rectangle> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
-        if (this.filled) gc.fillRect(x - width / 2, y - height / 2, width, height);
-        else gc.drawRect(x - width / 2, y - height / 2, width, height);
+    protected void drawOutline(Graphics2D gc) {
+        gc.drawRect(x - width / 2, y - height / 2, width, height);
+    }
+
+    @Override
+    protected void drawFilled(Graphics2D gc) {
+        gc.fillRect(x - width / 2, y - height / 2, width, height);
     }
 
     @Override

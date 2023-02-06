@@ -15,11 +15,6 @@ public class Path extends Drawable<Path> {
      * @see Path2D
      */
     Path2D path;
-    /**
-     * The stroke of the line
-     * @see Stroke
-     */
-    Stroke stroke;
 
     /**
      * Create a new Path element. The path is initially empty.
@@ -36,7 +31,6 @@ public class Path extends Drawable<Path> {
     public Path() {
         super(0, 0, Color.BLACK);
         this.path = new Path2D.Double();
-        this.stroke = new BasicStroke(1);
         this.filled = false;
     }
 
@@ -55,8 +49,7 @@ public class Path extends Drawable<Path> {
     public Path(Color color) {
         super(0, 0, color);
         this.path = new Path2D.Double();
-        this.stroke = new BasicStroke(1);
-        this.filled = false;
+        this.unfilledStroke = new BasicStroke(1);
     }
 
     /**
@@ -67,7 +60,7 @@ public class Path extends Drawable<Path> {
      */
     @SuppressWarnings("unused")
     public Path setStroke(Stroke stroke) {
-        this.stroke = stroke;
+        this.unfilledStroke = stroke;
         return this;
     }
 
@@ -78,7 +71,7 @@ public class Path extends Drawable<Path> {
      * @return The original object to allow method chaining
      */
     public Path setThickness(int thickness) {
-        this.stroke = new BasicStroke(thickness);
+        this.unfilledStroke = new BasicStroke(thickness);
         return this;
     }
 
@@ -141,17 +134,17 @@ public class Path extends Drawable<Path> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
-        gc.setStroke(stroke);
+    protected void drawOutline(Graphics2D gc) {
         Path2D copy = (Path2D)path.clone();
         copy.transform(AffineTransform.getTranslateInstance(x, y));
+        gc.draw(copy);
+    }
 
-        if (this.filled) gc.fill(copy);
-        else {
-            gc.setStroke(stroke);
-            gc.draw(copy);
-        }
+    @Override
+    protected void drawFilled(Graphics2D gc) {
+        Path2D copy = (Path2D)path.clone();
+        copy.transform(AffineTransform.getTranslateInstance(x, y));
+        gc.fill(copy);
     }
 
     @Override

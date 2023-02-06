@@ -19,6 +19,16 @@ public class Triangle extends Drawable<Triangle> {
      */
     public int height;
 
+    private Polygon poly;
+
+    private java.awt.Polygon getPolygon() {
+        return new java.awt.Polygon(
+                new int[]{x - width / 2, x + width / 2, x},
+                new int[]{y + height / 2, y + height / 2, y - height / 2},
+                3
+        );
+    }
+
     /**
      * Create a new Triangle element.
      * <pre>{@code
@@ -54,28 +64,6 @@ public class Triangle extends Drawable<Triangle> {
         super(centerX, centerY, color);
         this.width = width;
         this.height = height;
-    }
-
-    @Override
-    public void draw(Graphics2D gc) {
-        java.awt.Polygon poly = new java.awt.Polygon(
-                new int[]{x - width / 2, x + width / 2, x},
-                new int[]{y + height / 2, y + height / 2, y - height / 2},
-                3
-        );
-        gc.setColor(this.color);
-        if (filled) gc.fillPolygon(poly);
-        else gc.drawPolygon(poly);
-    }
-
-    @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
-    }
-
-    @Override
-    protected Triangle getThis() {
-        return this;
     }
 
     /**
@@ -119,6 +107,26 @@ public class Triangle extends Drawable<Triangle> {
      */
     public Triangle setHeight(int h) {
         this.height = h;
+        return this;
+    }
+
+    @Override
+    protected void drawFilled(Graphics2D gc) {
+        gc.fillPolygon(this.getPolygon());
+    }
+
+    @Override
+    protected void drawOutline(Graphics2D gc) {
+        gc.drawPolygon(this.getPolygon());
+    }
+
+    @Override
+    public Point center(Graphics g) {
+        return new Point(x, y);
+    }
+
+    @Override
+    protected Triangle getThis() {
         return this;
     }
 }

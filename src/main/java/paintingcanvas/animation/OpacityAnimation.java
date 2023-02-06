@@ -9,6 +9,7 @@ import java.awt.*;
  */
 public class OpacityAnimation extends Animation {
     public int start;
+    public int outlineStart;
     public int end;
 
     public OpacityAnimation(int start, int duration, double end, Drawable drawable) {
@@ -21,10 +22,15 @@ public class OpacityAnimation extends Animation {
         Color color = drawable.color;
         int alpha = (int) (start + (end - start) * easing.ease(progress));
         drawable.color = new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
+
+        Color outlineColor = drawable.outlineColor;
+        int outlineAlpha = (int) (start + (end - start) * easing.ease(progress));
+        drawable.outlineColor = new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha);
     }
 
     @Override
     void initAnimation(Drawable drawable) {
         this.start = drawable.color.getAlpha();
+        this.outlineStart = drawable.outlineColor.getAlpha();
     }
 }

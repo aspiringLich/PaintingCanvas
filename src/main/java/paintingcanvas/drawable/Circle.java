@@ -49,10 +49,13 @@ public class Circle extends Drawable<Circle> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
-        if (this.filled) gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
-        else gc.drawOval(x - radius, y - radius, radius, radius);
+    protected void drawFilled(Graphics2D gc) {
+        gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
+    }
+
+    @Override
+    protected void drawOutline(Graphics2D gc) {
+        gc.drawOval(x - radius, y - radius, radius * 2, radius * 2);
     }
 
     @Override

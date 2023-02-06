@@ -24,16 +24,19 @@ public class Test {
                 .setColor(0xff0000);
 
         Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}})
-                .setColor(0xffff00);
+                .setColor(0xffff00)
+                .setOutline(Color.RED, 5);
         Square square = new Square(0, 0, 100)
-                .setColor(0x00ff00);
+                .setColor(0x00ff00)
+                .setFilled(false);
 
         Path curvey = new Path()
                 .setThickness(10)
                 .cursorTo(300, 300)
                 .lineTo(200, 300)
                 .quadTo(300, 300, 200, 200)
-                .setColor(0x00ffff);
+                .setColor(0x00ffff)
+                .setOutline(Color.BLUE, 15);
         curvey.moveTo(100, 100, 3)
                 .rotateTo(90, 3);
         line.rotateTo(180, 3);

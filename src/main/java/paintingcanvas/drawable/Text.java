@@ -63,8 +63,14 @@ public class Text extends Drawable<Text> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
+    protected void drawFilled(Graphics2D gc) {
+        gc.setFont(font);
+        var center = center(gc);
+        gc.drawString(text, 2 * x - center.x, 2 * y - center.y);
+    }
+
+    @Override
+    protected void drawOutline(Graphics2D gc) {
         gc.setFont(font);
         var center = center(gc);
         gc.drawString(text, 2 * x - center.x, 2 * y - center.y);

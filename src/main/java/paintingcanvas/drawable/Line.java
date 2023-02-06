@@ -137,8 +137,13 @@ public class Line extends Drawable<Line> {
     }
 
     @Override
-    public void draw(Graphics2D gc) {
-        gc.setColor(color);
+    protected void drawFilled(Graphics2D gc) {
+        gc.setStroke(stroke);
+        gc.drawLine(this.x , this.y, this.x + endOffset.x, this.y + endOffset.y);
+    }
+
+    @Override
+    protected void drawOutline(Graphics2D gc) {
         gc.setStroke(stroke);
         gc.drawLine(this.x , this.y, this.x + endOffset.x, this.y + endOffset.y);
     }
