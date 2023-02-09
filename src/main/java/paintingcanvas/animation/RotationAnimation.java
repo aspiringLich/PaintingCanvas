@@ -19,7 +19,12 @@ public class RotationAnimation extends Animation {
         relative = true;
         return this;
     }
-
+    
+    @Override
+    public Animation copy() {
+        return new RotationAnimation(end);
+    }
+    
     @Override
     protected void updateAnimation(Drawable drawable, double progress) {
         var t = (double) easing.ease(progress);

@@ -22,7 +22,12 @@ public class MovementAnimation extends Animation {
         relative = true;
         return this;
     }
-
+    
+    @Override
+    public Animation copy() {
+        return new MovementAnimation(end);
+    }
+    
     @Override
     protected void updateAnimation(Drawable drawable, double progress) {
         var t = (double) easing.ease(progress);

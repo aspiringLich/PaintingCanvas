@@ -20,6 +20,8 @@ public abstract class Animation {
     public Drawable drawable;
     public Easing easing = Easing.linear();
     
+    abstract public Animation copy();
+    
     protected Animation(int startFrame, int duration, Drawable drawable) {
         this.startFrame = startFrame;
         this.duration = duration;
