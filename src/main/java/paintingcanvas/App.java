@@ -171,12 +171,10 @@ public class App {
      */
     @SuppressWarnings("SameParameterValue")
     protected static void sleep(double time, paintingcanvas.misc.TimeUnit unit) {
-        builderFrame += unit.asFrames(time);
-        lastBuilderFrame = builderFrame;
-
+        var frames = unit.asFrames(time);
         // Schedule unblocking thread
         synchronized (canvas.canvas.events) {
-            canvas.canvas.events.add(new paintingcanvas.Event(builderFrame, c -> {
+            canvas.canvas.events.add(new paintingcanvas.Event(canvas.canvas.frame + frames, c -> {
                 synchronized (syncObject) {
                     syncObject.notify();
                 }
