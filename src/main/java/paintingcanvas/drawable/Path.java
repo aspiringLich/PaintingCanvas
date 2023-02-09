@@ -15,7 +15,28 @@ public class Path extends Drawable<Path> {
      * @see Path2D
      */
     Path2D path;
-
+    
+    /**
+     * DO NOT USE, Overridden
+     * @param color     the color of the outline
+     * @param thickness the thickness of the outline
+     * @return {@code this}
+     */
+    @Override
+    public Path setOutline(int thickness, Color color) {
+        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+    }
+    
+    /**
+     * DO NOT USE, Overridden
+     * @param thickness the thickness of the outline
+     * @return {@code this}
+     */
+    @Override
+    public Path setOutline(int thickness) {
+        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+    }
+    
     /**
      * Create a new Path element. The path is initially empty.
      *
@@ -49,29 +70,29 @@ public class Path extends Drawable<Path> {
     public Path(Color color) {
         super(0, 0, color);
         this.path = new Path2D.Double();
-        this.unfilledStroke = new BasicStroke(1);
+        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
-     * Set the stroke of the line
+     * Set the stroke of the line.
      *
      * @param stroke a {@code Stroke} object to define this line's stroke
      * @return The original object to allow method chaining
      */
     @SuppressWarnings("unused")
     public Path setStroke(Stroke stroke) {
-        this.unfilledStroke = stroke;
+        this.outlineStroke = stroke;
         return this;
     }
 
     /**
-     * Set the thickness of the line
+     * Set the thickness of the line, equivalent to setOutline(thickness);
      *
      * @param thickness The thickness of the line in pixels
      * @return The original object to allow method chaining
      */
     public Path setThickness(int thickness) {
-        this.unfilledStroke = new BasicStroke(thickness);
+        this.outlineStroke = new BasicStroke(thickness);
         return this;
     }
 
@@ -135,16 +156,16 @@ public class Path extends Drawable<Path> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        Path2D copy = (Path2D)path.clone();
-        copy.transform(AffineTransform.getTranslateInstance(x, y));
-        gc.draw(copy);
+        gc.setColor(color);
+        gc.translate(x, y);
+        gc.draw(path);
     }
 
     @Override
     protected void drawFilled(Graphics2D gc) {
-        Path2D copy = (Path2D)path.clone();
-        copy.transform(AffineTransform.getTranslateInstance(x, y));
-        gc.fill(copy);
+        gc.setColor(color);
+        gc.translate(x, y);
+        gc.fill(path);
     }
 
     @Override
