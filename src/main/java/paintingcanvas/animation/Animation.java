@@ -19,11 +19,14 @@ public abstract class Animation {
     public int duration;
     public Drawable drawable;
     public Easing easing = Easing.linear();
-
-    Animation(int startFrame, int duration, Drawable drawable) {
+    
+    protected Animation(int startFrame, int duration, Drawable drawable) {
         this.startFrame = startFrame;
         this.duration = duration;
         this.drawable = drawable;
+    }
+    protected Animation() {
+        this(0, 0, null);
     }
 
     /**
@@ -48,7 +51,7 @@ public abstract class Animation {
     /**
      * update the animation with the progress (0-1) and affected drawable
      */
-    abstract void updateAnimation(Drawable drawable, double progress);
+    protected abstract void updateAnimation(Drawable drawable, double progress);
 
     /**
      * Initialize the animation with the affected drawable
@@ -64,7 +67,7 @@ public abstract class Animation {
     /**
      * Initialize the animation with the affected drawable
      */
-    abstract void initAnimation(Drawable drawable);
+    protected abstract void initAnimation(Drawable drawable);
 
     /**
      * Creates an animation that moves {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
@@ -80,7 +83,7 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation moveTo(int x, int y) {
-        return new MovementAnimation(0, 0, new Point(x, y), null);
+        return new MovementAnimation(new Point(x, y));
     }
 
     /**
@@ -99,7 +102,7 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation colorTo(int r, int g, int b) {
-        return new ColorAnimation(0, 0, new Color(r, g, b), null);
+        return new ColorAnimation(new Color(r, g, b));
     }
 
     /**
@@ -116,7 +119,7 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation colorTo(int hex) {
-        return new ColorAnimation(0, 0, new Color(hex), null);
+        return new ColorAnimation(new Color(hex));
     }
 
     /**
@@ -134,7 +137,7 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation colorTo(Color color) {
-        return new ColorAnimation(0, 0, color, null);
+        return new ColorAnimation(color);
     }
 
     /**
@@ -150,7 +153,7 @@ public abstract class Animation {
      * @see #fadeIn()
      */
     public static Animation fadeOut() {
-        return new OpacityAnimation(0, 0, 0, null);
+        return new OpacityAnimation(0);
     }
 
     /**
@@ -166,7 +169,7 @@ public abstract class Animation {
      * @see #fadeOut()
      */
     public static Animation fadeIn() {
-        return new OpacityAnimation(0, 0, 1, null);
+        return new OpacityAnimation(1);
     }
 
     /**
@@ -183,7 +186,7 @@ public abstract class Animation {
      * @return an {@code AnimationBuilder}
      */
     public static Animation rotateTo(int angle) {
-        return new RotationAnimation(0, 0, Math.toRadians(angle), null);
+        return new RotationAnimation(Math.toRadians(angle));
     }
 
     /**
@@ -199,7 +202,7 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation rotateBy(int angle) {
-        return new RotationAnimation(0, 0, Math.toRadians(angle), null).relative();
+        return new RotationAnimation(Math.toRadians(angle)).relative();
     }
 
     /**
@@ -217,6 +220,6 @@ public abstract class Animation {
      * @return an {@link Animation}
      */
     public static Animation moveBy(int x, int y, double duration) {
-        return new MovementAnimation(0, 0, new Point(x, y), null).relative();
+        return new MovementAnimation(new Point(x, y)).relative();
     }
 }

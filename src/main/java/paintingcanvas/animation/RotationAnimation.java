@@ -10,8 +10,8 @@ public class RotationAnimation extends Animation {
     public Double start = null;
     public boolean relative = false;
 
-    public RotationAnimation(int start, int duration, double end, Drawable drawable) {
-        super(start, duration, drawable);
+    public RotationAnimation(double end) {
+        super();
         this.end = end;
     }
 
@@ -21,13 +21,13 @@ public class RotationAnimation extends Animation {
     }
 
     @Override
-    void updateAnimation(Drawable drawable, double progress) {
+    protected void updateAnimation(Drawable drawable, double progress) {
         var t = (double) easing.ease(progress);
         drawable.rotation = start + (end - start) * t;
     }
 
     @Override
-    void initAnimation(Drawable drawable) {
+    protected void initAnimation(Drawable drawable) {
         start = drawable.rotation;
         if (relative) {
             end += start;

@@ -12,13 +12,13 @@ public class OpacityAnimation extends Animation {
     public int outlineStart;
     public int end;
 
-    public OpacityAnimation(int start, int duration, double end, Drawable drawable) {
-        super(start, duration, drawable);
+    public OpacityAnimation(double end) {
+        super();
         this.end = (int)(end * 255.0);
     }
 
     @Override
-    void updateAnimation(Drawable drawable, double progress) {
+    protected void updateAnimation(Drawable drawable, double progress) {
         Color color = drawable.color;
         int alpha = (int) (start + (end - start) * easing.ease(progress));
         drawable.color = new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
@@ -29,7 +29,7 @@ public class OpacityAnimation extends Animation {
     }
 
     @Override
-    void initAnimation(Drawable drawable) {
+    protected void initAnimation(Drawable drawable) {
         this.start = drawable.color.getAlpha();
         this.outlineStart = drawable.outlineColor.getAlpha();
     }
