@@ -1,21 +1,124 @@
 package examples.tessellation;
 
-import paintingcanvas.drawable.Line;
+import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Path;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import java.util.function.Supplier;
+import java.util.Random;
 
 class Tile {
     Edge[] edges = new Edge[6];
-    Path path = new Path();
+    Path path;
+    Path outline;
+    float hue;
+    int i, j;
     
-    Tile() {
-        for (int i = 0; i < 6; i++) {
-            edges[i] = new Edge();
+    public Point getPos() {
+        int x = Tessellation.xSpacing * i;
+        int y = Tessellation.ySpacing * j - (i % 2 * Const.height);
+        return new Point(x, y);
+    }
+    
+    void animate(Animation animation, double duration, boolean outline) {
+        path.animate().with(animation.copy(), duration);
+        if (outline) this.outline.animate().with(animation, duration);
+    }
+    
+    void rotate(double rotation) {
+        path.rotate(rotation);
+        outline.rotate(rotation);
+    }
+    
+    Tile(int i, int j) {
+        this.i = i;
+        this.j = j;
+        
+        var tiles =  getTiles();
+        for (int s = 0; s < tiles.length; s++) {
+            var tile = tiles[s];
+            if (tile != null) {
+                var flip = tile.edges[(s + 3) % 6].flip;
+                edges[s] = new Edge(!flip);
+            } else {
+                edges[s] = new Edge();
+            }
         }
+        
+        this.setColorRandom();
+    }
+    
+    void setColorRandom() {
+        ArrayList<Float> hues = new ArrayList<>();
+    
+        var tiles =  getTiles();
+        for (int s = 0; s < tiles.length; s++) {
+            var tile = tiles[s];
+            if (tile != null) {
+                hues.add(tile.hue);
+            }
+        }
+    
+        double newHue;
+        boolean cont;
+        do {
+            cont = false;
+            newHue = Math.random() * 360;
+        
+            for (var h : hues) {
+                if (Math.abs(h - newHue) < 50) {
+                    cont = true;
+                    break;
+                }
+            }
+        } while (cont);
+        hue = (float)newHue;
+    }
+    
+    Tile[] getTiles() {
+        final Point[] diff;
+        if (i % 2 == 1) {
+            diff = new Point[]{
+                    new Point(0, -1),
+                    new Point(1, -1),
+                    new Point(1, 0),
+                    new Point(0, 1),
+                    new Point(-1, 0),
+                    new Point(-1, -1)
+            };
+        } else {
+            diff = new Point[]{
+                    new Point(0, -1),
+                    new Point(1, 0),
+                    new Point(1, 1),
+                    new Point(0, 1),
+                    new Point(-1, 1),
+                    new Point(-1, 0)
+            };
+        }
+        
+        Tile[] out = new Tile[6];
+        for (int s = 0; s < 6; s++) {
+            var d = diff[s];
+            var tile = Tessellation.getTile(i + d.x, j + d.y);
+            out[s] = tile;
+        }
+        return out;
+    }
+    
+    void setColor() {
+        Color c = Color.getHSBColor(this.hue, 0.55f, 1.0f);
+        path.setColor(c);
+    }
+    
+    void colorTo(float hue) {
+        this.hue = hue;
+        this.path.animate().schedule(
+                0.0,
+                Animation.colorTo(Color.getHSBColor(hue, 0.55f, 1.0f)),
+                3
+        );
     }
     
     void draw(int x, int y) {
@@ -24,131 +127,83 @@ class Tile {
         
         var p1 = new Point(-size / 2, -height);
         var p2 = new Point(size / 2, -height);
-        Point c1 = new Point(p1), c2 = new Point(p2);
-        c1.x += Const.edgePadding;
-        c2.x -= Const.edgePadding;
+    
+        path = new Path().setPos(x, y);
+        outline = new Path().setPos(x, y);
+        path.cursorTo(p1.x, p1.y);
+        outline.cursorTo(p1.x, p1.y);
         
-        for (int i = 0; i < 2; i++) {
+        this.setColor();
+        
+        path.setFilled(true);
+        
+        outline.setThickness(5);
+        
+        for (int i = 0; i < 6; i++) {
             var tf = AffineTransform.getRotateInstance(
                     Math.PI / 3 * i
             );
-            Point tp1 = new Point(), tp2 = new Point();
-            Point tc1 = new Point(), tc2 = new Point();
-            tf.transform(p1, tp1);
-            tf.transform(p2, tp2);
-            tf.transform(c1, tc1);
-            tf.transform(c2, tc2);
             
-            var p = new Path().setPos(x, y);
-            p.cursorTo(tp1.x, tp1.y)
-                    .lineTo(tc1.x, tc1.y);
-            
-            var points = edges[i].get_path();
-            for (int j = 1; j < points.size(); j += 2) {
-                var end = points.get(j);
-                var ctrl = points.get(j - 1);
+            var points = edges[i].get_path(false);
+            for (int j = 1; j < points.size() - 1; j += 2) {
+                var end = points.get(j + 1);
+                var ctrl = points.get(j);
                 tf.transform(end, end);
                 tf.transform(ctrl, ctrl);
-                p.quadTo(ctrl.x, ctrl.y, end.x, end.y);
+                path.quadTo(ctrl.x, ctrl.y, end.x, end.y);
+                outline.quadTo(ctrl.x, ctrl.y, end.x, end.y);
             }
-            
-            p.cursorTo(tc2.x, tc2.y)
-                    .lineTo(tp2.x, tp2.y);
         }
     }
+}
+
+class Const {
+    static final int size = 80;
+    static final int edgePadding = (int) (size * 0.4);
+    static final int centerHeight = size / 8;
+    static final int height = (int) (size * Math.sqrt(3) / 2);
 }
 
 class Edge {
     boolean flip;
     
     Edge() {
-        flip = Math.random() > 0.5 ? -1 : 1;
-        
-        Supplier<Integer> genDeviation = () ->
-                (int) ((Math.random() - 0.5) * Const.deviation);
-        
-        var center = new Point(0, - Const.height - Const.centerHeight);
-        p1 = new Point(center);
-        p1.x += genDeviation.get() - Const.deviation;
-        p1.y += genDeviation.get();
-        p2 = new Point(center);
-        p2.x += genDeviation.get() + Const.deviation;
-        p2.y += genDeviation.get();
-        
-        var diff = Const.extMax - Const.extMin;
+        flip = new Random().nextBoolean();
     }
     
-    ArrayList<Point> get_path() {
+    Edge(boolean flip) {
+        this.flip = flip;
+    }
+    
+    ArrayList<Point> get_path(boolean flip) {
         ArrayList<Point> out = new ArrayList<>();
         var size = Const.size;
         var height = Const.height;
         var padding = Const.edgePadding;
+        var unit = (int)(size / 12 * 1.05);
         
-        var l1 = new Point(-size / 2 + padding, -height);
-        var l2 = new Point(-size / 2 + padding, -height - Const.tabHeight);
+        var tabHeight = (int) (unit * 4);
+        var indent = unit;
         
-        var center = new Point(0, -height - Const.centerHeight - Const.tabHeight * 2);
+        out.add(new Point(0, 0));
+        out.add(new Point(padding - unit / 2, unit));
+        out.add(new Point(padding, 0));
+        out.add(new Point(padding + unit / 4, -indent / 2));
+        out.add(new Point(padding, -indent));
+        out.add(new Point(padding - unit, -tabHeight));
+        out.add(new Point(size / 2, -tabHeight));
         
-        var r2 = new Point(size / 2 - padding, -height - Const.tabHeight);
-        var r1 = new Point(size / 2 - padding, -height);
+        if (this.flip) flip = !flip;
         
-        out.add(this.p1);
-        out.add(l2);
-//        out.add(l3);
-        out.add(center);
-//        out.add(r3);
-        out.add(r2);
-        out.add(this.p2);
-        out.add(r1);
+        for (Point p : out) {
+            if (flip) p.y = -p.y;
+            p.x -= size / 2;
+            p.y -= height;
+        }
+        for (int i = out.size() - 2; i >= 0; i--) {
+            out.add(new Point(-out.get(i).x, out.get(i).y));
+        }
         return out;
     }
 }
 
-class Line_ {
-    Point p1;
-    Point p2;
-    
-    Line_(Point p1, Point p2) {
-        this.p1 = p1;
-        this.p2 = p2;
-    }
-    
-    Line_(int x1, int y1, int x2, int y2) {
-        this.p1 = new Point(x1, y1);
-        this.p2 = new Point(x2, y2);
-    }
-    
-    /**
-     * Extends the line by the given amount
-     *
-     * @param ext amount to extend by
-     * @return the extended line
-     */
-    Line_ extend(int ext) {
-        int dx = p2.x - p1.x;
-        int dy = p2.y - p1.y;
-        double len = Math.sqrt(dx * dx + dy * dy);
-        double scale = (len + ext) / len;
-        int x = (int) (dx * scale);
-        int y = (int) (dy * scale);
-        return new Line_(p1.x, p1.y, p1.x + x, p1.y + y);
-    }
-    
-    Point intersect(Line_ other) {
-        double x1 = p1.x, y1 = p1.y;
-        double x2 = p2.x, y2 = p2.y;
-        double x3 = other.p1.x, y3 = other.p1.y;
-        double x4 = other.p2.x, y4 = other.p2.y;
-        
-        double dx12 = x1 - x2, dx34 = x3 - x4;
-        double dy12 = y1 - y2, dy34 = y3 - y4;
-        double d1212 = x1 * y2 - y1 * x2;
-        double d3434 = x3 * y4 - x4 * y3;
-        
-        double d = dx12 * dy34 - dy12 * dx34;
-        double x = (d1212 * dx34 - dx12 * d3434) / d;
-        double y = (d1212 * dy34 - dy12 * d3434) / d;
-        
-        return new Point((int) x, (int) y);
-    }
-}

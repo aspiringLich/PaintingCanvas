@@ -30,7 +30,7 @@ public class Test {
 
         Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}})
                 .setColor(0xffff00)
-                .setOutline(Color.RED, 5);
+                .setOutline(5, Color.RED);
         Square square = new Square(0, 0, 100)
                 .setColor(0x00ff00)
                 .setFilled(false);
@@ -40,8 +40,8 @@ public class Test {
                 .cursorTo(300, 300)
                 .lineTo(200, 300)
                 .quadTo(300, 300, 200, 200)
-                .setColor(0x00ffff)
-                .setOutline(Color.BLUE, 15);
+                .setColor(0x00ffff);
+//                .setOutline(Color.BLUE, 15)
         curvey.moveTo(100, 100, 3)
                 .rotateTo(90, 3);
         line.rotateTo(180, 3);
@@ -51,6 +51,7 @@ public class Test {
 
         System.out.println("This runs after all the animations are done");
 
+        c.setFilled(false);
         curvey.fadeOut(10);
     }
 }

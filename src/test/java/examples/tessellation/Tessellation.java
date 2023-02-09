@@ -1,36 +1,71 @@
 package examples.tessellation;
 
-import paintingcanvas.Canvas;
-import paintingcanvas.drawable.Circle;
-import paintingcanvas.drawable.Line;
-import paintingcanvas.drawable.Path;
+import paintingcanvas.animation.Animation;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.function.Supplier;
 
-class Const {
-    static final int size = 200;
-    static final int edgePadding = size / 4;
-    static final int centerHeight = size / 8;
-    static final int tabHeight = size / 4;
-    static final int deviation = 10;
-    static final int extMin = size / 12;
-    static final int extMax = size / 10;
-    static final int height = (int) (size * Math.sqrt(3) / 2);
-}
 
 public class Tessellation {
-    public static void main(String[] args) {
-        Canvas canvas = new Canvas();
-        canvas.setTitle("Tessellation project");
+    static Tile[][] tiles;
+    static final int ySpacing = Const.height * 2;
+    static final int xSpacing = Const.size * 3 / 2;
+    
+    Tessellation(int width, int height) {
+        int x = width / xSpacing + 2;
+        int y = height / ySpacing + 2;
         
-        int width = canvas.width();
-        int height = canvas.height();
-        
-        var t = new Tile();
-        t.draw(width / 2, height / 2);
-        new Circle(width / 2, height / 2, 10, Color.RED).move(0, - Const.height - Const.centerHeight);
+        tiles = new Tile[x][y];
+//        tiles = new Tile[2][2];
+        this.init();
+    }
+    
+    public static Tile getTile(int i, int j) {
+        if (i < 0 || j < 0 || i >= tiles.length || j >= tiles[i].length) {
+            return null;
+        }
+        return tiles[i][j];
+    }
+    
+    public void init() {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                tiles[i][j] = new Tile(i, j);
+                
+                tiles[i][j].draw(
+                        (int)(Math.random() * Main.canvas.width()),
+                        (int)(Math.random() * Main.canvas.height())
+                );
+                tiles[i][j].rotate((Math.random() - 0.5) * 720);
+            }
+        }
+    }
+    
+    public void animateAll(Animation animation, double delay, double dMin, double dMax, boolean outline) {
+        for (Tile[] tile : tiles) {
+            for (Tile value : tile) {
+                value.animate(animation, Math.random() * (dMax - dMin) + dMin, outline);
+                Main.canvas.sleep(delay);
+            }
+        }
+        Main.canvas.sleep();
+    }
+    
+    public void order() {
+        for (Tile[] row : tiles) {
+            for (Tile tile : row) {
+                var pos = tile.getPos();
+                tile.animate(
+                        Animation.moveTo(pos.x, pos.y),
+                        3,
+                        true
+                );
+                tile.animate(
+                        Animation.rotateTo(0),
+                        3,
+                        true
+                );
+            }
+        }
+        Main.canvas.sleep();
     }
 }
