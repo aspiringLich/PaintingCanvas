@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class Canvas {
     // how many frames per second do we want to run at?
     public static final int fps = 30;
-    CanvasComponent canvas;
+    public CanvasComponent canvas;
 
     /**
      * Creates a new canvas with a default size (900x600) and title ("Canvas")
@@ -32,9 +32,10 @@ public class Canvas {
 
     /**
      * Creates a new canvas
-     * @param width the width of the canvas
+     *
+     * @param width  the width of the canvas
      * @param height the height of the canvas
-     * @param title the title of the canvas
+     * @param title  the title of the canvas
      */
     public Canvas(int width, int height, String title) {
         canvas = new CanvasComponent(width, height, title, this);
@@ -43,6 +44,7 @@ public class Canvas {
 
     /**
      * Gets the width of the canvas
+     *
      * @return the width of the canvas
      */
     public int width() {
@@ -51,6 +53,7 @@ public class Canvas {
 
     /**
      * Gets the width of the canvas
+     *
      * @return the width of the canvas
      */
     public int height() {
@@ -59,6 +62,7 @@ public class Canvas {
 
     /**
      * Sets the title of the canvas
+     *
      * @param title the title of the canvas
      */
     public void setTitle(String title) {
@@ -106,15 +110,14 @@ public class Canvas {
     /**
      * The internal canvas component that is used to draw to the screen
      */
-    protected static class CanvasComponent extends JComponent {
+    public static class CanvasComponent extends JComponent {
         public final List<Drawable<?>> elements = new Vector<>();
         public final List<Animation> animations = new ArrayList<>();
         public final List<Event> events = new Vector<>();
+        public final JFrame jframe;
         public int frame = -1;
         public RenderLifecycle renderLifecycle = new RenderLifecycle() {
         };
-
-        final JFrame jframe;
 
         public CanvasComponent(int width, int height, String title, Canvas canvas) {
             super();

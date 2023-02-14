@@ -20,19 +20,19 @@ public class Text extends Drawable<Text> {
 
     /**
      * <p>
-     *     Create a new Text element.
-     *     The default font size is 30, and the default font is comic sans :)
+     * Create a new Text element.
+     * The default font size is 30, and the default font is comic sans :)
      * </p><p>
-     *     It probably won't work on replit however. Comic sans is not installed on
-     *     the replit servers by default.
+     * It probably won't work on replit however. Comic sans is not installed on
+     * the replit servers by default.
      * </p>
      * <pre>{@code
      * Text text = new Text(100, 100, "Hello World")
      * }</pre>
      *
-     * @param x     The X-position of the text
-     * @param y     The Y-position of the text
-     * @param text  The text
+     * @param x    The X-position of the text
+     * @param y    The Y-position of the text
+     * @param text The text
      */
     public Text(int x, int y, String text) {
         super(x, y, Color.BLACK);
@@ -42,11 +42,11 @@ public class Text extends Drawable<Text> {
 
     /**
      * <p>
-     *     Create a new Text element.
-     *     The default font size is 30, and the default font is comic sans :)
+     * Create a new Text element.
+     * The default font size is 30, and the default font is comic sans :)
      * </p><p>
-     *     It probably won't work on replit however. Comic sans is not installed on
-     *     the replit servers by default.
+     * It probably won't work on replit however. Comic sans is not installed on
+     * the replit servers by default.
      * </p>
      * <pre>{@code
      * Text text = new Text(100, 100, "Hello World", new Color(255, 0, 0))

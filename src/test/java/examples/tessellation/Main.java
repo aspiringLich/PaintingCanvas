@@ -7,14 +7,14 @@ import java.awt.*;
 
 public class Main {
     public static Canvas canvas = new Canvas(960, 640, "");
-    
+
     public static void main(String[] args) {
         canvas.setTitle("Tessellation project");
         canvas.sleep(0.05);
-        
+
         int width = canvas.width();
         int height = canvas.height();
-        
+
         Tessellation tess = new Tessellation(width, height);
         tess.order();
         tess.animateAll(

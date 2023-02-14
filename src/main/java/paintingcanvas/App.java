@@ -1,6 +1,8 @@
 package paintingcanvas;
 
-import paintingcanvas.animation.*;
+import paintingcanvas.animation.Animatable;
+import paintingcanvas.animation.Animation;
+import paintingcanvas.animation.MovementAnimation;
 import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.TimeUnit;
 
@@ -9,17 +11,17 @@ import java.awt.event.ComponentEvent;
 
 /**
  * <p>
- *     Hi person leafing through the documentation! This class is only really
- *     still here because i was too lazy to try and integrate
- *     everything with {@link Canvas.CanvasComponent}. You can use this
- *     to make your animations and stuff, but you should really use the Canvas class
+ * Hi person leafing through the documentation! This class is only really
+ * still here because i was too lazy to try and integrate
+ * everything with {@link Canvas.CanvasComponent}. You can use this
+ * to make your animations and stuff, but you should really use the Canvas class
  * </p><p>
- *     You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
- *     in reality its all static under the hood.
+ * You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
+ * in reality its all static under the hood.
  * </p><p>
- *     So thats why it breaks if you make two canvases.
+ * So thats why it breaks if you make two canvases.
  * </p><p>
- *     Or does it? IDK i haven't tested it.
+ * Or does it? IDK i haven't tested it.
  * </p>
  */
 @SuppressWarnings("unused")
@@ -73,25 +75,12 @@ public class App {
     }
 
     /**
-     * An overwrite-able function to let you run code every frame.
-     */
-    public void render() {
-    }
-
-    /**
-     * Initialize and run the application with default width height and title parameters
-     */
-//    public static void run(Canvas.CanvasComponent canvas) {
-//        run(canvas, 1000, 600, "Canvas");
-//    }
-
-    /**
      * Initialize and run the application.
      *
-     * @param c The canvas to draw on
-     * @param width The width of the window
+     * @param c      The canvas to draw on
+     * @param width  The width of the window
      * @param height The height of the window
-     * @param title The title of the window
+     * @param title  The title of the window
      */
     public static void run(Canvas c, int width, int height, String title) {
         // Worth a try
@@ -143,7 +132,15 @@ public class App {
     }
 
     /**
+     * Initialize and run the application with default width height and title parameters
+     */
+//    public static void run(Canvas.CanvasComponent canvas) {
+//        run(canvas, 1000, 600, "Canvas");
+//    }
+
+    /**
      * Adds the element to the canvas
+     *
      * @param drawable element to be added
      */
     public static void addElement(Drawable<?> drawable) {
@@ -192,6 +189,12 @@ public class App {
      */
     protected static void sleep(double time) {
         sleep(time, paintingcanvas.misc.TimeUnit.Seconds);
+    }
+
+    /**
+     * An overwrite-able function to let you run code every frame.
+     */
+    public void render() {
     }
 
     /**

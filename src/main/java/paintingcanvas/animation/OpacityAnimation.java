@@ -14,14 +14,14 @@ public class OpacityAnimation extends Animation {
 
     public OpacityAnimation(double end) {
         super();
-        this.end = (int)(end * 255.0);
+        this.end = (int) (end * 255.0);
     }
-    
+
     @Override
     public Animation copy() {
         return new OpacityAnimation(end);
     }
-    
+
     @Override
     protected void updateAnimation(Drawable drawable, double progress) {
         Color color = drawable.color;

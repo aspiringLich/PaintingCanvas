@@ -10,20 +10,20 @@ import java.awt.*;
 public class ColorAnimation extends Animation {
     private final Color end;
     private Color start;
-    
+
     public ColorAnimation(Color end) {
         super();
         this.end = end;
     }
-    
+
     @Override
     public Animation copy() {
         return new ColorAnimation(end);
     }
-    
+
     @Override
     protected void updateAnimation(Drawable drawable, double progress) {
-        drawable.color = lerpColor(start, end, (double) easing.ease(progress));
+        drawable.color = lerpColor(start, end, easing.ease(progress));
     }
 
     @Override

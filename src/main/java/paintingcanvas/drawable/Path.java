@@ -1,42 +1,21 @@
 package paintingcanvas.drawable;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 
 /**
  * An SVG-like path used to draw lines and curves.
- *
+ * <p>
  * Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.
  */
 public class Path extends Drawable<Path> {
     /**
      * The path to draw
+     *
      * @see Path2D
      */
     Path2D path;
-    
-    /**
-     * DO NOT USE, Overridden
-     * @param color     the color of the outline
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Path setOutline(int thickness, Color color) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
-    }
-    
-    /**
-     * DO NOT USE, Overridden
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Path setOutline(int thickness) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
-    }
-    
+
     /**
      * Create a new Path element. The path is initially empty.
      *
@@ -65,12 +44,36 @@ public class Path extends Drawable<Path> {
      *                       .lineTo(100, 100)
      *                       .setThickness(5);
      * }</pre>
+     *
      * @param color The color of the path
      */
     public Path(Color color) {
         super(0, 0, color);
         this.path = new Path2D.Double();
         this.outlineStroke = new BasicStroke(1);
+    }
+
+    /**
+     * DO NOT USE, Overridden
+     *
+     * @param color     the color of the outline
+     * @param thickness the thickness of the outline
+     * @return {@code this}
+     */
+    @Override
+    public Path setOutline(int thickness, Color color) {
+        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+    }
+
+    /**
+     * DO NOT USE, Overridden
+     *
+     * @param thickness the thickness of the outline
+     * @return {@code this}
+     */
+    @Override
+    public Path setOutline(int thickness) {
+        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
     }
 
     /**
@@ -171,7 +174,7 @@ public class Path extends Drawable<Path> {
     @Override
     public Point center(Graphics g) {
         var bounds = path.getBounds();
-        return new Point(x + (int)bounds.getCenterX(), y + (int)bounds.getCenterY());
+        return new Point(x + (int) bounds.getCenterX(), y + (int) bounds.getCenterY());
     }
 
     @Override

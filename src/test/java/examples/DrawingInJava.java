@@ -1,8 +1,10 @@
 package examples;
 
 import paintingcanvas.Canvas;
-import paintingcanvas.animation.*;
-import paintingcanvas.drawable.*;
+import paintingcanvas.animation.Animation;
+import paintingcanvas.drawable.Circle;
+import paintingcanvas.drawable.Rectangle;
+import paintingcanvas.drawable.Triangle;
 
 public class DrawingInJava {
     public static void main(String[] args) {

@@ -1,13 +1,10 @@
 package examples;
 
 import paintingcanvas.Canvas;
-import paintingcanvas.drawable.Line;
-import paintingcanvas.drawable.Path;
 import paintingcanvas.drawable.Polygon;
-import paintingcanvas.drawable.Square;
-import paintingcanvas.drawable.Circle;
+import paintingcanvas.drawable.*;
 
-import java.awt.Color;
+import java.awt.*;
 
 @SuppressWarnings("unused")
 public class Test {

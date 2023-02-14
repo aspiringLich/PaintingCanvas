@@ -6,6 +6,7 @@ package paintingcanvas.animation;
 public interface Easing {
     /**
      * Linear easing - Go here to here.
+     *
      * @return an {@code Easing} object representing this easing.
      */
     static Easing linear() {
@@ -14,6 +15,7 @@ public interface Easing {
 
     /**
      * Ease in - Go from here to here, but slow down at the end
+     *
      * @param n the degree of slowdown
      * @return an {@code Easing} object representing this easing.
      */

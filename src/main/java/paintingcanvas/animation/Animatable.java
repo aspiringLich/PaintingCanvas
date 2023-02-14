@@ -201,10 +201,10 @@ public interface Animatable {
 
     /**
      * <p>
-     *     This method moves {@code this} by the specified {@code x} horizontally.
-     *     Positive values move right, negative values move left.
+     * This method moves {@code this} by the specified {@code x} horizontally.
+     * Positive values move right, negative values move left.
      * </p><p>
-     *     This method is equivalent to {@code moveBy(x, 0, duration)}
+     * This method is equivalent to {@code moveBy(x, 0, duration)}
      * </p>
      *
      * <pre>{@code
@@ -217,16 +217,16 @@ public interface Animatable {
      * @param duration the number of seconds it lasts
      * @return an {@link App.AnimationBuilder}
      */
-    default App.AnimationBuilder moveHorizontalBy(int x,  double duration) {
+    default App.AnimationBuilder moveHorizontalBy(int x, double duration) {
         return add(Animation.moveTo(x + drawable().x, 0), duration);
     }
 
     /**
      * <p>
-     *     This method moves {@code this} by the specified {@code x} horizontally.
-     *     Positive values move right, negative values move left.
+     * This method moves {@code this} by the specified {@code x} horizontally.
+     * Positive values move right, negative values move left.
      * </p><p>
-     *     This method is equivalent to {@code moveBy(0, y, duration)}
+     * This method is equivalent to {@code moveBy(0, y, duration)}
      * </p>
      * <pre>{@code
      * Circle c = new Circle(200, 200, 50);
@@ -238,7 +238,7 @@ public interface Animatable {
      * @param duration the number of seconds it lasts
      * @return an {@link App.AnimationBuilder}
      */
-    default App.AnimationBuilder moveVerticalBy(int y,  double duration) {
+    default App.AnimationBuilder moveVerticalBy(int y, double duration) {
         return add(Animation.moveTo(0, y + drawable().y), duration);
     }
 }

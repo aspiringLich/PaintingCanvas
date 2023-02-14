@@ -43,14 +43,14 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * The stroke of the outline
      */
     public Stroke outlineStroke;
-    
+
     Drawable(int x, int y, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;
         App.addElement(this);
     }
-    
+
     /**
      * Sets the parameters for the outline of the shape
      *
@@ -68,12 +68,12 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @param thickness the thickness of the outline
      * @return The original object to allow method chaining
      */
-    public T setOutline( int thickness, Color color) {
+    public T setOutline(int thickness, Color color) {
         this.outlineColor = color;
         this.outlineStroke = new BasicStroke(thickness);
         return this.getThis();
     }
-    
+
     /**
      * Sets the parameters for the outline of the shape, with the color defaulting to black
      *
@@ -87,14 +87,13 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.setFilled(false);
      * }</pre>
      *
-     *
      * @param thickness the thickness of the outline
      * @return The original object to allow method chaining
      */
     public T setOutline(int thickness) {
         return this.setOutline(thickness, outlineColor);
     }
-    
+
     /**
      * Removes the outline from the shape
      *
@@ -104,7 +103,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.outlineStroke = null;
         return this.getThis();
     }
-    
+
     /**
      * Get the object's centerpoint
      *
@@ -120,7 +119,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The object's center-point
      */
     public abstract Point center(Graphics g);
-    
+
     /**
      * Actually render the object itself
      * <p>
@@ -131,13 +130,13 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      */
     public void render(Graphics g) {
         if (!this.visible) return;
-        
+
         var gc = (Graphics2D) g;
         var transform = gc.getTransform();
         var center = this.center(g);
         transform.setToRotation(this.rotation, center.x, center.y);
         gc.setTransform(transform);
-        
+
         // if filled, draw filled then outline
         // if not filled just draw the outline
         if (this.filled) {
@@ -146,7 +145,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         }
         this.renderOutline(gc);
     }
-    
+
     private void renderOutline(Graphics2D gc) {
         if (this.outlineStroke != null) {
             gc.setColor(this.outlineColor);
@@ -154,13 +153,13 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
             this.drawOutline(gc);
         }
     }
-    
+
     protected abstract void drawFilled(Graphics2D gc);
-    
+
     protected abstract void drawOutline(Graphics2D gc);
-    
+
     protected abstract T getThis();
-    
+
     /**
      * Hide the Object.
      * <pre>{@code
@@ -175,7 +174,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.visible = false;
         return getThis();
     }
-    
+
     /**
      * Show the Object
      * <pre>{@code
@@ -190,7 +189,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.visible = true;
         return getThis();
     }
-    
+
     /**
      * Get the X-position of the element
      *
@@ -201,7 +200,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public int getX() {
         return this.x;
     }
-    
+
     /**
      * Set the X-position of the object
      *
@@ -214,7 +213,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.x = x;
         return getThis();
     }
-    
+
     /**
      * Get the Y-position of the element.
      *
@@ -225,7 +224,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public int getY() {
         return this.y;
     }
-    
+
     /**
      * Set the Y-position of the element
      *
@@ -238,7 +237,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y = y;
         return getThis();
     }
-    
+
     /**
      * Get the position of the element
      *
@@ -248,7 +247,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public Point getPos() {
         return new Point(x, y);
     }
-    
+
     /**
      * Set the position of the element.
      *
@@ -264,7 +263,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y = y;
         return getThis();
     }
-    
+
     /**
      * Moves this drawable by the specified x and y.
      *
@@ -288,7 +287,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y += y;
         return getThis();
     }
-    
+
     /**
      * Moves this drawable by the specified x and y.
      *
@@ -307,7 +306,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.x += x;
         return getThis();
     }
-    
+
     /**
      * Moves this drawable by the specified x and y.
      *
@@ -326,7 +325,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y += y;
         return getThis();
     }
-    
+
     /**
      * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
      * <pre>{@code
@@ -342,7 +341,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public T setColor(int r, int g, int b) {
         return this.setColor(new Color(r, g, b));
     }
-    
+
     /**
      * Get the current color of an element as a {@link Color}
      *
@@ -351,7 +350,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public Color getColor() {
         return this.color;
     }
-    
+
     /**
      * Set the color of the object with a {@link Color} object.
      * <pre>{@code
@@ -366,7 +365,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.color = color;
         return getThis();
     }
-    
+
     /**
      * Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
      * <pre>{@code
@@ -381,7 +380,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public T setColor(int hex) {
         return setColor(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff);
     }
-    
+
     /**
      * Rotate this element by <code>rotation°</code>.
      * <pre>{@code
@@ -400,7 +399,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.rotation += Math.toRadians(rotation);
         return getThis();
     }
-    
+
     /**
      * Set an elements rotation to <code>rotation°</code>.
      * <pre>{@code
@@ -416,7 +415,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.rotation = rotation;
         return getThis();
     }
-    
+
     /**
      * Set whether this object is filled or not
      *
@@ -426,7 +425,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.setOutline(5);
      * c.setFilled(false);
      * }</pre>
-     * 
+     *
      * @param filled The value to set {@code this.filled} to
      * @return The original object to allow method chaining
      * @see #setOutline(int)
@@ -435,7 +434,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.filled = filled;
         return getThis();
     }
-    
+
     /**
      * <p>
      * Erase this object from the canvas. This object will be gone and cannot* be added back!
@@ -446,11 +445,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public void erase() {
         App.canvas.erase(this);
     }
-    
+
     public App.AnimationBuilder animate() {
         return new App.AnimationBuilder(this);
     }
-    
+
     public Drawable<?> drawable() {
         return this;
     }

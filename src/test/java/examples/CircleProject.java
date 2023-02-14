@@ -1,12 +1,12 @@
 package examples;
 
-import java.awt.Color;
-
-import java.util.*;
-
 import paintingcanvas.Canvas;
-import paintingcanvas.animation.*;
-import paintingcanvas.drawable.*;
+import paintingcanvas.animation.Animation;
+import paintingcanvas.animation.Easing;
+import paintingcanvas.drawable.Circle;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class CircleProject {
 

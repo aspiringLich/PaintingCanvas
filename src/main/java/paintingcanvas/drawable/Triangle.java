@@ -21,14 +21,6 @@ public class Triangle extends Drawable<Triangle> {
 
     private Polygon poly;
 
-    private java.awt.Polygon getPolygon() {
-        return new java.awt.Polygon(
-                new int[]{x - width / 2, x + width / 2, x},
-                new int[]{y + height / 2, y + height / 2, y - height / 2},
-                3
-        );
-    }
-
     /**
      * Create a new Triangle element.
      * <pre>{@code
@@ -64,6 +56,14 @@ public class Triangle extends Drawable<Triangle> {
         super(centerX, centerY, color);
         this.width = width;
         this.height = height;
+    }
+
+    private java.awt.Polygon getPolygon() {
+        return new java.awt.Polygon(
+                new int[]{x - width / 2, x + width / 2, x},
+                new int[]{y + height / 2, y + height / 2, y - height / 2},
+                3
+        );
     }
 
     /**

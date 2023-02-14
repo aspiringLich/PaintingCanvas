@@ -1,15 +1,16 @@
 package examples;
 
-import java.awt.Color;
+import paintingcanvas.Canvas;
+import paintingcanvas.animation.Animation;
+import paintingcanvas.drawable.Text;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.*;
-
-import paintingcanvas.Canvas;
-import paintingcanvas.animation.*;
-import paintingcanvas.drawable.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,7 @@ public class SongCloud {
             var oldColor = t.getColor();
             var color = RGBtoHSB(oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue(), null);
             var newColor = Color.getHSBColor(color[0], color[1], out.get(t.getText()) / (float) maxCount);
-            t.animate().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int)(Math.random() * 100.0) - 50), 1);
+            t.animate().with(Animation.colorTo(newColor), 1).with(Animation.rotateTo((int) (Math.random() * 100.0) - 50), 1);
         }
 
         // == Sing Song ==
