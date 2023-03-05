@@ -1,8 +1,10 @@
 package examples;
 
+import paintingcanvas.App;
 import paintingcanvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Text;
+import paintingcanvas.extensions.FrameCounter;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import static java.awt.Color.RGBtoHSB;
 public class SongCloud {
     public static void main(String[] args) throws IOException {
         Canvas canvas = new Canvas();
+        new FrameCounter().line(() -> String.format("Animations: %d", App.canvas.canvas.animations.size())).attach();
         canvas.setTitle("Song Cloud");
 
         var rawSong = Files.readString(Path.of("song.txt"));

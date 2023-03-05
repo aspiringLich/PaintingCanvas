@@ -4,6 +4,7 @@ import paintingcanvas.App;
 import paintingcanvas.Canvas;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -16,12 +17,13 @@ import java.util.Vector;
  * }</pre>
  */
 public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
+    final Vector<Long> frameTimes = new Vector<>();
     boolean enabled = true;
     boolean frameChart = true;
     int dataPoints = 100;
-    GetLines lines = () -> new String[]{};
+    List<GetLines> lines = new ArrayList<>();
     long lastFrame = System.currentTimeMillis();
-    final Vector<Long> frameTimes = new Vector<>();
+    Font font;
 
     /**
      * Create a new FrameCounter with default settings:
@@ -33,6 +35,7 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
      * </ul>
      */
     public FrameCounter() {
+        this.font = new Font(Font.DIALOG, Font.PLAIN, 12);
         for (int i = 0; i < dataPoints; i++) frameTimes.add(0L);
     }
 
@@ -78,7 +81,31 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
      * @return `this` for method chaining
      */
     public FrameCounter lines(GetLines lines) {
-        this.lines = lines;
+        this.lines.add(lines);
+        return this;
+    }
+
+    /**
+     * The function you supply will be run every frame.
+     * Empty by default.
+     *
+     * @param line The function to get an extra line
+     * @return `this` for method chaining
+     */
+    public FrameCounter line(GetLine line) {
+        this.lines.add(() -> new String[]{line.getLine()});
+        return this;
+    }
+
+    /**
+     * Sets the font used by the overlay UI.
+     * 12pt Dialog is the default.
+     *
+     * @param font The font to use
+     * @return `this` for method chaining
+     */
+    public FrameCounter font(Font font) {
+        this.font = font;
         return this;
     }
 
@@ -110,11 +137,14 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
 
         // Draw UI
         var gc = (Graphics2D) g;
+        gc.setFont(font);
+        gc.setTransform(new AffineTransform());
         var fh = gc.getFontMetrics().getHeight();
-        var text = new ArrayList<>(List.of(this.lines.getLines()));
-        text.add(0, String.format("FPS: %d", (int) (1000 / avg)));
-        text.add(1, String.format("FrameTime: %.1f", avg));
-        text.add(2, String.format("Elements: %d", App.canvas.canvas.elements.size()));
+        var text = new ArrayList<String>();
+        text.add(String.format("FPS: %d", (int) (1000 / avg)));
+        text.add(String.format("FrameTime: %.1f", avg));
+        text.add(String.format("Elements: %d", App.canvas.canvas.elements.size()));
+        for (var i : this.lines) text.addAll(List.of(i.getLines()));
 
         gc.setColor(new Color(0, 0, 0, 180));
         var maxText = 0;
@@ -140,5 +170,9 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
 
     public interface GetLines {
         String[] getLines();
+    }
+
+    public interface GetLine {
+        String getLine();
     }
 }

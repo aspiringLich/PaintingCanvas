@@ -8,9 +8,9 @@ import java.awt.*;
  * Controls animation that is to do with opacity
  */
 public class OpacityAnimation extends Animation {
+    public final int end;
     public int start;
     public int outlineStart;
-    public final int end;
 
     public OpacityAnimation(double end) {
         super();

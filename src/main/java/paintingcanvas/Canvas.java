@@ -48,7 +48,9 @@ public class Canvas {
      * @return the width of the canvas
      */
     public int width() {
-        return canvas.getWidth();
+        var canvasWidth = canvas.getWidth();
+        if (canvasWidth == 0) return canvas.startSize.x;
+        return canvasWidth;
     }
 
     /**
@@ -57,7 +59,9 @@ public class Canvas {
      * @return the width of the canvas
      */
     public int height() {
-        return canvas.getHeight();
+        var canvasHeight = canvas.getHeight();
+        if (canvasHeight == 0) return canvas.startSize.y;
+        return canvasHeight;
     }
 
     /**
@@ -111,6 +115,7 @@ public class Canvas {
      * The internal canvas component that is used to draw to the screen
      */
     public static class CanvasComponent extends JComponent {
+        public final Point startSize;
         public final List<Drawable<?>> elements = new Vector<>();
         public final List<Animation> animations = new ArrayList<>();
         public final List<Event> events = new Vector<>();
@@ -121,6 +126,7 @@ public class Canvas {
 
         public CanvasComponent(int width, int height, String title, Canvas canvas) {
             super();
+            this.startSize = new Point(width, height);
             jframe = new JFrame();
             jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             jframe.setSize(width, height);
