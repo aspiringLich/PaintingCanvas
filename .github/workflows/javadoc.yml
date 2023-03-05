@@ -2,13 +2,15 @@ name: Deploy Javadoc
 
 on:
   release:
-    types: [ published ]
+    types: [published]
   workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Dependencys
+        run: pip install bs4
       - name: Deploy JavaDoc
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
         with:
@@ -17,3 +19,4 @@ jobs:
           java-version: 11
           target-folder: . # url will be https://<username>.github.io/<repo>/javadoc
           project: gradle
+          custom-command: gradle javadoc && python3 ./doc_patcher.py

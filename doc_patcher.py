@@ -5,8 +5,8 @@ from typing import Tuple
 import bs4
 from pathlib import Path
 
-INPUT_DIR = ".doc"
-OUTPUT_DIR = ".doc"
+INPUT_DIR = "build/docs/javadoc"
+OUTPUT_DIR = "build/docs/javadoc"
 IGNORED_SUPERCLASSES = ["java.lang.Object", "java.lang.Enum"]
 
 # Return the method and field sections of a superclass, loading it if necessary
