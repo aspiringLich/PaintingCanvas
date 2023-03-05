@@ -1,16 +1,17 @@
 # i caved and wrote it in python :sob:
-# we need a JIT compiler for rust
+# we *need* a JIT compiler for rust
 
 from typing import Tuple
 import bs4
 from pathlib import Path
 
-INPUT_DIR = "build/docs/javadoc"
-OUTPUT_DIR = "build/docs/javadoc"
+# For docs generated with IntelliJ
+# INPUT_DIR, OUTPUT_DIR = ".doc", ".doc"
+INPUT_DIR, OUTPUT_DIR = "build/docs/javadoc", "build/docs/javadoc"
 IGNORED_SUPERCLASSES = ["java.lang.Object", "java.lang.Enum"]
 
 # Return the method and field sections of a superclass, loading it if necessary
-def process_doc_section(superclass_cache: dict, i: Path, j: bs4.element.Tag, id: str):
+def process_doc_section(superclass_cache: dict, i: Path, j: bs4.element.Tag, id: str) -> Tuple[bs4.element.Tag, bs4.element.Tag]:
     id = j["id"].split(id)[1]
     if id in IGNORED_SUPERCLASSES:
         return None
@@ -28,6 +29,15 @@ def process_doc_section(superclass_cache: dict, i: Path, j: bs4.element.Tag, id:
 
     return superclass_cache[superclass_def]
 
+# Convert relative links to absolute links
+def patch_links(tag: bs4.element.Tag, i: str) -> bs4.element.Tag:
+    for j in tag.select("a"):
+        href = j["href"]
+
+        if href.startswith("#"):
+            j["href"] = i + href
+
+    return tag
 
 # Load a superclass and return its methods and field sections
 def load_superclass_methods(path: Path) -> Tuple[bs4.element.Tag, bs4.element.Tag]:
@@ -63,7 +73,9 @@ def main():
                 superclass_cache, i, j, "methods.inherited.from.class.")
             if superclass_def is None:
                 continue
-            j.parent.select("code")[0].replace_with(superclass_def[0])
+            path = j.parent.select("h3 > a")[0]["href"]
+            j.parent.select("code")[0].replace_with(
+                patch_links(superclass_def[0], path))
 
         # Patch the Inherited Fields section
         for j in soup.select("[id*='fields.inherited.from.class.']"):
@@ -71,7 +83,9 @@ def main():
                 superclass_cache, i, j, "fields.inherited.from.class.")
             if superclass_def is None:
                 continue
-            j.parent.select("code")[0].replace_with(superclass_def[1])
+            path = j.parent.select("h3 > a")[0]["href"]
+            j.parent.select("code")[0].replace_with(
+                patch_links(superclass_def[1], path))
 
         # Write the patched file
         output_path = OUTPUT_DIR + i.as_posix().split(INPUT_DIR)[1]
