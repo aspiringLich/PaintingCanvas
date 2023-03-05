@@ -14,7 +14,7 @@ public class Path extends Drawable<Path> {
      *
      * @see Path2D
      */
-    Path2D path;
+    final Path2D path;
 
     /**
      * Create a new Path element. The path is initially empty.

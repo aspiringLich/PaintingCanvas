@@ -17,7 +17,7 @@ public class Polygon extends Drawable<Polygon> {
      *
      * @see java.awt.Polygon
      */
-    public java.awt.Polygon polygon;
+    public final java.awt.Polygon polygon;
 
     /**
      * Create a new empty polygon, meant to be used in conjunction with <code>.point(x, y)</code>

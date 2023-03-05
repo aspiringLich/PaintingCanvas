@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class Canvas {
     // how many frames per second do we want to run at?
     public static final int fps = 30;
-    public CanvasComponent canvas;
+    public final CanvasComponent canvas;
 
     /**
      * Creates a new canvas with a default size (900x600) and title ("Canvas")
@@ -160,7 +160,7 @@ public class Canvas {
 
 
         /**
-         * Paint stuf
+         * Paint stuff
          *
          * @param g the <code>Graphics</code> context in which to paint
          */

@@ -8,38 +8,83 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.
+ * <pre>{@code
+ * // Create and attach a new FrameCounter with default settings
+ * new FrameCounter().attach();
+ * }</pre>
+ */
 public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
     boolean enabled = true;
     boolean frameChart = true;
     int dataPoints = 100;
     GetLines lines = () -> new String[]{};
     long lastFrame = System.currentTimeMillis();
-    Vector<Long> frameTimes = new Vector<>();
+    final Vector<Long> frameTimes = new Vector<>();
 
+    /**
+     * Create a new FrameCounter with default settings:
+     * <ul>
+     *     <li>Enabled: true</li>
+     *     <li>FrameChart: true</li>
+     *     <li>DataPoints: 100</li>
+     *     <li>Lines: {}</li>
+     * </ul>
+     */
     public FrameCounter() {
         for (int i = 0; i < dataPoints; i++) frameTimes.add(0L);
     }
 
+    /**
+     * Enabled by default.
+     *
+     * @param enabled To enable or disable the overlay
+     * @return `this` for method chaining
+     */
     public FrameCounter enabled(boolean enabled) {
         this.enabled = enabled;
         return this;
     }
 
+    /**
+     * Enabled by default.
+     *
+     * @param enabled To enable or disable the frame time graph
+     * @return `this` for method chaining
+     */
     public FrameCounter frameChart(boolean enabled) {
         this.frameChart = enabled;
         return this;
     }
 
+    /**
+     * The number of data points used for the FPS and FrameTime text / FrameTime graph.
+     * 100 by default.
+     *
+     * @param dataPoints The number of data-points to use
+     * @return `this` for method chaining
+     */
     public FrameCounter dataPoints(int dataPoints) {
         this.dataPoints = dataPoints;
         return this;
     }
 
+    /**
+     * The function you supply will be run every frame.
+     * Empty by default.
+     *
+     * @param lines Function to get extra lines.
+     * @return `this` for method chaining
+     */
     public FrameCounter lines(GetLines lines) {
         this.lines = lines;
         return this;
     }
 
+    /**
+     * Adds system to the default static canvas.
+     */
     public void attach() {
         App.canvas.canvas.renderLifecycle = this;
     }

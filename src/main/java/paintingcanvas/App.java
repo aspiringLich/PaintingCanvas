@@ -16,10 +16,10 @@ import java.awt.event.ComponentEvent;
  * everything with {@link Canvas.CanvasComponent}. You can use this
  * to make your animations and stuff, but you should really use the Canvas class
  * </p><p>
- * You know, actually, the canvas object only really exists to pretend that theres some object youre calling this stuff on when
+ * You know, actually, the canvas object only really exists to pretend that theres some object you're calling this stuff on when
  * in reality its all static under the hood.
  * </p><p>
- * So thats why it breaks if you make two canvases.
+ * So that's why it breaks if you make two canvases.
  * </p><p>
  * Or does it? IDK i haven't tested it.
  * </p>
@@ -28,7 +28,7 @@ import java.awt.event.ComponentEvent;
 public class App {
     // Used to block on .add() calls
     protected static final Object syncObject = new Object();
-    // Used to wait on sleepUntillAnimationEnds
+    // Used to wait on sleepUntilAnimationEnds
     protected static final Object userSyncObject = new Object();
     /**
      * The global Painter all Drawables access to add themselves to.
@@ -124,19 +124,7 @@ public class App {
 
         // Init app
         canvas.canvas.render();
-//        try {
-//            this.setup();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
-
-    /**
-     * Initialize and run the application with default width height and title parameters
-     */
-//    public static void run(Canvas.CanvasComponent canvas) {
-//        run(canvas, 1000, 600, "Canvas");
-//    }
 
     /**
      * Adds the element to the canvas
@@ -206,7 +194,7 @@ public class App {
      * }</pre>
      */
     public static class AnimationBuilder implements Animatable {
-        protected Drawable<?> drawable;
+        protected final Drawable<?> drawable;
 
         public AnimationBuilder(Drawable<?> drawable) {
             this.drawable = drawable;

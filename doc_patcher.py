@@ -10,8 +10,6 @@ OUTPUT_DIR = "build/docs/javadoc"
 IGNORED_SUPERCLASSES = ["java.lang.Object", "java.lang.Enum"]
 
 # Return the method and field sections of a superclass, loading it if necessary
-
-
 def process_doc_section(superclass_cache: dict, i: Path, j: bs4.element.Tag, id: str):
     id = j["id"].split(id)[1]
     if id in IGNORED_SUPERCLASSES:
