@@ -12,9 +12,13 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
     boolean enabled = true;
     boolean frameChart = true;
     int dataPoints = 100;
-    GetLines lines;
+    GetLines lines = () -> new String[]{};
     long lastFrame = System.currentTimeMillis();
     Vector<Long> frameTimes = new Vector<>();
+
+    public FrameCounter() {
+        for (int i = 0; i < dataPoints; i++) frameTimes.add(0L);
+    }
 
     public FrameCounter enabled(boolean enabled) {
         this.enabled = enabled;
@@ -34,6 +38,10 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
     public FrameCounter lines(GetLines lines) {
         this.lines = lines;
         return this;
+    }
+
+    public void attach() {
+        App.canvas.canvas.renderLifecycle = this;
     }
 
     @Override
@@ -85,7 +93,7 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
         gc.drawPolyline(frameX, frameY, size);
     }
 
-    interface GetLines {
+    public interface GetLines {
         String[] getLines();
     }
 }
