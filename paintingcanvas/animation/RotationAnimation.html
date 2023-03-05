@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -199,10 +199,7 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int,double,paintingcanvas.drawable.Drawable)">RotationAnimation</a></span>&#8203;(int&nbsp;start,
-                 int&nbsp;duration,
-                 double&nbsp;end,
-                 <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(double)">RotationAnimation</a></span>&#8203;(double&nbsp;end)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -224,9 +221,29 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#copy()">copy</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>&#8203;(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable)</code></th>
+<td class="colLast">
+<div class="block">Initialize the animation with the affected drawable</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#relative()">relative</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>&#8203;(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable,
+               double&nbsp;progress)</code></th>
+<td class="colLast">
+<div class="block">update the animation with the progress (0-1) and affected drawable</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -296,16 +313,13 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(int,int,double,paintingcanvas.drawable.Drawable)">
+<a id="&lt;init&gt;(double)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>RotationAnimation</h4>
-<pre>public&nbsp;RotationAnimation&#8203;(int&nbsp;start,
-                         int&nbsp;duration,
-                         double&nbsp;end,
-                         <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable)</pre>
+<pre>public&nbsp;RotationAnimation&#8203;(double&nbsp;end)</pre>
 </li>
 </ul>
 </li>
@@ -321,10 +335,54 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <a id="relative()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>relative</h4>
 <pre class="methodSignature">public&nbsp;<a href="RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a>&nbsp;relative()</pre>
+</li>
+</ul>
+<a id="copy()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>copy</h4>
+<pre class="methodSignature">public&nbsp;<a href="Animation.html" title="class in paintingcanvas.animation">Animation</a>&nbsp;copy()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="Animation.html#copy()">copy</a></code>&nbsp;in class&nbsp;<code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="updateAnimation(paintingcanvas.drawable.Drawable,double)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>updateAnimation</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;updateAnimation&#8203;(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable,
+                               double&nbsp;progress)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">Animation</a></code></span></div>
+<div class="block">update the animation with the progress (0-1) and affected drawable</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></code>&nbsp;in class&nbsp;<code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="initAnimation(paintingcanvas.drawable.Drawable)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>initAnimation</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;initAnimation&#8203;(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&nbsp;drawable)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">Animation</a></code></span></div>
+<div class="block">Initialize the animation with the affected drawable</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></code>&nbsp;in class&nbsp;<code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>

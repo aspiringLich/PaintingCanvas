@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -143,7 +143,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">Path</span>
 extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&gt;</pre>
 <div class="block">An SVG-like path used to draw lines and curves.
-
+ <p>
  Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.</div>
 </li>
 </ul>
@@ -163,7 +163,7 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;paintingcanvas.drawable.<a href="Drawable.html" title="class in paintingcanvas.drawable">Drawable</a></h3>
-<code><a href="Drawable.html#color">color</a>, <a href="Drawable.html#filled">filled</a>, <a href="Drawable.html#outlineColor">outlineColor</a>, <a href="Drawable.html#outlineStroke">outlineStroke</a>, <a href="Drawable.html#rotation">rotation</a>, <a href="Drawable.html#unfilledStroke">unfilledStroke</a>, <a href="Drawable.html#visible">visible</a>, <a href="Drawable.html#x">x</a>, <a href="Drawable.html#y">y</a></code></li>
+<code><a href="Drawable.html#color">color</a>, <a href="Drawable.html#filled">filled</a>, <a href="Drawable.html#outlineColor">outlineColor</a>, <a href="Drawable.html#outlineStroke">outlineStroke</a>, <a href="Drawable.html#rotation">rotation</a>, <a href="Drawable.html#visible">visible</a>, <a href="Drawable.html#x">x</a>, <a href="Drawable.html#y">y</a></code></li>
 </ul>
 </li>
 </ul>
@@ -273,16 +273,31 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.drawable">Path</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStroke(java.awt.Stroke)">setStroke</a></span>&#8203;(java.awt.Stroke&nbsp;stroke)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOutline(int)">setOutline</a></span>&#8203;(int&nbsp;thickness)</code></th>
 <td class="colLast">
-<div class="block">Set the stroke of the line</div>
+<div class="block">DO NOT USE, Overridden</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.drawable">Path</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOutline(int,java.awt.Color)">setOutline</a></span>&#8203;(int&nbsp;thickness,
+          java.awt.Color&nbsp;color)</code></th>
+<td class="colLast">
+<div class="block">DO NOT USE, Overridden</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.drawable">Path</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStroke(java.awt.Stroke)">setStroke</a></span>&#8203;(java.awt.Stroke&nbsp;stroke)</code></th>
+<td class="colLast">
+<div class="block">Set the stroke of the line.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="Path.html" title="class in paintingcanvas.drawable">Path</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setThickness(int)">setThickness</a></span>&#8203;(int&nbsp;thickness)</code></th>
 <td class="colLast">
-<div class="block">Set the thickness of the line</div>
+<div class="block">Set the thickness of the line, equivalent to setOutline(thickness);</div>
 </td>
 </tr>
 </table>
@@ -291,7 +306,7 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;paintingcanvas.drawable.<a href="Drawable.html" title="class in paintingcanvas.drawable">Drawable</a></h3>
-<code><a href="Drawable.html#animate()">animate</a>, <a href="Drawable.html#draw(java.awt.Graphics2D)">draw</a>, <a href="Drawable.html#drawable()">drawable</a>, <a href="Drawable.html#erase()">erase</a>, <a href="Drawable.html#getColor()">getColor</a>, <a href="Drawable.html#getPos()">getPos</a>, <a href="Drawable.html#getX()">getX</a>, <a href="Drawable.html#getY()">getY</a>, <a href="Drawable.html#hide()">hide</a>, <a href="Drawable.html#move(int,int)">move</a>, <a href="Drawable.html#moveHorizontal(int)">moveHorizontal</a>, <a href="Drawable.html#moveVertical(int)">moveVertical</a>, <a href="Drawable.html#removeOutline()">removeOutline</a>, <a href="Drawable.html#render(java.awt.Graphics)">render</a>, <a href="Drawable.html#rotate(double)">rotate</a>, <a href="Drawable.html#setColor(int)">setColor</a>, <a href="Drawable.html#setColor(int,int,int)">setColor</a>, <a href="Drawable.html#setColor(java.awt.Color)">setColor</a>, <a href="Drawable.html#setFilled(boolean)">setFilled</a>, <a href="Drawable.html#setOutline(int)">setOutline</a>, <a href="Drawable.html#setOutline(java.awt.Color,int)">setOutline</a>, <a href="Drawable.html#setPos(int,int)">setPos</a>, <a href="Drawable.html#setRotation(double)">setRotation</a>, <a href="Drawable.html#setX(int)">setX</a>, <a href="Drawable.html#setY(int)">setY</a>, <a href="Drawable.html#show()">show</a></code></li>
+<code><a href="Drawable.html#animate()">animate</a>, <a href="Drawable.html#drawable()">drawable</a>, <a href="Drawable.html#erase()">erase</a>, <a href="Drawable.html#getColor()">getColor</a>, <a href="Drawable.html#getPos()">getPos</a>, <a href="Drawable.html#getX()">getX</a>, <a href="Drawable.html#getY()">getY</a>, <a href="Drawable.html#hide()">hide</a>, <a href="Drawable.html#move(int,int)">move</a>, <a href="Drawable.html#moveHorizontal(int)">moveHorizontal</a>, <a href="Drawable.html#moveVertical(int)">moveVertical</a>, <a href="Drawable.html#removeOutline()">removeOutline</a>, <a href="Drawable.html#render(java.awt.Graphics)">render</a>, <a href="Drawable.html#rotate(double)">rotate</a>, <a href="Drawable.html#setColor(int)">setColor</a>, <a href="Drawable.html#setColor(int,int,int)">setColor</a>, <a href="Drawable.html#setColor(java.awt.Color)">setColor</a>, <a href="Drawable.html#setFilled(boolean)">setFilled</a>, <a href="Drawable.html#setPos(int,int)">setPos</a>, <a href="Drawable.html#setRotation(double)">setRotation</a>, <a href="Drawable.html#setX(int)">setX</a>, <a href="Drawable.html#setY(int)">setY</a>, <a href="Drawable.html#show()">show</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -374,6 +389,44 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="setOutline(int,java.awt.Color)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setOutline</h4>
+<pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&nbsp;setOutline&#8203;(int&nbsp;thickness,
+                       java.awt.Color&nbsp;color)</pre>
+<div class="block">DO NOT USE, Overridden</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="Drawable.html#setOutline(int,java.awt.Color)">setOutline</a></code>&nbsp;in class&nbsp;<code><a href="Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>color</code> - the color of the outline</dd>
+<dd><code>thickness</code> - the thickness of the outline</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>this</code></dd>
+</dl>
+</li>
+</ul>
+<a id="setOutline(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setOutline</h4>
+<pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&nbsp;setOutline&#8203;(int&nbsp;thickness)</pre>
+<div class="block">DO NOT USE, Overridden</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="Drawable.html#setOutline(int)">setOutline</a></code>&nbsp;in class&nbsp;<code><a href="Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>thickness</code> - the thickness of the outline</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><code>this</code></dd>
+</dl>
+</li>
+</ul>
 <a id="setStroke(java.awt.Stroke)">
 <!--   -->
 </a>
@@ -381,7 +434,7 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 <li class="blockList">
 <h4>setStroke</h4>
 <pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&nbsp;setStroke&#8203;(java.awt.Stroke&nbsp;stroke)</pre>
-<div class="block">Set the stroke of the line</div>
+<div class="block">Set the stroke of the line.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>stroke</code> - a <code>Stroke</code> object to define this line's stroke</dd>
@@ -397,7 +450,7 @@ extends <a href="Drawable.html" title="class in paintingcanvas.drawable">Drawabl
 <li class="blockList">
 <h4>setThickness</h4>
 <pre class="methodSignature">public&nbsp;<a href="Path.html" title="class in paintingcanvas.drawable">Path</a>&nbsp;setThickness&#8203;(int&nbsp;thickness)</pre>
-<div class="block">Set the thickness of the line</div>
+<div class="block">Set the thickness of the line, equivalent to setOutline(thickness);</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>thickness</code> - The thickness of the line in pixels</dd>
