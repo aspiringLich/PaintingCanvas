@@ -139,6 +139,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">FrameCounter</span>
 extends java.lang.Object
 implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="interface in paintingcanvas">Canvas.CanvasComponent.RenderLifecycle</a></pre>
+<div class="block">A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.
+ <pre><code>
+ // Create and attach a new FrameCounter with default settings
+ new FrameCounter().attach();
+ </code></pre></div>
 </li>
 </ul>
 </div>
@@ -183,7 +188,15 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">FrameCounter</a></span>()</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">Create a new FrameCounter with default settings:
+ 
+     Enabled: true
+     FrameChart: true
+     DataPoints: 100
+     Lines: {}
+ </div>
+</td>
 </tr>
 </table>
 </li>
@@ -206,27 +219,37 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attach()">attach</a></span>()</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">Adds system to the default static canvas.</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code><a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dataPoints(int)">dataPoints</a></span>​(int dataPoints)</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">The number of data points used for the FPS and FrameTime text / FrameTime graph.</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code><a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enabled(boolean)">enabled</a></span>​(boolean enabled)</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">Enabled by default.</div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code><a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#frameChart(boolean)">frameChart</a></span>​(boolean enabled)</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">Enabled by default.</div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code><a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lines(paintingcanvas.extensions.FrameCounter.GetLines)">lines</a></span>​(<a href="FrameCounter.GetLines.html" title="interface in paintingcanvas.extensions">FrameCounter.GetLines</a> lines)</code></th>
-<td class="colLast"> </td>
+<td class="colLast">
+<div class="block">The function you supply will be run every frame.</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
@@ -255,18 +278,18 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 </tr>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>default void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onResize(paintingcanvas.Canvas.CanvasComponent,java.awt.event.ComponentEvent)">onResize</a></span>​(<a href="Canvas.CanvasComponent.html" title="class in paintingcanvas">Canvas.CanvasComponent</a> canvas,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../Canvas.CanvasComponent.RenderLifecycle.html#onResize(paintingcanvas.Canvas.CanvasComponent,java.awt.event.ComponentEvent)">onResize</a></span>​(<a href="Canvas.CanvasComponent.html" title="class in paintingcanvas">Canvas.CanvasComponent</a> canvas,
         java.awt.event.ComponentEvent e)</code></th>
 <td class="colLast"> </td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>default void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#renderEnd(java.awt.Graphics)">renderEnd</a></span>​(java.awt.Graphics g)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../Canvas.CanvasComponent.RenderLifecycle.html#renderEnd(java.awt.Graphics)">renderEnd</a></span>​(java.awt.Graphics g)</code></th>
 <td class="colLast"> </td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>default void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#renderStart(java.awt.Graphics)">renderStart</a></span>​(java.awt.Graphics g)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../Canvas.CanvasComponent.RenderLifecycle.html#renderStart(java.awt.Graphics)">renderStart</a></span>​(java.awt.Graphics g)</code></th>
 <td class="colLast"> </td>
 </tr>
 </table></li>
@@ -294,6 +317,13 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>FrameCounter</h4>
 <pre>public FrameCounter()</pre>
+<div class="block">Create a new FrameCounter with default settings:
+ <ul>
+<li>Enabled: true</li>
+<li>FrameChart: true</li>
+<li>DataPoints: 100</li>
+<li>Lines: {}</li>
+</ul></div>
 </li>
 </ul>
 </li>
@@ -313,6 +343,13 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>enabled</h4>
 <pre class="methodSignature">public <a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a> enabled​(boolean enabled)</pre>
+<div class="block">Enabled by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>enabled</code> - To enable or disable the overlay</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>`this` for method chaining</dd>
+</dl>
 </li>
 </ul>
 <a id="frameChart(boolean)">
@@ -322,6 +359,13 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>frameChart</h4>
 <pre class="methodSignature">public <a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a> frameChart​(boolean enabled)</pre>
+<div class="block">Enabled by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>enabled</code> - To enable or disable the frame time graph</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>`this` for method chaining</dd>
+</dl>
 </li>
 </ul>
 <a id="dataPoints(int)">
@@ -331,6 +375,14 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>dataPoints</h4>
 <pre class="methodSignature">public <a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a> dataPoints​(int dataPoints)</pre>
+<div class="block">The number of data points used for the FPS and FrameTime text / FrameTime graph.
+ 100 by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dataPoints</code> - The number of data-points to use</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>`this` for method chaining</dd>
+</dl>
 </li>
 </ul>
 <a id="lines(paintingcanvas.extensions.FrameCounter.GetLines)">
@@ -340,6 +392,14 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>lines</h4>
 <pre class="methodSignature">public <a href="FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a> lines​(<a href="FrameCounter.GetLines.html" title="interface in paintingcanvas.extensions">FrameCounter.GetLines</a> lines)</pre>
+<div class="block">The function you supply will be run every frame.
+ Empty by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>lines</code> - Function to get extra lines.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>`this` for method chaining</dd>
+</dl>
 </li>
 </ul>
 <a id="attach()">
@@ -349,6 +409,7 @@ implements <a href="../Canvas.CanvasComponent.RenderLifecycle.html" title="inter
 <li class="blockList">
 <h4>attach</h4>
 <pre class="methodSignature">public void attach()</pre>
+<div class="block">Adds system to the default static canvas.</div>
 </li>
 </ul>
 <a id="renderEnd(java.awt.Graphics)">

@@ -189,25 +189,25 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#drawable">drawable</a></span></code></th>
+<td class="colFirst"><code><a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#drawable">drawable</a></span></code></th>
 <td class="colLast"> </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#duration">duration</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#duration">duration</a></span></code></th>
 <td class="colLast">
 <div class="block">The length of the animation in frames</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="Easing.html" title="interface in paintingcanvas.animation">Easing</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#easing">easing</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#easing">easing</a></span></code></th>
 <td class="colLast"> </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startFrame">startFrame</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#startFrame">startFrame</a></span></code></th>
 <td class="colLast">
 <div class="block">The frame at which the animation should start</div>
 </td>
@@ -259,7 +259,7 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast">
 <div class="block">Initialize the animation with the affected drawable</div>
 </td>
@@ -271,7 +271,7 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable,
                double progress)</code></th>
 <td class="colLast">
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
@@ -292,14 +292,14 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(int)">colorTo</a></span>​(int hex)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#colorTo(int)">colorTo</a></span>​(int hex)</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(int,int,int)">colorTo</a></span>​(int r,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#colorTo(int,int,int)">colorTo</a></span>​(int r,
        int g,
        int b)</code></th>
 <td class="colLast">
@@ -308,54 +308,54 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorTo(java.awt.Color)">colorTo</a></span>​(java.awt.Color color)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#colorTo(java.awt.Color)">colorTo</a></span>​(java.awt.Color color)</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that changes the color of <code>this</code> to the specified <code>color</code> over <code>duration</code> seconds.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>abstract <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#copy()">copy</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#copy()">copy</a></span>()</code></th>
 <td class="colLast"> </td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#easing(paintingcanvas.animation.Easing)">easing</a></span>​(<a href="Easing.html" title="interface in paintingcanvas.animation">Easing</a> easing)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#easing(paintingcanvas.animation.Easing)">easing</a></span>​(<a href="Easing.html" title="interface in paintingcanvas.animation">Easing</a> easing)</code></th>
 <td class="colLast">
 <div class="block">Sets the easing to be used by this animation</div>
 </td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fadeIn()">fadeIn</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#fadeIn()">fadeIn</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that fades <code>this</code> in over @{code duration} seconds.</div>
 </td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fadeOut()">fadeOut</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#fadeOut()">fadeOut</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that fades <code>this</code> out over @{code duration} seconds.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init(paintingcanvas.drawable.Drawable)">init</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#init(paintingcanvas.drawable.Drawable)">init</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast">
 <div class="block">Initialize the animation with the affected drawable</div>
 </td>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>protected abstract void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast">
 <div class="block">Initialize the animation with the affected drawable</div>
 </td>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveBy(int,int,double)">moveBy</a></span>​(int x,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#moveBy(int,int,double)">moveBy</a></span>​(int x,
       int y,
       double duration)</code></th>
 <td class="colLast">
@@ -364,7 +364,7 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveTo(int,int)">moveTo</a></span>​(int x,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#moveTo(int,int)">moveTo</a></span>​(int x,
       int y)</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that moves <code>this</code> to the specified <code>x</code> and <code>y</code> over <code>duration</code> seconds</div>
@@ -372,28 +372,28 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 </tr>
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rotateBy(int)">rotateBy</a></span>​(int angle)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#rotateBy(int)">rotateBy</a></span>​(int angle)</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that rotates <code>this</code> by <code>angle°</code>.</div>
 </td>
 </tr>
 <tr class="altColor" id="i12">
 <td class="colFirst"><code>static <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rotateTo(int)">rotateTo</a></span>​(int angle)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#rotateTo(int)">rotateTo</a></span>​(int angle)</code></th>
 <td class="colLast">
 <div class="block">Creates an animation that rotates <code>this</code> to the specified <code>angle°</code>.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(int)">update</a></span>​(int frame)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#update(int)">update</a></span>​(int frame)</code></th>
 <td class="colLast">
 <div class="block">Updates the animation with the current frame</div>
 </td>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>protected abstract void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable,
                double progress)</code></th>
 <td class="colLast">
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
@@ -508,13 +508,16 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <ul class="blockList">
 <li class="blockList">
 <h4>updateAnimation</h4>
-<pre class="methodSignature">protected void updateAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable,
+<pre class="methodSignature">protected void updateAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable,
                                double progress)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class: <code><a href="Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">Animation</a></code></span></div>
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></code> in class <code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>drawable</code> - The affected drawable</dd>
+<dd><code>progress</code> - Animation progress (0-1)</dd>
 </dl>
 </li>
 </ul>
@@ -524,12 +527,14 @@ extends <a href="Animation.html" title="class in paintingcanvas.animation">Anima
 <ul class="blockListLast">
 <li class="blockList">
 <h4>initAnimation</h4>
-<pre class="methodSignature">protected void initAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</pre>
+<pre class="methodSignature">protected void initAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class: <code><a href="Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">Animation</a></code></span></div>
 <div class="block">Initialize the animation with the affected drawable</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></code> in class <code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>drawable</code> - The affected drawable</dd>
 </dl>
 </li>
 </ul>

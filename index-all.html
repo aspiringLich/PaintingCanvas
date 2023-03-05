@@ -128,7 +128,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#%3Cinit%3E()">Animation()</a></span> - Constructor for class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#%3Cinit%3E(int,int,paintingcanvas.drawable.Drawable)">Animation(int, int, Drawable)</a></span> - Constructor for class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#%3Cinit%3E(int,int,paintingcanvas.drawable.Drawable)">Animation(int, int, Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Constructor for class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/App.AnimationBuilder.html#%3Cinit%3E(paintingcanvas.drawable.Drawable)">AnimationBuilder(Drawable&lt;?&gt;)</a></span> - Constructor for class paintingcanvas.<a href="paintingcanvas/App.AnimationBuilder.html" title="class in paintingcanvas">App.AnimationBuilder</a></dt>
 <dd> </dd>
@@ -154,7 +154,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the number of frames in <code>time</code> units.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#attach()">attach()</a></span> - Method in class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">Adds system to the default static canvas.</div>
+</dd>
 </dl>
 <a id="I:B">
 <!-- -->
@@ -289,7 +291,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">D</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#dataPoints(int)">dataPoints(int)</a></span> - Method in class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">The number of data points used for the FPS and FrameTime text / FrameTime graph.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#drawable">drawable</a></span> - Variable in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/App.AnimationBuilder.html#drawable">drawable</a></span> - Variable in class paintingcanvas.<a href="paintingcanvas/App.AnimationBuilder.html" title="class in paintingcanvas">App.AnimationBuilder</a></dt>
@@ -383,7 +387,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Create a new Ellipse element.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#enabled(boolean)">enabled(boolean)</a></span> - Method in class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">Enabled by default.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/animation/MovementAnimation.html#end">end</a></span> - Variable in class paintingcanvas.animation.<a href="paintingcanvas/animation/MovementAnimation.html" title="class in paintingcanvas.animation">MovementAnimation</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/animation/OpacityAnimation.html#end">end</a></span> - Variable in class paintingcanvas.animation.<a href="paintingcanvas/animation/OpacityAnimation.html" title="class in paintingcanvas.animation">OpacityAnimation</a></dt>
@@ -450,11 +456,23 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="paintingcanvas/Canvas.CanvasComponent.html#frame">frame</a></span> - Variable in class paintingcanvas.<a href="paintingcanvas/Canvas.CanvasComponent.html" title="class in paintingcanvas">Canvas.CanvasComponent</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#frameChart(boolean)">frameChart(boolean)</a></span> - Method in class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">Enabled by default.</div>
+</dd>
 <dt><a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions"><span class="typeNameLink">FrameCounter</span></a> - Class in <a href="paintingcanvas/extensions/package-summary.html">paintingcanvas.extensions</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#%3Cinit%3E()">FrameCounter()</a></span> - Constructor for class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">Create a new FrameCounter with default settings:
+ 
+     Enabled: true
+     FrameChart: true
+     DataPoints: 100
+     Lines: {}
+ </div>
+</dd>
 <dt><a href="paintingcanvas/extensions/FrameCounter.GetLines.html" title="interface in paintingcanvas.extensions"><span class="typeNameLink">FrameCounter.GetLines</span></a> - Interface in <a href="paintingcanvas/extensions/package-summary.html">paintingcanvas.extensions</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/misc/TimeUnit.html#Frames">Frames</a></span> - paintingcanvas.misc.<a href="paintingcanvas/misc/TimeUnit.html" title="enum in paintingcanvas.misc">TimeUnit</a></dt>
@@ -583,21 +601,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">I</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#init(paintingcanvas.drawable.Drawable)">init(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#init(paintingcanvas.drawable.Drawable)">init(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd>
 <div class="block">Initialize the animation with the affected drawable</div>
 </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd>
 <div class="block">Initialize the animation with the affected drawable</div>
 </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/ColorAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/ColorAnimation.html" title="class in paintingcanvas.animation">ColorAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/ColorAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/ColorAnimation.html" title="class in paintingcanvas.animation">ColorAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/MovementAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/MovementAnimation.html" title="class in paintingcanvas.animation">MovementAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/MovementAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/MovementAnimation.html" title="class in paintingcanvas.animation">MovementAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/OpacityAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/OpacityAnimation.html" title="class in paintingcanvas.animation">OpacityAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/OpacityAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/OpacityAnimation.html" title="class in paintingcanvas.animation">OpacityAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/RotationAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/RotationAnimation.html#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/animation/Easing.html#inOutNth(double)">inOutNth(double)</a></span> - Static method in interface paintingcanvas.animation.<a href="paintingcanvas/animation/Easing.html" title="interface in paintingcanvas.animation">Easing</a></dt>
 <dd>
@@ -640,7 +658,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Linear easing - Go here to here.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/extensions/FrameCounter.html#lines(paintingcanvas.extensions.FrameCounter.GetLines)">lines(FrameCounter.GetLines)</a></span> - Method in class paintingcanvas.extensions.<a href="paintingcanvas/extensions/FrameCounter.html" title="class in paintingcanvas.extensions">FrameCounter</a></dt>
-<dd> </dd>
+<dd>
+<div class="block">The function you supply will be run every frame.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/drawable/Path.html#lineTo(int,int)">lineTo(int, int)</a></span> - Method in class paintingcanvas.drawable.<a href="paintingcanvas/drawable/Path.html" title="class in paintingcanvas.drawable">Path</a></dt>
 <dd>
 <div class="block">Make a line from the current cursor position to a new position</div>
@@ -729,7 +749,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="memberNameLink"><a href="paintingcanvas/Canvas.CanvasComponent.html#paintComponent(java.awt.Graphics)">paintComponent(Graphics)</a></span> - Method in class paintingcanvas.<a href="paintingcanvas/Canvas.CanvasComponent.html" title="class in paintingcanvas">Canvas.CanvasComponent</a></dt>
 <dd>
-<div class="block">Paint stuf</div>
+<div class="block">Paint stuff</div>
 </dd>
 <dt><a href="paintingcanvas/package-summary.html">paintingcanvas</a> - package paintingcanvas</dt>
 <dd>
@@ -1186,17 +1206,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Updates the animation with the current frame</div>
 </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/Animation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/Animation.html" title="class in paintingcanvas.animation">Animation</a></dt>
 <dd>
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
 </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/ColorAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/ColorAnimation.html" title="class in paintingcanvas.animation">ColorAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/ColorAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/ColorAnimation.html" title="class in paintingcanvas.animation">ColorAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/MovementAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/MovementAnimation.html" title="class in paintingcanvas.animation">MovementAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/MovementAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/MovementAnimation.html" title="class in paintingcanvas.animation">MovementAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/OpacityAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/OpacityAnimation.html" title="class in paintingcanvas.animation">OpacityAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/OpacityAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/OpacityAnimation.html" title="class in paintingcanvas.animation">OpacityAnimation</a></dt>
 <dd> </dd>
-<dt><span class="memberNameLink"><a href="paintingcanvas/animation/RotationAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a></dt>
+<dt><span class="memberNameLink"><a href="paintingcanvas/animation/RotationAnimation.html#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation(Drawable&lt;? extends Drawable&lt;?&gt;&gt;, double)</a></span> - Method in class paintingcanvas.animation.<a href="paintingcanvas/animation/RotationAnimation.html" title="class in paintingcanvas.animation">RotationAnimation</a></dt>
 <dd> </dd>
 <dt><span class="memberNameLink"><a href="paintingcanvas/App.html#userSyncObject">userSyncObject</a></span> - Static variable in class paintingcanvas.<a href="paintingcanvas/App.html" title="class in paintingcanvas">App</a></dt>
 <dd> </dd>

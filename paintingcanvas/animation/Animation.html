@@ -160,7 +160,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a></code></td>
+<td class="colFirst"><code><a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#drawable">drawable</a></span></code></th>
 <td class="colLast"> </td>
 </tr>
@@ -210,7 +210,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>protected </code></td>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int,paintingcanvas.drawable.Drawable)">Animation</a></span>​(int startFrame,
          int duration,
-         <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+         <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast"> </td>
 </tr>
 </table>
@@ -282,14 +282,14 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code><a href="Animation.html" title="class in paintingcanvas.animation">Animation</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init(paintingcanvas.drawable.Drawable)">init</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init(paintingcanvas.drawable.Drawable)">init</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast">
 <div class="block">Initialize the animation with the affected drawable</div>
 </td>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>protected abstract void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initAnimation(paintingcanvas.drawable.Drawable)">initAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</code></th>
 <td class="colLast">
 <div class="block">Initialize the animation with the affected drawable</div>
 </td>
@@ -334,7 +334,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>protected abstract void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateAnimation(paintingcanvas.drawable.Drawable,double)">updateAnimation</a></span>​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable,
                double progress)</code></th>
 <td class="colLast">
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
@@ -390,7 +390,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>drawable</h4>
-<pre>public <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable</pre>
+<pre>public <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable</pre>
 </li>
 </ul>
 <a id="easing">
@@ -420,7 +420,7 @@ extends java.lang.Object</pre>
 <h4>Animation</h4>
 <pre>protected Animation​(int startFrame,
                     int duration,
-                    <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</pre>
+                    <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</pre>
 </li>
 </ul>
 <a id="&lt;init&gt;()">
@@ -699,9 +699,14 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>updateAnimation</h4>
-<pre class="methodSignature">protected abstract void updateAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable,
+<pre class="methodSignature">protected abstract void updateAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable,
                                         double progress)</pre>
 <div class="block">update the animation with the progress (0-1) and affected drawable</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>drawable</code> - The affected drawable</dd>
+<dd><code>progress</code> - Animation progress (0-1)</dd>
+</dl>
 </li>
 </ul>
 <a id="init(paintingcanvas.drawable.Drawable)">
@@ -710,11 +715,11 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>init</h4>
-<pre class="methodSignature">public <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a> init​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</pre>
+<pre class="methodSignature">public <a href="Animation.html" title="class in paintingcanvas.animation">Animation</a> init​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</pre>
 <div class="block">Initialize the animation with the affected drawable</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>drawable</code> - the affected drawable</dd>
+<dd><code>drawable</code> - The affected drawable</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>this</dd>
 </dl>
@@ -726,8 +731,12 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>initAnimation</h4>
-<pre class="methodSignature">protected abstract void initAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a> drawable)</pre>
+<pre class="methodSignature">protected abstract void initAnimation​(<a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;? extends <a href="../drawable/Drawable.html" title="class in paintingcanvas.drawable">Drawable</a>&lt;?&gt;&gt; drawable)</pre>
 <div class="block">Initialize the animation with the affected drawable</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>drawable</code> - The affected drawable</dd>
+</dl>
 </li>
 </ul>
 </li>
