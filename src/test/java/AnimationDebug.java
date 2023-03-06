@@ -1,3 +1,4 @@
+import paintingcanvas.App;
 import paintingcanvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
@@ -9,14 +10,18 @@ import java.util.ArrayList;
 
 public class AnimationDebug {
     final static int size = 1;
-    final static int width = 1000;
+    final static int width = 1700;
     final static int height = 1000;
     final static int pad = size / 2;
 
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(width * size + 16, height * size + 16, "test");
-        new FrameCounter().lines(() -> new String[]{String.format("Frame: %d", canvas.canvas.frame), String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000)}).attach();
+        new FrameCounter().lines(() -> new String[]{
+                String.format("Frame: %d", canvas.canvas.frame),
+                String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
+                String.format("Animations: %d", App.canvas.canvas.animations.size())
+        }).attach();
 
         var rects = new ArrayList<Rectangle>();
         for (var x = 0; x < width; x++) {
