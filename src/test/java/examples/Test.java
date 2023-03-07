@@ -1,54 +1,26 @@
 package examples;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Polygon;
 import paintingcanvas.drawable.*;
+import paintingcanvas.extensions.FrameCounter;
 
 import java.awt.*;
 
 @SuppressWarnings("unused")
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Canvas canvas = new Canvas();
-        canvas.setTitle("Test");
+        new FrameCounter().line(
+                () -> String.format("Animations: %d", canvas.animations.size())
+        ).attach();
 
-        new Circle(0, 0, 10, Color.RED);
-        new Circle(0, canvas.height(), 10, Color.RED);
-        new Circle(canvas.width(), canvas.height(), 10, Color.RED);
-        new Circle(canvas.width(), 0, 10, Color.RED);
-
-
-        Circle c = new Circle(100, 100, 20)
-                .setColor(255, 0, 0)
-                .setOutline(10);
-
-        Line line = new Line(0, 0, 100, 100).setThickness(10)
-                .setColor(0xff0000);
-
-        Polygon gaming = new Polygon(new int[][]{{100, 100}, {200, 200}, {200, 100}})
-                .setColor(0xffff00)
-                .setOutline(5, Color.RED);
-        Square square = new Square(0, 0, 100)
-                .setColor(0x00ff00)
-                .setFilled(false);
-
-        Path curvey = new Path()
-                .setThickness(10)
-                .cursorTo(300, 300)
-                .lineTo(200, 300)
-                .quadTo(300, 300, 200, 200)
-                .setColor(0x00ffff);
-//                .setOutline(Color.BLUE, 15)
-        curvey.moveTo(100, 100, 3)
-                .rotateTo(90, 3);
-        line.rotateTo(180, 3);
-        square.rotateBy(180, 1);
-
-        canvas.sleep();
-
-        System.out.println("This runs after all the animations are done");
-
-        c.setFilled(false);
-        curvey.fadeOut(10);
+        Circle c = new Circle(canvas.getWidth() / 2, canvas.getHeight() / 2, 50, Color.RED);
+        while (true) {
+            c.moveBy(100, 1, 1);
+            c.moveBy(0, 100, 1);
+            c.moveBy(-100, 1, 1);
+            c.moveBy(0, -100, 1);
+        }
     }
 }

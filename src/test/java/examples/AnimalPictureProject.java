@@ -1,6 +1,6 @@
 package examples;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Rectangle;
 
@@ -35,8 +35,8 @@ public class AnimalPictureProject {
         Canvas canvas = new Canvas();
         canvas.setTitle("Animal Picture Projects");
 
-        var xm = canvas.width() / 2 - mushroom.length * 10;
-        var ym = canvas.height() / 2 - mushroom[0].length * 10;
+        var xm = canvas.getWidth() / 2 - mushroom.length * 10;
+        var ym = canvas.getHeight() / 2 - mushroom[0].length * 10;
         var colored = new ArrayList<Rectangle>();
 
         // == Mushroom ==

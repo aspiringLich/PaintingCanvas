@@ -1,6 +1,6 @@
 package examples;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
@@ -11,8 +11,8 @@ public class DrawingInJava {
         Canvas canvas = new Canvas();
         canvas.setTitle("Drawing in Java");
 
-        var width = canvas.width();
-        var height = canvas.height();
+        var width = canvas.getWidth();
+        var height = canvas.getHeight();
 
         // == Draw Landscape ==
         var sky = new Rectangle(width / 2, height / 4, width, height / 2).setColor(0x87ceeb);
@@ -25,7 +25,7 @@ public class DrawingInJava {
         var door = new Rectangle(250, 425, 50, 100).setColor(0xE8191A);
 
         // == Animate to Night ==
-        sun.animate().add(Animation.moveTo(width / 2, height / 2 + 50), 7).wait(3);
+        sun.animate().add(Animation.moveTo(width / 2, height / 2 + 50), 7).sleep(0.003);
 
         var duration = 4;
         sky.animate().with(Animation.colorTo(0xF5976C), duration);

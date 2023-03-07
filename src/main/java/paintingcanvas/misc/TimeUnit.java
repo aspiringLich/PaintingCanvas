@@ -1,6 +1,6 @@
 package paintingcanvas.misc;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 
 /**
  * Some common time units.

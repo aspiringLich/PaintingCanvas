@@ -1,7 +1,8 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.App;
 import paintingcanvas.animation.Animatable;
+import paintingcanvas.animation.AnimationBuilder;
+import paintingcanvas.canvas.Canvas;
 
 import java.awt.*;
 
@@ -48,7 +49,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.x = x;
         this.y = y;
         this.color = color;
-        App.addElement(this);
+
+        Canvas.getGlobalInstance().elements.add(this);
     }
 
     /**
@@ -443,11 +445,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * </p>
      */
     public void erase() {
-        App.canvas.erase(this);
+        Canvas.getGlobalInstance().elements.remove(this);
     }
 
-    public App.AnimationBuilder animate() {
-        return new App.AnimationBuilder(this);
+    public AnimationBuilder animate() {
+        return new AnimationBuilder(this);
     }
 
     public Drawable<?> drawable() {

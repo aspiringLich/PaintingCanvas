@@ -16,7 +16,13 @@ public abstract class Animation {
      * The length of the animation in frames
      */
     public int duration;
-    public Drawable<? extends Drawable<?>> drawable;
+    /**
+     * The drawable that is being animated
+     */
+    public Drawable<?> drawable;
+    /**
+     * The easing function to use
+     */
     public Easing easing = Easing.linear();
 
     protected Animation(int startFrame, int duration, Drawable<? extends Drawable<?>> drawable) {
@@ -202,7 +208,7 @@ public abstract class Animation {
      * @param frame the current frame
      */
     public void update(int frame) {
-        if (frame >= startFrame && frame <= this.startFrame + this.duration)
+        if (frame >= startFrame)
             this.updateAnimation(this.drawable, (frame - startFrame) / (double) this.duration);
     }
 
@@ -212,17 +218,15 @@ public abstract class Animation {
      * @param drawable The affected drawable
      * @param progress Animation progress (0-1)
      */
-    protected abstract void updateAnimation(Drawable<? extends Drawable<?>> drawable, double progress);
+    protected abstract void updateAnimation(Drawable<?> drawable, double progress);
 
     /**
      * Initialize the animation with the affected drawable
      *
-     * @param drawable The affected drawable
      * @return this
      */
-    public Animation init(Drawable<? extends Drawable<?>> drawable) {
-        this.drawable = drawable;
-        this.initAnimation(drawable);
+    public Animation init() {
+        this.initAnimation(this.drawable);
         return this;
     }
 
@@ -231,5 +235,9 @@ public abstract class Animation {
      *
      * @param drawable The affected drawable
      */
-    protected abstract void initAnimation(Drawable<? extends Drawable<?>> drawable);
+    protected abstract void initAnimation(Drawable<?> drawable);
+
+    public boolean ended(int frame) {
+        return frame > this.startFrame + this.duration;
+    }
 }

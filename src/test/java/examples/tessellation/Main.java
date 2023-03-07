@@ -1,6 +1,6 @@
 package examples.tessellation;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 
 import java.awt.*;
@@ -12,8 +12,8 @@ public class Main {
         canvas.setTitle("Tessellation project");
         canvas.sleep(0.05);
 
-        int width = canvas.width();
-        int height = canvas.height();
+        int width = canvas.getWidth();
+        int height = canvas.getHeight();
 
         Tessellation tess = new Tessellation(width, height);
         tess.order();

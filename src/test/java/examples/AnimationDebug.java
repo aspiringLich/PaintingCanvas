@@ -1,5 +1,6 @@
-import paintingcanvas.App;
-import paintingcanvas.Canvas;
+package examples;
+
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
 import paintingcanvas.drawable.Rectangle;
@@ -15,12 +16,12 @@ public class AnimationDebug {
     final static int pad = size / 2;
 
     public static void main(String[] argv) {
-        System.setProperty("sun.java2d.opengl", "true");
+//        System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(width * size + 16, height * size + 16, "test");
         new FrameCounter().lines(() -> new String[]{
-                String.format("Frame: %d", canvas.canvas.frame),
+                String.format("Frame: %d", canvas.frame),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
-                String.format("Animations: %d", App.canvas.canvas.animations.size())
+                String.format("Animations: %d", canvas.animations.size())
         }).attach();
 
         var rects = new ArrayList<Rectangle>();

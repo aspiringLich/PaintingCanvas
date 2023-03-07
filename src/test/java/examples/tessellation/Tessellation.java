@@ -30,8 +30,8 @@ public class Tessellation {
                 tiles[i][j] = new Tile(i, j);
 
                 tiles[i][j].draw(
-                        (int) (Math.random() * Main.canvas.width()),
-                        (int) (Math.random() * Main.canvas.height())
+                        (int) (Math.random() * Main.canvas.getWidth()),
+                        (int) (Math.random() * Main.canvas.getHeight())
                 );
                 tiles[i][j].rotate((Math.random() - 0.5) * 720);
             }

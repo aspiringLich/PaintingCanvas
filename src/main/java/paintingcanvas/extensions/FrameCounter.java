@@ -1,7 +1,6 @@
 package paintingcanvas.extensions;
 
-import paintingcanvas.App;
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -13,10 +12,10 @@ import java.util.Vector;
  * A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.
  * <pre>{@code
  * // Create and attach a new FrameCounter with default settings
- * new FrameCounter().attach();
+ * new FrameCounterd().attach();
  * }</pre>
  */
-public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
+public class FrameCounter implements Canvas.RenderLifecycle {
     final Vector<Long> frameTimes = new Vector<>();
     boolean enabled = true;
     boolean frameChart = true;
@@ -115,7 +114,8 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
      * Adds system to the default static canvas.
      */
     public void attach() {
-        App.canvas.canvas.renderLifecycle = this;
+
+        Canvas.getGlobalInstance().renderLifecycle = this;
     }
 
     @Override
@@ -147,7 +147,7 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
         var text = new ArrayList<String>();
         text.add(String.format("FPS: %d", (int) (1000 / avg)));
         text.add(String.format("FrameTime: %.1f", avg));
-        text.add(String.format("Elements: %d", App.canvas.canvas.elements.size()));
+        text.add(String.format("Elements: %d", Canvas.getGlobalInstance().elements.size()));
         for (var i : this.lines) text.addAll(List.of(i.getLines()));
 
         gc.setColor(new Color(0, 0, 0, 180));

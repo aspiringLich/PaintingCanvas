@@ -1,6 +1,6 @@
 package examples;
 
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
 import paintingcanvas.drawable.Circle;
@@ -13,8 +13,8 @@ public class CircleProject {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
         canvas.setTitle("Circle Projects");
-        var width = canvas.width();
-        var height = canvas.height();
+        var width = canvas.getWidth();
+        var height = canvas.getHeight();
 
         // == Init Circles (2) ==
         var circles = new ArrayList<Circle>();

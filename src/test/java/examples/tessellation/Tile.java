@@ -114,8 +114,7 @@ class Tile {
 
     void colorTo(float hue) {
         this.hue = hue;
-        this.path.animate().schedule(
-                0.0,
+        this.path.animate().with(
                 Animation.colorTo(Color.getHSBColor(hue, 0.55f, 1.0f)),
                 3
         );

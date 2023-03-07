@@ -1,7 +1,6 @@
 package examples;
 
-import paintingcanvas.App;
-import paintingcanvas.Canvas;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Text;
 import paintingcanvas.extensions.FrameCounter;
@@ -21,7 +20,7 @@ import static java.awt.Color.RGBtoHSB;
 public class SongCloud {
     public static void main(String[] args) throws IOException {
         Canvas canvas = new Canvas();
-        new FrameCounter().line(() -> String.format("Animations: %d", App.canvas.canvas.animations.size())).attach();
+        new FrameCounter().line(() -> String.format("Animations: %d", canvas.animations.size())).attach();
         canvas.setTitle("Song Cloud");
 
         var rawSong = Files.readString(Path.of("song.txt"));
@@ -47,8 +46,8 @@ public class SongCloud {
             var color = Color.getHSBColor((float) Math.random(), (float) (.25 + .70 * Math.random()),
                     (float) (.85 + .10 * Math.random()));
             var fontSize = (float) ((Math.sqrt((float) entry.getValue() / maxCount)) * 100f);
-            var x = (int) (Math.random() * canvas.width());
-            var y = (int) (Math.random() * canvas.height());
+            var x = (int) (Math.random() * canvas.getWidth());
+            var y = (int) (Math.random() * canvas.getHeight());
 
             var thisText = new Text(x, y, entry.getKey()).setFontSize(fontSize).setColor(color);
             text.add(thisText);

@@ -1,7 +1,7 @@
 package paintingcanvas.animation;
 
-import paintingcanvas.App;
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.misc.TimeUnit;
 
 import java.awt.*;
 
@@ -10,29 +10,15 @@ import java.awt.*;
  */
 public interface Animatable {
     /**
-     * Create an {@link App.AnimationBuilder}.
-     * Used to animate different properties of an element (position, rotation, color).
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     *
-     * // Animate Circle o to move to 200, 200 for 3 seconds
-     * o.animate().add(moveTo(200, 200), 3);
-     * }</pre>
-     *
-     * @return {@link App.AnimationBuilder}
-     */
-    App.AnimationBuilder animate();
-
-    /**
      * Get the {@link Drawable} element from this {@code Animatable}.
      *
      * @return the {@link Drawable}
      */
     Drawable<?> drawable();
 
-    private App.AnimationBuilder add(Animation animation, double duration) {
-        animation.init(drawable());
-        return animate().add(animation, duration);
+    private AnimationBuilder addAnimation(Animation animation, double duration) {
+        animation.drawable = drawable();
+        return drawable().animate().add(animation, duration);
     }
 
     /**
@@ -47,10 +33,10 @@ public interface Animatable {
      * @param x        the x-position to move to
      * @param y        the y-position to move to
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder moveTo(int x, int y, double duration) {
-        return add(Animation.moveTo(x, y), duration);
+    default AnimationBuilder moveTo(int x, int y, double duration) {
+        return this.addAnimation(Animation.moveTo(x, y), duration);
     }
 
     /**
@@ -67,10 +53,10 @@ public interface Animatable {
      * @param g        green (0-255)
      * @param b        blue (0-255)
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder colorTo(int r, int g, int b, double duration) {
-        return add(Animation.colorTo(r, g, b), duration);
+    default AnimationBuilder colorTo(int r, int g, int b, double duration) {
+        return this.addAnimation(Animation.colorTo(r, g, b), duration);
     }
 
     /**
@@ -86,10 +72,10 @@ public interface Animatable {
      *
      * @param hex      The number describing the RGB color
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder colorTo(int hex, double duration) {
-        return add(Animation.colorTo(hex), duration);
+    default AnimationBuilder colorTo(int hex, double duration) {
+        return this.addAnimation(Animation.colorTo(hex), duration);
     }
 
     /**
@@ -105,10 +91,10 @@ public interface Animatable {
      *
      * @param color    The color to fade to
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder colorTo(Color color, double duration) {
-        return add(Animation.colorTo(color), duration);
+    default AnimationBuilder colorTo(Color color, double duration) {
+        return this.addAnimation(Animation.colorTo(color), duration);
     }
 
     /**
@@ -121,11 +107,11 @@ public interface Animatable {
      * }</pre>
      *
      * @param duration the amount of time it takes to fade out
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      * @see #fadeIn(double)
      */
-    default App.AnimationBuilder fadeOut(double duration) {
-        return add(Animation.fadeOut(), duration);
+    default AnimationBuilder fadeOut(double duration) {
+        return this.addAnimation(Animation.fadeOut(), duration);
     }
 
     /**
@@ -138,11 +124,11 @@ public interface Animatable {
      * }</pre>
      *
      * @param duration the amount of time it takes to fade out
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      * @see #fadeOut(double)
      */
-    default App.AnimationBuilder fadeIn(double duration) {
-        return add(Animation.fadeIn(), duration);
+    default AnimationBuilder fadeIn(double duration) {
+        return this.addAnimation(Animation.fadeIn(), duration);
     }
 
     /**
@@ -157,11 +143,10 @@ public interface Animatable {
      *
      * @param angle    The absolute angle to rotate to in degrees.
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
-     * @see #animate()
+     * @return an {@code this}
      */
-    default App.AnimationBuilder rotateTo(int angle, double duration) {
-        return add(Animation.rotateTo(angle), duration);
+    default AnimationBuilder rotateTo(int angle, double duration) {
+        return this.addAnimation(Animation.rotateTo(angle), duration);
     }
 
     /**
@@ -175,10 +160,10 @@ public interface Animatable {
      *
      * @param angle    The relative angle to rotate to in degrees.
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder rotateBy(int angle, double duration) {
-        return add(Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation)), duration);
+    default AnimationBuilder rotateBy(int angle, double duration) {
+        return this.addAnimation(Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation)), duration);
     }
 
     /**
@@ -193,10 +178,10 @@ public interface Animatable {
      * @param x        the x to move by
      * @param y        the y to move by
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder moveBy(int x, int y, double duration) {
-        return add(Animation.moveTo(x + drawable().x, y + drawable().y), duration);
+    default AnimationBuilder moveBy(int x, int y, double duration) {
+        return this.addAnimation(Animation.moveTo(x + drawable().x, y + drawable().y), duration);
     }
 
     /**
@@ -215,10 +200,10 @@ public interface Animatable {
      *
      * @param x        the x to move by
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder moveHorizontalBy(int x, double duration) {
-        return add(Animation.moveTo(x + drawable().x, 0), duration);
+    default AnimationBuilder moveHorizontalBy(int x, double duration) {
+        return this.addAnimation(Animation.moveTo(x + drawable().x, 0), duration);
     }
 
     /**
@@ -236,9 +221,9 @@ public interface Animatable {
      *
      * @param y        the y to move by
      * @param duration the number of seconds it lasts
-     * @return an {@link App.AnimationBuilder}
+     * @return an {@code this}
      */
-    default App.AnimationBuilder moveVerticalBy(int y, double duration) {
-        return add(Animation.moveTo(0, y + drawable().y), duration);
+    default AnimationBuilder moveVerticalBy(int y, double duration) {
+        return this.addAnimation(Animation.moveTo(0, y + drawable().y), duration);
     }
 }

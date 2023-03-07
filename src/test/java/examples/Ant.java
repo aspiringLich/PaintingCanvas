@@ -1,12 +1,12 @@
 package examples;
 
-import paintingcanvas.Canvas;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.misc.TimeUnit;
 
 import java.awt.*;
+import paintingcanvas.canvas.Canvas;
 
 public class Ant {
     static final int PIXEL_SIZE = 10;
@@ -16,11 +16,11 @@ public class Ant {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(2000, 1000, "Langton's Ant");
         new FrameCounter().line(() -> String.format("Step: %d", tick)).attach();
-        var field = new Field(canvas.width() / PIXEL_SIZE, canvas.height() / PIXEL_SIZE);
+        var field = new Field(canvas.getWidth() / PIXEL_SIZE, canvas.getHeight() / PIXEL_SIZE);
 
         while (true) {
             field.step();
-            canvas.sleep(1, TimeUnit.Frames);
+            canvas.sleep(0.001);
         }
     }
 
