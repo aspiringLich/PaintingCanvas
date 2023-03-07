@@ -1,5 +1,6 @@
-package examples.tessellation;
+package examples;
 
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Path;
 
@@ -7,6 +8,91 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
+
+class Tessellation {
+    public static Canvas canvas = new Canvas(960, 640, "");
+
+    public static void main(String[] args) {
+        canvas.setTitle("Tessellation project");
+        canvas.sleep(0.05);
+
+        int width = canvas.getWidth();
+        int height = canvas.getHeight();
+
+        Tessellation tess = new Tessellation(width, height);
+        tess.order();
+        tess.animateAll(
+                Animation.colorTo(Color.getHSBColor(0, 0.55f, 1.0f)),
+                0.1,
+                2,
+                4,
+                false
+        );
+    }
+
+    static final int ySpacing = Const.height * 2;
+    static final int xSpacing = Const.size * 3 / 2;
+    static Tile[][] tiles;
+
+    Tessellation(int width, int height) {
+        int x = width / xSpacing + 2;
+        int y = height / ySpacing + 2;
+
+        tiles = new Tile[x][y];
+//        tiles = new Tile[2][2];
+        this.init();
+    }
+
+    public static Tile getTile(int i, int j) {
+        if (i < 0 || j < 0 || i >= tiles.length || j >= tiles[i].length) {
+            return null;
+        }
+        return tiles[i][j];
+    }
+
+    public void init() {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                tiles[i][j] = new Tile(i, j);
+
+                tiles[i][j].draw(
+                        (int) (Math.random() * Tessellation.canvas.getWidth()),
+                        (int) (Math.random() * Tessellation.canvas.getHeight())
+                );
+                tiles[i][j].rotate((Math.random() - 0.5) * 720);
+            }
+        }
+    }
+
+    public void animateAll(Animation animation, double delay, double dMin, double dMax, boolean outline) {
+        for (Tile[] tile : tiles) {
+            for (Tile value : tile) {
+                value.animate(animation, Math.random() * (dMax - dMin) + dMin, outline);
+                Tessellation.canvas.sleep(delay);
+            }
+        }
+        Tessellation.canvas.sleep();
+    }
+
+    public void order() {
+        for (Tile[] row : tiles) {
+            for (Tile tile : row) {
+                var pos = tile.getPos();
+                tile.animate(
+                        Animation.moveTo(pos.x, pos.y),
+                        3,
+                        true
+                );
+                tile.animate(
+                        Animation.rotateTo(0),
+                        3,
+                        true
+                );
+            }
+        }
+        Tessellation.canvas.sleep();
+    }
+}
 
 class Tile {
     Edge[] edges = new Edge[6];
@@ -205,4 +291,5 @@ class Edge {
         return out;
     }
 }
+
 
