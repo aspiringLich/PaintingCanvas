@@ -20,7 +20,7 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
     final Vector<Long> frameTimes = new Vector<>();
     boolean enabled = true;
     boolean frameChart = true;
-    int dataPoints = 100;
+    int dataPoints = 200;
     List<GetLines> lines = new ArrayList<>();
     long lastFrame = System.currentTimeMillis();
     Font font;
@@ -70,6 +70,8 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
      */
     public FrameCounter dataPoints(int dataPoints) {
         this.dataPoints = dataPoints;
+        this.frameTimes.clear();
+        for (int i = 0; i < dataPoints; i++) frameTimes.add(0L);
         return this;
     }
 
@@ -125,12 +127,14 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
         lastFrame = now;
         if (!enabled) return;
 
-        // Get average & max time
+        // Get average & max / min time
         var sum = 0;
         var max = 0;
+        var min = Integer.MAX_VALUE;
         for (var i : frameTimes) {
             sum += i;
             max = (int) Math.max(i, max);
+            min = (int) Math.min(i, min);
         }
         var avg = (float) (sum) / frameTimes.size();
 
@@ -162,10 +166,14 @@ public class FrameCounter implements Canvas.CanvasComponent.RenderLifecycle {
         var frameY = new int[size];
         for (var inc = 0; inc < size; inc++) {
             frameX[inc] = inc * maxText / size + 10;
-            frameY[inc] = (int) ((max - frameTimes.get(inc).intValue()) / (float) max * 30 + 10 + i * fh);
+            var per = (frameTimes.get(inc).intValue() - min) / (float)(max - min);
+            frameY[inc] = (int) (per * -30 + 40 + i * fh);
         }
 
+        var stroke = gc.getStroke();
+        gc.setStroke(new BasicStroke(BasicStroke.JOIN_ROUND));
         gc.drawPolyline(frameX, frameY, size);
+        gc.setStroke(stroke);
     }
 
     public interface GetLines {

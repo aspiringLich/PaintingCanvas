@@ -12,7 +12,7 @@ public class Text extends Drawable<Text> {
     /**
      * The font of the text, you can change this if you want a different font (and have it installed)
      */
-    public Font font = new Font("Comic Sans MS", Font.BOLD, 1);
+    public Font font = new Font("Comic Sans MS", Font.BOLD, 12);
     /**
      * The text to draw
      */

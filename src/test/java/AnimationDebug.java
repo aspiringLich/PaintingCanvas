@@ -9,9 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class AnimationDebug {
-    final static int size = 1;
-    final static int width = 1700;
-    final static int height = 1000;
+    final static int size = 20;
+    final static int width = 50;
+    final static int height = 50;
     final static int pad = size / 2;
 
     public static void main(String[] argv) {

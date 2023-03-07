@@ -9,12 +9,12 @@ import paintingcanvas.misc.TimeUnit;
 import java.awt.*;
 
 public class Ant {
-    static final int PIXEL_SIZE = 5;
+    static final int PIXEL_SIZE = 10;
     static int tick = 0;
 
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
-        var canvas = new Canvas(1000, 1000, "Langton's Ant");
+        var canvas = new Canvas(2000, 1000, "Langton's Ant");
         new FrameCounter().line(() -> String.format("Step: %d", tick)).attach();
         var field = new Field(canvas.width() / PIXEL_SIZE, canvas.height() / PIXEL_SIZE);
 
