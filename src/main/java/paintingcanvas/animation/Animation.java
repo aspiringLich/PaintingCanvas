@@ -17,26 +17,26 @@ public abstract class Animation {
      */
     public int duration;
     /**
-     * The drawable that is being animated
-     */
-    public Drawable<?> drawable;
-    /**
      * The easing function to use
      */
     public Easing easing = Easing.linear();
+    /**
+     * The Drawable this animation acts on
+     */
+    Drawable<?> drawable;
 
-    protected Animation(int startFrame, int duration, Drawable<? extends Drawable<?>> drawable) {
+    protected Animation(int startFrame, int duration) {
         this.startFrame = startFrame;
         this.duration = duration;
-        this.drawable = drawable;
     }
 
     protected Animation() {
-        this(0, 0, null);
+        this(0, 0);
     }
 
     /**
-     * Creates an animation that moves {@code this} to the specified {@code x} and {@code y} over {@code duration} seconds
+     * Creates an animation that moves {@code this} to the specified {@code x} and {@code y}
+     * over {@code duration} seconds
      *
      * <pre>{@code
      * Circle c = new Circle(200, 200, 50);
@@ -225,7 +225,10 @@ public abstract class Animation {
      *
      * @return this
      */
-    public Animation init() {
+    Animation init(Drawable<?> drawable, int startFrame, int duration) {
+        this.drawable = drawable;
+        this.startFrame = startFrame;
+        this.duration = duration;
         this.initAnimation(this.drawable);
         return this;
     }

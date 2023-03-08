@@ -448,10 +448,16 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         Canvas.getGlobalInstance().elements.remove(this);
     }
 
+    /**
+     * Start animating this object.
+     *
+     * @return An {@link AnimationBuilder} to start animating this object.
+     */
     public AnimationBuilder animate() {
         return new AnimationBuilder(this);
     }
 
+    @Override
     public Drawable<?> drawable() {
         return this;
     }

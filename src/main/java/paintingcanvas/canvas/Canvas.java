@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -16,28 +17,81 @@ import java.util.concurrent.TimeUnit;
  * The internal canvas component that is used to draw to the screen
  */
 public class Canvas {
-    // the fps of the canvas
+    /**
+     * the fps of the canvas
+     */
     public static final int fps = 30;
     public static Canvas globalInstance;
-    // the initial size of the Canvas
+    /**
+     * the initial size of the Canvas
+     */
     public final Point startSize;
-    // the elements that are currently on the canvas
+    /**
+     * the elements that are currently on the canvas
+     */
     public final List<Drawable<?>> elements = new Vector<>();
-    // the list of animations that are currently running
+    /**
+     * the list of animations that are currently running
+     */
     public final List<Animation> animations = new ArrayList<>();
-    // the list of events to run
-    public final List<Event> events = new Vector<>();
-    // the JFrame that the Canvas is attached to
+    /**
+     * A CanvasComponent, which handles all the rendering n stuff
+     */
     public final CanvasComponent component;
-    // the current frame
+    /**
+     * Used to lock the thread to wait for animations to finish
+     */
+    protected final Object syncObject = new Object();
+    /**
+     * The current frame
+     */
     public int frame = -1;
+    /**
+     * The RenderLifecycle: allows you to write code to run before and after a frame is rendered
+     */
     public RenderLifecycle renderLifecycle = new RenderLifecycle() {
     };
-    // Used to block
-    protected final Object syncObject = new Object();
+
+    /**
+     * Initializes the canvas with a default size of 900x600
+     * and a title of "Canvas"
+     */
+    public Canvas() {
+        this(900, 600, "Canvas");
+    }
+
+    /**
+     * Initializes the canvas
+     * @param width the width of the canvas
+     * @param height the height of the canvas
+     * @param title the title of the canvas
+     */
+    public Canvas(int width, int height, String title) {
+        super();
+        this.startSize = new Point(width, height);
+        this.component = new CanvasComponent(this, width, height, title);
+
+        if (globalInstance != null)
+            throw new RuntimeException("There can only be one Canvas instance");
+        Canvas.globalInstance = this;
+
+        render();
+    }
+
+    /**
+     * Get the global instance of the Canvas (used internally to access the Canvas)
+     *
+     * @return The global instance of Canvas
+     */
+    static public Canvas getGlobalInstance() {
+        if (globalInstance == null)
+            throw new RuntimeException("Canvas has not been initialized!");
+        return globalInstance;
+    }
 
     /**
      * Get the width of the canvas
+     *
      * @return The width of the canvas
      */
     public int getWidth() {
@@ -47,6 +101,7 @@ public class Canvas {
 
     /**
      * Get the height of the canvas
+     *
      * @return The height of the canvas
      */
     public int getHeight() {
@@ -56,6 +111,7 @@ public class Canvas {
 
     /**
      * Set the title of this canvas
+     *
      * @param title the new title
      */
     public void setTitle(String title) {
@@ -72,7 +128,7 @@ public class Canvas {
      * c.setColor(Color.BLUE);
      * }</pre>
      */
-     public void sleep() {
+    public void sleep() {
         try {
             synchronized (syncObject) {
                 syncObject.wait();
@@ -89,6 +145,7 @@ public class Canvas {
      * canvas.sleep(1); // Sleeps for 1 second
      * c.setColor(Color.RED);
      * }</pre>
+     *
      * @param seconds The number of seconds to sleep for
      */
     public void sleep(double seconds) {
@@ -97,34 +154,6 @@ public class Canvas {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * Hey did you know that the canvas object is fake, and it's actually all static
-     * <p>
-     * haha get bamboozled
-     * @return The global instance of Canvas
-     */
-    static public Canvas getGlobalInstance() {
-        if (globalInstance == null)
-            throw new RuntimeException("Canvas has not been initialized!");
-        return globalInstance;
-    }
-
-    public Canvas() {
-        this(900, 600, "Canvas");
-    }
-
-    public Canvas(int width, int height, String title) {
-        super();
-        this.startSize = new Point(width, height);
-        this.component = new CanvasComponent(this, width, height, title);
-
-        if (globalInstance != null)
-            throw new RuntimeException("There can only be one Canvas instance");
-        Canvas.globalInstance = this;
-
-        render();
     }
 
     public void render() {

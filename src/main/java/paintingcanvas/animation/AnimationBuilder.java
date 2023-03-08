@@ -39,10 +39,7 @@ public class AnimationBuilder {
 
         // init animation
         var _animation = animation.copy();
-        _animation.drawable = drawable;
-        _animation.init();
-        _animation.startFrame = c.frame;
-        _animation.duration = _duration;
+        _animation.init(drawable, c.frame, _duration);
         c.animations.add(_animation);
 
         // wait for this animation to finish
@@ -88,10 +85,7 @@ public class AnimationBuilder {
 
         // init animation
         var _animation = animation.copy();
-        _animation.drawable = drawable;
-        _animation.init();
-        _animation.startFrame = c.frame;
-        _animation.duration = _duration;
+        _animation.init(drawable, c.frame, _duration);
         c.animations.add(_animation);
 
         return this;

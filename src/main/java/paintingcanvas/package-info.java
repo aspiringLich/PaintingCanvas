@@ -1,9 +1,6 @@
 /**
- * <p>
- * Contains the main classes and rendering backbone of the library.
- * </p><p>
- * The main class is {@link paintingcanvas._Canvas}, the rest of the stuff defined in here is
- * internal stuff you don't need to worry about.
- * </p>
+ * PaintingCanvas! A library that provides you with
+ * a simple, but powerful way to draw and animate
+ * various shapes.
  */
 package paintingcanvas;
