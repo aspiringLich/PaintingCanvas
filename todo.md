@@ -3,4 +3,4 @@
  - [ ] Clean up documentation
  - [ ] Rewrite wiki documentation (yaaay)
  - [x] Resize thingy
- - [ ] Make it based on real time
+ - [ ] Make it based on real time (?????)

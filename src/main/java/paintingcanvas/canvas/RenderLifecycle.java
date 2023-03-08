@@ -13,14 +13,14 @@ public interface RenderLifecycle {
     default void renderEnd(Graphics g) {
     }
 
-    default void onResize(CanvasComponent canvas, ComponentEvent e) {
+    default void onResize(CanvasPanel canvas, ComponentEvent e) {
     }
 
     class ResizeListener extends ComponentAdapter {
-        final CanvasComponent canvas;
+        final CanvasPanel canvas;
         Dimension lastSize = new Dimension();
 
-        ResizeListener(CanvasComponent canvas) {
+        ResizeListener(CanvasPanel canvas) {
             this.canvas = canvas;
         }
 
@@ -48,7 +48,7 @@ public interface RenderLifecycle {
         private static Dimension lastSize;
 
         @Override
-        public void onResize(CanvasComponent canvasComponent, ComponentEvent e) {
+        public void onResize(CanvasPanel canvasComponent, ComponentEvent e) {
             if (lastSize == null) {
                 lastSize = e.getComponent().getSize();
                 return;
@@ -75,7 +75,7 @@ public interface RenderLifecycle {
                 anim.end = new Point(anim.end.x + (int) widthDiff, anim.end.y + (int) heightDiff);
             });
 
-            canvas.component.jframe.repaint();
+            canvas.panel.jframe.repaint();
         }
     }
 }

@@ -34,7 +34,7 @@ public class Canvas {
     /**
      * A CanvasComponent, which handles all the rendering n stuff
      */
-    public final CanvasComponent component;
+    public final CanvasPanel panel;
     /**
      * Used to lock the thread to wait for animations to finish
      */
@@ -78,7 +78,7 @@ public class Canvas {
     public Canvas(int width, int height, String title) {
         super();
         this.startSize = new Point(width, height);
-        this.component = new CanvasComponent(this, width, height, title);
+        this.panel = new CanvasPanel(this, width, height, title);
 
         this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
         if (!System.getProperties().getOrDefault("paintingcanvas.autoCenter", "").toString().toLowerCase(Locale.ROOT).equals("false"))
@@ -107,8 +107,8 @@ public class Canvas {
      * @return The width of the canvas
      */
     public int getWidth() {
-        var width = component.getWidth();
-        return width == 0 ? startSize.x : width + component.xInset;
+        var width = panel.getWidth();
+        return width == 0 ? startSize.x : width;
     }
 
     /**
@@ -117,8 +117,8 @@ public class Canvas {
      * @return The height of the canvas
      */
     public int getHeight() {
-        var height = component.getHeight();
-        return height == 0 ? startSize.y : height + component.yInset;
+        var height = panel.getHeight();
+        return height == 0 ? startSize.y : height;
     }
 
     /**
@@ -127,7 +127,7 @@ public class Canvas {
      * @param title the new title
      */
     public void setTitle(String title) {
-        this.component.jframe.setTitle(title);
+        this.panel.jframe.setTitle(title);
     }
 
     /**
@@ -172,6 +172,6 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        poolExecutor.scheduleAtFixedRate(component::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        poolExecutor.scheduleAtFixedRate(panel::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 }

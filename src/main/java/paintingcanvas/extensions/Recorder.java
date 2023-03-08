@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.attribute.FileAttribute;
 
 /**
  * A class that allows you to record the canvas to a image sequence, can be combined using ffmpeg
@@ -50,7 +49,7 @@ public class Recorder implements RenderLifecycle {
 
     public Recorder stop() {
         this.recording = false;
-        System.out.printf("ffmpeg -framerate 30 -i 'tmp_%d.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4", Canvas.fps, this.dir, this.format);
+        System.out.printf("ffmpeg -r 30 -i 'tmp_%d.jpg' -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -y -an out.mp4", Canvas.fps, this.dir, this.format);
         return this;
     }
 
@@ -70,7 +69,7 @@ public class Recorder implements RenderLifecycle {
         if (rendering) return;
 
         synchronized (imgSync) {
-            var cmp = Canvas.getGlobalInstance().component;
+            var cmp = Canvas.getGlobalInstance().panel;
             img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
             var gc = img.getGraphics();
             cmp.paint(gc);
@@ -83,4 +82,9 @@ public class Recorder implements RenderLifecycle {
     }
 }
 
-// ffmpeg -framerate 30 -i 'tmp_%d.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4
+//                  v file pattern                                  v idk i trust stack overflow
+//         v framerate          v padding                                  v output file
+// ffmpeg -r 30 -i 'tmp_%d.jpg' -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -y -an out.mp4
+
+// if we didnt have the padding, it would fail to compress to mp4 b/c it needs an even height
+// or something

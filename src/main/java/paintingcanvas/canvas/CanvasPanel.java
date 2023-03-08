@@ -4,29 +4,33 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Internal class that extends JComponent that does the initial setup of the JFrame
+ * Internal class that extends JPanel that does the initial setup of the JFrame
  * <p>
  * Mostly used to not clutter up the documentation
  */
-public class CanvasComponent extends JComponent {
+public class CanvasPanel extends JPanel {
     public JFrame jframe;
     Canvas canvas;
 
-    int xInset, yInset;
+    int width, height;
 
-    CanvasComponent(Canvas canvas, int width, int height, String title) {
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width, height);
+    }
+
+    CanvasPanel(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
-        jframe = new JFrame();
-        var inset = jframe.getInsets();
-        xInset = inset.left + inset.right;
-        yInset = inset.top + inset.bottom;
+        this.width = width;
+        this.height = height;
 
-        jframe.setSize(width + xInset, height + yInset);
+        jframe = new JFrame();
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle(title);
         jframe.setVisible(true);
 //        jframe.setLayout(null);
         jframe.add(this);
+        jframe.pack();
         jframe.setLocationRelativeTo(null);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
     }
@@ -37,6 +41,8 @@ public class CanvasComponent extends JComponent {
      * @param g the <code>Graphics</code> context in which to paint
      */
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
         g.setColor(canvas.backgroundColor);
         g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         canvas.frame++;
