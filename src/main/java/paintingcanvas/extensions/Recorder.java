@@ -20,6 +20,7 @@ import java.nio.file.Path;
 public class Recorder implements RenderLifecycle {
     // == Screenshot ==
     final Object imgSync = new Object();
+
     // == Misc ==
     boolean rendering = true;
     BufferedImage img;
@@ -35,21 +36,32 @@ public class Recorder implements RenderLifecycle {
         return this;
     }
 
-    public Recorder record(String format) {
-        try {
-            this.dir = Files.createTempDirectory(".tmp");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public Recorder record(Path path, String format) {
+        this.dir = path;
         this.format = format;
         this.recording = true;
         this.inc = 0;
+
+        if (filledFolder(this.dir))
+            System.err.printf("Recording folder `%s` already has files in it.", path);
+
+        try {
+            Files.createDirectory(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return this;
+    }
+
+    private boolean filledFolder(Path path) {
+        if (!Files.exists(path)) return false;
+        var contents = path.toFile().listFiles();
+        return contents == null || contents.length > 0;
     }
 
     public Recorder stop() {
         this.recording = false;
-        System.out.printf("ffmpeg -r 30 -i 'tmp_%d.jpg' -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -y -an out.mp4", Canvas.fps, this.dir, this.format);
+        System.out.printf("Maybe: ffmpeg -r %d -i '%s/tmp_%%d.%s' -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -y -an out.mov", Canvas.fps, this.dir, this.format);
         return this;
     }
 
@@ -67,9 +79,9 @@ public class Recorder implements RenderLifecycle {
     public void renderEnd(Graphics g) {
         rendering ^= true;
         if (rendering) return;
+        var cmp = Canvas.getGlobalInstance().panel;
 
         synchronized (imgSync) {
-            var cmp = Canvas.getGlobalInstance().panel;
             img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
             var gc = img.getGraphics();
             cmp.paint(gc);
@@ -78,6 +90,18 @@ public class Recorder implements RenderLifecycle {
         }
 
         if (!recording || this.dir == null) return;
+        {
+            var size = cmp.getSize();
+            var gc = (Graphics2D) g;
+            var text = "REC";
+            gc.setFont(gc.getFont().deriveFont(Font.PLAIN, 30));
+            var width = gc.getFontMetrics().stringWidth(text);
+            var height = gc.getFontMetrics().getHeight();
+            gc.setColor(Color.WHITE);
+            gc.drawString(text, size.width - width - 10, height / 2 + 20);
+            gc.setColor(Color.RED);
+            gc.fillOval(size.width - 40 - width, 15, 25, 25);
+        }
         screenshot(this.dir.resolve(Path.of(String.format("tmp_%d.%s", inc++, this.format))).toFile(), this.format);
     }
 }
