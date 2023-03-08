@@ -26,7 +26,7 @@ public class Line extends Drawable<Line> {
     public Line(int x1, int y1, int x2, int y2) {
         super(x1, y1, Color.BLACK);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(5);
+        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Line extends Drawable<Line> {
     public Line(int x1, int y1, int x2, int y2, Color color) {
         super(x1, y1, color);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(5);
+        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
