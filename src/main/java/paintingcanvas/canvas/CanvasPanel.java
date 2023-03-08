@@ -14,11 +14,6 @@ public class CanvasPanel extends JPanel {
 
     int width, height;
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(width, height);
-    }
-
     CanvasPanel(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
         this.width = width;
@@ -33,6 +28,11 @@ public class CanvasPanel extends JPanel {
         jframe.pack();
         jframe.setLocationRelativeTo(null);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width, height);
     }
 
     /**

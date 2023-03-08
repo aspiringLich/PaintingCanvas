@@ -4,7 +4,6 @@ import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
-import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
 

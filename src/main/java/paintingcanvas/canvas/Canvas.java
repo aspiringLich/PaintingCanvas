@@ -53,14 +53,6 @@ public class Canvas {
     public Color backgroundColor = Color.WHITE;
 
     /**
-     * Sets the background color of the canvas
-     * @param color the new background color
-     */
-    public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
-    }
-
-    /**
      * Initializes the canvas with a default size of 900x600
      * and a title of "Canvas"
      */
@@ -99,6 +91,15 @@ public class Canvas {
         if (globalInstance == null)
             throw new RuntimeException("Canvas has not been initialized!");
         return globalInstance;
+    }
+
+    /**
+     * Sets the background color of the canvas
+     *
+     * @param color the new background color
+     */
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
     }
 
     /**
