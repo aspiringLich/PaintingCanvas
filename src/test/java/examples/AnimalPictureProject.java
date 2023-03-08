@@ -3,6 +3,7 @@ package examples;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Rectangle;
+import paintingcanvas.extensions.FrameCounter;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -32,8 +33,10 @@ public class AnimalPictureProject {
     // @formatter:on
 
     public static void main(String[] args) {
+        System.setProperty("paintingcanvas.autoCenter", "false");
         Canvas canvas = new Canvas();
         canvas.setTitle("Animal Picture Projects");
+        new FrameCounter().attach();
 
         var xm = canvas.getWidth() / 2 - mushroom.length * 10;
         var ym = canvas.getHeight() / 2 - mushroom[0].length * 10;
@@ -52,8 +55,6 @@ public class AnimalPictureProject {
                 if (rawColor == 3) colored.add(rect);
             }
         }
-
-        System.out.print("e");
 
         // == Animation ==
         while (true) {

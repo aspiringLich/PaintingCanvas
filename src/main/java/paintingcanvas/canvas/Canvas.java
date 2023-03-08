@@ -3,12 +3,9 @@ package paintingcanvas.canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Drawable;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +30,7 @@ public class Canvas {
     /**
      * the list of animations that are currently running
      */
-    public final List<Animation> animations = new ArrayList<>();
+    public final List<Animation> animations = new Vector<>();
     /**
      * A CanvasComponent, which handles all the rendering n stuff
      */
@@ -49,8 +46,7 @@ public class Canvas {
     /**
      * The RenderLifecycle: allows you to write code to run before and after a frame is rendered
      */
-    public RenderLifecycle renderLifecycle = new RenderLifecycle() {
-    };
+    public List<RenderLifecycle> renderLifecycles = new Vector<>();
 
     /**
      * Initializes the canvas with a default size of 900x600
@@ -72,10 +68,13 @@ public class Canvas {
         this.startSize = new Point(width, height);
         this.component = new CanvasComponent(this, width, height, title);
 
+        this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
+        if (!System.getProperties().getOrDefault("paintingcanvas.autoCenter", "").toString().toLowerCase(Locale.ROOT).equals("false"))
+            this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
+
         if (globalInstance != null)
             throw new RuntimeException("There can only be one Canvas instance");
         Canvas.globalInstance = this;
-
         render();
     }
 
@@ -163,43 +162,9 @@ public class Canvas {
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
         poolExecutor.scheduleAtFixedRate(() -> {
             component.repaint();
-            SwingUtilities.updateComponentTreeUI(component.jframe);
-            component.jframe.invalidate();
-            component.jframe.validate();
+//            SwingUtilities.updateComponentTreeUI(component.jframe);
+//            component.jframe.invalidate();
+//            component.jframe.validate();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
-    }
-
-    public interface RenderLifecycle {
-        default void renderStart(Graphics g) {
-            var gc = (Graphics2D) g;
-            // Enable antialiasing for elements + text
-            gc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            gc.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        }
-
-        default void renderEnd(Graphics g) {
-        }
-
-        default void onResize(CanvasComponent canvas, ComponentEvent e) {
-            canvas.repaint();
-        }
-    }
-
-    static class ResizeListener extends ComponentAdapter {
-        final CanvasComponent canvas;
-        Dimension lastSize = new Dimension();
-
-        ResizeListener(CanvasComponent canvas) {
-            this.canvas = canvas;
-        }
-
-        public void componentResized(ComponentEvent e) {
-            // Don't fire callback multiple times for a single event
-            var thisSize = e.getComponent().getSize();
-            if (thisSize.equals(lastSize)) return;
-            lastSize = thisSize;
-
-            canvas.canvas.renderLifecycle.onResize(canvas, e);
-        }
     }
 }

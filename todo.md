@@ -2,5 +2,5 @@
 
  - [ ] Clean up documentation
  - [ ] Rewrite wiki documentation (yaaay)
- - [ ] Resize thingy
+ - [x] Resize thingy
  - [ ] Make it based on real time

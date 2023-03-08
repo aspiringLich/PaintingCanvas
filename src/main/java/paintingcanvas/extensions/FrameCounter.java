@@ -1,6 +1,7 @@
 package paintingcanvas.extensions;
 
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.canvas.RenderLifecycle;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -15,7 +16,7 @@ import java.util.Vector;
  * new FrameCounter().attach();
  * }</pre>
  */
-public class FrameCounter implements Canvas.RenderLifecycle {
+public class FrameCounter implements RenderLifecycle {
     final Vector<Long> frameTimes = new Vector<>();
     boolean enabled = true;
     boolean frameChart = true;
@@ -114,8 +115,7 @@ public class FrameCounter implements Canvas.RenderLifecycle {
      * Adds system to the default static canvas.
      */
     public void attach() {
-
-        Canvas.getGlobalInstance().renderLifecycle = this;
+        Canvas.getGlobalInstance().renderLifecycles.add(this);
     }
 
     @Override

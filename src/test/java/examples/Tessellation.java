@@ -14,6 +14,7 @@ class Tessellation {
     static final int xSpacing = Const.size * 3 / 2;
     public static Canvas canvas = new Canvas(960, 640, "");
     static Tile[][] tiles;
+
     Tessellation(int width, int height) {
         int x = width / xSpacing + 2;
         int y = height / ySpacing + 2;
