@@ -1,21 +1,24 @@
-<image align=right width=40% src=https://user-images.githubusercontent.com/48413902/211966226-fe55605e-881b-40ab-b3da-8e6e2c96614a.png></image>
 
 # PaintingCanvas
 
 ## What is this?
  
-This is a complete overhaul to the old graphics library used in our AP comp science class. As well as adding new features, it's no longer terrible and flashy with the power of like 10 lines of code. 
+This is a complete overhaul to the old graphics library used in our AP comp science class. It adds more shapes, more features, a *much* more robust and capable animation system, and more!
 
 ## Features
 
 The default font is comic sans (important feature) (you're welcome).
 
-This is a relatively capable library, and it has most of the features you would expect out of a canvas. You can draw objects, rotate them, and animate them. It's not a terribly extensive system, but you shouldn't struggle to do something cool with it.
+This is a relatively capable library, and it has most of the features you would expect out of a canvas. You can draw shapes, rotate them, and move them around. If you would like a more complete overview of what this library is capable of, check out the [javadoc](https://aspiringlich.github.io/PaintingCanvas/paintingcanvas/package-summary.html).
 
 ## Simplicity First!
 
-This library is meant to replace another one, and thus it's API is relatively similar to its predecessor. It puts simplicity over robustness first, as this is meant to teach people who barely know how to code in a more interactive way. It's also meant to be modified to fit the specific lesson or project. 
+This library is designed to be as simple as possible, while still being somewhat robust. It's made to be simple enough for absolute beginners to use, but powerful and extensible enough to satisfy all the biggest nerds out there.
 
-So don't complain about how the rendering runs completely detached and asynchronously from the main thread.
+So don't complain about how the rendering runs completely asynchronously from the main thread.
 
-And how the animation system is more of an animation scheduling system (we've argued over this to no end).
+## Examples
+
+You can find various examples in `src/test/java/examples/`. These are all runnable, and they should give you a good idea of how to use the library, and give good *examples* (haha get it) of the library's capabilities.
+
+`TODO: ADD VIDEOS OF EXAMPLES`
