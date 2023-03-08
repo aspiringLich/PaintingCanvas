@@ -19,7 +19,7 @@ public class AnimationDebug {
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(width * size, height * size + 32, "test");
-        var rec = new Recorder().attach().record("jpg");
+//        var rec = new Recorder().attach().record("jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),

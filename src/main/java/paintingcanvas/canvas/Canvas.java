@@ -108,7 +108,7 @@ public class Canvas {
      */
     public int getWidth() {
         var width = component.getWidth();
-        return width == 0 ? startSize.x : width;
+        return width == 0 ? startSize.x : width + component.xInset;
     }
 
     /**
@@ -118,7 +118,7 @@ public class Canvas {
      */
     public int getHeight() {
         var height = component.getHeight();
-        return height == 0 ? startSize.y : height;
+        return height == 0 ? startSize.y : height + component.yInset;
     }
 
     /**

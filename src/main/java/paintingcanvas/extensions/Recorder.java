@@ -10,7 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.FileAttribute;
 
+/**
+ * A class that allows you to record the canvas to a image sequence, can be combined using ffmpeg
+ * or something similar
+ * <p>
+ * stores the images in a temporary directory using {@link Files#createTempDirectory}
+ */
 public class Recorder implements RenderLifecycle {
     // == Screenshot ==
     final Object imgSync = new Object();
@@ -43,7 +50,7 @@ public class Recorder implements RenderLifecycle {
 
     public Recorder stop() {
         this.recording = false;
-        System.out.printf("Maybe: ffmpeg -framerate %d -pattern_type glob -i \"%s/tmp_*.%s\" out.mp4", Canvas.fps, this.dir, this.format);
+        System.out.printf("ffmpeg -framerate 30 -i 'tmp_%d.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4", Canvas.fps, this.dir, this.format);
         return this;
     }
 
@@ -67,6 +74,7 @@ public class Recorder implements RenderLifecycle {
             img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
             var gc = img.getGraphics();
             cmp.paint(gc);
+            Canvas.globalInstance.frame -= 1;
             gc.dispose();
         }
 
@@ -75,4 +83,4 @@ public class Recorder implements RenderLifecycle {
     }
 }
 
-// ffmpeg -framerate 30 -pattern_type glob -i '*.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4
+// ffmpeg -framerate 30 -i 'tmp_%d.jpg' -c:v libx264 -pix_fmt yuv420p out.mp4

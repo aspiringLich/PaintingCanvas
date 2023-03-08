@@ -4,6 +4,7 @@ import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
+import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
 
@@ -14,12 +15,13 @@ public class Ant {
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(2000, 1000, "Langton's Ant");
+//        var rec = new Recorder().attach().record("jpg");
         new FrameCounter().line(() -> String.format("Step: %d", tick)).attach();
-        var field = new Field(canvas.getWidth() / PIXEL_SIZE, canvas.getHeight() / PIXEL_SIZE);
+        var field = new Field(canvas.getWidth() / PIXEL_SIZE + 1, canvas.getHeight() / PIXEL_SIZE + 1);
 
         while (true) {
             field.step();
-            canvas.sleep(0.001);
+            canvas.sleep(0.005);
         }
     }
 

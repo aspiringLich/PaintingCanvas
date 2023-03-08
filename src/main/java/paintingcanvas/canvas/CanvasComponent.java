@@ -12,14 +12,20 @@ public class CanvasComponent extends JComponent {
     public JFrame jframe;
     Canvas canvas;
 
+    int xInset, yInset;
+
     CanvasComponent(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
         jframe = new JFrame();
+        var inset = jframe.getInsets();
+        xInset = inset.left + inset.right;
+        yInset = inset.top + inset.bottom;
 
+        jframe.setSize(width + xInset, height + yInset);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setSize(width, height);
         jframe.setTitle(title);
         jframe.setVisible(true);
+//        jframe.setLayout(null);
         jframe.add(this);
         jframe.setLocationRelativeTo(null);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
