@@ -1,7 +1,7 @@
 package examples;
 
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Path;
 
 import java.awt.*;
@@ -10,7 +10,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 class Tessellation {
+    static final int ySpacing = Const.height * 2;
+    static final int xSpacing = Const.size * 3 / 2;
     public static Canvas canvas = new Canvas(960, 640, "");
+    static Tile[][] tiles;
+    Tessellation(int width, int height) {
+        int x = width / xSpacing + 2;
+        int y = height / ySpacing + 2;
+
+        tiles = new Tile[x][y];
+//        tiles = new Tile[2][2];
+        this.init();
+    }
 
     public static void main(String[] args) {
         canvas.setTitle("Tessellation project");
@@ -28,19 +39,6 @@ class Tessellation {
                 4,
                 false
         );
-    }
-
-    static final int ySpacing = Const.height * 2;
-    static final int xSpacing = Const.size * 3 / 2;
-    static Tile[][] tiles;
-
-    Tessellation(int width, int height) {
-        int x = width / xSpacing + 2;
-        int y = height / ySpacing + 2;
-
-        tiles = new Tile[x][y];
-//        tiles = new Tile[2][2];
-        this.init();
     }
 
     public static Tile getTile(int i, int j) {
@@ -268,13 +266,12 @@ class Edge {
         var unit = (int) (size / 12 * 1.05);
 
         var tabHeight = unit * 4;
-        var indent = unit;
 
         out.add(new Point(0, 0));
         out.add(new Point(padding - unit / 2, unit));
         out.add(new Point(padding, 0));
-        out.add(new Point(padding + unit / 4, -indent / 2));
-        out.add(new Point(padding, -indent));
+        out.add(new Point(padding + unit / 4, -unit / 2));
+        out.add(new Point(padding, -unit));
         out.add(new Point(padding - unit, -tabHeight));
         out.add(new Point(size / 2, -tabHeight));
 

@@ -166,7 +166,7 @@ public class FrameCounter implements Canvas.RenderLifecycle {
         var frameY = new int[size];
         for (var inc = 0; inc < size; inc++) {
             frameX[inc] = inc * maxText / size + 10;
-            var per = (frameTimes.get(inc).intValue() - min) / (float)(max - min);
+            var per = (frameTimes.get(inc).intValue() - min) / (float) (max - min);
             frameY[inc] = (int) (per * -30 + 40 + i * fh);
         }
 

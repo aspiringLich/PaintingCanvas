@@ -1,15 +1,14 @@
 package examples;
 
 import paintingcanvas.canvas.Canvas;
-import paintingcanvas.drawable.Polygon;
-import paintingcanvas.drawable.*;
+import paintingcanvas.drawable.Circle;
 import paintingcanvas.extensions.FrameCounter;
 
 import java.awt.*;
 
 @SuppressWarnings("unused")
 public class Test {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Canvas canvas = new Canvas();
         new FrameCounter().line(
                 () -> String.format("Animations: %d", canvas.animations.size())

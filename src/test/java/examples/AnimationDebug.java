@@ -1,8 +1,8 @@
 package examples;
 
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
 

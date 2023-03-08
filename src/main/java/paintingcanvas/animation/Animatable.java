@@ -1,7 +1,6 @@
 package paintingcanvas.animation;
 
 import paintingcanvas.drawable.Drawable;
-import paintingcanvas.misc.TimeUnit;
 
 import java.awt.*;
 

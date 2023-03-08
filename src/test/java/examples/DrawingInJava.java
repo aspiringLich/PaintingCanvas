@@ -1,7 +1,7 @@
 package examples;
 
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.animation.Animation;
+import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.drawable.Triangle;

@@ -62,9 +62,10 @@ public class Canvas {
 
     /**
      * Initializes the canvas
-     * @param width the width of the canvas
+     *
+     * @param width  the width of the canvas
      * @param height the height of the canvas
-     * @param title the title of the canvas
+     * @param title  the title of the canvas
      */
     public Canvas(int width, int height, String title) {
         super();
