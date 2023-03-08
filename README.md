@@ -21,4 +21,4 @@ So don't complain about how the rendering runs completely asynchronously from th
 
 You can find various examples in `src/test/java/examples/`. These are all runnable, and they should give you a good idea of how to use the library, and give good *examples* (haha get it) of the library's capabilities.
 
-`TODO: ADD VIDEOS OF EXAMPLES`
+![animation_test](vid/animation_test.mp4)
