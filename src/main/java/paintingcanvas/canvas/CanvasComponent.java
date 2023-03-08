@@ -8,8 +8,8 @@ import java.awt.*;
  * <p>
  * Mostly used to not clutter up the documentation
  */
-class CanvasComponent extends JComponent {
-    JFrame jframe;
+public class CanvasComponent extends JComponent {
+    public JFrame jframe;
     Canvas canvas;
 
     CanvasComponent(Canvas canvas, int width, int height, String title) {

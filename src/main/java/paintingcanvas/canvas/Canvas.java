@@ -160,11 +160,6 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        poolExecutor.scheduleAtFixedRate(() -> {
-            component.repaint();
-//            SwingUtilities.updateComponentTreeUI(component.jframe);
-//            component.jframe.invalidate();
-//            component.jframe.validate();
-        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        poolExecutor.scheduleAtFixedRate(component::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 }

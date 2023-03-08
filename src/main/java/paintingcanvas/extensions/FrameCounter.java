@@ -36,7 +36,6 @@ public class FrameCounter implements RenderLifecycle {
      */
     public FrameCounter() {
         this.font = new Font(Font.DIALOG, Font.PLAIN, 12);
-        for (int i = 0; i < dataPoints; i++) frameTimes.add(0L);
     }
 
     /**
