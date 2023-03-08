@@ -8,7 +8,6 @@ import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public class AnimationDebug {
@@ -20,7 +19,7 @@ public class AnimationDebug {
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(width * size + 16, height * size + 16, "test");
-        var recorder = new Recorder().attach();
+        var rec = new Recorder().attach().record("jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
@@ -37,9 +36,10 @@ public class AnimationDebug {
             }
         }
 
+        var i = 0;
         while (true) {
+            if (++i >= 10) rec.stop();
             canvas.sleep(4);
-            recorder.screenshot(new File("out.png"), "png");
             var removed = new ArrayList<Rectangle>();
             for (var y = 0; y < height; y++) {
                 for (var x = 0; x < width; x++) {
