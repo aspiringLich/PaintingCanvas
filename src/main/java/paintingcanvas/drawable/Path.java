@@ -51,29 +51,7 @@ public class Path extends Drawable<Path> {
         super(0, 0, color);
         this.path = new Path2D.Double();
         this.outlineStroke = new BasicStroke(1);
-    }
-
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param color     the color of the outline
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Path setOutline(int thickness, Color color) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
-    }
-
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Path setOutline(int thickness) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+        this.filled = false;
     }
 
     /**
