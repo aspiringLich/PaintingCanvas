@@ -12,7 +12,7 @@ import java.util.Vector;
  * A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.
  * <pre>{@code
  * // Create and attach a new FrameCounter with default settings
- * new FrameCounterd().attach();
+ * new FrameCounter().attach();
  * }</pre>
  */
 public class FrameCounter implements Canvas.RenderLifecycle {
