@@ -47,6 +47,18 @@ public class Canvas {
      * The RenderLifecycle: allows you to write code to run before and after a frame is rendered
      */
     public List<RenderLifecycle> renderLifecycles = new Vector<>();
+    /**
+     * The background color of the canvas
+     */
+    public Color backgroundColor = Color.WHITE;
+
+    /**
+     * Sets the background color of the canvas
+     * @param color the new background color
+     */
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
+    }
 
     /**
      * Initializes the canvas with a default size of 900x600

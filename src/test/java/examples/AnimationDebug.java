@@ -18,7 +18,7 @@ public class AnimationDebug {
 
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
-        var canvas = new Canvas(width * size + 16, height * size + 16, "test");
+        var canvas = new Canvas(width * size, height * size + 32, "test");
         var rec = new Recorder().attach().record("jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
@@ -38,7 +38,7 @@ public class AnimationDebug {
 
         var i = 0;
         while (true) {
-            if (++i >= 10) rec.stop();
+//            if (++i >= 10) rec.stop();
             canvas.sleep(4);
             var removed = new ArrayList<Rectangle>();
             for (var y = 0; y < height; y++) {
