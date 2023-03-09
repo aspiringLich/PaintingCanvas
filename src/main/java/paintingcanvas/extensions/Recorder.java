@@ -113,13 +113,15 @@ public class Recorder implements RenderLifecycle {
 
         if (!recording || this.dir == null) return;
         {
+            var color = (Canvas.getGlobalInstance().frame / 30) % 2 == 0 ? Color.BLACK : Color.WHITE;
+
             var size = cmp.getSize();
             var gc = (Graphics2D) g;
             var text = "REC";
             gc.setFont(gc.getFont().deriveFont(Font.PLAIN, 30));
             var width = gc.getFontMetrics().stringWidth(text);
             var height = gc.getFontMetrics().getHeight();
-            gc.setColor(Color.WHITE);
+            gc.setColor(color);
             gc.drawString(text, size.width - width - 10, height / 2 + 20);
             gc.setColor(Color.RED);
             gc.fillOval(size.width - 40 - width, 15, 25, 25);
