@@ -18,7 +18,7 @@ public class Canvas {
      * the fps of the canvas
      */
     public static final int fps = 30;
-    public static Canvas globalInstance;
+    static Canvas globalInstance;
     /**
      * the initial size of the Canvas
      */
@@ -39,6 +39,7 @@ public class Canvas {
      * Used to lock the thread to wait for animations to finish
      */
     protected final Object syncObject = new Object();
+    public boolean autoAdd;
     /**
      * The current frame
      */
@@ -73,8 +74,10 @@ public class Canvas {
         this.panel = new CanvasPanel(this, width, height, title);
 
         this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
-        if (!System.getProperties().getOrDefault("paintingcanvas.autoCenter", "").toString().toLowerCase(Locale.ROOT).equals("false"))
+        if (enabledProp("paintingcanvas.autoCenter"))
             this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
+        if (enabledProp("paintingcanvas.autoAdd"))
+            this.autoAdd = true;
 
         if (globalInstance != null)
             throw new RuntimeException("There can only be one Canvas instance");
@@ -91,6 +94,10 @@ public class Canvas {
         if (globalInstance == null)
             throw new RuntimeException("Canvas has not been initialized!");
         return globalInstance;
+    }
+
+    private boolean enabledProp(String prop) {
+        return !System.getProperties().getOrDefault(prop, "").toString().toLowerCase(Locale.ROOT).equals("false");
     }
 
     /**

@@ -79,13 +79,14 @@ public class Recorder implements RenderLifecycle {
     public void renderEnd(Graphics g) {
         rendering ^= true;
         if (rendering) return;
-        var cmp = Canvas.getGlobalInstance().panel;
+        var canvas = Canvas.getGlobalInstance();
+        var cmp = canvas.panel;
 
         synchronized (imgSync) {
             img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
             var gc = img.getGraphics();
             cmp.paint(gc);
-            Canvas.globalInstance.frame -= 1;
+            canvas.frame -= 1;
             gc.dispose();
         }
 

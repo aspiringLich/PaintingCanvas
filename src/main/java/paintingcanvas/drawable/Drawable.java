@@ -50,7 +50,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y = y;
         this.color = color;
 
-        Canvas.getGlobalInstance().elements.add(this);
+        var canvas = Canvas.getGlobalInstance();
+        if (canvas.autoAdd) canvas.elements.add(this);
     }
 
     /**
