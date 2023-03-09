@@ -172,8 +172,9 @@ public interface Easing {
 
     static Easing easeInElastic() {
         return t -> {
-            double p = 0.3;
-            return Math.pow(2, 10 * (t - 1)) * Math.sin((t - 1 - p / 4) * (2 * Math.PI) / p);
+            var c4 = (2 * Math.PI) / 3;
+            return t == 0 || t == 1 ? t :
+                    -Math.pow(2, 10 * t - 10) * Math.sin((t * 10 - 10.75) * c4);
         };
     }
 

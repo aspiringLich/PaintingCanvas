@@ -38,9 +38,9 @@ public abstract class Animation {
      * Internal method that is called to help copy this object
      */
     void copy(Animation in) {
-        in.startFrame = startFrame;
-        in.duration = duration;
-        in.easing = easing;
+        startFrame = in.startFrame;
+        duration = in.duration;
+        easing = in.easing;
     }
 
     /**
