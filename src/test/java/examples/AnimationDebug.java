@@ -5,10 +5,8 @@ import paintingcanvas.animation.Easing;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
-import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class AnimationDebug {
@@ -45,7 +43,7 @@ public class AnimationDebug {
             for (var y = 0; y < height; y++) {
                 for (var x = 0; x < width; x++) {
                     var rect = rects.remove((int) (Math.random() * rects.size()));
-                    rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.inOutNth(2)), 3);
+                    rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.easeInOut(2)), 3);
                     removed.add(rect);
                 }
             }
