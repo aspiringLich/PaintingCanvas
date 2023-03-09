@@ -9,7 +9,10 @@ import paintingcanvas.misc.TimeUnit;
  * <pre>{@code
  * Text text = new Text(100, 100, "Hello World");
  * text.animate()
- *     .add(moveTo(200, 200), 3);
+ *     .add(Animation.moveTo(200, 200), 3)      // move to (200, 200) in 3 seconds
+ *     .with(Animation.colorTo(Color.BLUE), 3)  // change color to blue in 3 seconds
+ *     .with(Animation.moveBy(100, 0), 3);      // at the same time, move 100 pixels to the right
+ * canvas.sleep();                              // wait for the animation to finish
  * }</pre>
  */
 public class AnimationBuilder {
@@ -24,8 +27,8 @@ public class AnimationBuilder {
      * <pre>{@code
      * // these animations will run one after the other
      * obj.animate()
-     *    .add(moveTo(100, 100), 100, TimeUnit.Frames)
-     *    .add(colorTo(Color.BLUE), 100, TimeUnit.Frames);
+     *    .add(Animation.moveTo(100, 100), 100, TimeUnit.Frames)
+     *    .add(Animation.colorTo(Color.BLUE), 100, TimeUnit.Frames);
      * }</pre>
      *
      * @param animation The animation type to add
@@ -53,8 +56,8 @@ public class AnimationBuilder {
      * <pre>{@code
      * // these animations will run one after the other
      * obj.animate()
-     *    .add(moveTo(100, 100), 10)
-     *    .add(colorTo(Color.BLUE), 10);
+     *    .add(Animation.moveTo(100, 100), 10)
+     *    .add(Animation.colorTo(Color.BLUE), 10);
      * }</pre>
      *
      * @param animation The animation type to add
@@ -70,8 +73,8 @@ public class AnimationBuilder {
      * <pre>{@code
      * // these animations will run at the same time
      * obj.animate()
-     *    .add(moveTo(100, 100), 100, TimeUnit.Frames)
-     *    .add(colorTo(Color.BLUE), 100, TimeUnit.Frames);
+     *    .add(Animation.moveTo(100, 100), 100, TimeUnit.Frames)
+     *    .add(Animation.colorTo(Color.BLUE), 100, TimeUnit.Frames);
      * }</pre>
      *
      * @param animation The animation type to add
@@ -96,8 +99,8 @@ public class AnimationBuilder {
      * <pre>{@code
      * // these animations will run at the same time
      * obj.animate()
-     *    .add(moveTo(100, 100), 10)
-     *    .with(colorTo(Color.BLUE), 10);
+     *    .add(Animation.moveTo(100, 100), 10)
+     *    .with(Animation.colorTo(Color.BLUE), 10);
      * }</pre>
      *
      * @param animation The animation type to add
@@ -118,11 +121,7 @@ public class AnimationBuilder {
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder sleep(double seconds) {
-        try {
-            Thread.sleep((long) (seconds * 1000));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Canvas.globalInstance.sleep(seconds);
         return this;
     }
 }

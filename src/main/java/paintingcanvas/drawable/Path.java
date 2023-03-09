@@ -78,6 +78,17 @@ public class Path extends Drawable<Path> {
     }
 
     /**
+     * Set the color of the line, equivalent to setOutline(thickness, color);
+     *
+     * @param color The color of the line
+     * @return The original object to allow method chaining
+     */
+    public Path setLineColor(Color color) {
+        this.outlineColor = color;
+        return this;
+    }
+
+    /**
      * Move the cursor to a new position
      *
      * @param x The X-position of the new cursor position
@@ -137,7 +148,7 @@ public class Path extends Drawable<Path> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        gc.setColor(color);
+        gc.setColor(outlineColor);
         gc.translate(x, y);
         gc.draw(path);
     }

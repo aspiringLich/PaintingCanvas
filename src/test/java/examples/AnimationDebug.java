@@ -5,10 +5,8 @@ import paintingcanvas.animation.Easing;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
-import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class AnimationDebug {
@@ -20,7 +18,7 @@ public class AnimationDebug {
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
         var canvas = new Canvas(width * size, height * size + 32, "test");
-        var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
+//        var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
@@ -39,13 +37,13 @@ public class AnimationDebug {
 
         var i = 0;
         while (true) {
-            if (++i >= 10) rec.stop();
+//            if (++i >= 10) rec.stop();
             canvas.sleep(4);
             var removed = new ArrayList<Rectangle>();
             for (var y = 0; y < height; y++) {
                 for (var x = 0; x < width; x++) {
                     var rect = rects.remove((int) (Math.random() * rects.size()));
-                    rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.inOutNth(2)), 3);
+                    rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.easeInOut(2)), 3);
                     removed.add(rect);
                 }
             }

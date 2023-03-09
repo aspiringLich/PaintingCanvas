@@ -19,7 +19,9 @@ public class OpacityAnimation extends Animation {
 
     @Override
     public Animation copy() {
-        return new OpacityAnimation(end);
+        var out = new OpacityAnimation(end);
+        out.copy(this);
+        return out;
     }
 
     @Override

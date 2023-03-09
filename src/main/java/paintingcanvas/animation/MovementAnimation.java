@@ -12,7 +12,6 @@ public class MovementAnimation extends Animation {
     public Point start;
     public boolean relative = false;
 
-
     public MovementAnimation(Point end) {
         super();
         this.end = end;
@@ -25,7 +24,10 @@ public class MovementAnimation extends Animation {
 
     @Override
     public Animation copy() {
-        return new MovementAnimation(end);
+        var out = new MovementAnimation(end);
+        out.copy(this);
+        out.relative = relative;
+        return out;
     }
 
     @Override
@@ -39,8 +41,8 @@ public class MovementAnimation extends Animation {
     protected void initAnimation(Drawable<?> drawable) {
         this.start = new Point(drawable.x, drawable.y);
         if (relative) {
-            end.x += start.x;
-            end.y += start.y;
+            end.x += drawable.x;
+            end.y += drawable.y;
         }
     }
 }

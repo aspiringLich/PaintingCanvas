@@ -41,6 +41,9 @@ public class CanvasPanel extends JPanel {
      * @param g the <code>Graphics</code> context in which to paint
      */
     public void paintComponent(Graphics g) {
+        synchronized (canvas.frameSync) {
+            canvas.frameSync.notify();
+        }
         super.paintComponent(g);
 
         g.setColor(canvas.backgroundColor);
@@ -63,8 +66,8 @@ public class CanvasPanel extends JPanel {
 
                 // unblock if no more animations
                 if (canvas.animations.size() != 0) continue;
-                synchronized (canvas.syncObject) {
-                    canvas.syncObject.notifyAll();
+                synchronized (canvas.animationSync) {
+                    canvas.animationSync.notifyAll();
                 }
             }
         }

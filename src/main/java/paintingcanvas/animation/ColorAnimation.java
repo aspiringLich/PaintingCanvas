@@ -18,7 +18,9 @@ public class ColorAnimation extends Animation {
 
     @Override
     public Animation copy() {
-        return new ColorAnimation(end);
+        var out = new ColorAnimation(end);
+        out.copy(this);
+        return out;
     }
 
     @Override

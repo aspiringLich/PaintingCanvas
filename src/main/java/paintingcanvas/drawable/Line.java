@@ -26,7 +26,7 @@ public class Line extends Drawable<Line> {
     public Line(int x1, int y1, int x2, int y2) {
         super(x1, y1, Color.BLACK);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(5);
+        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
@@ -46,30 +46,14 @@ public class Line extends Drawable<Line> {
     public Line(int x1, int y1, int x2, int y2, Color color) {
         super(x1, y1, color);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(5);
+        this.outlineStroke = new BasicStroke(1);
     }
 
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param color     the color of the outline
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
     @Override
     public Line setOutline(int thickness, Color color) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
-    }
-
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Line setOutline(int thickness) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+        this.color = color;
+        this.outlineStroke = new BasicStroke(thickness);
+        return this;
     }
 
     /**
