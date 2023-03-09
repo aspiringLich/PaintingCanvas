@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * A class that allows you to record the canvas to a image sequence, can be combined using ffmpeg
@@ -50,9 +51,9 @@ public class Recorder implements RenderLifecycle {
 
             var contents = path.toFile().listFiles();
             // go through all files in the folder and check if they are related to the recording
-            for (var file : contents) {
+            for (var file : Objects.requireNonNull(contents)) {
                 var name = file.getName();
-                assert(file.isFile());
+                assert (file.isFile());
                 if (name.startsWith("tmp_") && name.endsWith(format))
                     continue;
                 if (name.equals("out.mov") || name.equals("out.mp4"))
@@ -71,7 +72,7 @@ public class Recorder implements RenderLifecycle {
                 _e.printStackTrace();
                 return this;
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             // something hapenned idk just return
             e.printStackTrace();
             return this;
@@ -114,18 +115,20 @@ public class Recorder implements RenderLifecycle {
 
         if (!recording || this.dir == null) return;
         {
-            var color = (Canvas.getGlobalInstance().frame / 30) % 2 == 0 ? Color.BLACK : Color.WHITE;
-
             var size = cmp.getSize();
             var gc = (Graphics2D) g;
             var text = "REC";
             gc.setFont(gc.getFont().deriveFont(Font.PLAIN, 30));
             var width = gc.getFontMetrics().stringWidth(text);
             var height = gc.getFontMetrics().getHeight();
-            gc.setColor(color);
-            gc.drawString(text, size.width - width - 10, height / 2 + 20);
+            gc.setColor(new Color(0, 0, 0, 180));
+            gc.fillRect(size.width - width - 45, 5, width + 40, height - 3);
+            gc.setColor(Color.WHITE);
+            gc.drawString(text, size.width - width - 10, height / 2 + 15);
             gc.setColor(Color.RED);
-            gc.fillOval(size.width - 40 - width, 15, 25, 25);
+            if ((canvas.frame / 30) % 2 == 0) gc.fillOval(size.width - 40 - width, 10, 25, 25);
+            gc.setColor(Color.WHITE);
+            gc.drawOval(size.width - 40 - width, 10, 25, 25);
         }
         screenshot(this.dir.resolve(Path.of(String.format("tmp_%d.%s", inc++, this.format))).toFile(), this.format);
     }
