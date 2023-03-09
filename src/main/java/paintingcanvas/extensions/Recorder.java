@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -39,24 +40,45 @@ public class Recorder implements RenderLifecycle {
     public Recorder record(Path path, String format) {
         this.dir = path;
         this.format = format;
-        this.recording = true;
         this.inc = 0;
-
-        if (filledFolder(this.dir))
-            System.err.printf("Recording folder `%s` already has files in it.", path);
 
         try {
             Files.createDirectory(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+        } catch (FileAlreadyExistsException e) {
+            // make sure its safe to delete everything in it
+            // if so, delete it
 
-    private boolean filledFolder(Path path) {
-        if (!Files.exists(path)) return false;
-        var contents = path.toFile().listFiles();
-        return contents == null || contents.length > 0;
+            var contents = path.toFile().listFiles();
+            // go through all files in the folder and check if they are related to the recording
+            for (var file : contents) {
+                var name = file.getName();
+                assert(file.isFile());
+                if (name.startsWith("tmp_") && name.endsWith(format))
+                    continue;
+                if (name.equals("out.mov") || name.equals("out.mp4"))
+                    continue;
+                // if the file is not related to the recording, print an error
+                System.err.printf(
+                        "Recording folder `%s` has unrelated files in it (%s). " +
+                                "Related files are generated pictures (e.g: tmp_1.%s) " +
+                                "or `out.mov` / `out.mp4`. Recording aborted!\n", path, name, format);
+                return this;
+            }
+            try {
+                for (var file : contents)
+                    Files.delete(file.toPath());
+            } catch (IOException _e) {
+                _e.printStackTrace();
+                return this;
+            }
+        }  catch (IOException e) {
+            // something hapenned idk just return
+            e.printStackTrace();
+            return this;
+        }
+
+        this.recording = true;
+        return this;
     }
 
     public Recorder stop() {
