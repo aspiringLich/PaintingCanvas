@@ -54,28 +54,39 @@ public class Path extends Drawable<Path> {
         this.filled = false;
     }
 
-//    /**
-//     * Set the stroke of the line.
-//     *
-//     * @param stroke a {@code Stroke} object to define this line's stroke
-//     * @return The original object to allow method chaining
-//     */
-//    @SuppressWarnings("unused")
-//    public Path setStroke(Stroke stroke) {
-//        this.outlineStroke = stroke;
-//        return this;
-//    }
-//
-//    /**
-//     * Set the thickness of the line, equivalent to setOutline(thickness);
-//     *
-//     * @param thickness The thickness of the line in pixels
-//     * @return The original object to allow method chaining
-//     */
-//    public Path setThickness(int thickness) {
-//        this.outlineStroke = new BasicStroke(thickness);
-//        return this;
-//    }
+    /**
+     * Set the stroke of the line.
+     *
+     * @param stroke a {@code Stroke} object to define this line's stroke
+     * @return The original object to allow method chaining
+     */
+    @SuppressWarnings("unused")
+    public Path setStroke(Stroke stroke) {
+        this.outlineStroke = stroke;
+        return this;
+    }
+
+    /**
+     * Set the thickness of the line, equivalent to setOutline(thickness);
+     *
+     * @param thickness The thickness of the line in pixels
+     * @return The original object to allow method chaining
+     */
+    public Path setThickness(int thickness) {
+        this.outlineStroke = new BasicStroke(thickness);
+        return this;
+    }
+
+    /**
+     * Set the color of the line, equivalent to setOutline(thickness, color);
+     *
+     * @param color The color of the line
+     * @return The original object to allow method chaining
+     */
+    public Path setLineColor(Color color) {
+        this.outlineColor = color;
+        return this;
+    }
 
     /**
      * Move the cursor to a new position
@@ -137,7 +148,7 @@ public class Path extends Drawable<Path> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        gc.setColor(color);
+        gc.setColor(outlineColor);
         gc.translate(x, y);
         gc.draw(path);
     }

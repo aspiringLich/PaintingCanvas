@@ -49,27 +49,11 @@ public class Line extends Drawable<Line> {
         this.outlineStroke = new BasicStroke(1);
     }
 
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param color     the color of the outline
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
     @Override
     public Line setOutline(int thickness, Color color) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
-    }
-
-    /**
-     * DO NOT USE, Overridden
-     *
-     * @param thickness the thickness of the outline
-     * @return {@code this}
-     */
-    @Override
-    public Line setOutline(int thickness) {
-        throw new RuntimeException("setOutline is useless on Line, please use .setColor() and .setThickness instead");
+        this.color = color;
+        this.outlineStroke = new BasicStroke(thickness);
+        return this;
     }
 
     /**

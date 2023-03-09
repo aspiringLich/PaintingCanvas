@@ -121,11 +121,7 @@ public class AnimationBuilder {
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder sleep(double seconds) {
-        try {
-            Thread.sleep((long) (seconds * 1000));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Canvas.globalInstance.sleep(seconds);
         return this;
     }
 }

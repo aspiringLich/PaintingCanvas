@@ -156,8 +156,16 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         }
     }
 
+    /**
+     * the color is set to `color`
+     * @param gc The graphics context to draw the object with
+     */
     protected abstract void drawFilled(Graphics2D gc);
 
+    /**
+     * the color is set to `outlineColor`, the stroke is set to `outlineStroke`
+     * @param gc The graphics context to draw the object with
+     */
     protected abstract void drawOutline(Graphics2D gc);
 
     protected abstract T getThis();

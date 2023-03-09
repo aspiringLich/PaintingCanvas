@@ -38,7 +38,11 @@ public class Canvas {
     /**
      * Used to lock the thread to wait for animations to finish
      */
-    protected final Object syncObject = new Object();
+    protected final Object animationSync = new Object();
+    /**
+     * Used to lock the thread to wait for a frame count
+     */
+    protected final Object frameSync = new Object();
     /**
      * The current frame
      */
@@ -143,8 +147,8 @@ public class Canvas {
      */
     public void sleep() {
         try {
-            synchronized (syncObject) {
-                syncObject.wait();
+            synchronized (animationSync) {
+                animationSync.wait();
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -162,10 +166,26 @@ public class Canvas {
      * @param seconds The number of seconds to sleep for
      */
     public void sleep(double seconds) {
-        try {
-            Thread.sleep((long) (seconds * 1000));
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        // if the time is short: just thread.sleep
+        if (seconds < 0.1) {
+            try {
+                Thread.sleep((long) (seconds * 1000));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        // otherwise wait for the frame count to reach the specified frame
+        else {
+            int targetFrame = frame + (int) (seconds * fps);
+            synchronized (frameSync) {
+                while (frame < targetFrame) {
+                    try {
+                        frameSync.wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         }
     }
 
@@ -173,6 +193,8 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        poolExecutor.scheduleAtFixedRate(panel::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        poolExecutor.scheduleAtFixedRate(() -> {
+            panel.repaint();
+        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 }
