@@ -22,7 +22,10 @@ public class RotationAnimation extends Animation {
 
     @Override
     public Animation copy() {
-        return new RotationAnimation(end);
+        var out = new RotationAnimation(end);
+        out.copy(this);
+        out.relative = relative;
+        return out;
     }
 
     @Override

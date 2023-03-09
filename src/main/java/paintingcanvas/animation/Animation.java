@@ -35,6 +35,15 @@ public abstract class Animation {
     }
 
     /**
+     * Internal method that is called to help copy this object
+     */
+    void copy(Animation in) {
+        in.startFrame = startFrame;
+        in.duration = duration;
+        in.easing = easing;
+    }
+
+    /**
      * Creates an animation that moves {@code this} to the specified {@code x} and {@code y}
      * over {@code duration} seconds
      *
@@ -182,10 +191,9 @@ public abstract class Animation {
      *
      * @param x        the x to move by
      * @param y        the y to move by
-     * @param duration the number of seconds it lasts
      * @return an {@link Animation}
      */
-    public static Animation moveBy(int x, int y, double duration) {
+    public static Animation moveBy(int x, int y) {
         return new MovementAnimation(new Point(x, y)).relative();
     }
 
