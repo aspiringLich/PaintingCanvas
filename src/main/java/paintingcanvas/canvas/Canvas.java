@@ -19,7 +19,6 @@ public class Canvas {
      */
     public static final int fps = 30;
     public static Canvas globalInstance;
-    public boolean autoAdd;
     /**
      * the initial size of the Canvas
      */
@@ -44,6 +43,7 @@ public class Canvas {
      * Used to lock the thread to wait for a frame count
      */
     protected final Object frameSync = new Object();
+    public boolean autoAdd;
     /**
      * The current frame
      */

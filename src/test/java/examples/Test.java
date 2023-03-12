@@ -1,7 +1,8 @@
 package examples;
 
 import paintingcanvas.canvas.Canvas;
-import paintingcanvas.drawable.*;
+import paintingcanvas.drawable.Circle;
+import paintingcanvas.drawable.Line;
 import paintingcanvas.extensions.FrameCounter;
 
 import java.awt.*;

@@ -5,10 +5,8 @@ import paintingcanvas.animation.Easing;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
-import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class AnimationDebug {
@@ -21,7 +19,7 @@ public class AnimationDebug {
         System.setProperty("sun.java2d.opengl", "true");
         System.setProperty("paintingcanvas.autoCenter", "false");
         var canvas = new Canvas(width * size, height * size /*+ 32*/, "test");
-        var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
+        // var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),

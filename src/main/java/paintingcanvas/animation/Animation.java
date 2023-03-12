@@ -35,15 +35,6 @@ public abstract class Animation {
     }
 
     /**
-     * Internal method that is called to help copy this object
-     */
-    void copy(Animation in) {
-        startFrame = in.startFrame;
-        duration = in.duration;
-        easing = in.easing;
-    }
-
-    /**
      * Creates an animation that moves {@code this} to the specified {@code x} and {@code y}
      * over {@code duration} seconds
      *
@@ -189,12 +180,21 @@ public abstract class Animation {
      * c.moveTo(0, 100, 3).moveTo(200, 0, 3);
      * }</pre>
      *
-     * @param x        the x to move by
-     * @param y        the y to move by
+     * @param x the x to move by
+     * @param y the y to move by
      * @return an {@link Animation}
      */
     public static Animation moveBy(int x, int y) {
         return new MovementAnimation(new Point(x, y)).relative();
+    }
+
+    /**
+     * Internal method that is called to help copy this object
+     */
+    void copy(Animation in) {
+        startFrame = in.startFrame;
+        duration = in.duration;
+        easing = in.easing;
     }
 
     abstract public Animation copy();

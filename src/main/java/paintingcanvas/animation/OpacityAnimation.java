@@ -1,6 +1,7 @@
 package paintingcanvas.animation;
 
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -32,6 +33,7 @@ public class OpacityAnimation extends Animation {
 
         Color outlineColor = drawable.outlineColor;
         int outlineAlpha = (int) (start + (end - start) * easing.ease(progress));
+        outlineAlpha = Misc.clamp(outlineAlpha, 0, 255);
         drawable.outlineColor = new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha);
     }
 
