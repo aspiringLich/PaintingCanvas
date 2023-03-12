@@ -46,9 +46,9 @@ public abstract class Animation {
      *
      * @param x the x-position to move to
      * @param y the y-position to move to
-     * @return an {@link Animation}
+     * @return a {@link MovementAnimation}
      */
-    public static Animation moveTo(int x, int y) {
+    public static MovementAnimation moveTo(int x, int y) {
         return new MovementAnimation(new Point(x, y));
     }
 
@@ -65,9 +65,9 @@ public abstract class Animation {
      * @param r red (0-255)
      * @param g green (0-255)
      * @param b blue (0-255)
-     * @return an {@link Animation}
+     * @return a {@link ColorAnimation}
      */
-    public static Animation colorTo(int r, int g, int b) {
+    public static ColorAnimation colorTo(int r, int g, int b) {
         return new ColorAnimation(new Color(r, g, b));
     }
 
@@ -82,9 +82,9 @@ public abstract class Animation {
      * }</pre>
      *
      * @param hex The number describing the RGB color
-     * @return an {@link Animation}
+     * @return a {@link ColorAnimation}
      */
-    public static Animation colorTo(int hex) {
+    public static ColorAnimation colorTo(int hex) {
         return new ColorAnimation(new Color(hex));
     }
 
@@ -115,10 +115,10 @@ public abstract class Animation {
      * c.fadeOut(3).fadeIn(3);
      * }</pre>
      *
-     * @return an {@link Animation}
+     * @return an {@link OpacityAnimation}
      * @see #fadeIn()
      */
-    public static Animation fadeOut() {
+    public static OpacityAnimation fadeOut() {
         return new OpacityAnimation(0);
     }
 
@@ -131,10 +131,10 @@ public abstract class Animation {
      * c.fadeOut(3).fadeIn(3);
      * }</pre>
      *
-     * @return an {@link Animation}
+     * @return an {@link OpacityAnimation}
      * @see #fadeOut()
      */
-    public static Animation fadeIn() {
+    public static OpacityAnimation fadeIn() {
         return new OpacityAnimation(1);
     }
 
@@ -149,9 +149,9 @@ public abstract class Animation {
      * }</pre>
      *
      * @param angle The absolute angle to rotate to in degrees.
-     * @return an {@code AnimationBuilder}
+     * @return a {@link RotationAnimation}
      */
-    public static Animation rotateTo(int angle) {
+    public static RotationAnimation rotateTo(int angle) {
         return new RotationAnimation(Math.toRadians(angle));
     }
 
@@ -165,9 +165,9 @@ public abstract class Animation {
      * }</pre>
      *
      * @param angle The relative angle to rotate to in degrees.
-     * @return an {@link Animation}
+     * @return a {@link RotationAnimation}
      */
-    public static Animation rotateBy(int angle) {
+    public static RotationAnimation rotateBy(int angle) {
         return new RotationAnimation(Math.toRadians(angle)).relative();
     }
 
@@ -182,9 +182,9 @@ public abstract class Animation {
      *
      * @param x the x to move by
      * @param y the y to move by
-     * @return an {@link Animation}
+     * @return a {@link MovementAnimation}
      */
-    public static Animation moveBy(int x, int y) {
+    public static MovementAnimation moveBy(int x, int y) {
         return new MovementAnimation(new Point(x, y)).relative();
     }
 
