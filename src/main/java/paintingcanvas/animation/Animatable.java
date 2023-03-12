@@ -162,7 +162,7 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder rotateBy(int angle, double duration) {
-        return this.addAnimation(Animation.rotateTo(angle + (int) Math.toDegrees(drawable().rotation)), duration);
+        return this.addAnimation(Animation.rotateBy(angle), duration);
     }
 
     /**
@@ -180,7 +180,7 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder moveBy(int x, int y, double duration) {
-        return this.addAnimation(Animation.moveTo(x + drawable().x, y + drawable().y), duration);
+        return this.addAnimation(Animation.moveBy(x, y), duration);
     }
 
     /**
@@ -202,7 +202,7 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder moveHorizontalBy(int x, double duration) {
-        return this.addAnimation(Animation.moveTo(x, 0).relative(), duration);
+        return this.addAnimation(Animation.moveBy(x, 0).relative(), duration);
     }
 
     /**
@@ -223,6 +223,6 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder moveVerticalBy(int y, double duration) {
-        return this.addAnimation(Animation.moveTo(0, y).relative(), duration);
+        return this.addAnimation(Animation.moveBy(0, y).relative(), duration);
     }
 }
