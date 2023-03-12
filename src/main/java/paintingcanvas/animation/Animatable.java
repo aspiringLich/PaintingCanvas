@@ -202,7 +202,7 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder moveHorizontalBy(int x, double duration) {
-        return this.addAnimation(Animation.moveTo(x + drawable().x, y), duration);
+        return this.addAnimation(Animation.moveTo(x, 0).relative(), duration);
     }
 
     /**
@@ -223,6 +223,6 @@ public interface Animatable {
      * @return an {@code this}
      */
     default AnimationBuilder moveVerticalBy(int y, double duration) {
-        return this.addAnimation(Animation.moveTo(x, y + drawable().y), duration);
+        return this.addAnimation(Animation.moveTo(0, y).relative(), duration);
     }
 }
