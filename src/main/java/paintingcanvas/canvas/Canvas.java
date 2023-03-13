@@ -4,8 +4,8 @@ import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Drawable;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.List;
-import java.util.Locale;
 import java.util.Vector;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +22,8 @@ public class Canvas {
     /**
      * the initial size of the Canvas
      */
-    public final Point startSize;
+    public final Dimension startSize;
+    public final Point2D.Float translation;
     /**
      * the elements that are currently on the canvas
      */
@@ -74,18 +75,20 @@ public class Canvas {
      */
     public Canvas(int width, int height, String title) {
         super();
-        this.startSize = new Point(width, height);
+        this.startSize = new Dimension(width, height);
+        this.translation = new Point2D.Float(0, 0);
         this.panel = new CanvasPanel(this, width, height, title);
-
-        this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
-        if (enabledProp("paintingcanvas.autoCenter"))
-            this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
-        if (enabledProp("paintingcanvas.autoAdd"))
-            this.autoAdd = true;
 
         if (globalInstance != null)
             throw new RuntimeException("There can only be one Canvas instance");
         Canvas.globalInstance = this;
+
+        this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
+        if (getProp("paintingcanvas.autoCenter", true))
+            this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
+        if (getProp("paintingcanvas.autoAdd", true))
+            this.autoAdd = true;
+
         render();
     }
 
@@ -100,8 +103,10 @@ public class Canvas {
         return globalInstance;
     }
 
-    private boolean enabledProp(String prop) {
-        return !System.getProperties().getOrDefault(prop, "").toString().toLowerCase(Locale.ROOT).equals("false");
+    private boolean getProp(String prop, boolean _default) {
+        var val = System.getProperties().getProperty(prop);
+        if (val == null) return _default;
+        return Boolean.parseBoolean(val);
     }
 
     /**
@@ -119,8 +124,9 @@ public class Canvas {
      * @return The width of the canvas
      */
     public int getWidth() {
+        if (panel == null) return startSize.width;
         var width = panel.getWidth();
-        return width == 0 ? startSize.x : width;
+        return width == 0 ? startSize.width : width;
     }
 
     /**
@@ -129,8 +135,9 @@ public class Canvas {
      * @return The height of the canvas
      */
     public int getHeight() {
+        if (panel == null) return startSize.height;
         var height = panel.getHeight();
-        return height == 0 ? startSize.y : height;
+        return height == 0 ? startSize.height : height;
     }
 
     /**
@@ -198,10 +205,8 @@ public class Canvas {
 
     public void render() {
         // TODO: Account for the time it takes to run the render function
-        // (Implement the run with a loop and thread::sleep)
+        // (Implement the run with a loop and thread::sleep) or dont -- im sure you will get a warning for busy waiting
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        poolExecutor.scheduleAtFixedRate(() -> {
-            panel.repaint();
-        }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        poolExecutor.scheduleAtFixedRate(panel::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
 }

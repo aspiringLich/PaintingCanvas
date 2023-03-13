@@ -1,10 +1,11 @@
 package paintingcanvas.canvas;
 
-import paintingcanvas.animation.MovementAnimation;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.geom.Point2D;
 
 public interface RenderLifecycle {
     default void renderStart(Graphics g) {
@@ -45,35 +46,35 @@ public interface RenderLifecycle {
     }
 
     class CenteringLifecycle implements RenderLifecycle {
-        private static Dimension lastSize;
+        final int error = 50;
+        private Point2D.Double lastSize;
+        private boolean active = false;
 
         @Override
         public void onResize(CanvasPanel canvasComponent, ComponentEvent e) {
-            if (lastSize == null) {
-                lastSize = e.getComponent().getSize();
+            if (e.getComponent() == null) return;
+            var canvas = Canvas.getGlobalInstance();
+            if (lastSize == null || !this.active) {
+                var size = e.getComponent().getSize();
+                lastSize = new Point2D.Double(size.width, size.height);
+                if (Misc.equality(lastSize.x, canvas.startSize.width, error) &&
+                        Misc.equality(lastSize.y, canvas.startSize.height, error))
+                    active = true;
                 return;
             }
 
-            var canvas = Canvas.getGlobalInstance();
-            var newSize = canvasComponent.jframe.getSize();
+            var _newSize = canvasComponent.jframe.getSize();
+            var newSize = new Point2D.Double(_newSize.width, _newSize.height);
             if (lastSize.equals(newSize)) return;
 
-            var widthDiff = (newSize.width - lastSize.width) / 2f;
-            var heightDiff = (newSize.height - lastSize.height) / 2f;
+            var widthDiff = (newSize.x - lastSize.x) / 2f;
+            var heightDiff = (newSize.y - lastSize.y) / 2f;
             lastSize = newSize;
 
-            synchronized (canvas.elements) {
-                canvas.elements.forEach(s -> {
-                    s.x += widthDiff;
-                    s.y += heightDiff;
-                });
+            synchronized (canvas.translation) {
+                var old = canvas.translation;
+                canvas.translation.setLocation(old.x + widthDiff, old.y + heightDiff);
             }
-
-            canvas.animations.stream().filter(a -> a instanceof MovementAnimation).forEach(s -> {
-                var anim = (MovementAnimation) s;
-                anim.start = new Point(anim.start.x + (int) widthDiff, anim.start.y + (int) heightDiff);
-                anim.end = new Point(anim.end.x + (int) widthDiff, anim.end.y + (int) heightDiff);
-            });
 
             canvas.panel.jframe.repaint();
         }

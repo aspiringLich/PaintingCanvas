@@ -6,4 +6,8 @@ public class Misc {
         if (val.doubleValue() < min.doubleValue()) return min;
         return val;
     }
+
+    public static <N extends Number> boolean equality(N a, N b, N error) {
+        return Math.max(a.doubleValue(), b.doubleValue()) - error.doubleValue() <= Math.min(a.doubleValue(), b.doubleValue()) + error.doubleValue();
+    }
 }

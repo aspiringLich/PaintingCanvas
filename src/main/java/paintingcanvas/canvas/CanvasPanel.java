@@ -51,6 +51,10 @@ public class CanvasPanel extends JPanel {
         canvas.frame++;
         if (canvas.frame < 0) return;
 
+        synchronized (canvas.translation) {
+            g.translate((int)canvas.translation.x, (int)canvas.translation.y);
+        }
+
         synchronized (canvas.animations) {
             // Update animations
             for (int i = 0; i < canvas.animations.size(); i++) {
