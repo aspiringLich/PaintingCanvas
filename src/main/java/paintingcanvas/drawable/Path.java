@@ -151,6 +151,7 @@ public class Path extends Drawable<Path> {
         gc.setColor(outlineColor);
         gc.translate(x, y);
         gc.draw(path);
+        gc.translate(-x, -y);
     }
 
     @Override
@@ -158,6 +159,7 @@ public class Path extends Drawable<Path> {
         gc.setColor(color);
         gc.translate(x, y);
         gc.fill(path);
+        gc.translate(-x, -y);
     }
 
     @Override
