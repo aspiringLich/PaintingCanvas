@@ -135,7 +135,7 @@ public abstract class Animation {
      * @see #fadeOut()
      */
     public static OpacityAnimation fadeIn() {
-        return new OpacityAnimation(1);
+        return new OpacityAnimation(255);
     }
 
     /**

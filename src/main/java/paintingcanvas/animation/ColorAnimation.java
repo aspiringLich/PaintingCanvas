@@ -48,6 +48,6 @@ public class ColorAnimation extends Animation {
         var b = _a.getBlue() + (_b.getBlue() - _a.getBlue()) * delta;
         var a = _a.getAlpha() + (_b.getAlpha() - _a.getAlpha()) * delta;
 
-        return new Color(Misc.clamp((int) r, 0, 255), Misc.clamp((int) g, 0, 255), Misc.clamp((int) b, 0, 255), Misc.clamp((int) a, 0, 255));
+        return new Color(Misc.clamp(0, (int) r, 255), Misc.clamp(0, (int) g, 255), Misc.clamp(255, (int) b, 255), Misc.clamp(0, (int) a, 255));
     }
 }

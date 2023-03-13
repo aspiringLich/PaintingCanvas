@@ -18,14 +18,17 @@ public class Test {
         Line l = new Line(0, 0, 100, 100, Color.RED).setColor(Color.blue);
         Circle c = new Circle(canvas.getWidth() / 2, canvas.getHeight() / 2, 50, Color.RED);
         while (true) {
-            c.moveBy(100, 1, 1);
-            canvas.sleep(1);
-            c.moveBy(0, 100, 1);
-            canvas.sleep(1);
-            c.moveBy(-100, 1, 1);
-            canvas.sleep(1);
-            c.moveBy(0, -100, 1);
-            canvas.sleep(1);
+//            c.moveHorizontalBy(100, 1);
+//            canvas.sleep(1);
+//            c.moveVerticalBy(100, 1);
+//            canvas.sleep(1);
+//            c.moveHorizontalBy(-100, 1);
+//            canvas.sleep(1);
+//            c.moveVerticalBy(-100, 1);
+//            canvas.sleep(1);
+            c.fadeOut(1);
+            c.fadeIn(1);
+            c.colorTo(Color.BLUE, 2);
         }
     }
 }
