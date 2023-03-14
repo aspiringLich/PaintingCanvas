@@ -28,7 +28,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9};
+var data = {"i0":9,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -182,6 +182,13 @@ extends java.lang.Object</pre>
      N max)</code></th>
 <td class="colLast"> </td>
 </tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>static &lt;N extends java.lang.Number&gt;<br/>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equality(N,N,N)">equality</a></span>​(N a,
+        N b,
+        N error)</code></th>
+<td class="colLast"> </td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -230,12 +237,25 @@ extends java.lang.Object</pre>
 </a><a id="clamp(N,N,N)">
 <!-- -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>clamp</h4>
 <pre class="methodSignature">public static &lt;N extends java.lang.Number&gt; N clamp​(N min,
                                                    N val,
                                                    N max)</pre>
+</li>
+</ul>
+<a id="equality(java.lang.Number,java.lang.Number,java.lang.Number)">
+<!-- -->
+</a><a id="equality(N,N,N)">
+<!-- -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>equality</h4>
+<pre class="methodSignature">public static &lt;N extends java.lang.Number&gt; boolean equality​(N a,
+                                                            N b,
+                                                            N error)</pre>
 </li>
 </ul>
 </li>
