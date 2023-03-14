@@ -8,6 +8,7 @@ public class Misc {
     }
 
     public static <N extends Number> boolean equality(N a, N b, N error) {
-        return Math.max(a.doubleValue(), b.doubleValue()) - error.doubleValue() <= Math.min(a.doubleValue(), b.doubleValue()) + error.doubleValue();
+        var err = error.doubleValue() / 2;
+        return Math.max(a.doubleValue(), b.doubleValue()) - err <= Math.min(a.doubleValue(), b.doubleValue()) + err;
     }
 }
