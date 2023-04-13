@@ -33,16 +33,18 @@ public class MovementAnimation extends Animation {
     @Override
     protected void updateAnimation(Drawable<?> drawable, double progress) {
         var t = easing.ease(progress);
-        drawable.x = (int) (start.x + (end.x - start.x) * t);
-        drawable.y = (int) (start.y + (end.y - start.y) * t);
+        drawable.setPos(
+                (int) (start.x + (end.x - start.x) * t),
+                (int) (start.y + (end.y - start.y) * t)
+        );
     }
 
     @Override
     protected void initAnimation(Drawable<?> drawable) {
-        this.start = new Point(drawable.x, drawable.y);
+        this.start = drawable.getPos();
         if (relative) {
-            end.x += drawable.x;
-            end.y += drawable.y;
+            end.x += drawable.getX();
+            end.y += drawable.getY();
         }
     }
 }

@@ -1,5 +1,7 @@
 package paintingcanvas.canvas;
 
+import paintingcanvas.drawable.Drawable;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,14 +14,14 @@ public class CanvasPanel extends JPanel {
     public JFrame jframe;
     Canvas canvas;
 
-    int width, height;
+    private final int width, height;
 
     CanvasPanel(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
+        jframe = new JFrame();
+
         this.width = width;
         this.height = height;
-
-        jframe = new JFrame();
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle(title);
         jframe.setVisible(true);
@@ -74,8 +76,8 @@ public class CanvasPanel extends JPanel {
 
         // Render elements
         canvas.renderLifecycles.forEach(e -> e.renderStart(g));
-        synchronized (canvas.elements) {
-            for (var element : canvas.elements) {
+        synchronized (Canvas.drawableSync) {
+            for (Drawable<?> element : canvas.elements) {
                 try {
                     element.render(g);
                 } catch (Exception e) {

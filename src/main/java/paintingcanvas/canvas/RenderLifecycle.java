@@ -64,8 +64,7 @@ public interface RenderLifecycle {
 
             synchronized (canvas.elements) {
                 canvas.elements.forEach(s -> {
-                    s.x += widthDiff;
-                    s.y += heightDiff;
+                    s.move((int)widthDiff, (int)heightDiff);
                 });
             }
 

@@ -43,6 +43,10 @@ public class Canvas {
      * Used to lock the thread to wait for a frame count
      */
     protected final Object frameSync = new Object();
+    /**
+     * Used to synchronize with drawables
+     */
+    public static final Object drawableSync = new Object();
     public boolean autoAdd;
     /**
      * The current frame
@@ -200,6 +204,7 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
+        Thread thread = Thread.currentThread();
         poolExecutor.scheduleAtFixedRate(() -> {
             panel.repaint();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);

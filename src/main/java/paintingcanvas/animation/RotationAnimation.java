@@ -31,12 +31,12 @@ public class RotationAnimation extends Animation {
     @Override
     protected void updateAnimation(Drawable<? extends Drawable<?>> drawable, double progress) {
         var t = easing.ease(progress);
-        drawable.rotation = start + (end - start) * t;
+        drawable.setRotation(start + (end - start) * t);
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        start = drawable.rotation;
+        start = drawable.getRotation();
         if (relative) {
             end += start;
         }

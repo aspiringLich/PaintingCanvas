@@ -26,12 +26,12 @@ public class ColorAnimation extends Animation {
 
     @Override
     protected void updateAnimation(Drawable<?> drawable, double progress) {
-        drawable.color = lerpColor(start, end, easing.ease(progress));
+        drawable.setColor(lerpColor(start, end, easing.ease(progress)));
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        this.start = drawable.color;
+        this.start = drawable.getColor();
     }
 
     /**

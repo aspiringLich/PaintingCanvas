@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * A system to add a debug overlay showing the FPS, frame count, Element count and frame time graph.
+ * A system to add a debug overlay showing the FPS,
+ * frame count, Element count and frame time graph.
  * <pre>{@code
  * // Create and attach a new FrameCounter with default settings
  * new FrameCounter().attach();

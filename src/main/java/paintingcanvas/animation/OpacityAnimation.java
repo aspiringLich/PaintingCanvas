@@ -34,22 +34,19 @@ public class OpacityAnimation extends Animation {
     protected void updateAnimation(Drawable<? extends Drawable<?>> drawable, double progress) {
         var t = easing.ease(progress);
 
-        Color color = drawable.color;
-        int alpha = (int) (start + (end - start) * t);
+        Color color = drawable.getColor();
+        int alpha = Misc.clamp(0, (int) (start + (end - start) * t), 255);
 //        System.err.println(end);
-        alpha = Misc.clamp(0, alpha, 255);
-        drawable.color = new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
+        drawable.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
 
-        Color outlineColor = drawable.outlineColor;
-        int outlineAlpha = (int) (start + (end - start) * t);
-        outlineAlpha = Misc.clamp(0, outlineAlpha, 255);
-        drawable.outlineColor = new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha);
+        Color outlineColor = drawable.getOutlineColor();
+        int outlineAlpha = Misc.clamp(0, (int) (outlineStart + (end - outlineStart) * t), 255);
+        drawable.setOutline(new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha));
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        this.start = drawable.color.getAlpha();
-//        System.out.println(start);
-        this.outlineStart = drawable.outlineColor.getAlpha();
+        this.start = drawable.getColor().getAlpha();
+        this.outlineStart = drawable.getOutlineColor().getAlpha();
     }
 }

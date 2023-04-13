@@ -15,35 +15,35 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Rotation of the object in radians (imagine using degrees)
      */
-    public double rotation;
+    double rotation;
     /**
      * Whether the object is visible or not
      */
-    public boolean visible = true;
+    boolean visible = true;
     /**
      * Whether the object is filled or not
      */
-    public boolean filled = true;
+    boolean filled = true;
     /**
      * The color of the object
      */
-    public Color color;
+    Color color;
     /**
      * The X-position of the object
      */
-    public int x;
+    int x;
     /**
      * The Y-position of the object
      */
-    public int y;
+    int y;
     /**
      * The color of the outline
      */
-    public Color outlineColor = Color.BLACK;
+    Color outlineColor = Color.BLACK;
     /**
      * The stroke of the outline
      */
-    public Stroke outlineStroke;
+    Stroke outlineStroke;
 
     Drawable(int x, int y, Color color) {
         this.x = x;
@@ -72,9 +72,34 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setOutline(int thickness, Color color) {
-        this.outlineColor = color;
-        this.outlineStroke = new BasicStroke(thickness);
-        return this.getThis();
+        synchronized (Canvas.drawableSync) {
+            this.outlineColor = color;
+            this.outlineStroke = new BasicStroke(thickness);
+            return this.getThis();
+        }
+    }
+
+    /**
+     * Sets the outline color of the shape
+     *
+     * <pre>{@code
+     * // the circle is red outlined by a black outline
+     * Circle c = new Circle(100, 100, 50);
+     * c.setOutline(5);
+     * c.setColor(Color.RED);
+     *
+     * // now the outline is blue
+     * c.setOutline(Color.BLUE);
+     * }</pre>
+     *
+     * @param color     the color of the outline
+     * @return The original object to allow method chaining
+     */
+    public T setOutline(Color color) {
+        synchronized (Canvas.drawableSync) {
+            this.outlineColor = color;
+            return this.getThis();
+        }
     }
 
     /**
@@ -223,7 +248,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setX(int x) {
-        this.x = x;
+        synchronized (Canvas.drawableSync) {
+            this.x = x;
+        }
         return getThis();
     }
 
@@ -247,7 +274,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #getY()
      */
     public T setY(int y) {
-        this.y = y;
+        synchronized (Canvas.drawableSync) {
+            this.y = y;
+        }
         return getThis();
     }
 
@@ -272,8 +301,10 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setPos(int x, int y) {
-        this.x = x;
-        this.y = y;
+        synchronized (Canvas.drawableSync) {
+            this.x = x;
+            this.y = y;
+        }
         return getThis();
     }
 
@@ -296,8 +327,10 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T move(int x, int y) {
-        this.x += x;
-        this.y += y;
+        synchronized (Canvas.drawableSync) {
+            this.x += x;
+            this.y += y;
+        }
         return getThis();
     }
 
@@ -316,7 +349,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T moveHorizontal(int x) {
-        this.x += x;
+        synchronized (Canvas.drawableSync) {
+            this.x += x;
+        }
         return getThis();
     }
 
@@ -335,7 +370,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveHorizontal(int)
      */
     public T moveVertical(int y) {
-        this.y += y;
+        synchronized (Canvas.drawableSync) {
+            this.y += y;
+        }
         return getThis();
     }
 
@@ -375,7 +412,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setColor(Color color) {
-        this.color = color;
+        synchronized (Canvas.drawableSync) {
+            this.color = color;
+        }
         return getThis();
     }
 
@@ -409,15 +448,33 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setRotation(double)
      */
     public T rotate(double rotation) {
-        this.rotation += Math.toRadians(rotation);
+        synchronized (Canvas.drawableSync) {
+            this.rotation += Math.toRadians(rotation);
+        }
         return getThis();
+    }
+
+    /**
+     * Get an elements rotation
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setRotation(90); // Sets the elements rotation to 90°
+     * let i = o.getRotation(); // Gets the rotation
+     * assert i == 90;
+     * }</pre>
+     *
+     * @return The rotation of the object
+     * @see #rotate(double)
+     */
+    public double getRotation() {
+        return this.rotation;
     }
 
     /**
      * Set an elements rotation to <code>rotation°</code>.
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
-     * o.rotate(90); // Sets the elements rotation to 90°
+     * o.setRotation(90); // Sets the elements rotation to 90°
      * }</pre>
      *
      * @param rotation Absolute rotation. (Degrees)
@@ -425,7 +482,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #rotate(double)
      */
     public T setRotation(double rotation) {
-        this.rotation = rotation;
+        synchronized (Canvas.drawableSync) {
+            this.rotation = rotation;
+        }
         return getThis();
     }
 
@@ -444,7 +503,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setOutline(int)
      */
     public T setFilled(boolean filled) {
-        this.filled = filled;
+        synchronized (Canvas.drawableSync) {
+            this.filled = filled;
+        }
         return getThis();
     }
 
@@ -457,6 +518,20 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      */
     public void erase() {
         Canvas.getGlobalInstance().elements.remove(this);
+    }
+
+    /**
+     * Gets the outline color
+     */
+    public Color getOutlineColor() {
+        return this.outlineColor;
+    }
+
+    /**
+     * Gets the outline stroke
+     */
+    public Stroke getOutlineStroke() {
+        return this.outlineStroke;
     }
 
     /**
