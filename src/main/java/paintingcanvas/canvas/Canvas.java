@@ -113,6 +113,7 @@ public class Canvas {
      *
      * @param color the new background color
      */
+    @SuppressWarnings("unused")
     public void setBackgroundColor(Color color) {
         this.backgroundColor = color;
     }
@@ -204,7 +205,6 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep)
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        Thread thread = Thread.currentThread();
         poolExecutor.scheduleAtFixedRate(() -> {
             panel.repaint();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);

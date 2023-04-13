@@ -17,6 +17,7 @@ import java.util.Vector;
  * new FrameCounter().attach();
  * }</pre>
  */
+@SuppressWarnings("unused")
 public class FrameCounter implements RenderLifecycle {
     final Vector<Long> frameTimes = new Vector<>();
     boolean enabled = true;

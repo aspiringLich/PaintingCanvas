@@ -4,7 +4,6 @@ import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
 import java.awt.*;
-import java.awt.image.ColorModel;
 
 /**
  * Displays some information on the screen, such as
