@@ -108,8 +108,7 @@ public class Recorder implements RenderLifecycle {
         synchronized (imgSync) {
             img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
             var gc = img.getGraphics();
-            cmp.paint(gc);
-            canvas.frame -= 1;
+            cmp.simplePaint(gc);
             gc.dispose();
         }
 

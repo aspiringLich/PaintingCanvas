@@ -209,4 +209,21 @@ public class Canvas {
             panel.repaint();
         }, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
     }
+
+    /**
+     * Get the mouse position in the canvas.
+     *
+     * <pre>{@code
+     * Point mousePos = canvas.getMousePos();
+     * if (mousePos != null) {
+     *     int x = mousePos.x;
+     *     int y = mousePos.y;
+     * }
+     * }</pre>
+     *
+     * @return The mouse position, or {@code null} if the mouse is not hovering over the canvas
+     */
+    public Point getMousePos() {
+        return panel.getMousePosition();
+    }
 }

@@ -62,7 +62,7 @@ public interface RenderLifecycle {
             var heightDiff = (newSize.height - lastSize.height) / 2f;
             lastSize = newSize;
 
-            synchronized (canvas.elements) {
+            synchronized (Canvas.drawableSync) {
                 canvas.elements.forEach(s -> {
                     s.move((int)widthDiff, (int)heightDiff);
                 });

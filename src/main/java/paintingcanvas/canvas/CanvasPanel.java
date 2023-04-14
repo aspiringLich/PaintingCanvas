@@ -48,8 +48,6 @@ public class CanvasPanel extends JPanel {
         }
         super.paintComponent(g);
 
-        g.setColor(canvas.backgroundColor);
-        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         canvas.frame++;
         if (canvas.frame < 0) return;
 
@@ -76,6 +74,17 @@ public class CanvasPanel extends JPanel {
 
         // Render elements
         canvas.renderLifecycles.forEach(e -> e.renderStart(g));
+        simplePaint(g);
+        canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
+    }
+
+    /**
+     * Does one thing: draws all the thingies.
+     * @param g The graphics context to draw into
+     */
+    public void simplePaint(Graphics g) {
+        g.setColor(canvas.backgroundColor);
+        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         synchronized (Canvas.drawableSync) {
             for (Drawable<?> element : canvas.elements) {
                 try {
@@ -85,6 +94,5 @@ public class CanvasPanel extends JPanel {
                 }
             }
         }
-        canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
     }
 }
