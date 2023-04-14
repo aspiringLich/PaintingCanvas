@@ -25,18 +25,22 @@ public class InfoDisplay implements RenderLifecycle {
     );
     private final Stroke stroke = new BasicStroke(10);
     private int fontSize = 12;
-    private Font font = new Font(Font.DIALOG, Font.PLAIN, 12);;
+    private Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
+    ;
     private Color textColor = Color.black;
 
-    public InfoDisplay() {}
+    public InfoDisplay() {
+    }
 
     /**
      * Set the font size of the displayed text
+     *
      * @param fontSize The new font size
      */
     public void setFontSize(int fontSize) {
         this.fontSize = fontSize;
-        this.font = new Font(Font.DIALOG, Font.PLAIN, fontSize);;
+        this.font = new Font(Font.DIALOG, Font.PLAIN, fontSize);
+        ;
     }
 
     public void setFont(Font font) {
@@ -67,6 +71,8 @@ public class InfoDisplay implements RenderLifecycle {
         int x = 10, y = 30;
         if (mouse.x >= width - textWidth) x = -x - textWidth;
         if (mouse.y >= height - textHeight) y = -textHeight;
+        x += mouse.x;
+        y += mouse.y;
 
         var cmp = canvas.panel;
         var img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -94,12 +100,12 @@ public class InfoDisplay implements RenderLifecycle {
         gc.drawLine(0, mouse.y, width, mouse.y);
 
         gc.setColor(new Color(0, 0, 0, 180));
-        gc.fillRect(mouse.x + x - pad, mouse.y + y - fontSize - pad, textWidth + pad * 2, textHeight + pad * 2);
+        gc.fillRect(x - pad, y - fontSize - pad, textWidth + pad * 2, textHeight + pad * 2);
 
         gc.setFont(font);
         gc.setColor(Color.white);
-        gc.drawString(String.format("pos: (%d, %d)", mouse.x, mouse.y), mouse.x + x, mouse.y + y);
-        gc.drawString(String.format("rgb: (%d, %d, %d)", red, green, blue), mouse.x + x, mouse.y + y + fontSize);
-        gc.drawString(String.format("hex: (#%06X)", hex & 0x00ffffff), mouse.x + x, mouse.y + y + fontSize * 2);
+        gc.drawString(String.format("pos: (%d, %d)", mouse.x, mouse.y), x, y);
+        gc.drawString(String.format("rgb: (%d, %d, %d)", red, green, blue), x, y + fontSize);
+        gc.drawString(String.format("hex: (#%06X)", hex & 0x00ffffff), x, y + fontSize * 2);
     }
 }

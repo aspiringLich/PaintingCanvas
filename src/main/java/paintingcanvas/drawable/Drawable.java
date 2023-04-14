@@ -162,7 +162,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         var gc = (Graphics2D) g;
         var transform = gc.getTransform();
         var center = this.center(g);
-        transform.setToRotation(this.rotation, center.x, center.y);
+        transform.rotate(this.rotation, center.x, center.y);
         gc.setTransform(transform);
 
         // if filled, draw filled then outline
