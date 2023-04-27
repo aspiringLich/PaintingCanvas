@@ -1,4 +1,4 @@
-package examples;
+package stress_tests;
 
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
@@ -9,8 +9,8 @@ import paintingcanvas.extensions.FrameCounter;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AnimationDebug {
-    final static int size = 20;
+public class AnimationTest {
+    final static int size = 10;
     final static int width = 50;
     final static int height = 50;
     final static int pad = size / 2;
