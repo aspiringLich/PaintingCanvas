@@ -4,6 +4,7 @@ import paintingcanvas.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Internal class that extends JPanel that does the initial setup of the JFrame
@@ -11,10 +12,13 @@ import java.awt.*;
  * Mostly used to not clutter up the documentation
  */
 public class CanvasPanel extends JPanel {
-    public JFrame jframe;
-    Canvas canvas;
-
     private final int width, height;
+    public JFrame jframe;
+    /**
+     * The image that is drawn to the screen
+     */
+    public BufferedImage image;
+    Canvas canvas;
 
     CanvasPanel(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
@@ -52,7 +56,7 @@ public class CanvasPanel extends JPanel {
         if (canvas.frame < 0) return;
 
         synchronized (canvas.translation) {
-            g.translate((int)canvas.translation.x, (int)canvas.translation.y);
+            g.translate((int) canvas.translation.x, (int) canvas.translation.y);
         }
 
         synchronized (canvas.animations) {
@@ -76,27 +80,27 @@ public class CanvasPanel extends JPanel {
             }
         }
 
-        // Render elements
-        canvas.renderLifecycles.forEach(e -> e.renderStart(g));
-        simplePaint(g);
-        canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
-    }
+        // Render elements onto an image
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        var ig = image.getGraphics();
 
-    /**
-     * Does one thing: draws all the thingies.
-     * @param g The graphics context to draw into
-     */
-    public void simplePaint(Graphics g) {
-        g.setColor(canvas.backgroundColor);
-        g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        canvas.renderLifecycles.forEach(e -> e.renderStart(ig));
+        ig.setColor(canvas.backgroundColor);
+        ig.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         synchronized (Canvas.drawableSync) {
             for (Drawable<?> element : canvas.elements) {
                 try {
-                    element.render(g);
+                    element.render(ig);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    element.erase();
                 }
             }
         }
+
+        // copy the image onto the screen
+        g.drawImage(image, 0, 0, null);
+        ig.dispose();
+        canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
     }
 }

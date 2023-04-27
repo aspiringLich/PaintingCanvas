@@ -7,6 +7,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.Point2D;
 
+/**
+ * Allows other classes to run code at different points during the rendering
+ * process. This is mainly useful for extensions / little widgets and things,
+ * but I'm sure you can find other uses.
+ */
 public interface RenderLifecycle {
     default void renderStart(Graphics g) {
     }

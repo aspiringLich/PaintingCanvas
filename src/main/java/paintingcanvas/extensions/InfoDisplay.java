@@ -71,14 +71,10 @@ public class InfoDisplay implements RenderLifecycle {
         y += mouse.y;
 
         var cmp = canvas.panel;
-        var img = new BufferedImage(cmp.getWidth(), cmp.getHeight(), BufferedImage.TYPE_INT_RGB);
-        var imgGraphics = img.getGraphics();
-        cmp.simplePaint(imgGraphics);
-        imgGraphics.dispose();
 
         int hex;
         try {
-            hex = img.getRGB(mouse.x, mouse.y);
+            hex = cmp.image.getRGB(mouse.x, mouse.y);
         } catch (ArrayIndexOutOfBoundsException e) {
             hex = 0xffffffff;
         }
