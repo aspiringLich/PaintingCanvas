@@ -77,16 +77,26 @@ public interface RenderLifecycle {
     }
 
     class CenteringLifecycle implements RenderLifecycle {
+        boolean first = true;
+        int x = 0, y = 0;
+
         @Override
         public void onResize(CanvasPanel panel, ComponentEvent e) {
             if (e.getComponent() == null) return;
             var canvas = Canvas.getGlobalInstance();
 
-            var xdiff = panel.initialWidth - panel.getWidth();
-            var ydiff = panel.initialHeight - panel.getHeight();
+            var xDiff = panel.initialWidth - panel.getWidth() - x;
+            var yDiff = panel.initialHeight - panel.getHeight() - y;
+
+            if (first) {
+                first = false;
+                x = xDiff;
+                y = yDiff;
+                return;
+            }
 
             synchronized (canvas.translation) {
-                canvas.translation.setLocation(-xdiff / 2f, -ydiff / 2f);
+                canvas.translation.setLocation(-xDiff / 2f, -yDiff / 2f);
             }
 
             canvas.panel.jframe.repaint();
