@@ -4,7 +4,6 @@ import paintingcanvas.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -22,19 +21,20 @@ public class CanvasPanel extends JPanel {
     public Canvas canvas;
 
     CanvasPanel(Canvas canvas, int width, int height, String title) {
+        this.initialWidth = width;
+        this.initialHeight = height;
+
         this.canvas = canvas;
         jframe = new JFrame();
 
-        this.initialWidth = width;
-        this.initialHeight = height;
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle(title);
-        jframe.setVisible(true);
 //        jframe.setLayout(null);
         jframe.add(this);
         jframe.pack();
         jframe.setLocationRelativeTo(null);
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
+        jframe.setVisible(true);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CanvasPanel extends JPanel {
      * @param g the <code>Graphics</code> context in which to paint
      */
     public void paintComponent(Graphics g) {
-        var gc = (Graphics2D)g;
+        var gc = (Graphics2D) g;
         synchronized (canvas.frameSync) {
             canvas.frameSync.notify();
         }
@@ -80,7 +80,7 @@ public class CanvasPanel extends JPanel {
 
         // Render elements onto an image
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-        var ig = (Graphics2D)image.getGraphics();
+        var ig = (Graphics2D) image.getGraphics();
 
         ig.setColor(Color.WHITE);
         ig.fillRect(0, 0, getWidth(), getHeight());
