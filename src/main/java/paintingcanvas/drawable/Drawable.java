@@ -51,7 +51,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.color = color;
 
         var canvas = Canvas.getGlobalInstance();
-        if (canvas.autoAdd) canvas.elements.add(this);
+        if (canvas.autoAdd) {
+            synchronized (Canvas.drawableSync) {
+                canvas.elements.add(this);
+            }
+        }
     }
 
     /**
@@ -162,7 +166,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         var gc = (Graphics2D) g;
         var transform = gc.getTransform();
         var center = this.center(g);
-        transform.rotate(this.rotation, center.x, center.y);
+        transform.setToRotation(this.rotation, center.x, center.y);
         gc.setTransform(transform);
 
         // if filled, draw filled then outline
@@ -517,7 +521,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * </p>
      */
     public void erase() {
-        Canvas.getGlobalInstance().elements.remove(this);
+        synchronized (Canvas.drawableSync) {
+            Canvas.getGlobalInstance().elements.remove(this);
+        }
     }
 
     /**
