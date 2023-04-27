@@ -3,8 +3,10 @@ package paintingcanvas.drawable;
 import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.canvas.CanvasPanel;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
@@ -96,7 +98,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.setOutline(Color.BLUE);
      * }</pre>
      *
-     * @param color     the color of the outline
+     * @param color the color of the outline
      * @return The original object to allow method chaining
      */
     public T setOutline(Color color) {
@@ -155,7 +157,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Actually render the object itself
      * <p>
-     * This calls the draw method, but does some extra steps beforehand to lay it out correctly
+     * This calls the draw methods, but does some extra steps beforehand to lay it out correctly
      * <p>
      *
      * @param g The graphics context to draw the object with
@@ -164,9 +166,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         if (!this.visible) return;
 
         var gc = (Graphics2D) g;
+        var save = gc.getTransform();
         var transform = gc.getTransform();
+
         var center = this.center(g);
-        transform.setToRotation(this.rotation, center.x, center.y);
+        transform.rotate(this.rotation, center.x, center.y);
         gc.setTransform(transform);
 
         // if filled, draw filled then outline
@@ -176,6 +180,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
             this.drawFilled(gc);
         }
         this.renderOutline(gc);
+
+        gc.setTransform(save);
     }
 
     private void renderOutline(Graphics2D gc) {

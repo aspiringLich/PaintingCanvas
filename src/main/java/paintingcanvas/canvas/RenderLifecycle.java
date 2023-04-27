@@ -13,10 +13,36 @@ import java.awt.geom.Point2D;
  * but I'm sure you can find other uses.
  */
 public interface RenderLifecycle {
-    default void renderStart(Graphics g) {
+    /**
+     * Runs before everything else; the {@code image} in {@link CanvasPanel} will
+     * reflect your changes.
+     * @param g The graphics context
+     */
+    default void preRender(Graphics g) {
     }
 
+    /**
+     * Runs after everything else; the {@code image} in {@link CanvasPanel} will
+     * reflect your changes.
+     * @param g The graphics context
+     */
+    default void postRender(Graphics g) {
+    }
+
+    /**
+     * Runs after everything else; the {@code image} in {@link CanvasPanel} will
+     * not reflect your changes.
+     * @param g The graphics context
+     */
     default void renderEnd(Graphics g) {
+    }
+
+    /**
+     * Runs before everything else; the {@code image} in {@link CanvasPanel} will
+     * not reflect your changes.
+     * @param g The graphics context
+     */
+    default void renderStart(Graphics g) {
     }
 
     default void onResize(CanvasPanel canvas, ComponentEvent e) {
@@ -42,7 +68,7 @@ public interface RenderLifecycle {
 
     class AntiAliasingLifecycle implements RenderLifecycle {
         @Override
-        public void renderStart(Graphics g) {
+        public void preRender(Graphics g) {
             var gc = (Graphics2D) g;
             // Enable antialiasing for elements + text
             gc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -51,34 +77,16 @@ public interface RenderLifecycle {
     }
 
     class CenteringLifecycle implements RenderLifecycle {
-        final int error = 50;
-        private Point2D.Double lastSize;
-        private boolean active = false;
-
         @Override
-        public void onResize(CanvasPanel canvasComponent, ComponentEvent e) {
+        public void onResize(CanvasPanel panel, ComponentEvent e) {
             if (e.getComponent() == null) return;
             var canvas = Canvas.getGlobalInstance();
-            if (lastSize == null || !this.active) {
-                var size = e.getComponent().getSize();
-                lastSize = new Point2D.Double(size.width, size.height);
-                if (Misc.equality(lastSize.x, canvas.startSize.width, error) &&
-                        Misc.equality(lastSize.y, canvas.startSize.height, error))
-                    active = true;
-                return;
-            }
 
-            var _newSize = canvasComponent.jframe.getSize();
-            var newSize = new Point2D.Double(_newSize.width, _newSize.height);
-            if (lastSize.equals(newSize)) return;
-
-            var widthDiff = (newSize.x - lastSize.x) / 2f;
-            var heightDiff = (newSize.y - lastSize.y) / 2f;
-            lastSize = newSize;
+            var xdiff = panel.initialWidth - panel.getWidth();
+            var ydiff = panel.initialHeight - panel.getHeight();
 
             synchronized (canvas.translation) {
-                var old = canvas.translation;
-                canvas.translation.setLocation(old.x + widthDiff, old.y + heightDiff);
+                canvas.translation.setLocation(-xdiff / 2f, -ydiff / 2f);
             }
 
             canvas.panel.jframe.repaint();

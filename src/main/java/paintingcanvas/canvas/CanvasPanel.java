@@ -4,6 +4,7 @@ import paintingcanvas.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 /**
@@ -12,20 +13,20 @@ import java.awt.image.BufferedImage;
  * Mostly used to not clutter up the documentation
  */
 public class CanvasPanel extends JPanel {
-    private final int width, height;
+    final int initialWidth, initialHeight;
     public JFrame jframe;
     /**
      * The image that is drawn to the screen
      */
     public BufferedImage image;
-    Canvas canvas;
+    public Canvas canvas;
 
     CanvasPanel(Canvas canvas, int width, int height, String title) {
         this.canvas = canvas;
         jframe = new JFrame();
 
-        this.width = width;
-        this.height = height;
+        this.initialWidth = width;
+        this.initialHeight = height;
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle(title);
         jframe.setVisible(true);
@@ -38,7 +39,7 @@ public class CanvasPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(width, height);
+        return new Dimension(initialWidth, initialHeight);
     }
 
     /**
@@ -47,17 +48,14 @@ public class CanvasPanel extends JPanel {
      * @param g the <code>Graphics</code> context in which to paint
      */
     public void paintComponent(Graphics g) {
+        var gc = (Graphics2D)g;
         synchronized (canvas.frameSync) {
             canvas.frameSync.notify();
         }
-        super.paintComponent(g);
+        super.paintComponent(gc);
 
         canvas.frame++;
         if (canvas.frame < 0) return;
-
-        synchronized (canvas.translation) {
-            g.translate((int) canvas.translation.x, (int) canvas.translation.y);
-        }
 
         synchronized (canvas.animations) {
             // Update animations
@@ -81,12 +79,16 @@ public class CanvasPanel extends JPanel {
         }
 
         // Render elements onto an image
-        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        var ig = image.getGraphics();
+        image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        var ig = (Graphics2D)image.getGraphics();
 
-        canvas.renderLifecycles.forEach(e -> e.renderStart(ig));
-        ig.setColor(canvas.backgroundColor);
-        ig.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        ig.setColor(Color.WHITE);
+        ig.fillRect(0, 0, getWidth(), getHeight());
+        synchronized (canvas.translation) {
+            ig.translate((int) canvas.translation.x, (int) canvas.translation.y);
+        }
+
+        canvas.renderLifecycles.forEach(e -> e.preRender(ig));
         synchronized (Canvas.drawableSync) {
             for (Drawable<?> element : canvas.elements) {
                 try {
@@ -97,9 +99,15 @@ public class CanvasPanel extends JPanel {
                 }
             }
         }
+        canvas.renderLifecycles.forEach(e -> e.postRender(ig));
 
         // copy the image onto the screen
-        g.drawImage(image, 0, 0, null);
+        canvas.renderLifecycles.forEach(e -> e.renderStart(g));
+        gc.drawImage(
+                image,
+                0, 0,
+                null
+        );
         ig.dispose();
         canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
     }
