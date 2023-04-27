@@ -37,18 +37,17 @@ public class Canvas {
      */
     public final CanvasPanel panel;
     /**
-     * Used to lock the thread to wait for animations to finish
+     * Sync with animations: Notifies on animation finish
      */
     protected final Object animationSync = new Object();
     /**
-     * Used to lock the thread to wait for a frame count
+     * Sync with frame: Notifies on end of frame
      */
     protected final Object frameSync = new Object();
     /**
-     * Used to synchronize with drawables
+     * Sync with drawables: Use when modifying a drawable
      */
     public static final Object drawableSync = new Object();
-    public boolean autoAdd;
     /**
      * The current frame
      */
@@ -58,16 +57,16 @@ public class Canvas {
      */
     public List<RenderLifecycle> renderLifecycles = new Vector<>();
     /**
-     * The background color of the canvas
+     * The options for the behavior of the canvas, see {@link CanvasOptions}
      */
-    public Color backgroundColor = Color.WHITE;
+    public CanvasOptions options;
 
     /**
      * Initializes the canvas with a default size of 900x600
      * and a title of "Canvas"
      */
     public Canvas() {
-        this(900, 600, "Canvas");
+        this(900, 600, "Canvas", new CanvasOptions());
     }
 
     /**
@@ -78,6 +77,18 @@ public class Canvas {
      * @param title  the title of the canvas
      */
     public Canvas(int width, int height, String title) {
+        this(width, height, title, new CanvasOptions());
+    }
+
+    /**
+     * Initializes the canvas
+     *
+     * @param width   the width of the canvas
+     * @param height  the height of the canvas
+     * @param title   the title of the canvas
+     * @param options options for the canvas
+     */
+    public Canvas(int width, int height, String title, CanvasOptions options) {
         super();
         this.startSize = new Dimension(width, height);
         this.translation = new Point2D.Float(0, 0);
@@ -87,12 +98,11 @@ public class Canvas {
             throw new RuntimeException("There can only be one Canvas instance");
         Canvas.globalInstance = this;
 
-        this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
-        if (getProp("paintingcanvas.autoCenter", true))
+        this.options = options;
+        if (options.antiAlias)
+            this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
+        if (options.autoCenter)
             this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
-        if (getProp("paintingcanvas.autoAdd", true))
-            this.autoAdd = true;
-
         render();
     }
 
@@ -107,12 +117,6 @@ public class Canvas {
         return globalInstance;
     }
 
-    private boolean getProp(String prop, boolean _default) {
-        var val = System.getProperties().getProperty(prop);
-        if (val == null) return _default;
-        return Boolean.parseBoolean(val);
-    }
-
     /**
      * Sets the background color of the canvas
      *
@@ -120,7 +124,7 @@ public class Canvas {
      */
     @SuppressWarnings("unused")
     public void setBackgroundColor(Color color) {
-        this.backgroundColor = color;
+        this.options.backgroundColor = color;
     }
 
     /**

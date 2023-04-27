@@ -82,7 +82,7 @@ public class CanvasPanel extends JPanel {
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         var ig = (Graphics2D) image.getGraphics();
 
-        ig.setColor(Color.WHITE);
+        ig.setColor(canvas.options.backgroundColor);
         ig.fillRect(0, 0, getWidth(), getHeight());
         synchronized (canvas.translation) {
 //            System.out.println(canvas.translation);

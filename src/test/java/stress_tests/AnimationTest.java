@@ -3,6 +3,7 @@ package stress_tests;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.canvas.CanvasOptions;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
 
@@ -17,8 +18,10 @@ public class AnimationTest {
 
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
-        System.setProperty("paintingcanvas.autoCenter", "false");
-        var canvas = new Canvas(width * size, height * size /*+ 32*/, "test");
+
+        CanvasOptions options = new CanvasOptions();
+        options.autoCenter = false;
+        var canvas = new Canvas(width * size, height * size /*+ 32*/, "test", options);
         // var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.frame),
