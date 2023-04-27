@@ -30,9 +30,19 @@ public class SyncTest {
             }
         }
         while (true) {
+            int tempN = 10;
+            Circle[] temps = new Circle[tempN];
+            for (int i = 0; i < tempN; i++) {
+                temps[i] = new Circle((int) (Math.random() * canvas.getWidth()), (int) (Math.random() * canvas.getHeight()), 10, randomColor());
+            }
+
             for (int i = 0; i < 20; i++) {
                 for (Polygon c : shapes) c.move(10, 0);
                 for (Polygon c : shapes) c.move(-10, 0);
+            }
+
+            for (int i = 0; i < tempN; i++) {
+                temps[i].erase();
             }
         }
     }
