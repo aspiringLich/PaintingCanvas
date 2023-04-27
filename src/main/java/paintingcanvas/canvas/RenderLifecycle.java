@@ -1,21 +1,31 @@
 package paintingcanvas.canvas;
 
-import paintingcanvas.misc.Misc;
-
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.geom.Point2D;
 
 /**
- * Allows other classes to run code at different points during the rendering
- * process. This is mainly useful for extensions / little widgets and things,
- * but I'm sure you can find other uses.
+ * <p>
+ *     Allows other classes to run code at different points during the rendering process. This is mainly useful for
+ *     extensions / little widgets and things, but I'm sure you can find other uses.
+ * </p>
+ * <p>
+ *     Here's <em>exactly</em> how it works (sort of). First the {@link java.awt.image.BufferedImage image} is created,
+ *     and the background is drawn. Next, {@link RenderLifecycle#preRender(Graphics)} is called, and all the
+ *     {@link paintingcanvas.drawable.Drawable Drawables} get drawn. Then {@link RenderLifecycle#postRender(Graphics)}
+ *     is called, {@link RenderLifecycle#renderStart(Graphics)} is called, and finally, the image is copied over to the
+ *     screen, and {@link RenderLifecycle#renderEnd(Graphics)} is called.
+ * </p>
+ * <p>
+ *     Note that {@code preRender} / {@code postRender} are called on a different graphics context compared to
+ *     {@code renderStart} / {@code renderEnd}.
+ * </p>
  */
 public interface RenderLifecycle {
     /**
      * Runs before everything else; the {@code image} in {@link CanvasPanel} will
      * reflect your changes.
+     *
      * @param g The graphics context
      */
     default void preRender(Graphics g) {
@@ -24,6 +34,7 @@ public interface RenderLifecycle {
     /**
      * Runs after everything else; the {@code image} in {@link CanvasPanel} will
      * reflect your changes.
+     *
      * @param g The graphics context
      */
     default void postRender(Graphics g) {
@@ -32,6 +43,7 @@ public interface RenderLifecycle {
     /**
      * Runs after everything else; the {@code image} in {@link CanvasPanel} will
      * not reflect your changes.
+     *
      * @param g The graphics context
      */
     default void renderEnd(Graphics g) {
@@ -40,6 +52,7 @@ public interface RenderLifecycle {
     /**
      * Runs before everything else; the {@code image} in {@link CanvasPanel} will
      * not reflect your changes.
+     *
      * @param g The graphics context
      */
     default void renderStart(Graphics g) {
@@ -67,12 +80,21 @@ public interface RenderLifecycle {
     }
 
     class AntiAliasingLifecycle implements RenderLifecycle {
-        @Override
-        public void preRender(Graphics g) {
+        void antiAlias(Graphics g) {
             var gc = (Graphics2D) g;
             // Enable antialiasing for elements + text
             gc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             gc.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        }
+
+        @Override
+        public void preRender(Graphics g) {
+            antiAlias(g);
+        }
+
+        @Override
+        public void renderStart(Graphics g) {
+            antiAlias(g);
         }
     }
 
