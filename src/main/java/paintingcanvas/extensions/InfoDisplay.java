@@ -26,8 +26,7 @@ public class InfoDisplay implements RenderLifecycle {
     private final Stroke stroke = new BasicStroke(10);
     private int fontSize = 12;
     private Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
-    ;
-    private Color textColor = Color.black;
+    private final Color textColor = Color.BLACK;
 
     public InfoDisplay() {
     }
@@ -40,7 +39,6 @@ public class InfoDisplay implements RenderLifecycle {
     public void setFontSize(int fontSize) {
         this.fontSize = fontSize;
         this.font = new Font(Font.DIALOG, Font.PLAIN, fontSize);
-        ;
     }
 
     public void setFont(Font font) {
@@ -60,9 +58,7 @@ public class InfoDisplay implements RenderLifecycle {
         var height = canvas.getHeight();
 
         var mouse = canvas.getMousePos();
-        if (mouse == null) {
-            return;
-        }
+        if (mouse == null) return;
 
         int textWidth = fontSize * 10;
         int textHeight = fontSize * 3;
