@@ -121,11 +121,6 @@ public class Triangle extends Drawable<Triangle> {
     }
 
     @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
-    }
-
-    @Override
     protected Triangle getThis() {
         return this;
     }

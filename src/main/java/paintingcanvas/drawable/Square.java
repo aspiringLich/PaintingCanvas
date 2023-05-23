@@ -59,11 +59,6 @@ public class Square extends Drawable<Square> {
     }
 
     @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
-    }
-
-    @Override
     public Square getThis() {
         return this;
     }

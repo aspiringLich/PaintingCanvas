@@ -68,11 +68,6 @@ public class Rectangle extends Drawable<Rectangle> {
     }
 
     @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
-    }
-
-    @Override
     protected Rectangle getThis() {
         return this;
     }

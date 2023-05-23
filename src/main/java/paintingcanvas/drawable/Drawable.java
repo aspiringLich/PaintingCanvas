@@ -152,7 +152,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @param g Graphics context
      * @return The object's center-point
      */
-    public abstract Point center(Graphics g);
+    public Point center(Graphics g) {
+        return new Point(this.x, this.y);
+    }
 
     /**
      * Actually render the object itself

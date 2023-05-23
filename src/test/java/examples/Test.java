@@ -1,12 +1,14 @@
 package examples;
 
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.drawable.Image;
 import paintingcanvas.drawable.Line;
 import paintingcanvas.drawable.Polygon;
 import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.extensions.InfoDisplay;
 
-import java.awt.*;
+import java.awt.Color;
+
 
 @SuppressWarnings("unused")
 public class Test {
@@ -16,26 +18,11 @@ public class Test {
 
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
-        new FrameCounter().line(
-            () -> String.format("Animations: %d", canvas.animations.size())
-        ).attach();
-        new InfoDisplay().attach();
 
-        Line l = new Line(0, 0, 100, 100, Color.RED).setColor(Color.blue);
-        Polygon[] shapes = new Polygon[10];
-        for (int i = 0; i < shapes.length; i++) {
-            shapes[i] = new Polygon(0, 200, randomColor());
-            for (int j = 0; j < 5; j++) {
-                int x = (int) (Math.random() * 200);
-                int y = (int) (Math.random() * 200);
-                shapes[i].point(x, y);
-            }
-        }
-        while (true) {
-            for (int i = 0; i < 20; i++) {
-                for (Polygon c : shapes) c.move(10, 0);
-                for (Polygon c : shapes) c.move(-10, 0);
-            }
-        }
+        String dir = System.getProperty("user.dir");
+        Image image = new Image(0, 0, "src/test/java/examples/flop.jpg")
+                .rotate(90);
+
+        while(true) {}
     }
 }

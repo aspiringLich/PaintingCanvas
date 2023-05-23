@@ -67,11 +67,6 @@ public class Ellipse extends Drawable<Ellipse> {
     }
 
     @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
-    }
-
-    @Override
     protected Ellipse getThis() {
         return this;
     }
