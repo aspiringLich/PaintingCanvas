@@ -1,5 +1,7 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Hue;
+
 import java.awt.*;
 
 /**
@@ -56,6 +58,24 @@ public class Triangle extends Drawable<Triangle> {
         super(centerX, centerY, color);
         this.width = width;
         this.height = height;
+    }
+
+    /**
+     * Create a new Triangle element with a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * // Create a new Triangle centered at (100, 100) that is 20px wide and 30px tall
+     * Triangle triangle = new Triangle(100, 100, 20, 30, new Color(255, 0, 0));
+     * }</pre>
+     *
+     * @param centerX The X-position of the triangle
+     * @param centerY The Y-position of the triangle
+     * @param width   The width of the triangle
+     * @param height  The height of the triangle
+     * @param color   The name of the color of the triangle
+     */
+    public Triangle(int centerX, int centerY, int width, int height, String color) {
+        this(centerX, centerY, width, height, Hue.getColor(color));
     }
 
     private java.awt.Polygon getPolygon() {

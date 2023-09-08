@@ -1,5 +1,7 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Hue;
+
 import java.awt.*;
 
 /**
@@ -47,6 +49,25 @@ public class Line extends Drawable<Line> {
         super(x1, y1, color);
         this.endOffset = new Point(x2 - x1, y2 - y1);
         this.outlineStroke = new BasicStroke(1);
+    }
+
+    /**
+     * Create a new Line element colored a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * // Create a new Line from (100, 100) to (200, 200)
+     * Line line = new Line(100, 100, 200, 200, "red");
+     * }</pre>
+     *
+     * @param x1    The X-position of the startpoint
+     * @param y1    The Y-position of the startpoint
+     * @param x2    The X-position of the endpoint
+     * @param y2    The Y-position of the endpoint
+     * @param color The name of the color (case-insensitive)
+     */
+    @SuppressWarnings("unused")
+    public Line(int x1, int y1, int x2, int y2, String color) {
+        this(x1, y1, x2, y2, Hue.getColor(color));
     }
 
     @Override

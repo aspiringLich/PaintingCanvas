@@ -1,5 +1,7 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Hue;
+
 import java.awt.*;
 
 /**
@@ -18,7 +20,7 @@ public class Square extends Drawable<Square> {
     /**
      * Create a new Square element.
      * <pre>{@code
-     * // Created a square centered at (100, 100) with a side length of 30px
+     * // Create a square centered at (100, 100) with a side length of 30px
      * Square square = new Square(100, 100, 30);
      * }</pre>
      *
@@ -34,7 +36,7 @@ public class Square extends Drawable<Square> {
     /**
      * Create a new Square element.
      * <pre>{@code
-     * // Created a red square centered at (100, 100) with a side length of 30px
+     * // Create a red square centered at (100, 100) with a side length of 30px
      * Square square = new Square(100, 100, 30, new Color(255, 0, 0));
      * }</pre>
      *
@@ -46,6 +48,23 @@ public class Square extends Drawable<Square> {
     public Square(int centerX, int centerY, int size, Color color) {
         super(centerX, centerY, color);
         this.size = size;
+    }
+
+    /**
+     * Create a new Square element with a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * // Create a red square centered at (100, 100) with a side length of 30px
+     * Square square = new Square(100, 100, 30, "red");
+     * }</pre>
+     *
+     * @param centerX The X-position of the square
+     * @param centerY The Y-position of the square
+     * @param size    The size of the square
+     * @param color   The name of the color of the square (case-insensitive)
+     */
+    public Square(int centerX, int centerY, int size, String color) {
+        this(centerX, centerY, size, Hue.getColor(color));
     }
 
     @Override

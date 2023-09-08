@@ -3,10 +3,9 @@ package paintingcanvas.drawable;
 import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
 import paintingcanvas.canvas.Canvas;
-import paintingcanvas.canvas.CanvasPanel;
+import paintingcanvas.misc.Hue;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
@@ -428,6 +427,21 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
             this.color = color;
         }
         return getThis();
+    }
+
+    /**
+     * Set the color of the object with a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor("red"); // Set color to red
+     * }</pre>
+     *
+     * @param color The name of the color (case-insensitive)
+     * @return The original object to allow method chaining
+     */
+    public T setColor(String color) {
+        return setColor(Hue.getColor(color));
     }
 
     /**

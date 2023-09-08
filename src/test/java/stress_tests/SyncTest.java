@@ -22,7 +22,7 @@ public class SyncTest {
 
         Polygon[] shapes = new Polygon[10];
         for (int i = 0; i < shapes.length; i++) {
-            shapes[i] = new Polygon(0, 200, randomColor());
+            shapes[i] = new Polygon(0, 200).setColor(randomColor());
             for (int j = 0; j < 5; j++) {
                 int x = (int) (Math.random() * 200);
                 int y = (int) (Math.random() * 200);

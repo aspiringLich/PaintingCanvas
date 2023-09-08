@@ -1,5 +1,7 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Hue;
+
 import java.awt.*;
 
 /**
@@ -55,6 +57,24 @@ public class Rectangle extends Drawable<Rectangle> {
         super(centerX, centerY, color);
         this.width = width;
         this.height = height;
+    }
+
+    /**
+     * Create a new Rectangle element with a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * // Create a new red Rectangle centered at (100, 100) with a width of 20 and a height of 30
+     * Rectangle rectangle = new Rectangle(100, 100, 20, 30, "red");
+     * }</pre>
+     *
+     * @param centerX The X-position of the rectangle
+     * @param centerY The Y-position of the rectangle
+     * @param width   The width of the rectangle
+     * @param height  The height of the rectangle
+     * @param color   The name of the color (case-insensitive)
+     */
+    public Rectangle(int centerX, int centerY, int width, int height, String color) {
+        this(centerX, centerY, width, height, Hue.getColor(color));
     }
 
     @Override

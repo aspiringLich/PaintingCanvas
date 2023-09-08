@@ -1,5 +1,7 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Hue;
+
 import java.awt.*;
 
 /**
@@ -32,9 +34,9 @@ public class Circle extends Drawable<Circle> {
     }
 
     /**
-     * Create a new Circle element.
+     * Create a new Circle element with a specified {@link Color}.
      * <pre>{@code
-     * // Create a new Circle centered at (100, 100) with a radius of 20.
+     * // Create a new red Circle centered at (100, 100) with a radius of 20.
      * Circle circle = new Circle(100, 100, 20, new Color(255, 0, 0));
      * }</pre>
      *
@@ -46,6 +48,23 @@ public class Circle extends Drawable<Circle> {
     public Circle(int centerX, int centerY, int radius, Color color) {
         super(centerX, centerY, color);
         this.radius = radius;
+    }
+
+    /**
+     * Create a new Circle element with a certain color by name
+     * (see {@link Hue} for list of all valid names)
+     * <pre>{@code
+     * // Create a new red Circle centered at (100, 100) with a radius of 20.
+     * Circle circle = new Circle(100, 100, 20, new Color(255, 0, 0));
+     * }</pre>
+     *
+     * @param centerX The X-position of the circle
+     * @param centerY The Y-position of the circle
+     * @param radius  The radius of the circle
+     * @param color   The name of the color (case-insensitive)
+     */
+    public Circle(int centerX, int centerY, int radius, String color) {
+        this(centerX, centerY, radius, Hue.getColor(color));
     }
 
     @Override
