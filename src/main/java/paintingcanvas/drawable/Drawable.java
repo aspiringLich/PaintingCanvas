@@ -550,6 +550,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Gets the outline color
+     *
+     * @return The outline color
      */
     public Color getOutlineColor() {
         return this.outlineColor;
@@ -557,6 +559,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Gets the outline stroke
+     *
+     * @return The outline stroke
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;

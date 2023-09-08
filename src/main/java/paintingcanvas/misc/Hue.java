@@ -14,30 +14,31 @@ import java.util.Map;
  *     {@link #getColor(String)}
  * </p>
  * <table>
+ *     <caption>{@link Hue} Variants</caption>
  *     <tr><th>Variant</th><th>Color</th></tr>
- *     <tr><td>Black</td><td style="background-color:#000000" /></tr>
- *     <tr><td>White</td><td style="background-color:#ffffff" /></tr>
- *     <tr><td>Slate</td><td style="background-color:#94a3b8" /></tr>
- *     <tr><td>Gray</td><td style="background-color:#9ca3af" /></tr>
- *     <tr><td>Zinc</td><td style="background-color:#a1a1aa" /></tr>
- *     <tr><td>Neutral</td><td style="background-color:#a3a3a3" /></tr>
- *     <tr><td>Stone</td><td style="background-color:#a8a29e" /></tr>
- *     <tr><td>Red</td><td style="background-color:#f87171" /></tr>
- *     <tr><td>Orange</td><td style="background-color:#fb923c" /></tr>
- *     <tr><td>Amber</td><td style="background-color:#fbbf24" /></tr>
- *     <tr><td>Yellow</td><td style="background-color:#facc15" /></tr>
- *     <tr><td>Lime</td><td style="background-color:#a3e635" /></tr>
- *     <tr><td>Green</td><td style="background-color:#4ade80" /></tr>
- *     <tr><td>Emerald</td><td style="background-color:#4ade80" /></tr>
- *     <tr><td>Teal</td><td style="background-color:#2dd4bf" /></tr>
- *     <tr><td>Cyan</td><td style="background-color:#22d3ee" /></tr>
- *     <tr><td>Sky</td><td style="background-color:#38bdf8" /></tr>
- *     <tr><td>Blue</td><td style="background-color:#60a5fa" /></tr>
- *     <tr><td>Indigo</td><td style="background-color:#818cf8" /></tr>
- *     <tr><td>Purple</td><td style="background-color:#a78bfa" /></tr>
- *     <tr><td>Fuchsia</td><td style="background-color:#e879f9" /></tr>
- *     <tr><td>Pink</td><td style="background-color:#f472b6" /></tr>
- *     <tr><td>Rose</td><td style="background-color:#fb7185" /></tr>
+ *     <tr><td>Black</td><td style="background-color:#000000"></td></tr>
+ *     <tr><td>White</td><td style="background-color:#ffffff"></td></tr>
+ *     <tr><td>Slate</td><td style="background-color:#94a3b8"></td></tr>
+ *     <tr><td>Gray</td><td style="background-color:#9ca3af"></td></tr>
+ *     <tr><td>Zinc</td><td style="background-color:#a1a1aa"></td></tr>
+ *     <tr><td>Neutral</td><td style="background-color:#a3a3a3"></td></tr>
+ *     <tr><td>Stone</td><td style="background-color:#a8a29e"></td></tr>
+ *     <tr><td>Red</td><td style="background-color:#f87171"></td></tr>
+ *     <tr><td>Orange</td><td style="background-color:#fb923c"></td></tr>
+ *     <tr><td>Amber</td><td style="background-color:#fbbf24"></td></tr>
+ *     <tr><td>Yellow</td><td style="background-color:#facc15"></td></tr>
+ *     <tr><td>Lime</td><td style="background-color:#a3e635"></td></tr>
+ *     <tr><td>Green</td><td style="background-color:#4ade80"></td></tr>
+ *     <tr><td>Emerald</td><td style="background-color:#4ade80"></td></tr>
+ *     <tr><td>Teal</td><td style="background-color:#2dd4bf"></td></tr>
+ *     <tr><td>Cyan</td><td style="background-color:#22d3ee"></td></tr>
+ *     <tr><td>Sky</td><td style="background-color:#38bdf8"></td></tr>
+ *     <tr><td>Blue</td><td style="background-color:#60a5fa"></td></tr>
+ *     <tr><td>Indigo</td><td style="background-color:#818cf8"></td></tr>
+ *     <tr><td>Purple</td><td style="background-color:#a78bfa"></td></tr>
+ *     <tr><td>Fuchsia</td><td style="background-color:#e879f9"></td></tr>
+ *     <tr><td>Pink</td><td style="background-color:#f472b6"></td></tr>
+ *     <tr><td>Rose</td><td style="background-color:#fb7185"></td></tr>
  * </table>
  */
 @SuppressWarnings("unused")
