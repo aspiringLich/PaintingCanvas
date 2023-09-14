@@ -236,7 +236,6 @@ public class Canvas {
         return panel.getMousePosition();
     }
 
-    // TODO: More docs
     /**
      * Runs the specified code all on the same frame.
      * Without it, because the rendering is decoupled from your code, many operations can be randomly split across frames.
