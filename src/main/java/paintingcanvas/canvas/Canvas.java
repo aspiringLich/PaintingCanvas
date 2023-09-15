@@ -235,4 +235,24 @@ public class Canvas {
     public Point getMousePos() {
         return panel.getMousePosition();
     }
+
+    /**
+     * Runs the specified code all on the same frame.
+     * Without it, because the rendering is decoupled from your code, many operations can be randomly split across frames.
+     *
+     * <pre>{@code
+     * Canvas canvas = new Canvas();
+     * Polygon[] shapes = ...;
+     * canvas.atomic(() -> {
+     *     for (Polygon c : shapes) c.move(10, 0);
+     * });
+     * }</pre>
+     *
+     * @param r The code to run
+     */
+    public void atomic(Runnable r) {
+        synchronized (drawableSync) {
+            r.run();
+        }
+    }
 }
