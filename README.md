@@ -39,4 +39,4 @@ https://user-images.githubusercontent.com/48413902/223738287-396ffca5-8bcd-48a8-
 
 https://user-images.githubusercontent.com/48413902/224180302-c79f398b-5772-42b3-9aa5-6139518b5d22.mp4
 
-[javadoc]: https://aspiringlich.github.io/PaintingCanvas/paintingcanvas/package-summary.html
+[javadoc]: https://aspiringlich.github.io/PaintingCanvas
