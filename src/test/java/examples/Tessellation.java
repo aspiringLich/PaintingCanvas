@@ -210,7 +210,6 @@ class Tile {
         var height = Const.height;
 
         var p1 = new Point(-size / 2, -height);
-        var p2 = new Point(size / 2, -height);
 
         path = new Path().setPos(x, y);
         outline = new Path().setPos(x, y);
