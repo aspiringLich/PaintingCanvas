@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -60,8 +60,9 @@ public class Rectangle extends Drawable<Rectangle> {
     }
 
     /**
-     * Create a new Rectangle element with a certain color by name
-     * (see {@link Hue} for list of all valid names)
+     * Create a new Rectangle element with a hue name or hex code
+     * @see Misc#stringToColor(String)
+     *
      * <pre>{@code
      * // Create a new red Rectangle centered at (100, 100) with a width of 20 and a height of 30
      * Rectangle rectangle = new Rectangle(100, 100, 20, 30, "red");
@@ -74,7 +75,7 @@ public class Rectangle extends Drawable<Rectangle> {
      * @param color   The name of the color (case-insensitive)
      */
     public Rectangle(int centerX, int centerY, int width, int height, String color) {
-        this(centerX, centerY, width, height, Hue.getColor(color));
+        this(centerX, centerY, width, height, Misc.stringToColor(color));
     }
 
     @Override
