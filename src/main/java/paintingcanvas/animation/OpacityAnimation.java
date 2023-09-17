@@ -37,7 +37,6 @@ public class OpacityAnimation extends Animation {
 
         Color color = drawable.getColor();
         int alpha = Misc.clamp(0, (int) (start + (end - start) * t), 255);
-//        System.err.println(end);
         drawable.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
 
         Color outlineColor = drawable.getOutlineColor();

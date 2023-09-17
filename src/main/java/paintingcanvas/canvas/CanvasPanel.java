@@ -28,7 +28,6 @@ public class CanvasPanel extends JPanel {
         jframe = new JFrame();
 
         jframe.setTitle(title);
-//        jframe.setLayout(null);
         jframe.add(this);
         jframe.pack();
         jframe.setLocationRelativeTo(null);
@@ -71,7 +70,7 @@ public class CanvasPanel extends JPanel {
                 i--;
 
                 // unblock if no more animations
-                if (canvas.animations.size() != 0) continue;
+                if (!canvas.animations.isEmpty()) continue;
                 synchronized (canvas.animationSync) {
                     canvas.animationSync.notifyAll();
                 }
@@ -85,7 +84,6 @@ public class CanvasPanel extends JPanel {
         ig.setColor(canvas.options.backgroundColor);
         ig.fillRect(0, 0, getWidth(), getHeight());
         synchronized (canvas.translation) {
-//            System.out.println(canvas.translation);
             ig.translate((int) canvas.translation.x, (int) canvas.translation.y);
         }
 

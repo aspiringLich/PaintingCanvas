@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -66,8 +66,9 @@ public class Text extends Drawable<Text> {
 
     /**
      * <p>
-     * Create a new Text element with a certain color by name
-     * (see {@link Hue} for list of all valid names).
+     * Create a new Text element with a hue name or hex code
+     * @see Misc#stringToColor(String)
+     *
      * The default font size is 30, and the default font is comic sans :)
      * </p><p>
      * It probably won't work on replit however. Comic sans is not installed on
@@ -83,7 +84,7 @@ public class Text extends Drawable<Text> {
      * @param color The name of the color of the text (case-insensitive)
      */
     public Text(int x, int y, String text, String color) {
-        this(x, y, text, Hue.getColor(color));
+        this(x, y, text, Misc.stringToColor(color));
     }
 
     @Override

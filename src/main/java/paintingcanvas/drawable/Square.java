@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -51,8 +51,9 @@ public class Square extends Drawable<Square> {
     }
 
     /**
-     * Create a new Square element with a certain color by name
-     * (see {@link Hue} for list of all valid names)
+     * Create a new Square element with a hue name or hex code
+     * @see Misc#stringToColor(String)
+     *
      * <pre>{@code
      * // Create a red square centered at (100, 100) with a side length of 30px
      * Square square = new Square(100, 100, 30, "red");
@@ -64,7 +65,7 @@ public class Square extends Drawable<Square> {
      * @param color   The name of the color of the square (case-insensitive)
      */
     public Square(int centerX, int centerY, int size, String color) {
-        this(centerX, centerY, size, Hue.getColor(color));
+        this(centerX, centerY, size, Misc.stringToColor(color));
     }
 
     @Override

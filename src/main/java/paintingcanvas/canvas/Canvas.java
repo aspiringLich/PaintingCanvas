@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Canvas {
     /**
-     * the fps of the canvas
+     * The FPS of the canvas
      */
     public static final int fps = 30;
      /**
@@ -24,16 +24,16 @@ public class Canvas {
     public static final Object drawableSync = new Object();
     public static Canvas globalInstance;
     /**
-     * the initial size of the Canvas
+     * The initial size of the Canvas
      */
     public final Dimension startSize;
     public final Point2D.Float translation;
     /**
-     * the elements that are currently on the canvas
+     * The elements that are currently on the canvas
      */
     public final List<Drawable<?>> elements = new Vector<>();
     /**
-     * the list of animations that are currently running
+     * The list of animations that are currently running
      */
     public final List<Animation> animations = new Vector<>();
     /**
@@ -70,7 +70,7 @@ public class Canvas {
     }
 
     /**
-     * Initializes the canvas
+     * Initialize the canvas
      *
      * @param width  the width of the canvas
      * @param height the height of the canvas
@@ -81,7 +81,7 @@ public class Canvas {
     }
 
     /**
-     * Initializes the canvas
+     * Initialize the canvas with more options
      *
      * @param width   the width of the canvas
      * @param height  the height of the canvas
@@ -189,7 +189,7 @@ public class Canvas {
      * @param seconds The number of seconds to sleep for
      */
     public void sleep(double seconds) {
-        // if the time is short: just thread.sleep
+        // if the time is short, just Thread.sleep
         if (seconds < 0.1) {
             try {
                 Thread.sleep((long) (seconds * 1000));
@@ -197,7 +197,7 @@ public class Canvas {
                 throw new RuntimeException(e);
             }
         }
-        // otherwise wait for the frame count to reach the specified frame
+        // otherwise, wait for the frame count to reach the specified frame
         else {
             int targetFrame = frame + (int) (seconds * fps);
             synchronized (frameSync) {

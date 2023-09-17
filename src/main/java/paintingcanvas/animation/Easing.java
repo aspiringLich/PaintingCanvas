@@ -12,7 +12,7 @@ package paintingcanvas.animation;
  */
 public interface Easing {
     /**
-     * Linear easing: A.K.A no easing.
+     * Linear easing, aka no easing.
      *
      * @return an {@code Easing} object representing this easing.
      */
@@ -21,7 +21,7 @@ public interface Easing {
     }
 
     /**
-     * easeIn: Start out slow then accelerate up
+     * Ease in
      *
      * @param n the degree
      * @return an {@code Easing} object representing this easing.
@@ -31,7 +31,7 @@ public interface Easing {
     }
 
     /**
-     * easeOut: Start out fast then Slow down
+     * Ease out
      *
      * @param n the degree
      * @return an {@code Easing} object representing this easing.
@@ -41,7 +41,7 @@ public interface Easing {
     }
 
     /**
-     * easeInOut: Accelerate up then slow down
+     * Exponentially ease in and out
      *
      * @param n the degree
      * @return an {@code Easing} object representing this easing.
@@ -53,26 +53,56 @@ public interface Easing {
         };
     }
 
+    /**
+     * Ease in sinusoidally
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInSine() {
         return t -> 1 - Math.cos((t * Math.PI) / 2);
     }
 
+    /**
+     * Ease out sinusoidally
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeOutSine() {
         return t -> Math.sin((t * Math.PI) / 2);
     }
 
+    /**
+     * Ease in and out sinusoidally
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInOutSine() {
         return t -> -(Math.cos(Math.PI * t) - 1) / 2;
     }
 
+    /**
+     * Ease in quadratically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInQuad() {
         return t -> t * t;
     }
 
+    /**
+     * Ease out quadratically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeOutQuad() {
         return t -> 1 - (1 - t) * (1 - t);
     }
 
+    /**
+     * Ease in and out quadratically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInOutQuad() {
         return t -> {
             if (t < 0.5) return 2 * t * t;
@@ -80,14 +110,29 @@ public interface Easing {
         };
     }
 
+    /**
+     * Ease in cubically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInCubic() {
         return t -> t * t * t;
     }
 
+    /**
+     * Ease out cubically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeOutCubic() {
         return t -> 1 - Math.pow(1 - t, 3);
     }
 
+    /**
+     * Ease in and out cubically
+     *
+     * @return an {@code Easing} object representing this easing.
+     */
     static Easing easeInOutCubic() {
         return t -> {
             if (t < 0.5) return 4 * t * t * t;
