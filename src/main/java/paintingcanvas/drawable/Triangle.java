@@ -21,8 +21,6 @@ public class Triangle extends Drawable<Triangle> {
      */
     public int height;
 
-    private Polygon poly;
-
     /**
      * Create a new Triangle element.
      * <pre>{@code
