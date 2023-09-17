@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 import java.awt.geom.Path2D;
@@ -57,8 +57,8 @@ public class Path extends Drawable<Path> {
     }
 
     /**
-     * Create a new Path element with a certain color by name
-     * (see {@link Hue} for list of all valid names). The path is initially empty.
+     * Create a new Path element with a hue name or hex code
+     * @see Misc#stringToColor(String)
      *
      * <pre>{@code
      * Path path = new Path("red").lineTo(100, 100)
@@ -71,7 +71,7 @@ public class Path extends Drawable<Path> {
      * @param color The name of the color (case-insensitive)
      */
     public Path(String color) {
-        this(Hue.getColor(color));
+        this(Misc.stringToColor(color));
     }
 
     /**

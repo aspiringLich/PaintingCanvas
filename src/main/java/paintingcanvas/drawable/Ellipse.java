@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -59,8 +59,8 @@ public class Ellipse extends Drawable<Ellipse> {
     }
 
     /**
-     * Create a new Ellipse element with a certain color by name
-     * (see {@link Hue} for list of all valid names)
+     * Create a new Ellipse element with a hue name or hex code
+     * @see Misc#stringToColor(String)
      * <pre>{@code
      * // Create a new red ellipse centered at (100, 100) with width 20 and height 30
      * Ellipse ellipse = new Ellipse(100, 100, 20, 30, "red");
@@ -73,7 +73,7 @@ public class Ellipse extends Drawable<Ellipse> {
      * @param color   The name of the color (case-insensitive)
      */
     public Ellipse(int centerX, int centerY, int width, int height, String color) {
-        this(centerX, centerY, width, height, Hue.getColor(color));
+        this(centerX, centerY, width, height, Misc.stringToColor(color));
     }
 
     @Override

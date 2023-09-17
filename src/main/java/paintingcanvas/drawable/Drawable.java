@@ -4,6 +4,7 @@ import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -26,23 +27,23 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      */
     boolean filled = true;
     /**
-     * The color of the object
+     * the color of the object
      */
     Color color;
     /**
-     * The X-position of the object
+     * the X-position of the object
      */
     int x;
     /**
-     * The Y-position of the object
+     * the Y-position of the object
      */
     int y;
     /**
-     * The color of the outline
+     * the color of the outline
      */
     Color outlineColor = Color.BLACK;
     /**
-     * The stroke of the outline
+     * the stroke of the outline
      */
     Stroke outlineStroke;
 
@@ -74,7 +75,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      *
      * @param color     the color of the outline
      * @param thickness the thickness of the outline
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     public T setOutline(int thickness, Color color) {
         synchronized (Canvas.drawableSync) {
@@ -98,7 +99,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * }</pre>
      *
      * @param color the color of the outline
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     public T setOutline(Color color) {
         synchronized (Canvas.drawableSync) {
@@ -121,7 +122,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * }</pre>
      *
      * @param thickness the thickness of the outline
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     public T setOutline(int thickness) {
         return this.setOutline(thickness, outlineColor);
@@ -130,7 +131,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Removes the outline from the shape
      *
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     public T removeOutline() {
         this.outlineStroke = null;
@@ -149,7 +150,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * }</pre>
      *
      * @param g Graphics context
-     * @return The object's center-point
+     * @return the object's center-point
      */
     public Point center(Graphics g) {
         return new Point(this.x, this.y);
@@ -161,7 +162,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * This calls the draw methods, but does some extra steps beforehand to lay it out correctly
      * <p>
      *
-     * @param g The graphics context to draw the object with
+     * @param g the graphics context to draw the object with
      */
     public void render(Graphics g) {
         if (!this.visible) return;
@@ -196,14 +197,14 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * the color is set to `color`
      *
-     * @param gc The graphics context to draw the object with
+     * @param gc the graphics context to draw the object with
      */
     protected abstract void drawFilled(Graphics2D gc);
 
     /**
      * the color is set to `outlineColor`, the stroke is set to `outlineStroke`
      *
-     * @param gc The graphics context to draw the object with
+     * @param gc the graphics context to draw the object with
      */
     protected abstract void drawOutline(Graphics2D gc);
 
@@ -216,7 +217,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * o.hide();
      * }</pre>
      *
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #show()
      */
     public T hide() {
@@ -231,7 +232,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * o.show();
      * }</pre>
      *
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #hide()
      */
     public T show() {
@@ -254,7 +255,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * Set the X-position of the object
      *
      * @param x the new X-position of the Object
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #getX()
      * @see #setY(int)
      */
@@ -280,7 +281,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * Set the Y-position of the element
      *
      * @param y the new Y-position of the Object
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #setX(int)
      * @see #getY()
      */
@@ -294,7 +295,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Get the position of the element
      *
-     * @return The position of the element as a {@link Point}
+     * @return the position of the element as a {@link Point}
      * @see #setPos(int, int)
      */
     public Point getPos() {
@@ -304,9 +305,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Set the position of the element.
      *
-     * @param x The new absolute X-position of the element
-     * @param y The new absolute Y-position of the element
-     * @return The original object to allow method chaining
+     * @param x the new absolute X-position of the element
+     * @param y the new absolute Y-position of the element
+     * @return the original object to allow method chaining
      * @see #getPos()
      * @see #setX(int)
      * @see #setY(int)
@@ -330,9 +331,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.move(-10, -10);
      * }</pre>
      *
-     * @param x The x to move by
-     * @param y The y to move by
-     * @return The original object to allow method chaining
+     * @param x the x to move by
+     * @param y the y to move by
+     * @return the original object to allow method chaining
      * @see #setPos(int, int)
      * @see #moveHorizontal(int)
      * @see #moveVertical(int)
@@ -354,8 +355,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.moveHorizontal(10);
      * }</pre>
      *
-     * @param x The x to move by
-     * @return The original object to allow method chaining
+     * @param x the x to move by
+     * @return the original object to allow method chaining
      * @see #setPos(int, int)
      * @see #moveVertical(int)
      */
@@ -375,8 +376,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.moveVertical(10);
      * }</pre>
      *
-     * @param y The y to move by
-     * @return The original object to allow method chaining
+     * @param y the y to move by
+     * @return the original object to allow method chaining
      * @see #setPos(int, int)
      * @see #moveHorizontal(int)
      */
@@ -388,44 +389,101 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     }
 
     /**
-     * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB</a>.
+     * Get the current color of an element as a {@link Color}
+     *
+     * @return the {@link Color} of the element
+     */
+    public Color getColor() {
+        return this.color;
+    }
+
+    /**
+     * Set the color of {@code this} to the specified {@code color}.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
+     *
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      * o.setColor(255, 0, 0); // Set color to red
      * }</pre>
      *
-     * @param r The red component of the color (0-255)
-     * @param g The green component of the color (0-255)
-     * @param b The blue component of the color (0-255)
-     * @return The original object to allow method chaining
+     * @param r red (0-255)
+     * @param g green (0-255)
+     * @param b blue (0-255)
+     * @return the original object to allow method chaining
      */
     public T setColor(int r, int g, int b) {
         return this.setColor(new Color(r, g, b));
     }
 
     /**
-     * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGBA_color_model">RGBA</a>.
+     * Set the color of {@code this} to the specified {@code color}
+     * See <a href="https://en.wikipedia.org/wiki/RGBA_color_model">Wikipedia</a> for how this works.
+     * 
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      * o.setColor(255, 0, 0); // Set color to red
      * }</pre>
      *
-     * @param r The red component of the color (0-255)
-     * @param g The green component of the color (0-255)
-     * @param b The blue component of the color (0-255)
-     * @return The original object to allow method chaining
+     * @param r red (0-255)
+     * @param g green (0-255)
+     * @param b blue (0-255)
+     * @param a alpha (0-255)
+     * @return the original object to allow method chaining
      */
     public T setColor(int r, int g, int b, int a) {
         return this.setColor(new Color(r, g, b, a));
     }
 
     /**
-     * Get the current color of an element as a {@link Color}
+     * Set the color of {@code this} to the specified {@code color}.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
+     * 
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * // 0xFF0000 is hex for (255, 0, 0), which is red
+     * o.setColor(0xFF0000);
+     * }</pre>
      *
-     * @return The {@link Color} of the element
+     * @param hex the number describing the RGB color
+     * @return the original object to allow method chaining
      */
-    public Color getColor() {
-        return this.color;
+    public T setColor(int hex) {
+        return setColor(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff);
+    }
+
+    /**
+     * Set the color of the object with a {@link Hue} object.
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor(Hue.GREEN); // Set color to red
+     * }</pre>
+     *
+     * @param hue the hue
+     * @return the original object to allow method chaining
+     */
+    public T setColor(Hue hue) {
+        synchronized (Canvas.drawableSync) {
+            this.color = hue.getColor();
+        }
+        return getThis();
+    }
+
+    /**
+     * Set the color of the object with a hue name or hex code.
+     * @see Misc#stringToColor(String)
+     *
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor("red"); // Set color to red
+     * // #FF0000 is hex for (255, 0, 0), which is red
+     * o.setColor("#FF0000"); // Set color to red, in a different way
+     * }</pre>
+     *
+     * @param name the string describing the hue or the hex code
+     * @return the original object to allow method chaining
+     */
+    public T setColor(String name) {
+        return setColor(Misc.stringToColor(name));
     }
 
     /**
@@ -436,7 +494,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * }</pre>
      *
      * @param color color.
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     public T setColor(Color color) {
         synchronized (Canvas.drawableSync) {
@@ -445,62 +503,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
-        /**
-     * Set the color of the object with a {@link Hue} object.
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.setColor(Hue.GREEN); // Set color to red
-     * }</pre>
-     *
-     * @param color color.
-     * @return The original object to allow method chaining
-     */
-    public T setColor(Hue hue) {
-        synchronized (Canvas.drawableSync) {
-            this.color = hue.getColor();
-        }
-        return getThis();
-    }
-
     /**
-     * Set the color of the object with a certain color by name, or by a <a href="https://en.wikipedia.org/wiki/RGB_color_model">hex code</a>. string.
-     * (see {@link Hue} for list of all valid names)
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.setColor("red"); // Set color to red
-     * // #FF0000 is hex for (255, 0, 0), which is red
-     * o.setColor("#FF0000"); // Set color to red, in a different way
-     * }</pre>
-     *
-     * @param color The name of the color (case-insensitive)
-     * @return The original object to allow method chaining
-     */
-    public T setColor(String name) {
-        try {
-            var color = Color.decode(name);
-            return setColor(color);
-        } catch (Exception e) {
-            return setColor(Hue.getColor(name));
-        }
-    }
-
-    /**
-     * Set the color of the object with a <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">8-bit RGB hex literal</a>.
-     * <pre>{@code
-     *     Circle o = new Circle(100, 100, 20);
-     * // 0xFF0000 is hex for (255, 0, 0), which is red
-     * o.setColor(0xFF0000);
-     * }</pre>
-     *
-     * @param hex The color as a hex literal
-     * @return The original object to allow method chaining
-     */
-    public T setColor(int hex) {
-        return setColor(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff);
-    }
-
-    /**
-     * Rotate this element by <code>rotation°</code>.
+     * Rotate this element by {@code rotation} degrees.
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      *
@@ -510,7 +514,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * }</pre>
      *
      * @param rotation Change in rotation. (Degrees)
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #setRotation(double)
      */
     public T rotate(double rotation) {
@@ -529,7 +533,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * assert i == 90;
      * }</pre>
      *
-     * @return The rotation of the object
+     * @return the rotation of the object
      * @see #rotate(double)
      */
     public double getRotation() {
@@ -537,14 +541,14 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     }
 
     /**
-     * Set an elements rotation to <code>rotation°</code>.
+     * Set an elements rotation to {@code rotation} degrees.
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      * o.setRotation(90); // Sets the elements rotation to 90°
      * }</pre>
      *
      * @param rotation Absolute rotation. (Degrees)
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      * @see #rotate(double)
      */
     public T setRotation(double rotation) {
@@ -564,8 +568,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * c.setFilled(false);
      * }</pre>
      *
-     * @param filled The value to set {@code this.filled} to
-     * @return The original object to allow method chaining
+     * @param filled the value to set {@code this.filled} to
+     * @return the original object to allow method chaining
      * @see #setOutline(int)
      */
     public T setFilled(boolean filled) {
@@ -576,9 +580,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     }
 
     /**
-     * <p>
      * Erase this object from the canvas. This object will be gone and cannot* be added back!
-     * </p><p>
+     * <p>
      * <sub>* It can be added back just don't tell anyone shhhh</sub>
      * </p>
      */
@@ -591,7 +594,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Gets the outline color
      *
-     * @return The outline color
+     * @return the outline color
      */
     public Color getOutlineColor() {
         return this.outlineColor;
@@ -600,7 +603,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     /**
      * Gets the outline stroke
      *
-     * @return The outline stroke
+     * @return the outline stroke
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;

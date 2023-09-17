@@ -1,6 +1,6 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Hue;
+import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class Line extends Drawable<Line> {
     /**
-     * The offset of the endpoint from the startpoint (x, y)
+     * the offset of the endpoint from the startpoint (x, y)
      */
     public Point endOffset;
 
@@ -20,10 +20,10 @@ public class Line extends Drawable<Line> {
      * Line line = new Line(100, 100, 200, 200);
      * }</pre>
      *
-     * @param x1 The X-position of the startpoint
-     * @param y1 The Y-position of the startpoint
-     * @param x2 The X-position of the endpoint
-     * @param y2 The Y-position of the endpoint
+     * @param x1 the X-position of the startpoint
+     * @param y1 the Y-position of the startpoint
+     * @param x2 the X-position of the endpoint
+     * @param y2 the Y-position of the endpoint
      */
     public Line(int x1, int y1, int x2, int y2) {
         super(x1, y1, Color.BLACK);
@@ -38,11 +38,11 @@ public class Line extends Drawable<Line> {
      * Line line = new Line(100, 100, 200, 200, new Color(255, 0, 0));
      * }</pre>
      *
-     * @param x1    The X-position of the startpoint
-     * @param y1    The Y-position of the startpoint
-     * @param x2    The X-position of the endpoint
-     * @param y2    The Y-position of the endpoint
-     * @param color The color of the line
+     * @param x1    the X-position of the startpoint
+     * @param y1    the Y-position of the startpoint
+     * @param x2    the X-position of the endpoint
+     * @param y2    the Y-position of the endpoint
+     * @param color the color of the line
      */
     @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, Color color) {
@@ -52,22 +52,22 @@ public class Line extends Drawable<Line> {
     }
 
     /**
-     * Create a new Line element colored a certain color by name
-     * (see {@link Hue} for list of all valid names)
+     * Create a new Line element colored a hue name or hex code
+     * @see Misc#stringToColor(String)
      * <pre>{@code
      * // Create a new Line from (100, 100) to (200, 200)
      * Line line = new Line(100, 100, 200, 200, "red");
      * }</pre>
      *
-     * @param x1    The X-position of the startpoint
-     * @param y1    The Y-position of the startpoint
-     * @param x2    The X-position of the endpoint
-     * @param y2    The Y-position of the endpoint
-     * @param color The name of the color (case-insensitive)
+     * @param x1    the X-position of the startpoint
+     * @param y1    the Y-position of the startpoint
+     * @param x2    the X-position of the endpoint
+     * @param y2    the Y-position of the endpoint
+     * @param color the name of the color (case-insensitive)
      */
     @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, String color) {
-        this(x1, y1, x2, y2, Hue.getColor(color));
+        this(x1, y1, x2, y2, Misc.stringToColor(color));
     }
 
     @Override
@@ -78,9 +78,9 @@ public class Line extends Drawable<Line> {
     }
 
     /**
-     * DO NOT USE, Overridden
+     * DO NOT USE, Overridden, as there is nothing to fill in a line
      *
-     * @param filled The value to set {@code this.filled} to
+     * @param filled the value to set {@code this.filled} to
      * @return {@code this}
      */
     @Override
@@ -92,7 +92,7 @@ public class Line extends Drawable<Line> {
      * Set the stroke of the line
      *
      * @param stroke a {@code Stroke} object to define this line's stroke
-     * @return The original object to allow method chaining
+     * @return the original object to allow method chaining
      */
     @SuppressWarnings("unused")
     public Line setStroke(Stroke stroke) {
@@ -103,8 +103,8 @@ public class Line extends Drawable<Line> {
     /**
      * Set the thickness of the line
      *
-     * @param thickness The thickness of the line in pixels
-     * @return The original object to allow method chaining
+     * @param thickness the thickness of the line in pixels
+     * @return the original object to allow method chaining
      */
     public Line setThickness(int thickness) {
         this.outlineStroke = new BasicStroke(thickness);
@@ -148,9 +148,9 @@ public class Line extends Drawable<Line> {
     /**
      * Get the startpoint of the line
      *
-     * @param x The new X-position of the startpoint
-     * @param y The new Y-position of the startpoint
-     * @return The original object to allow method chaining
+     * @param x the new X-position of the startpoint
+     * @param y the new Y-position of the startpoint
+     * @return the original object to allow method chaining
      */
     public Line setStartpoint(int x, int y) {
         this.x = x;
@@ -161,9 +161,9 @@ public class Line extends Drawable<Line> {
     /**
      * Set the endpoint of the line
      *
-     * @param x The new X-position of the endpoint
-     * @param y The new Y-position of the endpoint
-     * @return The original object to allow method chaining
+     * @param x the new X-position of the endpoint
+     * @param y the new Y-position of the endpoint
+     * @return the original object to allow method chaining
      */
     public Line setEndpoint(int x, int y) {
         this.endOffset = new Point(this.x - x, this.y - y);
