@@ -22,9 +22,6 @@ import java.util.Objects;
 public class Recorder implements RenderLifecycle {
     // == Screenshot ==
     final Object imgSync = new Object();
-
-    // == Misc ==
-    boolean rendering = true;
     BufferedImage img;
 
     // == Image Sequence ==
@@ -100,8 +97,6 @@ public class Recorder implements RenderLifecycle {
 
     @Override
     public void renderEnd(Graphics g) {
-        rendering ^= true;
-        if (rendering) return;
         var canvas = Canvas.getGlobalInstance();
         var cmp = canvas.panel;
 
