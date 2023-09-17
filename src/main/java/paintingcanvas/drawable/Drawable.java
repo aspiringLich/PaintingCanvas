@@ -404,6 +404,22 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     }
 
     /**
+     * Set the color of the element with <a href="https://en.wikipedia.org/wiki/RGBA_color_model">RGBA</a>.
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor(255, 0, 0); // Set color to red
+     * }</pre>
+     *
+     * @param r The red component of the color (0-255)
+     * @param g The green component of the color (0-255)
+     * @param b The blue component of the color (0-255)
+     * @return The original object to allow method chaining
+     */
+    public T setColor(int r, int g, int b, int a) {
+        return this.setColor(new Color(r, g, b, a));
+    }
+
+    /**
      * Get the current color of an element as a {@link Color}
      *
      * @return The {@link Color} of the element
@@ -429,19 +445,43 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
+        /**
+     * Set the color of the object with a {@link Hue} object.
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor(Hue.GREEN); // Set color to red
+     * }</pre>
+     *
+     * @param color color.
+     * @return The original object to allow method chaining
+     */
+    public T setColor(Hue hue) {
+        synchronized (Canvas.drawableSync) {
+            this.color = hue.getColor();
+        }
+        return getThis();
+    }
+
     /**
-     * Set the color of the object with a certain color by name
+     * Set the color of the object with a certain color by name, or by a <a href="https://en.wikipedia.org/wiki/RGB_color_model">hex code</a>. string.
      * (see {@link Hue} for list of all valid names)
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      * o.setColor("red"); // Set color to red
+     * // #FF0000 is hex for (255, 0, 0), which is red
+     * o.setColor("#FF0000"); // Set color to red, in a different way
      * }</pre>
      *
      * @param color The name of the color (case-insensitive)
      * @return The original object to allow method chaining
      */
-    public T setColor(String color) {
-        return setColor(Hue.getColor(color));
+    public T setColor(String name) {
+        try {
+            var color = Color.decode(name);
+            return setColor(color);
+        } catch (Exception e) {
+            return setColor(Hue.getColor(name));
+        }
     }
 
     /**
