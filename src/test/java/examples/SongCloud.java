@@ -23,7 +23,7 @@ public class SongCloud {
         new FrameCounter().line(() -> String.format("Animations: %d", canvas.animations.size())).attach();
         canvas.setTitle("Song Cloud");
 
-        var rawSong = Files.readString(Path.of("song.txt"));
+        var rawSong = Files.readString(Path.of("src/test/java/examples/song.txt"));
 
         var out = new HashMap<String, Integer>();
         var words = new ArrayList<String>();
