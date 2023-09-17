@@ -6,12 +6,12 @@ import java.util.Map;
 
 /**
  * <p>
- *     Colors (besides black and white) are taken from the
- *     <a href="https://tailwindcss.com/docs/customizing-colors">Tailwind CSS Color Palette</a>.
+ * Colors (besides black and white) are taken from the
+ * <a href="https://tailwindcss.com/docs/customizing-colors">Tailwind CSS Color Palette</a>.
  * </p>
  * <p>
- *     Not indented to be constructed directly in the public API. Internally, it's only use is
- *     {@link #getColor(String)}
+ * Not indented to be constructed directly in the public API. Internally, it's only use is
+ * {@link #getColor(String)}
  * </p>
  * <table>
  *     <caption>{@link Hue} Variants</caption>

@@ -23,9 +23,9 @@ public class InfoDisplay implements RenderLifecycle {
             0f
     );
     private final Stroke stroke = new BasicStroke(10);
+    private final Color textColor = Color.BLACK;
     private int fontSize = 12;
     private Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
-    private final Color textColor = Color.BLACK;
 
     public InfoDisplay() {
     }

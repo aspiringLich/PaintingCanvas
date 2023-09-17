@@ -445,7 +445,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
-        /**
+    /**
      * Set the color of the object with a {@link Hue} object.
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);

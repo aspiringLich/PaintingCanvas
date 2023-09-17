@@ -33,5 +33,6 @@ public class CanvasOptions {
      */
     public Color backgroundColor = Color.WHITE;
 
-    public CanvasOptions() {}
+    public CanvasOptions() {
+    }
 }

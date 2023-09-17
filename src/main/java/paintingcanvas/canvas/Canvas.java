@@ -18,6 +18,10 @@ public class Canvas {
      * the fps of the canvas
      */
     public static final int fps = 30;
+     /**
+     * Sync with drawables: Use when modifying a drawable
+     */
+    public static final Object drawableSync = new Object();
     public static Canvas globalInstance;
     /**
      * the initial size of the Canvas
@@ -44,10 +48,6 @@ public class Canvas {
      * Sync with frame: Notifies on end of frame
      */
     protected final Object frameSync = new Object();
-    /**
-     * Sync with drawables: Use when modifying a drawable
-     */
-    public static final Object drawableSync = new Object();
     /**
      * The current frame
      */

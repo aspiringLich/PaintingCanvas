@@ -6,19 +6,19 @@ import java.awt.event.ComponentEvent;
 
 /**
  * <p>
- *     Allows other classes to run code at different points during the rendering process. This is mainly useful for
- *     extensions / little widgets and things, but I'm sure you can find other uses.
+ * Allows other classes to run code at different points during the rendering process. This is mainly useful for
+ * extensions / little widgets and things, but I'm sure you can find other uses.
  * </p>
  * <p>
- *     Here's <em>exactly</em> how it works (sort of). First the {@link java.awt.image.BufferedImage image} is created,
- *     and the background is drawn. Next, {@link RenderLifecycle#preRender(Graphics)} is called, and all the
- *     {@link paintingcanvas.drawable.Drawable Drawables} get drawn. Then {@link RenderLifecycle#postRender(Graphics)}
- *     is called, {@link RenderLifecycle#renderStart(Graphics)} is called, and finally, the image is copied over to the
- *     screen, and {@link RenderLifecycle#renderEnd(Graphics)} is called.
+ * Here's <em>exactly</em> how it works (sort of). First the {@link java.awt.image.BufferedImage image} is created,
+ * and the background is drawn. Next, {@link RenderLifecycle#preRender(Graphics)} is called, and all the
+ * {@link paintingcanvas.drawable.Drawable Drawables} get drawn. Then {@link RenderLifecycle#postRender(Graphics)}
+ * is called, {@link RenderLifecycle#renderStart(Graphics)} is called, and finally, the image is copied over to the
+ * screen, and {@link RenderLifecycle#renderEnd(Graphics)} is called.
  * </p>
  * <p>
- *     Note that {@code preRender} / {@code postRender} are called on a different graphics context compared to
- *     {@code renderStart} / {@code renderEnd}.
+ * Note that {@code preRender} / {@code postRender} are called on a different graphics context compared to
+ * {@code renderStart} / {@code renderEnd}.
  * </p>
  */
 public interface RenderLifecycle {

@@ -1,7 +1,6 @@
 package stress_tests;
 
 import paintingcanvas.canvas.Canvas;
-import paintingcanvas.drawable.Polygon;
 import paintingcanvas.drawable.Triangle;
 import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.extensions.InfoDisplay;

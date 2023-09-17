@@ -1,11 +1,12 @@
 package stress_tests;
 
-import java.awt.*;
-
 import paintingcanvas.canvas.Canvas;
-import paintingcanvas.drawable.*;
-import paintingcanvas.extensions.*;
+import paintingcanvas.drawable.Circle;
 import paintingcanvas.drawable.Polygon;
+import paintingcanvas.extensions.FrameCounter;
+import paintingcanvas.extensions.InfoDisplay;
+
+import java.awt.*;
 
 @SuppressWarnings("unused")
 public class SyncTest {
