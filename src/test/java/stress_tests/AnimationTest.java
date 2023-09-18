@@ -19,8 +19,7 @@ public class AnimationTest {
     public static void main(String[] argv) {
         System.setProperty("sun.java2d.opengl", "true");
 
-        CanvasOptions options = new CanvasOptions();
-        options.autoCenter = false;
+        var options = new CanvasOptions().autoCenter(false);
         var canvas = new Canvas(width * size, height * size /*+ 32*/, "test", options);
         // var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
         new FrameCounter().lines(() -> new String[]{
