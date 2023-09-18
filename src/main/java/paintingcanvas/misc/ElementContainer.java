@@ -11,6 +11,8 @@ import java.util.Vector;
 public class ElementContainer {
     final List<Drawable<?>> elements = new Vector<>();
     boolean dirty = false;
+    int minLayer = 0;
+    int maxLayer = 0;
 
     public void foreach(DrawableConsumer consumer) {
         prepareRender();
@@ -22,13 +24,26 @@ public class ElementContainer {
     void prepareRender() {
         if (!dirty) return;
         synchronized (Canvas.drawableSync) {
-            elements.sort(Comparator.comparingInt(Drawable::getLayer));
+            elements.sort(Comparator.comparingInt(a -> {
+                int layer = a.getLayer();
+                minLayer = Math.min(minLayer, layer);
+                maxLayer = Math.max(maxLayer, layer);
+                return layer;
+            }));
         }
         dirty = false;
     }
 
     public void setDirty() {
         this.dirty = true;
+    }
+
+    public int getMinLayer() {
+        return minLayer;
+    }
+
+    public int getMaxLayer() {
+        return maxLayer;
     }
 
     public int size() {

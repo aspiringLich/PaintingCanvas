@@ -22,11 +22,22 @@ public class Test {
         Image image = new Image(200, 200, "src/test/java/examples/flop.jpg")
                 .rotate(90);
 
-        int i = 0;
+        int i = -1;
+        Square[] squares = new Square[Hue.values().length];
         for (Hue h : Hue.values())
-            new Square(50 + (i % 8) * 100, 50 + (i++ / 8) * 100, 100, new Color(h.hex));
+            squares[++i] = new Square(50 + (i % 8) * 100, 50 + (i / 8) * 100, 100, new Color(h.hex));
 
         canvas.sleep(3);
-        image.setLayer(1);
+        image.bringToFront();
+
+        for (Square square : squares) {
+            square.bringToFront();
+            canvas.sleep(0.1);
+        }
+
+        for (Square square : squares) {
+            square.sendToBack();
+            canvas.sleep(0.1);
+        }
     }
 }

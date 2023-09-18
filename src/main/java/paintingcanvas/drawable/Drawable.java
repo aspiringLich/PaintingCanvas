@@ -585,16 +585,54 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         return getThis();
     }
 
+    /**
+     * Gets the current layer of the object.
+     * By default, all objects are on layer 0.
+     * @see #setLayer(int)
+     * @see #bringToFront()
+     * @see #sendToBack()
+     * @return the original object to allow method chaining
+     */
     public int getLayer() {
         return this.layer;
     }
 
+    /**
+     * Puts the object on a specific layer.
+     * @see #getLayer()
+     * @see #bringToFront()
+     * @see #sendToBack()
+     * @param layer the layer to set the object to
+     * @return the original object to allow method chaining
+     */
     public T setLayer(int layer) {
         synchronized (Canvas.drawableSync) {
             this.layer = layer;
             Canvas.getGlobalInstance().elements.setDirty();
         }
         return getThis();
+    }
+
+    /**
+     * Brings the object in front of all other objects.
+     * @see #getLayer()
+     * @see #setLayer(int)
+     * @see #sendToBack()
+     * @return the original object to allow method chaining
+     */
+    public T bringToFront() {
+        return this.setLayer(Canvas.getGlobalInstance().elements.getMaxLayer() + 1);
+    }
+
+    /**
+     * Puts the object behind all other objects.
+     * @see #getLayer()
+     * @see #setLayer(int)
+     * @see #bringToFront()
+     * @return the original object to allow method chaining
+     */
+    public T sendToBack() {
+        return this.setLayer(Canvas.getGlobalInstance().elements.getMinLayer() - 1);
     }
 
     /**
