@@ -2,6 +2,7 @@ package paintingcanvas.canvas;
 
 import paintingcanvas.animation.Animation;
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -31,7 +32,7 @@ public class Canvas {
     /**
      * The elements that are currently on the canvas
      */
-    public final List<Drawable<?>> elements = new Vector<>();
+    public final ElementContainer elements = new ElementContainer();
     /**
      * The list of animations that are currently running
      */

@@ -19,15 +19,14 @@ public class Test {
 
         String dir = System.getProperty("user.dir");
 
-        int i = 0;
-        for (Hue h : Hue.values()) {
-            new Square(50 + (i % 8) * 100, 50 + (i / 8) * 100, 100, new Color(h.hex));
-            i++;
-        }
-        Image image = new Image(200, 500, "src/test/java/examples/flop.jpg")
+        Image image = new Image(200, 200, "src/test/java/examples/flop.jpg")
                 .rotate(90);
 
-        while (true) {
-        }
+        int i = 0;
+        for (Hue h : Hue.values())
+            new Square(50 + (i % 8) * 100, 50 + (i++ / 8) * 100, 100, new Color(h.hex));
+
+        canvas.sleep(3);
+        image.setLayer(1);
     }
 }

@@ -7,6 +7,7 @@ import paintingcanvas.misc.Hue;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.util.Comparator;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
@@ -14,6 +15,11 @@ import java.awt.*;
  */
 @SuppressWarnings("unused")
 public abstract class Drawable<T extends Drawable<T>> implements Animatable {
+    /**
+     * The layer of the object, higher layers are rendered on top of lower layers.
+     * By default, all objects are on layer 0.
+     */
+    int layer = 0;
     /**
      * Rotation of the object in radians (imagine using degrees)
      */
@@ -399,45 +405,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Set the color of {@code this} to the specified {@code color}.
-     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
-     *
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.setColor(255, 0, 0); // Set color to red
-     * }</pre>
-     *
-     * @param r red (0-255)
-     * @param g green (0-255)
-     * @param b blue (0-255)
-     * @return the original object to allow method chaining
-     */
-    public T setColor(int r, int g, int b) {
-        return this.setColor(new Color(r, g, b));
-    }
-
-    /**
-     * Set the color of {@code this} to the specified {@code color}
-     * See <a href="https://en.wikipedia.org/wiki/RGBA_color_model">Wikipedia</a> for how this works.
-     * 
-     * <pre>{@code
-     * Circle o = new Circle(100, 100, 20);
-     * o.setColor(255, 0, 0); // Set color to red
-     * }</pre>
-     *
-     * @param r red (0-255)
-     * @param g green (0-255)
-     * @param b blue (0-255)
-     * @param a alpha (0-255)
-     * @return the original object to allow method chaining
-     */
-    public T setColor(int r, int g, int b, int a) {
-        return this.setColor(new Color(r, g, b, a));
-    }
-
-    /**
-     * Set the color of {@code this} to the specified {@code color}.
      * See <a href="https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations">Wikipedia</a> for how this works.
-     * 
+     *
      * <pre>{@code
      * Circle o = new Circle(100, 100, 20);
      * // 0xFF0000 is hex for (255, 0, 0), which is red
@@ -470,6 +439,9 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Set the color of the object with a hue name or hex code.
+     *
+     * @param name the string describing the hue or the hex code
+     * @return the original object to allow method chaining
      * @see Misc#stringToColor(String)
      *
      * <pre>{@code
@@ -478,9 +450,6 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * // #FF0000 is hex for (255, 0, 0), which is red
      * o.setColor("#FF0000"); // Set color to red, in a different way
      * }</pre>
-     *
-     * @param name the string describing the hue or the hex code
-     * @return the original object to allow method chaining
      */
     public T setColor(String name) {
         return setColor(Misc.stringToColor(name));
@@ -501,6 +470,43 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
             this.color = color;
         }
         return getThis();
+    }
+
+    /**
+     * Set the color of {@code this} to the specified {@code color}.
+     * See <a href="https://en.wikipedia.org/wiki/RGB_color_model">Wikipedia</a> for how this works.
+     *
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor(255, 0, 0); // Set color to red
+     * }</pre>
+     *
+     * @param r red (0-255)
+     * @param g green (0-255)
+     * @param b blue (0-255)
+     * @return the original object to allow method chaining
+     */
+    public T setColor(int r, int g, int b) {
+        return this.setColor(new Color(r, g, b));
+    }
+
+    /**
+     * Set the color of {@code this} to the specified {@code color}
+     * See <a href="https://en.wikipedia.org/wiki/RGBA_color_model">Wikipedia</a> for how this works.
+     *
+     * <pre>{@code
+     * Circle o = new Circle(100, 100, 20);
+     * o.setColor(255, 0, 0); // Set color to red
+     * }</pre>
+     *
+     * @param r red (0-255)
+     * @param g green (0-255)
+     * @param b blue (0-255)
+     * @param a alpha (0-255)
+     * @return the original object to allow method chaining
+     */
+    public T setColor(int r, int g, int b, int a) {
+        return this.setColor(new Color(r, g, b, a));
     }
 
     /**
@@ -575,6 +581,18 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public T setFilled(boolean filled) {
         synchronized (Canvas.drawableSync) {
             this.filled = filled;
+        }
+        return getThis();
+    }
+
+    public int getLayer() {
+        return this.layer;
+    }
+
+    public T setLayer(int layer) {
+        synchronized (Canvas.drawableSync) {
+            this.layer = layer;
+            Canvas.getGlobalInstance().elements.setDirty();
         }
         return getThis();
     }
