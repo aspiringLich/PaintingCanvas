@@ -52,17 +52,17 @@ public class Circle extends Drawable<Circle> {
 
     /**
      * Create a new Circle element with a hue name or hex code
+     *
+     * @param centerX The X-position of the circle
+     * @param centerY The Y-position of the circle
+     * @param radius  The radius of the circle
+     * @param color   The name of the color (case-insensitive)
      * @see Misc#stringToColor(String)
      *
      * <pre>{@code
      * // Create a new red Circle centered at (100, 100) with a radius of 20.
      * Circle circle = new Circle(100, 100, 20, "red");
      * }</pre>
-     *
-     * @param centerX The X-position of the circle
-     * @param centerY The Y-position of the circle
-     * @param radius  The radius of the circle
-     * @param color   The name of the color (case-insensitive)
      */
     public Circle(int centerX, int centerY, int radius, String color) {
         this(centerX, centerY, radius, Misc.stringToColor(color));

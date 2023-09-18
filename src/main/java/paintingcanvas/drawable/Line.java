@@ -53,17 +53,17 @@ public class Line extends Drawable<Line> {
 
     /**
      * Create a new Line element colored a hue name or hex code
-     * @see Misc#stringToColor(String)
-     * <pre>{@code
-     * // Create a new Line from (100, 100) to (200, 200)
-     * Line line = new Line(100, 100, 200, 200, "red");
-     * }</pre>
      *
      * @param x1    the X-position of the startpoint
      * @param y1    the Y-position of the startpoint
      * @param x2    the X-position of the endpoint
      * @param y2    the Y-position of the endpoint
      * @param color the name of the color (case-insensitive)
+     * @see Misc#stringToColor(String)
+     * <pre>{@code
+     * // Create a new Line from (100, 100) to (200, 200)
+     * Line line = new Line(100, 100, 200, 200, "red");
+     * }</pre>
      */
     @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, String color) {

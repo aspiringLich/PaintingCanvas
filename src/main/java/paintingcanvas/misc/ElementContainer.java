@@ -1,6 +1,5 @@
 package paintingcanvas.misc;
 
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Drawable;
 
 import java.util.Comparator;
@@ -9,29 +8,39 @@ import java.util.Vector;
 
 // TODO: Put drawable sync here
 public class ElementContainer {
+    static final Object drawableSync = new Object();
     final List<Drawable<?>> elements = new Vector<>();
     boolean dirty = false;
     int minLayer = 0;
     int maxLayer = 0;
 
-    public void foreach(DrawableConsumer consumer) {
-        prepareRender();
-        for (Drawable<?> drawable : elements) {
-            consumer.accept(drawable);
+    /**
+     * ALL MODIFICATIONS TO DRAWABLES MUST BE DONE THROUGH THIS METHOD
+     *
+     * @param runnable The code to run
+     */
+    public static void atomic(Runnable runnable) {
+        synchronized (drawableSync) {
+            runnable.run();
         }
     }
 
-    void prepareRender() {
-        if (!dirty) return;
-        synchronized (Canvas.drawableSync) {
-            elements.sort(Comparator.comparingInt(a -> {
-                int layer = a.getLayer();
-                minLayer = Math.min(minLayer, layer);
-                maxLayer = Math.max(maxLayer, layer);
-                return layer;
-            }));
+    public void foreach(DrawableConsumer consumer) {
+        synchronized (drawableSync) {
+            if (dirty) {
+                elements.sort(Comparator.comparingInt(a -> {
+                    int layer = a.getLayer();
+                    minLayer = Math.min(minLayer, layer);
+                    maxLayer = Math.max(maxLayer, layer);
+                    return layer;
+                }));
+                dirty = false;
+            }
+
+            for (Drawable<?> drawable : elements) {
+                consumer.accept(drawable);
+            }
         }
-        dirty = false;
     }
 
     public void setDirty() {
@@ -51,16 +60,20 @@ public class ElementContainer {
     }
 
     public void add(Drawable<?> drawable) {
-        elements.add(drawable);
+        synchronized (drawableSync) {
+            elements.add(drawable);
+        }
         dirty = true;
     }
 
     public void remove(Drawable<?> drawable) {
-        elements.remove(drawable);
+        synchronized (drawableSync) {
+            elements.remove(drawable);
+        }
         dirty = true;
     }
 
-    public static interface DrawableConsumer {
+    public interface DrawableConsumer {
         void accept(Drawable<?> drawable);
     }
 }

@@ -1,7 +1,6 @@
 package paintingcanvas.canvas;
 
 import paintingcanvas.animation.Animation;
-import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
@@ -19,10 +18,6 @@ public class Canvas {
      * The FPS of the canvas
      */
     public static final int fps = 30;
-     /**
-     * Sync with drawables: Use when modifying a drawable
-     */
-    public static final Object drawableSync = new Object();
     public static Canvas globalInstance;
     /**
      * The initial size of the Canvas
@@ -252,8 +247,6 @@ public class Canvas {
      * @param r The code to run
      */
     public void atomic(Runnable r) {
-        synchronized (drawableSync) {
-            r.run();
-        }
+        ElementContainer.atomic(r);
     }
 }

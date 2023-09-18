@@ -69,10 +69,10 @@ public interface Animatable {
      * c.colorTo(255, 0, 0, 100, 3);
      * }</pre>
      *
-     * @param r red (0-255)
-     * @param g green (0-255)
-     * @param b blue (0-255)
-     * @param a alpha (0-255)
+     * @param r        red (0-255)
+     * @param g        green (0-255)
+     * @param b        blue (0-255)
+     * @param a        alpha (0-255)
      * @param duration the number of seconds it lasts
      * @return an {@link AnimationBuilder}
      */
@@ -107,7 +107,7 @@ public interface Animatable {
      * c.colorTo(0xFF0000, 3);
      * }</pre>
      *
-     * @param hue the hue
+     * @param hue      the hue
      * @param duration the number of seconds it lasts
      * @return a {@link ColorAnimation}
      */
@@ -125,7 +125,7 @@ public interface Animatable {
      * c.colorTo("red", 3).colorTo("#0000FF", 3);
      * }</pre>
      *
-     * @param name the hue name or the hex code
+     * @param name     the hue name or the hex code
      * @param duration the number of seconds it lasts
      * @return an {@link AnimationBuilder}
      */

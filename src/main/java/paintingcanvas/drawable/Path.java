@@ -58,6 +58,8 @@ public class Path extends Drawable<Path> {
 
     /**
      * Create a new Path element with a hue name or hex code
+     *
+     * @param color The name of the color (case-insensitive)
      * @see Misc#stringToColor(String)
      *
      * <pre>{@code
@@ -67,8 +69,6 @@ public class Path extends Drawable<Path> {
      *                      .lineTo(100, 100)
      *                      .setThickness(5);
      * }</pre>
-     *
-     * @param color The name of the color (case-insensitive)
      */
     public Path(String color) {
         this(Misc.stringToColor(color));

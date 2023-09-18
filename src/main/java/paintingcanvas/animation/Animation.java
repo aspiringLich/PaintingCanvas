@@ -256,7 +256,7 @@ public abstract class Animation {
      * c.animate().add(Animation.moveHorizontalBy(100), 3);
      * }</pre>
      *
-     * @param x        the x to move by
+     * @param x the x to move by
      * @return an {@link AnimationBuilder}
      */
     public static MovementAnimation moveHorizontalBy(int x) {
@@ -274,13 +274,13 @@ public abstract class Animation {
      * c.animate().add(Animation.moveVerticalBy(100), 3);
      * }</pre>
      *
-     * @param y        the y to move by
+     * @param y the y to move by
      * @return an {@link AnimationBuilder}
      */
     public static MovementAnimation moveVerticalBy(int y) {
         return new MovementAnimation(new Point(0, y)).relative();
     }
-    
+
     /**
      * Internal method that is called to help copy this object
      */

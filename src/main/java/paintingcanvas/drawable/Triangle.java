@@ -60,17 +60,17 @@ public class Triangle extends Drawable<Triangle> {
 
     /**
      * Create a new Triangle element with a hue name or hex code
-     * @see Misc#stringToColor(String)
-     * <pre>{@code
-     * // Create a new Triangle centered at (100, 100) that is 20px wide and 30px tall
-     * Triangle triangle = new Triangle(100, 100, 20, 30, new Color(255, 0, 0));
-     * }</pre>
      *
      * @param centerX The X-position of the triangle
      * @param centerY The Y-position of the triangle
      * @param width   The width of the triangle
      * @param height  The height of the triangle
      * @param color   The name of the color of the triangle
+     * @see Misc#stringToColor(String)
+     * <pre>{@code
+     * // Create a new Triangle centered at (100, 100) that is 20px wide and 30px tall
+     * Triangle triangle = new Triangle(100, 100, 20, 30, new Color(255, 0, 0));
+     * }</pre>
      */
     public Triangle(int centerX, int centerY, int width, int height, String color) {
         this(centerX, centerY, width, height, Misc.stringToColor(color));

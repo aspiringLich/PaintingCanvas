@@ -1,7 +1,5 @@
 package paintingcanvas.misc;
 
-import paintingcanvas.animation.ColorAnimation;
-
 import java.awt.*;
 
 public class Misc {
@@ -18,11 +16,10 @@ public class Misc {
 
     /**
      * Set the color of the object with a certain color by name, or by a <a href="https://en.wikipedia.org/wiki/RGB_color_model">hex code</a>. string.
-     * @see Hue for list of all valid names
      *
      * @param name the string describing the hue or the hex code
      * @return the color
-     *
+     * @see Hue for list of all valid names
      */
     public static Color stringToColor(String name) {
         try {

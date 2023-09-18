@@ -67,8 +67,13 @@ public class Text extends Drawable<Text> {
     /**
      * <p>
      * Create a new Text element with a hue name or hex code
-     * @see Misc#stringToColor(String)
      *
+     * @param x     The X-position of the text
+     * @param y     The Y-position of the text
+     * @param text  The text
+     * @param color The name of the color of the text (case-insensitive)
+     * @see Misc#stringToColor(String)
+     * <p>
      * The default font size is 30, and the default font is comic sans :)
      * </p><p>
      * It probably won't work on replit however. Comic sans is not installed on
@@ -77,11 +82,6 @@ public class Text extends Drawable<Text> {
      * <pre>{@code
      * Text text = new Text(100, 100, "Hello World", "red")
      * }</pre>
-     *
-     * @param x     The X-position of the text
-     * @param y     The Y-position of the text
-     * @param text  The text
-     * @param color The name of the color of the text (case-insensitive)
      */
     public Text(int x, int y, String text, String color) {
         this(x, y, text, Misc.stringToColor(color));

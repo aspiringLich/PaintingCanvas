@@ -1,7 +1,5 @@
 package paintingcanvas.canvas;
 
-import paintingcanvas.drawable.Drawable;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -88,16 +86,14 @@ public class CanvasPanel extends JPanel {
         }
 
         canvas.renderLifecycles.forEach(e -> e.preRender(ig));
-        synchronized (Canvas.drawableSync) {
-            canvas.elements.foreach(element -> {
-                try {
-                    element.render(ig);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    element.erase();
-                }
-            });
-        }
+        canvas.elements.foreach(element -> {
+            try {
+                element.render(ig);
+            } catch (Exception e) {
+                e.printStackTrace();
+                element.erase();
+            }
+        });
         canvas.renderLifecycles.forEach(e -> e.postRender(ig));
 
         // copy the image onto the screen

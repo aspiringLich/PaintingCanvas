@@ -3,11 +3,11 @@ package paintingcanvas.drawable;
 import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.misc.Hue;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
-import java.util.Comparator;
 
 /**
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
@@ -59,11 +59,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.color = color;
 
         var canvas = Canvas.getGlobalInstance();
-        if (canvas.options.autoAdd) {
-            synchronized (Canvas.drawableSync) {
-                canvas.elements.add(this);
-            }
-        }
+        if (canvas.options.autoAdd)
+            canvas.elements.add(this);
     }
 
     /**
@@ -84,11 +81,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return the original object to allow method chaining
      */
     public T setOutline(int thickness, Color color) {
-        synchronized (Canvas.drawableSync) {
+        ElementContainer.atomic(() -> {
             this.outlineColor = color;
             this.outlineStroke = new BasicStroke(thickness);
-            return this.getThis();
-        }
+        });
+        return this.getThis();
     }
 
     /**
@@ -108,10 +105,10 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return the original object to allow method chaining
      */
     public T setOutline(Color color) {
-        synchronized (Canvas.drawableSync) {
+        ElementContainer.atomic(() -> {
             this.outlineColor = color;
-            return this.getThis();
-        }
+        });
+        return this.getThis();
     }
 
     /**
@@ -266,9 +263,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setX(int x) {
-        synchronized (Canvas.drawableSync) {
-            this.x = x;
-        }
+        ElementContainer.atomic(() -> this.x = x);
         return getThis();
     }
 
@@ -292,9 +287,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #getY()
      */
     public T setY(int y) {
-        synchronized (Canvas.drawableSync) {
-            this.y = y;
-        }
+        ElementContainer.atomic(() -> this.y = y);
         return getThis();
     }
 
@@ -319,10 +312,10 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setPos(int x, int y) {
-        synchronized (Canvas.drawableSync) {
+        ElementContainer.atomic(() -> {
             this.x = x;
             this.y = y;
-        }
+        });
         return getThis();
     }
 
@@ -345,10 +338,10 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T move(int x, int y) {
-        synchronized (Canvas.drawableSync) {
+        ElementContainer.atomic(() -> {
             this.x += x;
             this.y += y;
-        }
+        });
         return getThis();
     }
 
@@ -367,9 +360,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T moveHorizontal(int x) {
-        synchronized (Canvas.drawableSync) {
-            this.x += x;
-        }
+        ElementContainer.atomic(() -> this.x += x);
         return getThis();
     }
 
@@ -388,9 +379,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveHorizontal(int)
      */
     public T moveVertical(int y) {
-        synchronized (Canvas.drawableSync) {
-            this.y += y;
-        }
+        ElementContainer.atomic(() -> this.y += y);
         return getThis();
     }
 
@@ -431,9 +420,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return the original object to allow method chaining
      */
     public T setColor(Hue hue) {
-        synchronized (Canvas.drawableSync) {
-            this.color = hue.getColor();
-        }
+        ElementContainer.atomic(() -> this.color = hue.getColor());
         return getThis();
     }
 
@@ -466,9 +453,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return the original object to allow method chaining
      */
     public T setColor(Color color) {
-        synchronized (Canvas.drawableSync) {
-            this.color = color;
-        }
+        ElementContainer.atomic(() -> this.color = color);
         return getThis();
     }
 
@@ -524,9 +509,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setRotation(double)
      */
     public T rotate(double rotation) {
-        synchronized (Canvas.drawableSync) {
-            this.rotation += Math.toRadians(rotation);
-        }
+        ElementContainer.atomic(() -> this.rotation += Math.toRadians(rotation));
         return getThis();
     }
 
@@ -558,9 +541,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #rotate(double)
      */
     public T setRotation(double rotation) {
-        synchronized (Canvas.drawableSync) {
-            this.rotation = rotation;
-        }
+        ElementContainer.atomic(() -> this.rotation = rotation);
         return getThis();
     }
 
@@ -579,19 +560,18 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setOutline(int)
      */
     public T setFilled(boolean filled) {
-        synchronized (Canvas.drawableSync) {
-            this.filled = filled;
-        }
+        ElementContainer.atomic(() -> this.filled = filled);
         return getThis();
     }
 
     /**
      * Gets the current layer of the object.
      * By default, all objects are on layer 0.
+     *
+     * @return the original object to allow method chaining
      * @see #setLayer(int)
      * @see #bringToFront()
      * @see #sendToBack()
-     * @return the original object to allow method chaining
      */
     public int getLayer() {
         return this.layer;
@@ -599,26 +579,28 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Puts the object on a specific layer.
+     *
+     * @param layer the layer to set the object to
+     * @return the original object to allow method chaining
      * @see #getLayer()
      * @see #bringToFront()
      * @see #sendToBack()
-     * @param layer the layer to set the object to
-     * @return the original object to allow method chaining
      */
     public T setLayer(int layer) {
-        synchronized (Canvas.drawableSync) {
+        ElementContainer.atomic(() -> {
             this.layer = layer;
             Canvas.getGlobalInstance().elements.setDirty();
-        }
+        });
         return getThis();
     }
 
     /**
      * Brings the object in front of all other objects.
+     *
+     * @return the original object to allow method chaining
      * @see #getLayer()
      * @see #setLayer(int)
      * @see #sendToBack()
-     * @return the original object to allow method chaining
      */
     public T bringToFront() {
         return this.setLayer(Canvas.getGlobalInstance().elements.getMaxLayer() + 1);
@@ -626,10 +608,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
 
     /**
      * Puts the object behind all other objects.
+     *
+     * @return the original object to allow method chaining
      * @see #getLayer()
      * @see #setLayer(int)
      * @see #bringToFront()
-     * @return the original object to allow method chaining
      */
     public T sendToBack() {
         return this.setLayer(Canvas.getGlobalInstance().elements.getMinLayer() - 1);
@@ -642,9 +625,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * </p>
      */
     public void erase() {
-        synchronized (Canvas.drawableSync) {
-            Canvas.getGlobalInstance().elements.remove(this);
-        }
+        Canvas.getGlobalInstance().elements.remove(this);
     }
 
     /**

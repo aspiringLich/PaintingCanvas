@@ -39,5 +39,13 @@ public class Test {
             square.sendToBack();
             canvas.sleep(0.1);
         }
+
+        for (int j = 0; j < 500; j++) {
+            canvas.atomic(() -> {
+                for (Square square : squares)
+                    square.moveHorizontal(1);
+            });
+            canvas.sleep(0.01);
+        }
     }
 }
