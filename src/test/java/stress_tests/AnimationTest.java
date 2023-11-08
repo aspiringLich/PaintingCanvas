@@ -1,5 +1,6 @@
 package stress_tests;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.animation.Easing;
 import paintingcanvas.canvas.Canvas;
@@ -24,9 +25,9 @@ public class AnimationTest {
         var canvas = new Canvas(width * size, height * size /*+ 32*/, "test", options);
         // var rec = new Recorder().attach().record(Path.of("rec"), "jpg");
         new FrameCounter().lines(() -> new String[]{
-                String.format("Frame: %d", canvas.frame),
+                String.format("Frame: %d", canvas.getFrame()),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
-                String.format("Animations: %d", canvas.animations.size())
+                String.format("Animations: %d", InternalCanvas.animations.size())
         }).attach();
 
         var rects = new ArrayList<Rectangle>();

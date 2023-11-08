@@ -89,7 +89,7 @@ public class EasingDemo {
         int columns = 3;
 
         Canvas canvas = new Canvas(width * columns + squareWidth - 5, easings.length * height / columns + height, "Easing Demo");
-        new FrameCounter().line(() -> String.format("Frame: %d", canvas.frame)).attach();
+        new FrameCounter().line(() -> String.format("Frame: %d", canvas.getFrame())).attach();
         // new Recorder().record(Path.of("./rec"), "jpg").attach();
         Square[] squares = new Square[easings.length];
         Text[] text = new Text[easings.length];

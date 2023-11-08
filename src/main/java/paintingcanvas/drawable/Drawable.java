@@ -1,8 +1,10 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
 import paintingcanvas.canvas.Canvas;
+import paintingcanvas.canvas.CanvasNotInitializedException;
 import paintingcanvas.misc.Hue;
 
 import java.awt.*;
@@ -51,10 +53,13 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
         this.y = y;
         this.color = color;
 
-        var canvas = Canvas.getGlobalInstance();
-        if (canvas.options.autoAdd) {
-            synchronized (Canvas.drawableSync) {
-                canvas.elements.add(this);
+        if (!InternalCanvas.initialized) {
+            throw new CanvasNotInitializedException();
+        }
+
+        if (InternalCanvas.options.autoAdd) {
+            synchronized (InternalCanvas.drawableSync) {
+                InternalCanvas.elements.add(this);
             }
         }
     }
@@ -77,7 +82,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setOutline(int thickness, Color color) {
-        synchronized (Canvas.drawableSync) {
+        synchronized (InternalCanvas.drawableSync) {
             this.outlineColor = color;
             this.outlineStroke = new BasicStroke(thickness);
             return this.getThis();
@@ -101,7 +106,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setOutline(Color color) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.outlineColor = color;
             return this.getThis();
         }
@@ -259,7 +264,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setX(int x) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.x = x;
         }
         return getThis();
@@ -285,7 +290,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #getY()
      */
     public T setY(int y) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.y = y;
         }
         return getThis();
@@ -312,7 +317,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setY(int)
      */
     public T setPos(int x, int y) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.x = x;
             this.y = y;
         }
@@ -338,7 +343,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T move(int x, int y) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.x += x;
             this.y += y;
         }
@@ -360,7 +365,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveVertical(int)
      */
     public T moveHorizontal(int x) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.x += x;
         }
         return getThis();
@@ -381,7 +386,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #moveHorizontal(int)
      */
     public T moveVertical(int y) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.y += y;
         }
         return getThis();
@@ -439,7 +444,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @return The original object to allow method chaining
      */
     public T setColor(Color color) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.color = color;
         }
         return getThis();
@@ -452,11 +457,11 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * o.setColor(Hue.GREEN); // Set color to red
      * }</pre>
      *
-     * @param color color.
+     * @param hue the hue.
      * @return The original object to allow method chaining
      */
     public T setColor(Hue hue) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.color = hue.getColor();
         }
         return getThis();
@@ -472,7 +477,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * o.setColor("#FF0000"); // Set color to red, in a different way
      * }</pre>
      *
-     * @param color The name of the color (case-insensitive)
+     * @param name The name of the color (case-insensitive)
      * @return The original object to allow method chaining
      */
     public T setColor(String name) {
@@ -514,7 +519,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setRotation(double)
      */
     public T rotate(double rotation) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.rotation += Math.toRadians(rotation);
         }
         return getThis();
@@ -548,7 +553,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #rotate(double)
      */
     public T setRotation(double rotation) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.rotation = rotation;
         }
         return getThis();
@@ -569,7 +574,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #setOutline(int)
      */
     public T setFilled(boolean filled) {
-        synchronized (Canvas.drawableSync) {
+        synchronized(InternalCanvas.drawableSync) {
             this.filled = filled;
         }
         return getThis();
@@ -583,8 +588,8 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * </p>
      */
     public void erase() {
-        synchronized (Canvas.drawableSync) {
-            Canvas.getGlobalInstance().elements.remove(this);
+        synchronized(InternalCanvas.drawableSync) {
+            InternalCanvas.elements.remove(this);
         }
     }
 

@@ -1,5 +1,6 @@
 package paintingcanvas.extensions;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
@@ -44,15 +45,10 @@ public class InfoDisplay implements RenderLifecycle {
         this.font = font;
     }
 
-
-    public void attach() {
-        Canvas.getGlobalInstance().renderLifecycles.add(this);
-    }
-
     @Override
     public void renderEnd(Graphics g) {
         var gc = (Graphics2D) g;
-        var canvas = Canvas.getGlobalInstance();
+        var canvas = InternalCanvas.canvas;
         var width = canvas.getWidth();
         var height = canvas.getHeight();
 
@@ -69,7 +65,7 @@ public class InfoDisplay implements RenderLifecycle {
         x += mouse.x;
         y += mouse.y;
 
-        var cmp = canvas.panel;
+        var cmp = InternalCanvas.panel;
 
         int hex;
         try {

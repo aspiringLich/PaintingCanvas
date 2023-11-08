@@ -1,12 +1,9 @@
 package paintingcanvas.canvas;
 
-import paintingcanvas.animation.Animation;
-import paintingcanvas.drawable.Drawable;
+import paintingcanvas.InternalCanvas;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -14,53 +11,6 @@ import java.util.concurrent.TimeUnit;
  * The internal canvas component that is used to draw to the screen
  */
 public class Canvas {
-    /**
-     * the fps of the canvas
-     */
-    public static final int fps = 30;
-    public static Canvas globalInstance;
-    /**
-     * the initial size of the Canvas
-     */
-    public final Dimension startSize;
-    public final Point2D.Float translation;
-    /**
-     * the elements that are currently on the canvas
-     */
-    public final List<Drawable<?>> elements = new Vector<>();
-    /**
-     * the list of animations that are currently running
-     */
-    public final List<Animation> animations = new Vector<>();
-    /**
-     * A CanvasComponent, which handles all the rendering n stuff
-     */
-    public final CanvasPanel panel;
-    /**
-     * Sync with animations: Notifies on animation finish
-     */
-    protected final Object animationSync = new Object();
-    /**
-     * Sync with frame: Notifies on end of frame
-     */
-    protected final Object frameSync = new Object();
-    /**
-     * Sync with drawables: Use when modifying a drawable
-     */
-    public static final Object drawableSync = new Object();
-    /**
-     * The current frame
-     */
-    public int frame = -1;
-    /**
-     * The RenderLifecycle: allows you to write code to run before and after a frame is rendered
-     */
-    public List<RenderLifecycle> renderLifecycles = new Vector<>();
-    /**
-     * The options for the behavior of the canvas, see {@link CanvasOptions}
-     */
-    public CanvasOptions options;
-
     /**
      * Initializes the canvas with a default size of 900x600
      * and a title of "Canvas"
@@ -89,32 +39,19 @@ public class Canvas {
      * @param options options for the canvas
      */
     public Canvas(int width, int height, String title, CanvasOptions options) {
-        super();
-        this.startSize = new Dimension(width, height);
-        this.translation = new Point2D.Float(0, 0);
-        this.panel = new CanvasPanel(this, width, height, title);
+        if (InternalCanvas.initialized)
+            throw new RuntimeException("Canvas has already been initialized");
+        InternalCanvas.startSize = new Dimension(width, height);
+        InternalCanvas.translation = new Point2D.Float(0, 0);
+        InternalCanvas.panel = new CanvasPanel(this, width, height, title);
+        InternalCanvas.canvas = this;
 
-        if (globalInstance != null)
-            throw new RuntimeException("There can only be one Canvas instance");
-        Canvas.globalInstance = this;
-
-        this.options = options;
+        InternalCanvas.options = options;
         if (options.antiAlias)
-            this.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
+            InternalCanvas.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
         if (options.autoCenter)
-            this.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
+            InternalCanvas.renderLifecycles.add(new RenderLifecycle.CenteringLifecycle());
         render();
-    }
-
-    /**
-     * Get the global instance of the Canvas (used internally to access the Canvas)
-     *
-     * @return The global instance of Canvas
-     */
-    static public Canvas getGlobalInstance() {
-        if (globalInstance == null)
-            throw new RuntimeException("Canvas has not been initialized!");
-        return globalInstance;
     }
 
     /**
@@ -124,7 +61,7 @@ public class Canvas {
      */
     @SuppressWarnings("unused")
     public void setBackgroundColor(Color color) {
-        this.options.backgroundColor = color;
+        InternalCanvas.options.backgroundColor = color;
     }
 
     /**
@@ -133,9 +70,9 @@ public class Canvas {
      * @return The width of the canvas
      */
     public int getWidth() {
-        if (panel == null) return startSize.width;
-        var width = panel.getWidth();
-        return width == 0 ? startSize.width : width;
+        if (InternalCanvas.panel == null) return InternalCanvas.startSize.width;
+        var width = InternalCanvas.panel.getWidth();
+        return width == 0 ? InternalCanvas.startSize.width : width;
     }
 
     /**
@@ -144,9 +81,23 @@ public class Canvas {
      * @return The height of the canvas
      */
     public int getHeight() {
-        if (panel == null) return startSize.height;
-        var height = panel.getHeight();
-        return height == 0 ? startSize.height : height;
+        if (InternalCanvas.panel == null) return InternalCanvas.startSize.height;
+        var height = InternalCanvas.panel.getHeight();
+        return height == 0 ? InternalCanvas.startSize.height : height;
+    }
+
+    /**
+     * Get the current frame count
+     */
+    public int getFrame() {
+        return InternalCanvas.frame;
+    }
+
+    /**
+     * Get the current configured options
+     */
+    public CanvasOptions getOptions() {
+        return InternalCanvas.options;
     }
 
     /**
@@ -155,7 +106,7 @@ public class Canvas {
      * @param title the new title
      */
     public void setTitle(String title) {
-        this.panel.jframe.setTitle(title);
+        InternalCanvas.panel.jframe.setTitle(title);
     }
 
     /**
@@ -170,8 +121,8 @@ public class Canvas {
      */
     public void sleep() {
         try {
-            synchronized (animationSync) {
-                animationSync.wait();
+            synchronized (InternalCanvas.animationSync) {
+                InternalCanvas.animationSync.wait();
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -199,11 +150,11 @@ public class Canvas {
         }
         // otherwise wait for the frame count to reach the specified frame
         else {
-            int targetFrame = frame + (int) (seconds * fps);
-            synchronized (frameSync) {
-                while (frame < targetFrame) {
+            int targetFrame = InternalCanvas.frame + (int) (seconds * InternalCanvas.options.fps);
+            synchronized (InternalCanvas.frameSync) {
+                while (InternalCanvas.frame < targetFrame) {
                     try {
-                        frameSync.wait();
+                        InternalCanvas.frameSync.wait();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -216,12 +167,16 @@ public class Canvas {
         // TODO: Account for the time it takes to run the render function
         // (Implement the run with a loop and thread::sleep) or dont -- im sure you will get a warning for busy waiting
         ScheduledThreadPoolExecutor poolExecutor = new ScheduledThreadPoolExecutor(1);
-        poolExecutor.scheduleAtFixedRate(panel::repaint, 0, 1000000 / fps, TimeUnit.MICROSECONDS);
+        poolExecutor.scheduleAtFixedRate(
+                InternalCanvas.panel::repaint, 0,
+                1000000 / InternalCanvas.options.fps,
+                TimeUnit.MICROSECONDS
+        );
     }
 
     /**
      * Get the mouse position in the canvas.
-     *
+     * L
      * <pre>{@code
      * Point mousePos = canvas.getMousePos();
      * if (mousePos != null) {
@@ -233,7 +188,7 @@ public class Canvas {
      * @return The mouse position, or {@code null} if the mouse is not hovering over the canvas
      */
     public Point getMousePos() {
-        return panel.getMousePosition();
+        return InternalCanvas.panel.getMousePosition();
     }
 
     /**
@@ -251,7 +206,7 @@ public class Canvas {
      * @param r The code to run
      */
     public void atomic(Runnable r) {
-        synchronized (drawableSync) {
+        synchronized (InternalCanvas.drawableSync) {
             r.run();
         }
     }

@@ -1,5 +1,6 @@
 package paintingcanvas.misc;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 
 /**
@@ -7,8 +8,8 @@ import paintingcanvas.canvas.Canvas;
  */
 public enum TimeUnit {
     Frames(1),
-    Milliseconds(Canvas.fps / 1000f),
-    Seconds(Canvas.fps);
+    Milliseconds(InternalCanvas.options.fps / 1000f),
+    Seconds(InternalCanvas.options.fps);
 
     final double frames;
 

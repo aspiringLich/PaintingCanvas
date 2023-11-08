@@ -1,5 +1,6 @@
 package stress_tests;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Polygon;
 import paintingcanvas.drawable.Triangle;
@@ -17,7 +18,7 @@ public class RotateTest {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
         new FrameCounter().line(
-                () -> String.format("Animations: %d", canvas.animations.size())
+                () -> String.format("Animations: %d", InternalCanvas.animations.size())
         ).attach();
         new InfoDisplay().attach();
 

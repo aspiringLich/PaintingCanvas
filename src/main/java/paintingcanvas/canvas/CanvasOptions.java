@@ -32,6 +32,12 @@ public class CanvasOptions {
      * default: {@link Color#WHITE}
      */
     public Color backgroundColor = Color.WHITE;
+    /**
+     * The FPS to run rendering at
+     * <p>
+     * default: {@code 30}
+     */
+    public int fps = 30;
 
     public CanvasOptions() {}
 }

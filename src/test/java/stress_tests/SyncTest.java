@@ -2,6 +2,7 @@ package stress_tests;
 
 import java.awt.*;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.*;
 import paintingcanvas.extensions.*;
@@ -16,7 +17,7 @@ public class SyncTest {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
         new FrameCounter().line(
-                () -> String.format("Animations: %d", canvas.animations.size())
+                () -> String.format("Animations: %d", InternalCanvas.animations.size())
         ).attach();
         new InfoDisplay().attach();
 

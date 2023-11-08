@@ -1,5 +1,6 @@
 package paintingcanvas.extensions;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
@@ -32,11 +33,6 @@ public class Recorder implements RenderLifecycle {
     int inc;
     Path dir;
     String format;
-
-    public Recorder attach() {
-        Canvas.getGlobalInstance().renderLifecycles.add(this);
-        return this;
-    }
 
     public Recorder record(Path path, String format) {
         this.dir = path;
@@ -84,7 +80,7 @@ public class Recorder implements RenderLifecycle {
 
     public Recorder stop() {
         this.recording = false;
-        System.out.printf("Maybe: ffmpeg -r %d -i '%s/tmp_%%d.%s' -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -y -an out.mov", Canvas.fps, this.dir, this.format);
+        System.out.printf("Maybe: ffmpeg -r %d -i '%s/tmp_%%d.%s' -vf 'pad=ceil(iw/2)*2:ceil(ih/2)*2' -y -an out.mov", InternalCanvas.canvas.getOptions().fps, this.dir, this.format);
         return this;
     }
 
@@ -102,8 +98,8 @@ public class Recorder implements RenderLifecycle {
     public void renderEnd(Graphics g) {
         rendering ^= true;
         if (rendering) return;
-        var canvas = Canvas.getGlobalInstance();
-        var cmp = canvas.panel;
+        var canvas = InternalCanvas.canvas;
+        var cmp = InternalCanvas.panel;
 
         synchronized (imgSync) {
             img = cmp.image;
@@ -122,7 +118,7 @@ public class Recorder implements RenderLifecycle {
             gc.setColor(Color.WHITE);
             gc.drawString(text, size.width - width - 10, height / 2 + 15);
             gc.setColor(Color.RED);
-            if ((canvas.frame / 30) % 2 == 0) gc.fillOval(size.width - 40 - width, 10, 25, 25);
+            if ((canvas.getFrame() / 30) % 2 == 0) gc.fillOval(size.width - 40 - width, 10, 25, 25);
             gc.setColor(Color.WHITE);
             gc.drawOval(size.width - 40 - width, 10, 25, 25);
         }

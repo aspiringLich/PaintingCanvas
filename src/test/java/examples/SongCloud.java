@@ -1,5 +1,6 @@
 package examples;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.animation.Animation;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Text;
@@ -20,7 +21,7 @@ import static java.awt.Color.RGBtoHSB;
 public class SongCloud {
     public static void main(String[] args) throws IOException {
         Canvas canvas = new Canvas();
-        new FrameCounter().line(() -> String.format("Animations: %d", canvas.animations.size())).attach();
+        new FrameCounter().line(() -> String.format("Animations: %d", InternalCanvas.animations.size())).attach();
         canvas.setTitle("Song Cloud");
 
         var rawSong = Files.readString(Path.of("src/test/java/examples/song.txt"));

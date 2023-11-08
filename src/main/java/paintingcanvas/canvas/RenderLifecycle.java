@@ -1,5 +1,7 @@
 package paintingcanvas.canvas;
 
+import paintingcanvas.InternalCanvas;
+
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -22,6 +24,13 @@ import java.awt.event.ComponentEvent;
  * </p>
  */
 public interface RenderLifecycle {
+    /**
+     * Attach this lifecycle to the canvas
+     */
+    default void attach() {
+        InternalCanvas.renderLifecycles.add(this);
+    }
+
     /**
      * Runs before everything else; the {@code image} in {@link CanvasPanel} will
      * reflect your changes.
@@ -75,7 +84,7 @@ public interface RenderLifecycle {
             if (thisSize.equals(lastSize)) return;
             lastSize = thisSize;
 
-            canvas.canvas.renderLifecycles.forEach(i -> i.onResize(canvas, e));
+            InternalCanvas.renderLifecycles.forEach(i -> i.onResize(canvas, e));
         }
     }
 
@@ -105,7 +114,6 @@ public interface RenderLifecycle {
         @Override
         public void onResize(CanvasPanel panel, ComponentEvent e) {
             if (e.getComponent() == null) return;
-            var canvas = Canvas.getGlobalInstance();
 
             var xDiff = panel.initialWidth - panel.getWidth() - x;
             var yDiff = panel.initialHeight - panel.getHeight() - y;
@@ -117,11 +125,11 @@ public interface RenderLifecycle {
                 return;
             }
 
-            synchronized (canvas.translation) {
-                canvas.translation.setLocation(-xDiff / 2f, -yDiff / 2f);
+            synchronized (InternalCanvas.translation) {
+                InternalCanvas.translation.setLocation(-xDiff / 2f, -yDiff / 2f);
             }
 
-            canvas.panel.jframe.repaint();
+            InternalCanvas.panel.jframe.repaint();
         }
     }
 }

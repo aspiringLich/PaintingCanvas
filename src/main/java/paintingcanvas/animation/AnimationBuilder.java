@@ -1,5 +1,6 @@
 package paintingcanvas.animation;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.TimeUnit;
@@ -37,16 +38,15 @@ public class AnimationBuilder {
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder add(Animation animation, double duration, TimeUnit unit) {
-        Canvas c = Canvas.getGlobalInstance();
         var _duration = unit.asFrames(duration);
 
         // init animation
         var _animation = animation.copy();
-        _animation.init(drawable, c.frame, _duration);
-        c.animations.add(_animation);
+        _animation.init(drawable, InternalCanvas.frame, _duration);
+        InternalCanvas.animations.add(_animation);
 
         // wait for this animation to finish
-        c.sleep();
+        InternalCanvas.canvas.sleep();
 
         return this;
     }
@@ -83,13 +83,12 @@ public class AnimationBuilder {
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder with(Animation animation, double duration, TimeUnit unit) {
-        Canvas c = Canvas.getGlobalInstance();
         var _duration = unit.asFrames(duration);
 
         // init animation
         var _animation = animation.copy();
-        _animation.init(drawable, c.frame, _duration);
-        c.animations.add(_animation);
+        _animation.init(drawable, InternalCanvas.frame, _duration);
+        InternalCanvas.animations.add(_animation);
 
         return this;
     }
@@ -121,7 +120,7 @@ public class AnimationBuilder {
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder sleep(double seconds) {
-        Canvas.globalInstance.sleep(seconds);
+        InternalCanvas.canvas.sleep(seconds);
         return this;
     }
 }

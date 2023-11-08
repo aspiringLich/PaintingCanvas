@@ -1,5 +1,6 @@
 package paintingcanvas.extensions;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
@@ -112,13 +113,6 @@ public class FrameCounter implements RenderLifecycle {
         return this;
     }
 
-    /**
-     * Adds system to the default static canvas.
-     */
-    public void attach() {
-        Canvas.getGlobalInstance().renderLifecycles.add(this);
-    }
-
     @Override
     public void renderEnd(Graphics g) {
         // Update frame times
@@ -148,7 +142,7 @@ public class FrameCounter implements RenderLifecycle {
         var text = new ArrayList<String>();
         text.add(String.format("FPS: %d", (int) (1000 / avg)));
         text.add(String.format("FrameTime: %.1f", avg));
-        text.add(String.format("Elements: %d", Canvas.getGlobalInstance().elements.size()));
+        text.add(String.format("Elements: %d", InternalCanvas.elements.size()));
         for (var i : this.lines) text.addAll(List.of(i.getLines()));
 
         gc.setColor(new Color(0, 0, 0, 180));

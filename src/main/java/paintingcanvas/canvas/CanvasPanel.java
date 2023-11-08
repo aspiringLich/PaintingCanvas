@@ -1,5 +1,6 @@
 package paintingcanvas.canvas;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.drawable.Drawable;
 
 import javax.swing.*;
@@ -49,31 +50,34 @@ public class CanvasPanel extends JPanel {
      */
     public void paintComponent(Graphics g) {
         var gc = (Graphics2D) g;
-        synchronized (canvas.frameSync) {
-            canvas.frameSync.notify();
+        var animations = InternalCanvas.animations;
+        var options = InternalCanvas.options;
+
+        synchronized (InternalCanvas.frameSync) {
+            InternalCanvas.frameSync.notify();
         }
         super.paintComponent(gc);
 
-        canvas.frame++;
-        if (canvas.frame < 0) return;
+        InternalCanvas.frame++;
+        if (InternalCanvas.frame < 0) return;
 
-        synchronized (canvas.animations) {
+        synchronized (InternalCanvas.animations) {
             // Update animations
-            for (int i = 0; i < canvas.animations.size(); i++) {
-                var animation = canvas.animations.get(i);
-                if (!animation.ended(canvas.frame)) {
-                    animation.update(canvas.frame);
+            for (int i = 0; i < animations.size(); i++) {
+                var animation = animations.get(i);
+                if (!animation.ended(InternalCanvas.frame)) {
+                    animation.update(InternalCanvas.frame);
                     continue;
                 }
 
                 // remove the animation
-                canvas.animations.remove(i);
+                animations.remove(i);
                 i--;
 
                 // unblock if no more animations
-                if (canvas.animations.size() != 0) continue;
-                synchronized (canvas.animationSync) {
-                    canvas.animationSync.notifyAll();
+                if (!animations.isEmpty()) continue;
+                synchronized (InternalCanvas.animationSync) {
+                    InternalCanvas.animationSync.notifyAll();
                 }
             }
         }
@@ -82,16 +86,16 @@ public class CanvasPanel extends JPanel {
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         var ig = (Graphics2D) image.getGraphics();
 
-        ig.setColor(canvas.options.backgroundColor);
+        ig.setColor(options.backgroundColor);
         ig.fillRect(0, 0, getWidth(), getHeight());
-        synchronized (canvas.translation) {
+        synchronized (InternalCanvas.translation) {
 //            System.out.println(canvas.translation);
-            ig.translate((int) canvas.translation.x, (int) canvas.translation.y);
+            ig.translate((int) InternalCanvas.translation.x, (int) InternalCanvas.translation.y);
         }
 
-        canvas.renderLifecycles.forEach(e -> e.preRender(ig));
-        synchronized (Canvas.drawableSync) {
-            for (Drawable<?> element : canvas.elements) {
+        InternalCanvas.renderLifecycles.forEach(e -> e.preRender(ig));
+        synchronized (InternalCanvas.drawableSync) {
+            for (Drawable<?> element : InternalCanvas.elements) {
                 try {
                     element.render(ig);
                 } catch (Exception e) {
@@ -100,16 +104,16 @@ public class CanvasPanel extends JPanel {
                 }
             }
         }
-        canvas.renderLifecycles.forEach(e -> e.postRender(ig));
+        InternalCanvas.renderLifecycles.forEach(e -> e.postRender(ig));
 
         // copy the image onto the screen
-        canvas.renderLifecycles.forEach(e -> e.renderStart(g));
+        InternalCanvas.renderLifecycles.forEach(e -> e.renderStart(g));
         gc.drawImage(
                 image,
                 0, 0,
                 null
         );
         ig.dispose();
-        canvas.renderLifecycles.forEach(e -> e.renderEnd(g));
+        InternalCanvas.renderLifecycles.forEach(e -> e.renderEnd(g));
     }
 }
