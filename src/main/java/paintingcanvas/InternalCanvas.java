@@ -6,6 +6,7 @@ import paintingcanvas.canvas.CanvasOptions;
 import paintingcanvas.canvas.CanvasPanel;
 import paintingcanvas.canvas.RenderLifecycle;
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -41,7 +42,7 @@ public class InternalCanvas {
     /**
      * the elements that are currently on the canvas
      */
-    public static final List<Drawable<?>> elements = new Vector<>();
+    public static final ElementContainer elements = new ElementContainer();
     /**
      * the list of animations that are currently running
      */

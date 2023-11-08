@@ -94,14 +94,14 @@ public class CanvasPanel extends JPanel {
 
         InternalCanvas.renderLifecycles.forEach(e -> e.preRender(ig));
         synchronized (InternalCanvas.drawableSync) {
-            for (Drawable<?> element : InternalCanvas.elements) {
+            InternalCanvas.elements.foreach(element -> {
                 try {
                     element.render(ig);
                 } catch (Exception e) {
                     e.printStackTrace();
                     element.erase();
                 }
-            }
+            });
         }
         InternalCanvas.renderLifecycles.forEach(e -> e.postRender(ig));
 

@@ -47,8 +47,9 @@ public class Canvas {
         InternalCanvas.translation = new Point2D.Float(0, 0);
         InternalCanvas.panel = new CanvasPanel(this, width, height, title);
         InternalCanvas.canvas = this;
-
         InternalCanvas.options = options;
+        InternalCanvas.initialized = true;
+
         if (options.antiAlias)
             InternalCanvas.renderLifecycles.add(new RenderLifecycle.AntiAliasingLifecycle());
         if (options.autoCenter)

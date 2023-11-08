@@ -597,7 +597,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
     public T setLayer(int layer) {
         ElementContainer.atomic(() -> {
             this.layer = layer;
-            Canvas.getGlobalInstance().elements.setDirty();
+            InternalCanvas.elements.setDirty();
         });
         return getThis();
     }
@@ -611,7 +611,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #sendToBack()
      */
     public T bringToFront() {
-        return this.setLayer(Canvas.getGlobalInstance().elements.getMaxLayer() + 1);
+        return this.setLayer(InternalCanvas.elements.getMaxLayer() + 1);
     }
 
     /**
@@ -623,7 +623,7 @@ public abstract class Drawable<T extends Drawable<T>> implements Animatable {
      * @see #bringToFront()
      */
     public T sendToBack() {
-        return this.setLayer(Canvas.getGlobalInstance().elements.getMinLayer() - 1);
+        return this.setLayer(InternalCanvas.elements.getMinLayer() - 1);
     }
 
     /**
