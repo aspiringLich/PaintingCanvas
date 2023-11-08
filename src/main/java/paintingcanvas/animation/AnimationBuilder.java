@@ -24,7 +24,7 @@ public class AnimationBuilder {
     }
 
     /**
-     * Add a new animation to the element.
+     * Add a new animation to the element and wait for it to finish.
      * <pre>{@code
      * // these animations will run one after the other
      * obj.animate()
@@ -32,9 +32,9 @@ public class AnimationBuilder {
      *    .add(Animation.colorTo(Color.BLUE), 100, TimeUnit.Frames);
      * }</pre>
      *
-     * @param animation The animation type to add
-     * @param duration  The amount of time the animation will last
-     * @param unit      The unit of time used for {@code duration}
+     * @param animation the animation type to add
+     * @param duration  the amount of time the animation will last
+     * @param unit      the unit of time used for {@code duration}
      * @return <code>this</code> to allow method chaining
      */
     public AnimationBuilder add(Animation animation, double duration, TimeUnit unit) {
@@ -69,12 +69,12 @@ public class AnimationBuilder {
     }
 
     /**
-     * Add the animation alongside / with the previous animation.
+     * Add the animation to run at the same time as the previous animation, without waiting for it to finish.
      * <pre>{@code
      * // these animations will run at the same time
      * obj.animate()
-     *    .add(Animation.moveTo(100, 100), 100, TimeUnit.Frames)
-     *    .add(Animation.colorTo(Color.BLUE), 100, TimeUnit.Frames);
+     *    .with(Animation.moveTo(100, 100), 100, TimeUnit.Frames)
+     *    .with(Animation.colorTo(Color.BLUE), 100, TimeUnit.Frames);
      * }</pre>
      *
      * @param animation The animation type to add
@@ -94,11 +94,11 @@ public class AnimationBuilder {
     }
 
     /**
-     * Add the animation alongside / with the previous animation.
+     * Add the animation to run at the same time as the previous animation, without waiting for it to finish.
      * <pre>{@code
      * // these animations will run at the same time
      * obj.animate()
-     *    .add(Animation.moveTo(100, 100), 10)
+     *    .with(Animation.moveTo(100, 100), 10)
      *    .with(Animation.colorTo(Color.BLUE), 10);
      * }</pre>
      *

@@ -29,7 +29,6 @@ public class CanvasPanel extends JPanel {
         jframe = new JFrame();
 
         jframe.setTitle(title);
-//        jframe.setLayout(null);
         jframe.add(this);
         jframe.pack();
         jframe.setLocationRelativeTo(null);

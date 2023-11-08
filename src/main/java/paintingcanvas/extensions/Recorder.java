@@ -23,9 +23,6 @@ import java.util.Objects;
 public class Recorder implements RenderLifecycle {
     // == Screenshot ==
     final Object imgSync = new Object();
-
-    // == Misc ==
-    boolean rendering = true;
     BufferedImage img;
 
     // == Image Sequence ==
@@ -96,8 +93,6 @@ public class Recorder implements RenderLifecycle {
 
     @Override
     public void renderEnd(Graphics g) {
-        rendering ^= true;
-        if (rendering) return;
         var canvas = InternalCanvas.canvas;
         var cmp = InternalCanvas.panel;
 
@@ -130,5 +125,5 @@ public class Recorder implements RenderLifecycle {
 //         v framerate          v padding                                  v output file
 // ffmpeg -r 30 -i 'tmp_%d.jpg' -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -y -an out.mp4
 
-// if we didnt have the padding, it would fail to compress to mp4 b/c it needs an even height
+// if we didn't have the padding, it would fail to compress to mp4 b/c it needs an even height
 // or something

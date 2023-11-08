@@ -8,11 +8,11 @@ import java.io.IOException;
 
 /**
  * <p>
- *     Draws an image from the specified path.
+ * Draws an image from the specified path.
  * </p>
  * <p>
- *     {@code setColor} and {@code getColor} don't do anything for this drawable as
- *     it is not a traditional solid color shape
+ * {@code setColor} and {@code getColor} don't do anything for this drawable as
+ * it is not a traditional solid color shape
  * </p>
  *
  * <pre>{@code
@@ -28,8 +28,9 @@ public class Image extends Drawable<Image> {
 
     /**
      * Create a new Image element.
-     * @param x The X-position of the image
-     * @param y The Y-position of the image
+     *
+     * @param x   The X-position of the image
+     * @param y   The Y-position of the image
      * @param src The path to the image file
      */
     public Image(int x, int y, String src) {
@@ -51,13 +52,14 @@ public class Image extends Drawable<Image> {
      * Image img = new Image(0, 0, "image.png");
      * img.setScale(2.0, 1.0); // the image is now stretched in the x direction
      * }</pre>
+     *
      * @param x The multiplier to scale x by
      * @param y The multiplier to scale y by
      * @return The original object to allow method chaining
      */
     public Image setScale(double x, double y) {
-        this.width = (int)(image.getWidth() * x);
-        this.height = (int)(image.getHeight() * y);
+        this.width = (int) (image.getWidth() * x);
+        this.height = (int) (image.getHeight() * y);
         return this;
     }
 

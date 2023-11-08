@@ -19,15 +19,33 @@ public class Test {
 
         String dir = System.getProperty("user.dir");
 
-        int i = 0;
-        for (Hue h : Hue.values()) {
-            new Square(50 + (i % 8) * 100, 50 + (i / 8) * 100, 100, new Color(h.hex));
-            i++;
-        }
-        Image image = new Image(200, 500, "src/test/java/examples/flop.jpg")
+        Image image = new Image(200, 200, "src/test/java/examples/flop.jpg")
                 .rotate(90);
 
-        while (true) {
+        int i = -1;
+        Square[] squares = new Square[Hue.values().length];
+        for (Hue h : Hue.values())
+            squares[++i] = new Square(50 + (i % 8) * 100, 50 + (i / 8) * 100, 100, new Color(h.hex));
+
+        canvas.sleep(3);
+        image.bringToFront();
+
+        for (Square square : squares) {
+            square.bringToFront();
+            canvas.sleep(0.1);
+        }
+
+        for (Square square : squares) {
+            square.sendToBack();
+            canvas.sleep(0.1);
+        }
+
+        for (int j = 0; j < 500; j++) {
+            canvas.atomic(() -> {
+                for (Square square : squares)
+                    square.moveHorizontal(1);
+            });
+            canvas.sleep(0.01);
         }
     }
 }

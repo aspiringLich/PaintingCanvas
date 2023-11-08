@@ -1,5 +1,7 @@
 package paintingcanvas.canvas;
 
+import paintingcanvas.animation.Animation;
+import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.InternalCanvas;
 
 import java.awt.*;
@@ -20,7 +22,7 @@ public class Canvas {
     }
 
     /**
-     * Initializes the canvas
+     * Initialize the canvas
      *
      * @param width  the width of the canvas
      * @param height the height of the canvas
@@ -31,7 +33,7 @@ public class Canvas {
     }
 
     /**
-     * Initializes the canvas
+     * Initialize the canvas with more options
      *
      * @param width   the width of the canvas
      * @param height  the height of the canvas
@@ -140,7 +142,7 @@ public class Canvas {
      * @param seconds The number of seconds to sleep for
      */
     public void sleep(double seconds) {
-        // if the time is short: just thread.sleep
+        // if the time is short, just Thread.sleep
         if (seconds < 0.1) {
             try {
                 Thread.sleep((long) (seconds * 1000));
@@ -148,7 +150,7 @@ public class Canvas {
                 throw new RuntimeException(e);
             }
         }
-        // otherwise wait for the frame count to reach the specified frame
+        // otherwise, wait for the frame count to reach the specified frame
         else {
             int targetFrame = InternalCanvas.frame + (int) (seconds * InternalCanvas.options.fps);
             synchronized (InternalCanvas.frameSync) {
@@ -176,7 +178,7 @@ public class Canvas {
 
     /**
      * Get the mouse position in the canvas.
-     * L
+     *
      * <pre>{@code
      * Point mousePos = canvas.getMousePos();
      * if (mousePos != null) {
@@ -206,8 +208,6 @@ public class Canvas {
      * @param r The code to run
      */
     public void atomic(Runnable r) {
-        synchronized (InternalCanvas.drawableSync) {
-            r.run();
-        }
+        ElementContainer.atomic(r);
     }
 }
