@@ -11,7 +11,7 @@ import java.awt.*;
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
  * Provides various common methods to draw objects to a screen
  */
-interface Drawable<T extends Drawable<T>> extends Animatable {
+public interface Drawable<T extends Drawable<T>> extends Animatable {
     void internalSetLayer(int layer);
 
     /**

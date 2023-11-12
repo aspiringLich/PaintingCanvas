@@ -13,7 +13,7 @@ import java.awt.*;
  *
  * @param <T> the type of the object
  */
-interface Colorable<T extends Drawable<T>> extends Drawable<T> {
+public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
     void internalSetColor(Color color);
 
     /**

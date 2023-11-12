@@ -17,7 +17,7 @@ import java.awt.*;
  *
  * @param <T> the type of the object
  */
-interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
+public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
     void internalSetOutlineStroke(Stroke stroke);
 
     void internalSetOutlineColor(Color color);
