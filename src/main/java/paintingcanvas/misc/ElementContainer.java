@@ -5,6 +5,7 @@ import paintingcanvas.drawable.Drawable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Callable;
 
 // TODO: Put drawable sync here
 public class ElementContainer {
@@ -13,6 +14,21 @@ public class ElementContainer {
     boolean dirty = false;
     int minLayer = 0;
     int maxLayer = 0;
+
+    /**
+     * ALL MODIFICATIONS TO DRAWABLES MUST BE DONE THROUGH THIS METHOD
+     *
+     * @param callable The code to run
+     */
+    public static <T> T atomic(Callable<T> callable) {
+        synchronized (drawableSync) {
+            try {
+                return callable.call();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     /**
      * ALL MODIFICATIONS TO DRAWABLES MUST BE DONE THROUGH THIS METHOD
@@ -75,5 +91,10 @@ public class ElementContainer {
 
     public interface DrawableConsumer {
         void accept(Drawable<?> drawable);
+    }
+
+    @FunctionalInterface
+    public interface AtomicExecutor {
+        void execute();
     }
 }

@@ -1,6 +1,7 @@
 package paintingcanvas.animation;
 
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.drawable.Positionable;
 
 import java.awt.*;
 
@@ -33,7 +34,8 @@ public class MovementAnimation extends Animation {
     @Override
     protected void updateAnimation(Drawable<?> drawable, double progress) {
         var t = easing.ease(progress);
-        drawable.setPos(
+        var p = (Positionable<?>) drawable;
+        p.setPos(
                 (int) (start.x + (end.x - start.x) * t),
                 (int) (start.y + (end.y - start.y) * t)
         );
@@ -41,10 +43,11 @@ public class MovementAnimation extends Animation {
 
     @Override
     protected void initAnimation(Drawable<?> drawable) {
-        this.start = drawable.getPos();
+        var p = (Positionable<?>) drawable;
+        this.start = p.getPos();
         if (relative) {
-            end.x += drawable.getX();
-            end.y += drawable.getY();
+            end.x += p.getX();
+            end.y += p.getY();
         }
     }
 }

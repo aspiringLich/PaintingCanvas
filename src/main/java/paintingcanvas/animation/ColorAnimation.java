@@ -1,5 +1,6 @@
 package paintingcanvas.animation;
 
+import paintingcanvas.drawable.Colorable;
 import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.Misc;
 
@@ -26,12 +27,14 @@ public class ColorAnimation extends Animation {
 
     @Override
     protected void updateAnimation(Drawable<?> drawable, double progress) {
-        drawable.setColor(lerpColor(start, end, easing.ease(progress)));
+        var c = Misc.castDrawable(drawable, Colorable.class);
+        c.setColor(lerpColor(start, end, easing.ease(progress)));
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        this.start = drawable.getColor();
+        var c = Misc.castDrawable(drawable, Colorable.class);
+        this.start = c.getColor();
     }
 
     /**

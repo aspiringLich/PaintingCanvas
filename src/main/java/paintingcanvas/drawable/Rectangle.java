@@ -11,15 +11,8 @@ import java.awt.*;
  * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Rectangle extends Drawable<Rectangle> {
-    /**
-     * The width of the rectangle.
-     */
-    public int width;
-    /**
-     * The height of the rectangle.
-     */
-    public int height;
+public class Rectangle extends Shape<Rectangle> {
+    int width, height;
 
     /**
      * Create a new Rectangle element.
@@ -79,17 +72,22 @@ public class Rectangle extends Drawable<Rectangle> {
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.drawRect(x - width / 2, y - height / 2, width, height);
+    void drawOutline(Graphics2D gc) {
+        gc.drawRect(-width / 2, -height / 2, width, height);
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.fillRect(x - width / 2, y - height / 2, width, height);
+    void drawFill(Graphics2D g) {
+        g.fillRect(-width / 2, -height / 2, width, height);
     }
 
     @Override
-    protected Rectangle getThis() {
+    public Point center(Graphics2D g) {
+        return getPos();
+    }
+
+    @Override
+    public Rectangle getThis() {
         return this;
     }
 

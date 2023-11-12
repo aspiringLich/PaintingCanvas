@@ -11,11 +11,8 @@ import java.awt.*;
  * Circle circle = new Circle(100, 100, 20);
  * }</pre>
  */
-public class Circle extends Drawable<Circle> {
-    /**
-     * The radius of the circle
-     */
-    public int radius;
+public class Circle extends Shape<Circle> {
+    int radius;
 
     /**
      * Create a new Circle element.
@@ -69,22 +66,22 @@ public class Circle extends Drawable<Circle> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
+    protected void drawFill(Graphics2D g) {
+        g.fillOval(- radius, - radius, radius * 2, radius * 2);
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+    protected void drawOutline(Graphics2D g) {
+        g.drawOval(- radius, - radius, radius * 2, radius * 2);
     }
 
     @Override
-    public Point center(Graphics g) {
-        return new Point(x, y);
+    public Point center(Graphics2D g) {
+        return getPos();
     }
 
     @Override
-    protected Circle getThis() {
+    public Circle getThis() {
         return this;
     }
 

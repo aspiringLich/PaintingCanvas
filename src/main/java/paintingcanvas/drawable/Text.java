@@ -10,7 +10,7 @@ import java.awt.*;
  * Text text = new Text(100, 100, "Hello World");
  * }</pre>
  */
-public class Text extends Drawable<Text> {
+public class Text extends DrawableBase<Text> {
     /**
      * The font of the text, you can change this if you want a different font (and have it installed)
      */
@@ -88,27 +88,20 @@ public class Text extends Drawable<Text> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.setFont(font);
-        var center = center(gc);
-        gc.drawString(text, 2 * x - center.x, 2 * y - center.y);
+    void draw(Graphics2D g) {
+        g.setFont(font);
+        var metrics = g.getFontMetrics(font);
+        g.drawString(text, -metrics.stringWidth(text) / 2, metrics.getAscent() / 4);
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.setFont(font);
-        var center = center(gc);
-        gc.drawString(text, 2 * x - center.x, 2 * y - center.y);
-    }
-
-    @Override
-    public Point center(Graphics g) {
+    public Point center(Graphics2D g) {
         var metrics = g.getFontMetrics(font);
         return new Point(x + metrics.stringWidth(text) / 2, y - metrics.getAscent() / 4);
     }
 
     @Override
-    protected Text getThis() {
+    public Text getThis() {
         return this;
     }
 

@@ -11,15 +11,9 @@ import java.awt.*;
  * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
  * }</pre>
  */
-public class Ellipse extends Drawable<Ellipse> {
-    /**
-     * The width of the ellipse.
-     */
-    public int width;
-    /**
-     * The height of the ellipse.
-     */
-    public int height;
+public class Ellipse extends Shape<Ellipse> {
+    int width;
+    int height;
 
     /**
      * Create a new Ellipse element.
@@ -78,16 +72,21 @@ public class Ellipse extends Drawable<Ellipse> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        gc.drawOval(x - width / 2, y - height / 2, width, height);
+        gc.drawOval(-width / 2, -height / 2, width, height);
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.fillOval(x - width / 2, y - height / 2, width, height);
+    protected void drawFill(Graphics2D gc) {
+        gc.fillOval(-width / 2, -height / 2, width, height);
     }
 
     @Override
-    protected Ellipse getThis() {
+    public Point center(Graphics2D g) {
+        return getPos();
+    }
+
+    @Override
+    public Ellipse getThis() {
         return this;
     }
 

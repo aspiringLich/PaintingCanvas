@@ -11,8 +11,7 @@ import java.io.IOException;
  * Draws an image from the specified path.
  * </p>
  * <p>
- * {@code setColor} and {@code getColor} don't do anything for this drawable as
- * it is not a traditional solid color shape
+ * TODO: The color should be used as a tint for the image
  * </p>
  *
  * <pre>{@code
@@ -22,7 +21,7 @@ import java.io.IOException;
  * Image img = new Image(100, 100, "path/to/image.png");
  * }</pre>
  */
-public class Image extends Drawable<Image> {
+public class Image extends Shape<Image> {
     BufferedImage image;
     int width, height;
 
@@ -64,17 +63,22 @@ public class Image extends Drawable<Image> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.drawImage(image, x - width / 2, y - height / 2, width, height, null);
+    void drawFill(Graphics2D g) {
+        g.drawImage(image, -width / 2, -height / 2, width, height, null);
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.drawRect(x - width / 2, y - height / 2, width, height);
+    protected void drawOutline(Graphics2D g) {
+        g.drawRect(-width / 2, -height / 2, width, height);
     }
 
     @Override
-    protected Image getThis() {
+    public Point center(Graphics2D g) {
+        return getPos();
+    }
+
+    @Override
+    public Image getThis() {
         return this;
     }
 }

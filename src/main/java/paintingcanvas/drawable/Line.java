@@ -7,11 +7,9 @@ import java.awt.*;
 /**
  * A line: with a startpoint and an endpoint
  */
-public class Line extends Drawable<Line> {
-    /**
-     * the offset of the endpoint from the startpoint (x, y)
-     */
-    public Point endOffset;
+public class Line extends DrawableBase<Line> {
+    Point endOffset;
+    Stroke stroke = new BasicStroke(1);
 
     /**
      * Create a new Line element.
@@ -28,7 +26,6 @@ public class Line extends Drawable<Line> {
     public Line(int x1, int y1, int x2, int y2) {
         super(x1, y1, Color.BLACK);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
@@ -44,11 +41,9 @@ public class Line extends Drawable<Line> {
      * @param y2    the Y-position of the endpoint
      * @param color the color of the line
      */
-    @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, Color color) {
         super(x1, y1, color);
         this.endOffset = new Point(x2 - x1, y2 - y1);
-        this.outlineStroke = new BasicStroke(1);
     }
 
     /**
@@ -65,27 +60,14 @@ public class Line extends Drawable<Line> {
      * Line line = new Line(100, 100, 200, 200, "red");
      * }</pre>
      */
-    @SuppressWarnings("unused")
     public Line(int x1, int y1, int x2, int y2, String color) {
         this(x1, y1, x2, y2, Misc.stringToColor(color));
     }
 
-    @Override
-    public Line setOutline(int thickness, Color color) {
+    public Line setStroke(int thickness, Color color) {
         this.color = color;
-        this.outlineStroke = new BasicStroke(thickness);
+        this.stroke = new BasicStroke(thickness);
         return this;
-    }
-
-    /**
-     * DO NOT USE, Overridden, as there is nothing to fill in a line
-     *
-     * @param filled the value to set {@code this.filled} to
-     * @return {@code this}
-     */
-    @Override
-    public Line setFilled(boolean filled) {
-        throw new RuntimeException("setFilled is useless on Line as it does not have anything to fill");
     }
 
     /**
@@ -94,9 +76,8 @@ public class Line extends Drawable<Line> {
      * @param stroke a {@code Stroke} object to define this line's stroke
      * @return the original object to allow method chaining
      */
-    @SuppressWarnings("unused")
     public Line setStroke(Stroke stroke) {
-        this.outlineStroke = stroke;
+        this.stroke = stroke;
         return this;
     }
 
@@ -107,7 +88,7 @@ public class Line extends Drawable<Line> {
      * @return the original object to allow method chaining
      */
     public Line setThickness(int thickness) {
-        this.outlineStroke = new BasicStroke(thickness);
+        this.stroke = new BasicStroke(thickness);
         return this;
     }
 
@@ -171,24 +152,16 @@ public class Line extends Drawable<Line> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.setColor(color);
-        gc.drawLine(this.x, this.y, this.x + endOffset.x, this.y + endOffset.y);
+    void draw(Graphics2D gc) {
+        gc.drawLine(0, 0, endOffset.x, endOffset.y);
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.setColor(color);
-        gc.drawLine(this.x, this.y, this.x + endOffset.x, this.y + endOffset.y);
-    }
-
-    @Override
-    public Point center(Graphics g) {
+    public Point center(Graphics2D g) {
         return new Point(this.x + endOffset.x / 2, this.y + endOffset.y / 2);
     }
 
-    @Override
-    protected Line getThis() {
+    public Line getThis() {
         return this;
     }
 }

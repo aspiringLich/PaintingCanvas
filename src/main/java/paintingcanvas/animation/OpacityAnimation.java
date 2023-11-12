@@ -1,6 +1,8 @@
 package paintingcanvas.animation;
 
+import paintingcanvas.drawable.Colorable;
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.drawable.Outlineable;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
@@ -34,19 +36,28 @@ public class OpacityAnimation extends Animation {
     @Override
     protected void updateAnimation(Drawable<? extends Drawable<?>> drawable, double progress) {
         var t = easing.ease(progress);
+        var c = Misc.castDrawable(drawable, Colorable.class);
 
-        Color color = drawable.getColor();
+        Color color = c.getColor();
         int alpha = Misc.clamp(0, (int) (start + (end - start) * t), 255);
-        drawable.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
+        c.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha));
 
-        Color outlineColor = drawable.getOutlineColor();
-        int outlineAlpha = Misc.clamp(0, (int) (outlineStart + (end - outlineStart) * t), 255);
-        drawable.setOutline(new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha));
+        try {
+            var o = (Outlineable<?>)drawable;
+            Color outlineColor = o .getOutlineColor();
+            int outlineAlpha = Misc.clamp(0, (int) (outlineStart + (end - outlineStart) * t), 255);
+            o .setOutline(new Color(outlineColor.getRed(), outlineColor.getGreen(), outlineColor.getBlue(), outlineAlpha));
+        } catch (ClassCastException ignored) {}
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        this.start = drawable.getColor().getAlpha();
-        this.outlineStart = drawable.getOutlineColor().getAlpha();
+        var c = Misc.castDrawable(drawable, Colorable.class);
+        this.start = c.getColor().getAlpha();
+
+        try {
+            var o = (Outlineable<?>)drawable;
+            this.outlineStart = o.getOutlineColor().getAlpha();
+        } catch (ClassCastException ignored) {}
     }
 }

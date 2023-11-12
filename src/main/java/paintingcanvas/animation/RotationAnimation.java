@@ -1,6 +1,8 @@
 package paintingcanvas.animation;
 
 import paintingcanvas.drawable.Drawable;
+import paintingcanvas.drawable.Positionable;
+import paintingcanvas.misc.Misc;
 
 /**
  * Controls animation that is to do with rotation
@@ -31,12 +33,14 @@ public class RotationAnimation extends Animation {
     @Override
     protected void updateAnimation(Drawable<? extends Drawable<?>> drawable, double progress) {
         var t = easing.ease(progress);
-        drawable.setRotation(start + (end - start) * t);
+        var p = Misc.castDrawable(drawable, Positionable.class);
+        p.setRotation(start + (end - start) * t);
     }
 
     @Override
     protected void initAnimation(Drawable<? extends Drawable<?>> drawable) {
-        start = drawable.getRotation();
+        var p = Misc.castDrawable(drawable, Positionable.class);
+        start = p.getRotation();
         if (relative) {
             end += start;
         }

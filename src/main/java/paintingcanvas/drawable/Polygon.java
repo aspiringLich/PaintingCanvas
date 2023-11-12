@@ -11,7 +11,7 @@ import java.awt.*;
  * );
  * }</pre>
  */
-public class Polygon extends Drawable<Polygon> {
+public class Polygon extends Shape<Polygon> {
     /**
      * The internal polygon element
      *
@@ -131,22 +131,15 @@ public class Polygon extends Drawable<Polygon> {
         }
     }
 
-    @Override
-    protected void drawOutline(Graphics2D gc) {
-        polygon.translate(x, y);
-        gc.drawPolygon(polygon);
-        polygon.translate(-x, -y);
+    void drawOutline(Graphics2D g) {
+        g.drawPolygon(polygon);
     }
 
-    @Override
-    protected void drawFilled(Graphics2D gc) {
-        polygon.translate(x, y);
-        gc.fillPolygon(polygon);
-        polygon.translate(-x, -y);
+    void drawFill(Graphics2D g) {
+        g.fillPolygon(polygon);
     }
 
-    @Override
-    public Point center(Graphics g) {
+   public Point center(Graphics g) {
         return new Point(x + polygon.getBounds().width / 2, y + polygon.getBounds().height / 2);
     }
 
@@ -158,6 +151,11 @@ public class Polygon extends Drawable<Polygon> {
      */
     public void point(int x, int y) {
         polygon.addPoint(x, y);
+    }
+
+    @Override
+    public Point center(Graphics2D g) {
+        return getPos();
     }
 
     @Override

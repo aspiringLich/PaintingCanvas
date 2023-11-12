@@ -1,5 +1,7 @@
 package paintingcanvas.misc;
 
+import paintingcanvas.drawable.Drawable;
+
 import java.awt.*;
 
 public class Misc {
@@ -30,6 +32,14 @@ public class Misc {
             // otherwise, try to decode it as a Hue
             // this function will also throw again if it isn't a valid Hue
             return Hue.getColor(name);
+        }
+    }
+
+    public static <T> T castDrawable(Drawable<?> drawable, Class<T> _class) {
+        try {
+            return (T) drawable;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("This drawable does not support " + _class.getName() + " operations");
         }
     }
 }

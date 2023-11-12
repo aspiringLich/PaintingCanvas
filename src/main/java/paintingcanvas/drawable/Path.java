@@ -10,7 +10,7 @@ import java.awt.geom.Path2D;
  * <p>
  * Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.
  */
-public class Path extends Drawable<Path> {
+public class Path extends Shape<Path> {
     /**
      * The path to draw
      *
@@ -168,28 +168,22 @@ public class Path extends Drawable<Path> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        gc.setColor(outlineColor);
-        gc.translate(x, y);
         gc.draw(path);
-        gc.translate(-x, -y);
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.setColor(color);
-        gc.translate(x, y);
+    protected void drawFill(Graphics2D gc) {
         gc.fill(path);
-        gc.translate(-x, -y);
     }
 
     @Override
-    public Point center(Graphics g) {
+    public Point center(Graphics2D g) {
         var bounds = path.getBounds();
         return new Point(x + (int) bounds.getCenterX(), y + (int) bounds.getCenterY());
     }
 
     @Override
-    protected Path getThis() {
+    public Path getThis() {
         return this;
     }
 }

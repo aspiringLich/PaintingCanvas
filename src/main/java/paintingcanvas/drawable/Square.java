@@ -11,11 +11,8 @@ import java.awt.*;
  * Square square = new Square(100, 100, 30);
  * }</pre>
  */
-public class Square extends Drawable<Square> {
-    /**
-     * The size / side-length of the square.
-     */
-    public int size;
+public class Square extends Shape<Square> {
+    int size;
 
     /**
      * Create a new Square element.
@@ -69,13 +66,18 @@ public class Square extends Drawable<Square> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.fillRect(x - size / 2, y - size / 2, size, size);
+    void drawFill(Graphics2D g) {
+        g.fillRect(-size / 2, -size / 2, size, size);
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.drawRect(x - size / 2, y - size / 2, size, size);
+    void drawOutline(Graphics2D g) {
+        g.drawRect(-size / 2, -size / 2, size, size);
+    }
+
+    @Override
+    public Point center(Graphics2D g) {
+        return getPos();
     }
 
     @Override
@@ -84,7 +86,7 @@ public class Square extends Drawable<Square> {
     }
 
     /**
-     * Gets the size of the square.
+     * Gets the size / side length of the square.
      *
      * @return The size of the square in pixels
      * @see #setSize(int)
@@ -94,7 +96,7 @@ public class Square extends Drawable<Square> {
     }
 
     /**
-     * Sets the size of the square.
+     * Sets the size / side length of the square.
      *
      * @param s The new size of the square in pixels
      * @return The original object to allow method chaining

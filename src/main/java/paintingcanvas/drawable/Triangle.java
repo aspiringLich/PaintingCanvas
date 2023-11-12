@@ -11,15 +11,9 @@ import java.awt.*;
  * Triangle triangle = new Triangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Triangle extends Drawable<Triangle> {
-    /**
-     * The width of the triangle.
-     */
-    public int width;
-    /**
-     * The height of the triangle.
-     */
-    public int height;
+public class Triangle extends Shape<Triangle> {
+    int width;
+    int height;
 
     /**
      * Create a new Triangle element.
@@ -78,8 +72,8 @@ public class Triangle extends Drawable<Triangle> {
 
     private java.awt.Polygon getPolygon() {
         return new java.awt.Polygon(
-                new int[]{x - width / 2, x + width / 2, x},
-                new int[]{y + height / 2, y + height / 2, y - height / 2},
+                new int[]{-width / 2, width / 2, 0},
+                new int[]{height / 2, height / 2, -height / 2},
                 3
         );
     }
@@ -129,17 +123,22 @@ public class Triangle extends Drawable<Triangle> {
     }
 
     @Override
-    protected void drawFilled(Graphics2D gc) {
-        gc.fillPolygon(this.getPolygon());
+    protected void drawFill(Graphics2D g) {
+        g.fillPolygon(this.getPolygon());
     }
 
     @Override
-    protected void drawOutline(Graphics2D gc) {
-        gc.drawPolygon(this.getPolygon());
+    protected void drawOutline(Graphics2D g) {
+        g.drawPolygon(this.getPolygon());
     }
 
     @Override
-    protected Triangle getThis() {
+    public Point center(Graphics2D g) {
+        return getPos();
+    }
+
+    @Override
+    public Triangle getThis() {
         return this;
     }
 }
