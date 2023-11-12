@@ -13,7 +13,7 @@ import java.awt.*;
  *
  * @param <T> the type of the object
  */
-public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
+interface Colorable<T extends Drawable<T>> extends Drawable<T> {
     void internalSetColor(Color color);
 
     /**
@@ -21,7 +21,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      *
      * @return the {@link Color} of the element
      */
-    public Color getColor();
+    Color getColor();
 
     /**
      * Set the color of the object with a {@link Color} object.
@@ -33,7 +33,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * @param color color.
      * @return the original object to allow method chaining
      */
-    public default T setColor(Color color) {
+    default T setColor(Color color) {
         ElementContainer.atomic(() -> internalSetColor(color));
         return getThis();
     }
@@ -51,7 +51,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * @param hex the number describing the RGB color
      * @return the original object to allow method chaining
      */
-    public default T setColor(int hex) {
+    default T setColor(int hex) {
         return setColor(hex >> 16 & 0xff, hex >> 8 & 0xff, hex & 0xff);
     }
 
@@ -65,7 +65,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * @param hue the hue
      * @return the original object to allow method chaining
      */
-    public default T setColor(Hue hue) {
+    default T setColor(Hue hue) {
         return setColor(hue.getColor());
     }
 
@@ -83,7 +83,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * o.setColor("#FF0000"); // Set color to red, in a different way
      * }</pre>
      */
-    public default T setColor(String name) {
+    default T setColor(String name) {
         return setColor(Misc.stringToColor(name));
     }
 
@@ -101,7 +101,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * @param b blue (0-255)
      * @return the original object to allow method chaining
      */
-    public default T setColor(int r, int g, int b) {
+    default T setColor(int r, int g, int b) {
         return setColor(new Color(r, g, b));
     }
 
@@ -120,7 +120,7 @@ public interface Colorable<T extends Drawable<T>> extends Drawable<T> {
      * @param a alpha (0-255)
      * @return the original object to allow method chaining
      */
-    public default T setColor(int r, int g, int b, int a) {
+    default T setColor(int r, int g, int b, int a) {
         return this.setColor(new Color(r, g, b, a));
     }
 }

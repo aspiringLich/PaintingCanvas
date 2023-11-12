@@ -17,7 +17,7 @@ import java.awt.*;
  *
  * @param <T> the type of the object
  */
-public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
+interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
     void internalSetOutlineStroke(Stroke stroke);
 
     void internalSetOutlineColor(Color color);
@@ -37,7 +37,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      *
      * @return the outline stroke
      */
-    public Stroke getOutlineStroke();
+    Stroke getOutlineStroke();
 
     /**
      * Sets the parameters for the outline of the shape
@@ -56,7 +56,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      * @param thickness the thickness of the outline
      * @return the original object to allow method chaining
      */
-    public default T setOutline(int thickness, Color color) {
+    default T setOutline(int thickness, Color color) {
         ElementContainer.atomic(() -> {
             internalSetOutlineStroke(new BasicStroke(thickness));
             internalSetOutlineColor(color);
@@ -80,7 +80,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      * @param color the color of the outline
      * @return the original object to allow method chaining
      */
-    public default T setOutline(Color color) {
+    default T setOutline(Color color) {
         ElementContainer.atomic(() -> internalSetOutlineColor(color));
         return this.getThis();
     }
@@ -101,7 +101,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      * @param thickness the thickness of the outline
      * @return the original object to allow method chaining
      */
-    public default T setOutline(int thickness) {
+    default T setOutline(int thickness) {
         ElementContainer.atomic(() -> internalSetOutlineStroke(new BasicStroke(thickness)));
         return this.getThis();
     }
@@ -111,7 +111,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      *
      * @return the original object to allow method chaining
      */
-    public default T removeOutline() {
+    default T removeOutline() {
         internalSetOutlineStroke(null);
         return this.getThis();
     }
@@ -130,7 +130,7 @@ public interface Outlineable<T extends Drawable<T>> extends Drawable<T> {
      * @return the original object to allow method chaining
      * @see #setOutline(int)
      */
-    public default T setFilled(boolean filled) {
+    default T setFilled(boolean filled) {
         ElementContainer.atomic(() -> internalSetFilled(filled));
         return getThis();
     }

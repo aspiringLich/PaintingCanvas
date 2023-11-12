@@ -1,7 +1,6 @@
 package paintingcanvas.extensions;
 
 import paintingcanvas.InternalCanvas;
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
 import java.awt.*;

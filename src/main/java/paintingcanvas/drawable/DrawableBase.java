@@ -10,7 +10,7 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
     int layer = 0;
     boolean visible = true;
     double rotation;
-    Color color = Color.BLACK;
+    Color color;
     int x;
     int y;
 
@@ -24,9 +24,7 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         }
 
         if (InternalCanvas.options.autoAdd) {
-            ElementContainer.atomic(() -> {
-                InternalCanvas.elements.add(this);
-            });
+            ElementContainer.atomic(() -> InternalCanvas.elements.add(this));
         }
     }
 
@@ -42,7 +40,7 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         var transform = g.getTransform();
 
         var center = this.center(g);
-        transform.rotate(this.rotation, center.x,  center.y);
+        transform.rotate(this.rotation, center.x, center.y);
         transform.translate(this.x, this.y);
         g.setTransform(transform);
 

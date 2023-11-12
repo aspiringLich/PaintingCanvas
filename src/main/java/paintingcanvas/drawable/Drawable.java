@@ -3,11 +3,7 @@ package paintingcanvas.drawable;
 import paintingcanvas.InternalCanvas;
 import paintingcanvas.animation.Animatable;
 import paintingcanvas.animation.AnimationBuilder;
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.misc.ElementContainer;
-import paintingcanvas.canvas.CanvasNotInitializedException;
-import paintingcanvas.misc.Hue;
-import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
@@ -15,7 +11,7 @@ import java.awt.*;
  * An interface to connect to any objects that can be considered "painter.drawable.Drawable".
  * Provides various common methods to draw objects to a screen
  */
-public interface Drawable<T extends Drawable<T>> extends Animatable {
+interface Drawable<T extends Drawable<T>> extends Animatable {
     void internalSetLayer(int layer);
 
     /**
@@ -32,7 +28,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @param g Graphics context
      * @return the object's center-point
      */
-    public Point center(Graphics2D g);
+    Point center(Graphics2D g);
 
     /**
      * Actually render the object itself
@@ -42,7 +38,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      *
      * @param g the graphics context to draw the object with
      */
-    public void render(Graphics2D g);
+    void render(Graphics2D g);
 
     T getThis();
 
@@ -56,7 +52,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @return the original object to allow method chaining
      * @see #show()
      */
-    public T hide();
+    T hide();
 
     /**
      * Show the Object
@@ -68,7 +64,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @return the original object to allow method chaining
      * @see #hide()
      */
-    public T show();
+    T show();
 
     /**
      * Gets the current layer of the object.
@@ -79,7 +75,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @see #bringToFront()
      * @see #sendToBack()
      */
-    public int getLayer();
+    int getLayer();
 
     /**
      * Puts the object on a specific layer.
@@ -90,7 +86,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @see #bringToFront()
      * @see #sendToBack()
      */
-    public default T setLayer(int layer) {
+    default T setLayer(int layer) {
         ElementContainer.atomic(() -> {
             internalSetLayer(layer);
             InternalCanvas.elements.setDirty();
@@ -106,7 +102,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @see #setLayer(int)
      * @see #sendToBack()
      */
-    public default T bringToFront() {
+    default T bringToFront() {
         return this.setLayer(InternalCanvas.elements.getMaxLayer() + 1);
     }
 
@@ -118,7 +114,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * @see #setLayer(int)
      * @see #bringToFront()
      */
-    public default T sendToBack() {
+    default T sendToBack() {
         return this.setLayer(InternalCanvas.elements.getMinLayer() - 1);
     }
 
@@ -128,7 +124,7 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      * <sub>* It can be added back just don't tell anyone shhhh</sub>
      * </p>
      */
-    public default void erase() {
+    default void erase() {
         ElementContainer.atomic(() -> {
             InternalCanvas.elements.remove(this);
             InternalCanvas.elements.setDirty();
@@ -140,12 +136,12 @@ public interface Drawable<T extends Drawable<T>> extends Animatable {
      *
      * @return An {@link AnimationBuilder} to start animating this object.
      */
-    public default AnimationBuilder animate() {
+    default AnimationBuilder animate() {
         return new AnimationBuilder(this);
     }
 
     @Override
-    public default Drawable<?> drawable() {
+    default Drawable<?> drawable() {
         return this;
     }
 }
