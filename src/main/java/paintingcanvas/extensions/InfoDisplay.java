@@ -46,8 +46,7 @@ public class InfoDisplay implements RenderLifecycle {
     }
 
     @Override
-    public void renderEnd(Graphics g) {
-        var gc = (Graphics2D) g;
+    public void renderEnd(Graphics2D g) {
         var canvas = InternalCanvas.canvas;
         var width = canvas.getWidth();
         var height = canvas.getHeight();
@@ -76,23 +75,23 @@ public class InfoDisplay implements RenderLifecycle {
         var color = new Color(hex);
         int red = color.getRed(), green = color.getGreen(), blue = color.getBlue();
 
-        gc.setColor(color);
-        gc.setStroke(stroke);
+        g.setColor(color);
+        g.setStroke(stroke);
         var size = 40;
-        gc.drawOval(mouse.x - size / 2, mouse.y - size / 2, size, size);
+        g.drawOval(mouse.x - size / 2, mouse.y - size / 2, size, size);
 
-        gc.setColor(textColor);
-        gc.setStroke(dashStroke);
-        gc.drawLine(mouse.x, 0, mouse.x, height);
-        gc.drawLine(0, mouse.y, width, mouse.y);
+        g.setColor(textColor);
+        g.setStroke(dashStroke);
+        g.drawLine(mouse.x, 0, mouse.x, height);
+        g.drawLine(0, mouse.y, width, mouse.y);
 
-        gc.setColor(new Color(0, 0, 0, 180));
-        gc.fillRect(x - pad, y - fontSize - pad, textWidth + pad * 2, textHeight + pad * 2);
+        g.setColor(new Color(0, 0, 0, 180));
+        g.fillRect(x - pad, y - fontSize - pad, textWidth + pad * 2, textHeight + pad * 2);
 
-        gc.setFont(font);
-        gc.setColor(Color.white);
-        gc.drawString(String.format("pos: (%d, %d)", mouse.x, mouse.y), x, y);
-        gc.drawString(String.format("rgb: (%d, %d, %d)", red, green, blue), x, y + fontSize);
-        gc.drawString(String.format("hex: (#%06X)", hex & 0x00ffffff), x, y + fontSize * 2);
+        g.setFont(font);
+        g.setColor(Color.white);
+        g.drawString(String.format("pos: (%d, %d)", mouse.x, mouse.y), x, y);
+        g.drawString(String.format("rgb: (%d, %d, %d)", red, green, blue), x, y + fontSize);
+        g.drawString(String.format("hex: (#%06X)", hex & 0x00ffffff), x, y + fontSize * 2);
     }
 }

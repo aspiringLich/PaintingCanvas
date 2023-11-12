@@ -10,7 +10,6 @@ import java.awt.*;
 /**
  * Controls animation that is to do with opacity
  */
-@SuppressWarnings("unused")
 public class OpacityAnimation extends Animation {
     public final int end;
     public int start;

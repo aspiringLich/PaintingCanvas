@@ -10,6 +10,7 @@ import java.awt.*;
  * Text text = new Text(100, 100, "Hello World");
  * }</pre>
  */
+@SuppressWarnings("unused")
 public class Text extends DrawableBase<Text> {
     /**
      * The font of the text, you can change this if you want a different font (and have it installed)

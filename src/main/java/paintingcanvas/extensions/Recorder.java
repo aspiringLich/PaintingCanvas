@@ -1,7 +1,6 @@
 package paintingcanvas.extensions;
 
 import paintingcanvas.InternalCanvas;
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
 import javax.imageio.ImageIO;
@@ -92,7 +91,7 @@ public class Recorder implements RenderLifecycle {
     }
 
     @Override
-    public void renderEnd(Graphics g) {
+    public void renderEnd(Graphics2D g) {
         var canvas = InternalCanvas.canvas;
         var cmp = InternalCanvas.panel;
 
@@ -101,22 +100,21 @@ public class Recorder implements RenderLifecycle {
         }
 
         if (!recording || this.dir == null) return;
-        {
-            var size = cmp.getSize();
-            var gc = (Graphics2D) g;
-            var text = "REC";
-            gc.setFont(gc.getFont().deriveFont(Font.PLAIN, 30));
-            var width = gc.getFontMetrics().stringWidth(text);
-            var height = gc.getFontMetrics().getHeight();
-            gc.setColor(new Color(0, 0, 0, 180));
-            gc.fillRect(size.width - width - 45, 5, width + 40, height - 3);
-            gc.setColor(Color.WHITE);
-            gc.drawString(text, size.width - width - 10, height / 2 + 15);
-            gc.setColor(Color.RED);
-            if ((canvas.getFrame() / 30) % 2 == 0) gc.fillOval(size.width - 40 - width, 10, 25, 25);
-            gc.setColor(Color.WHITE);
-            gc.drawOval(size.width - 40 - width, 10, 25, 25);
-        }
+
+        var size = cmp.getSize();
+        var text = "REC";
+        g.setFont(g.getFont().deriveFont(Font.PLAIN, 30));
+        var width = g.getFontMetrics().stringWidth(text);
+        var height = g.getFontMetrics().getHeight();
+        g.setColor(new Color(0, 0, 0, 180));
+        g.fillRect(size.width - width - 45, 5, width + 40, height - 3);
+        g.setColor(Color.WHITE);
+        g.drawString(text, size.width - width - 10, height / 2 + 15);
+        g.setColor(Color.RED);
+        if ((canvas.getFrame() / 30) % 2 == 0) g.fillOval(size.width - 40 - width, 10, 25, 25);
+        g.setColor(Color.WHITE);
+        g.drawOval(size.width - 40 - width, 10, 25, 25);
+
         screenshot(this.dir.resolve(Path.of(String.format("tmp_%d.%s", inc++, this.format))).toFile(), this.format);
     }
 }

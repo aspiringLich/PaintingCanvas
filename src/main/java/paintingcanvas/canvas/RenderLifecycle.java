@@ -13,10 +13,10 @@ import java.awt.event.ComponentEvent;
  * </p>
  * <p>
  * Here's <em>exactly</em> how it works (sort of). First the {@link java.awt.image.BufferedImage image} is created,
- * and the background is drawn. Next, {@link RenderLifecycle#preRender(Graphics)} is called, and all the
- * {@link paintingcanvas.drawable.Drawable Drawables} get drawn. Then {@link RenderLifecycle#postRender(Graphics)}
- * is called, {@link RenderLifecycle#renderStart(Graphics)} is called, and finally, the image is copied over to the
- * screen, and {@link RenderLifecycle#renderEnd(Graphics)} is called.
+ * and the background is drawn. Next, {@link RenderLifecycle#preRender(Graphics2D)} is called, and all the
+ * {@link paintingcanvas.drawable.Drawable Drawables} get drawn. Then {@link RenderLifecycle#postRender(Graphics2D)}
+ * is called, {@link RenderLifecycle#renderStart(Graphics2D)} is called, and finally, the image is copied over to the
+ * screen, and {@link RenderLifecycle#renderEnd(Graphics2D)} is called.
  * </p>
  * <p>
  * Note that {@code preRender} / {@code postRender} are called on a different graphics context compared to
@@ -37,7 +37,7 @@ public interface RenderLifecycle {
      *
      * @param g The graphics context
      */
-    default void preRender(Graphics g) {
+    default void preRender(Graphics2D g) {
     }
 
     /**
@@ -46,7 +46,7 @@ public interface RenderLifecycle {
      *
      * @param g The graphics context
      */
-    default void postRender(Graphics g) {
+    default void postRender(Graphics2D g) {
     }
 
     /**
@@ -55,7 +55,7 @@ public interface RenderLifecycle {
      *
      * @param g The graphics context
      */
-    default void renderEnd(Graphics g) {
+    default void renderEnd(Graphics2D g) {
     }
 
     /**
@@ -64,7 +64,7 @@ public interface RenderLifecycle {
      *
      * @param g The graphics context
      */
-    default void renderStart(Graphics g) {
+    default void renderStart(Graphics2D g) {
     }
 
     default void onResize(CanvasPanel canvas, ComponentEvent e) {
@@ -97,12 +97,12 @@ public interface RenderLifecycle {
         }
 
         @Override
-        public void preRender(Graphics g) {
+        public void preRender(Graphics2D g) {
             antiAlias(g);
         }
 
         @Override
-        public void renderStart(Graphics g) {
+        public void renderStart(Graphics2D g) {
             antiAlias(g);
         }
     }

@@ -1,6 +1,5 @@
 package paintingcanvas.canvas;
 
-import paintingcanvas.animation.Animation;
 import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.InternalCanvas;
 

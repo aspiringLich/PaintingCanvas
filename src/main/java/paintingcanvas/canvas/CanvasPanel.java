@@ -1,7 +1,6 @@
 package paintingcanvas.canvas;
 
 import paintingcanvas.InternalCanvas;
-import paintingcanvas.drawable.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -106,13 +105,13 @@ public class CanvasPanel extends JPanel {
         InternalCanvas.renderLifecycles.forEach(e -> e.postRender(ig));
 
         // copy the image onto the screen
-        InternalCanvas.renderLifecycles.forEach(e -> e.renderStart(g));
+        InternalCanvas.renderLifecycles.forEach(e -> e.renderStart(gc));
         gc.drawImage(
                 image,
                 0, 0,
                 null
         );
         ig.dispose();
-        InternalCanvas.renderLifecycles.forEach(e -> e.renderEnd(g));
+        InternalCanvas.renderLifecycles.forEach(e -> e.renderEnd(gc));
     }
 }

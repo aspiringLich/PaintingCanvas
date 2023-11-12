@@ -7,6 +7,7 @@ import java.awt.*;
 /**
  * A line: with a startpoint and an endpoint
  */
+@SuppressWarnings("unused")
 public class Line extends DrawableBase<Line> {
     Point endOffset;
     Stroke stroke = new BasicStroke(1);

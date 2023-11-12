@@ -25,10 +25,8 @@ public class RotateTest {
         for (int i = 0; i < shapes.length; i++) {
             shapes[i] = new Triangle(i * 200, canvas.getHeight() / 2, 100, 200, randomColor());
         }
-
-
         while (true) {
-            for (Triangle c : shapes) c.rotate(10);
+            for (Triangle c : shapes) c.rotate(20);
             canvas.sleep(1);
         }
     }

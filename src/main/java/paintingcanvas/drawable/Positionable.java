@@ -1,11 +1,8 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.InternalCanvas;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.function.Consumer;
 
 /**
  * <p>
@@ -25,7 +22,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @return the position of the element as a {@link Point}
      * @see #setPos(int, int)
      */
-    public Point getPos();
+    Point getPos();
 
     /**
      * Get an elements rotation
@@ -39,7 +36,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @return the rotation of the object
      * @see #rotate(double)
      */
-    public double getRotation();
+    double getRotation();
 
     /**
      * Get the X-position of the element
@@ -48,7 +45,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #getY()
      * @see #setX(int)
      */
-    public default int getX() {
+    default int getX() {
         return getPos().x;
     }
 
@@ -60,7 +57,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #getX()
      * @see #setY(int)
      */
-    public default T setX(int x) {
+    default T setX(int x) {
         ElementContainer.atomic(() -> internalSetPos(x, getY()));
         return getThis();
     }
@@ -72,7 +69,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #getY()
      * @see #setX(int)
      */
-    public default int getY() {
+    default int getY() {
         return getPos().y;
     }
 
@@ -84,7 +81,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #setX(int)
      * @see #getY()
      */
-    public default T setY(int y) {
+    default T setY(int y) {
         ElementContainer.atomic(() -> internalSetPos(getX(), y));
         return getThis();
     }
@@ -99,7 +96,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #setX(int)
      * @see #setY(int)
      */
-    public default T setPos(int x, int y) {
+    default T setPos(int x, int y) {
         ElementContainer.atomic(() -> internalSetPos(x, y));
         return getThis();
     }
@@ -122,7 +119,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #moveHorizontal(int)
      * @see #moveVertical(int)
      */
-    public default T move(int x, int y) {
+    default T move(int x, int y) {
         ElementContainer.atomic(() -> internalSetPos(getX() + x, getY() + y));
         return getThis();
     }
@@ -141,7 +138,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #setPos(int, int)
      * @see #moveVertical(int)
      */
-    public default T moveHorizontal(int x) {
+    default T moveHorizontal(int x) {
         return move(x, 0);
     }
 
@@ -159,7 +156,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @see #setPos(int, int)
      * @see #moveHorizontal(int)
      */
-    public default T moveVertical(int y) {
+    default T moveVertical(int y) {
         return move(0, y);
     }
 
@@ -177,7 +174,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @return the original object to allow method chaining
      * @see #setRotation(double)
      */
-    public default T rotate(double rotation) {
+    default T rotate(double rotation) {
         ElementContainer.atomic(() -> internalSetRotation(internalGetRotation() + Math.toRadians(rotation)));
         return getThis();
     }
@@ -193,7 +190,7 @@ public interface Positionable<T extends Drawable<T>> extends Drawable<T> {
      * @return the original object to allow method chaining
      * @see #rotate(double)
      */
-    public default T setRotation(double rotation) {
+    default T setRotation(double rotation) {
         ElementContainer.atomic(() -> internalSetRotation(Math.toRadians(rotation)));
         return getThis();
     }

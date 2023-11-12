@@ -1,7 +1,6 @@
 package paintingcanvas.extensions;
 
 import paintingcanvas.InternalCanvas;
-import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
 import java.awt.*;
@@ -114,7 +113,7 @@ public class FrameCounter implements RenderLifecycle {
     }
 
     @Override
-    public void renderEnd(Graphics g) {
+    public void renderEnd(Graphics2D g) {
         // Update frame times
         var now = System.currentTimeMillis();
         frameTimes.add(now - lastFrame);
@@ -135,24 +134,23 @@ public class FrameCounter implements RenderLifecycle {
 
 
         // Draw UI
-        var gc = (Graphics2D) g;
-        gc.setFont(font);
-        gc.setTransform(new AffineTransform());
-        var fh = gc.getFontMetrics().getHeight();
+        g.setFont(font);
+        g.setTransform(new AffineTransform());
+        var fh = g.getFontMetrics().getHeight();
         var text = new ArrayList<String>();
         text.add(String.format("FPS: %d", (int) (1000 / avg)));
         text.add(String.format("FrameTime: %.1f", avg));
         text.add(String.format("Elements: %d", InternalCanvas.elements.size()));
         for (var i : this.lines) text.addAll(List.of(i.getLines()));
 
-        gc.setColor(new Color(0, 0, 0, 180));
+        g.setColor(new Color(0, 0, 0, 180));
         var maxText = 0;
-        for (var e : text) maxText = Math.max(maxText, gc.getFontMetrics().stringWidth(e));
-        gc.fillRect(5, 5, maxText + 10, fh * text.size() + 40);
+        for (var e : text) maxText = Math.max(maxText, g.getFontMetrics().stringWidth(e));
+        g.fillRect(5, 5, maxText + 10, fh * text.size() + 40);
 
-        gc.setColor(Color.WHITE);
+        g.setColor(Color.WHITE);
         var i = 0;
-        for (var e : text) gc.drawString(e, 10, 20 + (i++ * fh));
+        for (var e : text) g.drawString(e, 10, 20 + (i++ * fh));
 
         // Frame time graph
         if (!frameChart || max <= 0) return;
@@ -165,10 +163,10 @@ public class FrameCounter implements RenderLifecycle {
             frameY[inc] = (int) (per * -30 + 40 + i * fh);
         }
 
-        var stroke = gc.getStroke();
-        gc.setStroke(new BasicStroke(BasicStroke.JOIN_ROUND));
-        gc.drawPolyline(frameX, frameY, size);
-        gc.setStroke(stroke);
+        var stroke = g.getStroke();
+        g.setStroke(new BasicStroke(BasicStroke.JOIN_ROUND));
+        g.drawPolyline(frameX, frameY, size);
+        g.setStroke(stroke);
     }
 
     public interface GetLines {
