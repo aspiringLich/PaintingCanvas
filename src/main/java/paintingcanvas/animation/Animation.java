@@ -206,8 +206,8 @@ public abstract class Animation {
      * @param angle The absolute angle to rotate to in degrees.
      * @return a {@link RotationAnimation}
      */
-    public static RotationAnimation rotateTo(int angle) {
-        return new RotationAnimation(Math.toRadians(angle));
+    public static RotationAnimation rotateTo(double angle) {
+        return new RotationAnimation(angle);
     }
 
     /**
@@ -223,8 +223,8 @@ public abstract class Animation {
      * @param angle The relative angle to rotate to in degrees.
      * @return a {@link RotationAnimation}
      */
-    public static RotationAnimation rotateBy(int angle) {
-        return new RotationAnimation(Math.toRadians(angle)).relative();
+    public static RotationAnimation rotateBy(double angle) {
+        return new RotationAnimation(angle).relative();
     }
 
     /**

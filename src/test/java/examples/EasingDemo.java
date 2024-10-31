@@ -113,7 +113,7 @@ public class EasingDemo {
                         text[i].getX() + (itr % 2 == 0 ? 1 : -1) * width / 2 + squareWidth / 2,
                         square.getY()
                 ).easing(easing);
-                var a2 = Animation.rotateTo(itr % 2 == 0 ? (int) Math.toDegrees(360.0) : 0).easing(easing);
+                var a2 = Animation.rotateTo(itr % 2 == 0 ? 360 : 0).easing(easing);
                 square.animate().with(a1, 3).with(a2, 3);
             }
             // sleep
