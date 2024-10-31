@@ -88,7 +88,7 @@ public class EasingDemo {
         int squareWidth = 35;
         int columns = 3;
 
-        Canvas canvas = new Canvas(width * columns + squareWidth - 5, easings.length * height / columns + height, "Easing Demo");
+        Canvas canvas = new Canvas(width * columns + squareWidth - 5, easings.length * height / columns, "Easing Demo");
         new FrameCounter().line(() -> String.format("Frame: %d", canvas.getFrame())).attach();
 //        new Recorder().record(Path.of("rec"), "png").attach();
         Square[] squares = new Square[easings.length];
@@ -102,6 +102,7 @@ public class EasingDemo {
             text[i] = new Text(width / 2 + width * (i % columns), y, names[i]).setFontSize(20);
         }
 
+        canvas.sleep(1);
         for (int itr = 0; ; itr++) {
             // animate all the objects
             for (int i = 0; i < easings.length; i++) {
@@ -112,7 +113,7 @@ public class EasingDemo {
                         text[i].getX() + (itr % 2 == 0 ? 1 : -1) * width / 2 + squareWidth / 2,
                         square.getY()
                 ).easing(easing);
-                var a2 = Animation.rotateTo(itr % 2 == 0 ? 360 : 0).easing(easing);
+                var a2 = Animation.rotateTo(itr % 2 == 0 ? (int) Math.toDegrees(360.0) : 0).easing(easing);
                 square.animate().with(a1, 3).with(a2, 3);
             }
             // sleep

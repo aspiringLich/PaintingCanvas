@@ -7,9 +7,17 @@ import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.CanvasOptions;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
+import paintingcanvas.extensions.Recorder;
 
 import java.awt.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
+
+class RectangleItem {
+    public Rectangle rect;
+    public int x;
+    public int y;
+}
 
 public class AnimationTest {
     final static int size = 10;
@@ -22,34 +30,46 @@ public class AnimationTest {
 
         var options = new CanvasOptions().autoCenter(false);
         var canvas = new Canvas(width * size, height * size /*+ 32*/, "test", options);
-//        new Recorder().record(Path.of("rec"), "png").attach();
+        new Recorder().record(Path.of("rec"), "png").attach();
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.getFrame()),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
                 String.format("Animations: %d", InternalCanvas.animations.size())
         }).attach();
 
-        var rects = new ArrayList<Rectangle>();
+        var rects = new ArrayList<RectangleItem>();
         for (var x = 0; x < width; x++) {
             for (var y = 0; y < height; y++) {
                 var rect = new Rectangle(pad + size * x, pad + size * y, size, size);
-                rect.setColor(Color.getHSBColor((float) Math.random(), 1, 1));
-                rect.setColor(Color.getHSBColor((x * y) / ((float) width * height), 1, 1));
-                rects.add(rect);
+                rect.setColor(Color.getHSBColor((float) (Math.pow(x * y, 0.8) / Math.pow(((float) width * height), 0.8)), 1, 1));
+
+                var item = new RectangleItem();
+                item.rect = rect;
+                item.x = x;
+                item.y = y;
+                rects.add(item);
             }
         }
 
-        while (true) {
-            canvas.sleep(4);
-            var removed = new ArrayList<Rectangle>();
-            for (var y = 0; y < height; y++) {
-                for (var x = 0; x < width; x++) {
-                    var rect = rects.remove((int) (Math.random() * rects.size()));
-                    rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.easeInOut(2)), 3);
-                    removed.add(rect);
+        canvas.sleep(1);
+        int i = 0;
+        while (++i > 0) {
+            if (i % 3 == 0) {
+                for (var item : rects) {
+                    item.rect.animate().with(Animation.moveTo(pad + size * item.x, pad + size * item.y).easing(Easing.easeInOut(2)), 3);
                 }
+            } else {
+                var removed = new ArrayList<RectangleItem>();
+                for (var y = 0; y < height; y++) {
+                    for (var x = 0; x < width; x++) {
+                        var item = rects.remove((int) (Math.random() * rects.size()));
+                        item.rect.animate().with(Animation.moveTo(pad + size * x, pad + size * y).easing(Easing.easeInOut(2)), 3);
+                        removed.add(item);
+                    }
+                }
+                rects = removed;
             }
-            rects = removed;
+            canvas.sleep(4);
         }
     }
 }
