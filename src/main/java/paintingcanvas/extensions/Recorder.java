@@ -82,8 +82,14 @@ public class Recorder implements RenderLifecycle {
 
     public void screenshot(File file, String format) {
         try {
+            System.out.println(file.getAbsolutePath());
+
             synchronized (imgSync) {
-                ImageIO.write(img, format, file);
+                if (!ImageIO.write(img, format, file)) {
+                    var supported = String.join(", ", ImageIO.getWriterFormatNames());
+                    System.err.printf("No appropriate image writer found for format `%s`, supported formats are [%s]\n", format, supported);
+                    System.err.print("Please note the image format must support transparency.\n");
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -121,7 +127,7 @@ public class Recorder implements RenderLifecycle {
 
 //                  v file pattern                                  v idk i trust stack overflow
 //         v framerate          v padding                                  v output file
-// ffmpeg -r 30 -i 'tmp_%d.jpg' -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -y -an out.mp4
+// ffmpeg -r 30 -i 'tmp_%d.png' -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -y -an out.mp4
 
 // if we didn't have the padding, it would fail to compress to mp4 b/c it needs an even height
 // or something
