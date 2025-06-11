@@ -4,8 +4,8 @@ plugins {
 }
 
 // what should the group-id be breon
-group 'paintingcanvas'
-version '1.4.5'
+group = 'paintingcanvas'
+version = '1.4.5'
 
 repositories {}
 dependencies {}
