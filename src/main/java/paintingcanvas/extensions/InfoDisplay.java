@@ -47,21 +47,24 @@ public class InfoDisplay implements RenderLifecycle {
     @Override
     public void renderEnd(Graphics2D g) {
         var canvas = InternalCanvas.canvas;
-        var width = canvas.getWidth();
-        var height = canvas.getHeight();
+        var bounds = g.getClipBounds();
 
+        // for some reason the graphics bounds and canvas bounds are different??
+        // weird.
         var mouse = canvas.getMousePos();
         if (mouse == null) return;
+        var scaledMousex = (int)(mouse.getX() * (bounds.getWidth() / (double) canvas.getWidth()));
+        var scaledMousey = (int)(mouse.getY() * (bounds.getHeight() / (double) canvas.getHeight()));
 
         int textWidth = fontSize * 10;
         int textHeight = fontSize * 3;
         int pad = 5;
 
         int x = 10, y = 30;
-        if (mouse.x >= width - textWidth) x = -x - textWidth;
-        if (mouse.y >= height - textHeight) y = -textHeight;
-        x += mouse.x;
-        y += mouse.y;
+        if (scaledMousex >= bounds.width - textWidth) x = -x - textWidth;
+        if (scaledMousey >= bounds.height - textHeight) y = -textHeight;
+        x += scaledMousex;
+        y += scaledMousey;
 
         var cmp = InternalCanvas.panel;
 
@@ -77,12 +80,12 @@ public class InfoDisplay implements RenderLifecycle {
         g.setColor(color);
         g.setStroke(stroke);
         var size = 40;
-        g.drawOval(mouse.x - size / 2, mouse.y - size / 2, size, size);
+        g.drawOval(scaledMousex - size / 2, scaledMousey - size / 2, size, size);
 
         g.setColor(textColor);
         g.setStroke(dashStroke);
-        g.drawLine(mouse.x, 0, mouse.x, height);
-        g.drawLine(0, mouse.y, width, mouse.y);
+        g.drawLine(scaledMousex, 0, scaledMousex, bounds.height);
+        g.drawLine(0, scaledMousey, bounds.width, scaledMousey);
 
         g.setColor(new Color(0, 0, 0, 180));
         g.fillRect(x - pad, y - fontSize - pad, textWidth + pad * 2, textHeight + pad * 2);
