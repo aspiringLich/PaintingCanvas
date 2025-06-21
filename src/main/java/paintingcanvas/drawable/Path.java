@@ -10,7 +10,7 @@ import java.awt.geom.Path2D;
  * <p>
  * Uses <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Path2D.html">Path2D</a> internally.
  */
-public class Path extends Shape<Path> {
+public class Path extends OutlineableDrawableBase<Path> {
     /**
      * The path to draw
      *

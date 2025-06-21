@@ -64,12 +64,24 @@ public class Image extends Shape<Image> {
 
     @Override
     void drawFill(Graphics2D g) {
-        g.drawImage(image, -width / 2, -height / 2, width, height, null);
+        g.drawImage(
+                image,
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height,
+                null
+        );
     }
 
     @Override
     protected void drawOutline(Graphics2D g) {
-        g.drawRect(-width / 2, -height / 2, width, height);
+        g.drawRect(
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height
+        );
     }
 
     @Override

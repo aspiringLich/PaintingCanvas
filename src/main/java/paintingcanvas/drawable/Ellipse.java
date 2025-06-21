@@ -72,12 +72,22 @@ public class Ellipse extends Shape<Ellipse> {
 
     @Override
     protected void drawOutline(Graphics2D gc) {
-        gc.drawOval(-width / 2, -height / 2, width, height);
+        gc.drawOval(
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height
+        );
     }
 
     @Override
     protected void drawFill(Graphics2D gc) {
-        gc.fillOval(-width / 2, -height / 2, width, height);
+        gc.fillOval(
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height
+        );
     }
 
     @Override

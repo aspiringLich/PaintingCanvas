@@ -71,11 +71,13 @@ public class Triangle extends Shape<Triangle> {
     }
 
     private java.awt.Polygon getPolygon() {
-        return new java.awt.Polygon(
+        var poly = new java.awt.Polygon(
                 new int[]{-width / 2, width / 2, 0},
                 new int[]{height / 2, height / 2, -height / 2},
                 3
         );
+        poly.translate((int) (width * -anchor.x), (int) (height * -anchor.y));
+        return poly;
     }
 
     /**

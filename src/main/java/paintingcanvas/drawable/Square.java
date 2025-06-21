@@ -67,12 +67,22 @@ public class Square extends Shape<Square> {
 
     @Override
     void drawFill(Graphics2D g) {
-        g.fillRect(-size / 2, -size / 2, size, size);
+        g.fillRect(
+                (int) (size * (-0.5 - anchor.x)),
+                (int) (size * (-0.5 - anchor.y)),
+                size,
+                size
+        );
     }
 
     @Override
     void drawOutline(Graphics2D g) {
-        g.drawRect(-size / 2, -size / 2, size, size);
+        g.drawRect(
+                (int) (size * (-0.5 - anchor.x)),
+                (int) (size * (-0.5 - anchor.y)),
+                size,
+                size
+        );
     }
 
     @Override

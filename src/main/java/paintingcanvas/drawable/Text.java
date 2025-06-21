@@ -1,17 +1,26 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Anchor;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 
 /**
- * A Text element, used for drawing text on the canvas.
+ * <p>
+ *     A Text element, used for drawing text on the canvas.
+ * </p>
+ * <p>
+ *     Anchors work a bit different for text elements. {@link Anchor#CENTER} centers the text at the baseline. This
+ *     requires {@link Anchor#TOP_CENTER} to differ by the ascent of the text, and {@link Anchor#BOTTOM_CENTER} to differ
+ *     by the descent.
+ * </p>
+ *
  * <pre>{@code
  * Text text = new Text(100, 100, "Hello World");
  * }</pre>
  */
 @SuppressWarnings("unused")
-public class Text extends DrawableBase<Text> {
+public class Text extends DrawableBase<Text> implements Anchorable<Text> {
     /**
      * The font of the text, you can change this if you want a different font (and have it installed)
      */
@@ -20,6 +29,7 @@ public class Text extends DrawableBase<Text> {
      * The text to draw
      */
     public String text;
+    Anchor anchor = Anchor.CENTER;
 
     /**
      * <p>
@@ -88,17 +98,74 @@ public class Text extends DrawableBase<Text> {
         this(x, y, text, Misc.stringToColor(color));
     }
 
+    private int width, height;
+    private FontMetrics metrics;
+
     @Override
     void draw(Graphics2D g) {
+        metrics = g.getFontMetrics(font);
+
+        width = metrics.stringWidth(text);
+        height = metrics.getHeight();
+        var ascent = metrics.getAscent();
+        var descent = metrics.getDescent();
+
+
+        var dy = 0.0;
+        if (anchor.y > 0) dy = descent * -anchor.y;
+        else if (anchor.y < 0) dy = ascent * -anchor.y;
+
+        g.setColor(color);
         g.setFont(font);
-        var metrics = g.getFontMetrics(font);
-        g.drawString(text, -metrics.stringWidth(text) / 2, metrics.getAscent() / 4);
+        g.drawString(
+                text,
+                (int) (width * (-0.5 - anchor.x)),
+                (int) dy
+        );
     }
+
 
     @Override
     public Point center(Graphics2D g) {
-        var metrics = g.getFontMetrics(font);
-        return new Point(x + metrics.stringWidth(text) / 2, y - metrics.getAscent() / 4);
+        return new Point(x, y);
+    }
+
+    /**
+     * <p>
+     *     Note that the computed width of the text only gets updated when the text is drawn. (i.e. it does not get
+     *     updated immediately)
+     * </p>
+     *
+     * @return The width of the text in pixels.
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * <p>
+     *      Note that the computed height of the text only gets updated when the text is drawn. (i.e. it does not get
+     *      updated immediately)
+     * </p>
+     *
+     * @return The height of the text in pixels.
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * If you need more information about the text, such as ascent, descent, leading, etc. the information can be
+     * retrieved from the {@link FontMetrics} object.
+     * <p>
+     *     Again, note that the metrics are only updated when the text is drawn. (i.e. it does not get
+     *     updated immediately)
+     * </p>
+     *
+     * @return The FontMetrics object containing information about the text
+     */
+    public FontMetrics getFontMetrics() {
+       return metrics;
     }
 
     @Override
@@ -165,5 +232,15 @@ public class Text extends DrawableBase<Text> {
     public Text setText(String text) {
         this.text = text;
         return this;
+    }
+
+    @Override
+    public Anchor getAnchor() {
+        return this.anchor;
+    }
+
+    @Override
+    public void internalSetAnchor(Anchor anchor) {
+        this.anchor = anchor;
     }
 }

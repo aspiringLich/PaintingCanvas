@@ -67,12 +67,22 @@ public class Circle extends Shape<Circle> {
 
     @Override
     protected void drawFill(Graphics2D g) {
-        g.fillOval(- radius, - radius, radius * 2, radius * 2);
+        g.fillOval(
+                (int) (radius * (-1 - 2 * anchor.x)),
+                (int) (radius * (-1 - 2 * anchor.y)),
+                radius * 2,
+                radius * 2
+        );
     }
 
     @Override
     protected void drawOutline(Graphics2D g) {
-        g.drawOval(- radius, - radius, radius * 2, radius * 2);
+        g.drawOval(
+                (int) (radius * (-1 - 2 * anchor.x)),
+                (int) (radius * (-1 - 2 * anchor.x)),
+                radius * 2,
+                radius * 2
+        );
     }
 
     @Override

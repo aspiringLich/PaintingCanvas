@@ -1,5 +1,6 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.misc.Anchor;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
@@ -72,13 +73,23 @@ public class Rectangle extends Shape<Rectangle> {
     }
 
     @Override
-    void drawOutline(Graphics2D gc) {
-        gc.drawRect(-width / 2, -height / 2, width, height);
+    void drawOutline(Graphics2D g) {
+        g.drawRect(
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height
+        );
     }
 
     @Override
     void drawFill(Graphics2D g) {
-        g.fillRect(-width / 2, -height / 2, width, height);
+        g.fillRect(
+                (int) (width * (-0.5 - anchor.x)),
+                (int) (height * (-0.5 - anchor.y)),
+                width,
+                height
+        );
     }
 
     @Override

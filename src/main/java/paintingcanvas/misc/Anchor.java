@@ -1,5 +1,9 @@
 package paintingcanvas.misc;
 
+/**
+ * The Anchor enum represents what point, relative to the center of an element, the element is draw about.
+ * All rotations are done around to this anchor point, and its treated as the "center" of the element.
+ */
 public enum Anchor {
     TOP_LEFT(-0.5, -0.5),
     TOP_CENTER(0.0, -0.5),

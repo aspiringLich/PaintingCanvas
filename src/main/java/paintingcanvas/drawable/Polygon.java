@@ -11,7 +11,7 @@ import java.awt.*;
  * );
  * }</pre>
  */
-public class Polygon extends Shape<Polygon> {
+public class Polygon extends OutlineableDrawableBase<Polygon> {
     /**
      * The internal polygon element
      *
@@ -137,10 +137,6 @@ public class Polygon extends Shape<Polygon> {
 
     void drawFill(Graphics2D g) {
         g.fillPolygon(polygon);
-    }
-
-   public Point center(Graphics g) {
-        return new Point(x + polygon.getBounds().width / 2, y + polygon.getBounds().height / 2);
     }
 
     /**
