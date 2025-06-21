@@ -21,7 +21,7 @@ import java.io.IOException;
  * Image img = new Image(100, 100, "path/to/image.png");
  * }</pre>
  */
-public class Image extends Shape<Image> {
+public class Image extends DrawableBase.Shape<Image> {
     BufferedImage image;
     int width, height;
 

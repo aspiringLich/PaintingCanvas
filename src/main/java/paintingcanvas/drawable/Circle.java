@@ -11,7 +11,7 @@ import java.awt.*;
  * Circle circle = new Circle(100, 100, 20);
  * }</pre>
  */
-public class Circle extends Shape<Circle> {
+public class Circle extends DrawableBase.Shape<Circle> {
     int radius;
 
     /**

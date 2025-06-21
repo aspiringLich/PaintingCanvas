@@ -11,7 +11,7 @@ import java.awt.*;
  * );
  * }</pre>
  */
-public class Polygon extends OutlineableDrawableBase<Polygon> {
+public class Polygon extends DrawableBase.OutlineableDrawableBase<Polygon> {
     /**
      * The internal polygon element
      *

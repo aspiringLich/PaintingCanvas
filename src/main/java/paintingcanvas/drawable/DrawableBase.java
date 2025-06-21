@@ -2,9 +2,11 @@ package paintingcanvas.drawable;
 
 import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.CanvasNotInitializedException;
+import paintingcanvas.misc.Anchor;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>, Positionable<T>, Colorable<T> {
     int layer = 0;
@@ -102,5 +104,75 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
     @Override
     public Color getColor() {
         return this.color;
+    }
+
+    public abstract static class Shape<T extends Drawable<T>> extends OutlineableDrawableBase<T> implements Anchorable<T> {
+        Anchor anchor = Anchor.CENTER;
+
+        public Shape(int x, int y, Color color) {
+            super(x, y, color);
+        }
+
+        @Override
+        public void internalSetAnchor(Anchor anchor) {
+            this.anchor = anchor;
+        }
+
+        @Override
+        public Anchor getAnchor() {
+            return null;
+        }
+    }
+
+    public abstract static class OutlineableDrawableBase<T extends Drawable<T>> extends DrawableBase<T> implements Outlineable<T> {
+        Stroke outlineStroke = null;
+        Color outlineColor = Color.BLACK;
+        boolean filled = true;
+
+        public OutlineableDrawableBase(int x, int y, Color color) {
+            super(x, y, color);
+        }
+
+        @Override
+        void draw(Graphics2D g) {
+            if (this.filled) {
+                g.setColor(this.color);
+                this.drawFill(g);
+            }
+            if (this.outlineStroke != null) {
+                g.setStroke(this.outlineStroke);
+                g.setColor(this.outlineColor);
+                this.drawOutline(g);
+            }
+        }
+
+        abstract void drawFill(Graphics2D g);
+
+        abstract void drawOutline(Graphics2D g);
+
+        @Override
+        public void internalSetOutlineStroke(Stroke stroke) {
+            this.outlineStroke = stroke;
+        }
+
+        @Override
+        public void internalSetOutlineColor(Color color) {
+            this.outlineColor = color;
+        }
+
+        @Override
+        public Color getOutlineColor() {
+            return this.outlineColor;
+        }
+
+        @Override
+        public Stroke getOutlineStroke() {
+            return this.outlineStroke;
+        }
+
+        @Override
+        public void internalSetFilled(boolean filled) {
+            this.filled = filled;
+        }
     }
 }

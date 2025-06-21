@@ -1,6 +1,5 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.misc.Anchor;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.*;
  * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Rectangle extends Shape<Rectangle> {
+public class Rectangle extends DrawableBase.Shape<Rectangle> {
     int width, height;
 
     /**

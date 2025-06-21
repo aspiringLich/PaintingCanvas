@@ -11,7 +11,7 @@ import java.awt.*;
  * Triangle triangle = new Triangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Triangle extends Shape<Triangle> {
+public class Triangle extends DrawableBase.Shape<Triangle> {
     int width;
     int height;
 

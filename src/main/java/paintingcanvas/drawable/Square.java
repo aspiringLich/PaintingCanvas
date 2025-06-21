@@ -11,7 +11,7 @@ import java.awt.*;
  * Square square = new Square(100, 100, 30);
  * }</pre>
  */
-public class Square extends Shape<Square> {
+public class Square extends DrawableBase.Shape<Square> {
     int size;
 
     /**

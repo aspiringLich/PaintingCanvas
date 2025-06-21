@@ -11,7 +11,7 @@ import java.awt.*;
  * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
  * }</pre>
  */
-public class Ellipse extends Shape<Ellipse> {
+public class Ellipse extends DrawableBase.Shape<Ellipse> {
     int width;
     int height;
 
