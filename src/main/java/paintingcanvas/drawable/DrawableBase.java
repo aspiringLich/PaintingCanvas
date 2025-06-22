@@ -7,6 +7,9 @@ import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
+import java.util.Optional;
 
 public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>, Positionable<T>, Colorable<T> {
     int layer = 0;
@@ -15,6 +18,7 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
     Color color;
     int x;
     int y;
+    AffineTransform transform;
 
     public DrawableBase(int x, int y, Color color) {
         this.x = x;
@@ -44,11 +48,43 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         var center = this.center(g);
         transform.rotate(this.rotation, center.x, center.y);
         transform.translate(this.x, this.y);
+        this.postTransform(transform);
+
         g.setTransform(transform);
+        this.transform = transform;
 
         this.draw(g);
 
         g.setTransform(save);
+    }
+
+    /**
+     * @return the mouse position transformed to the same coordinate space as the {@link #draw(Graphics2D)} method, or
+     *         null if the mouse position cannot be determined or the transform is not set.
+     */
+    Point transformedMousePos() {
+        if (this.transform == null || InternalCanvas.canvas == null)
+            return null;
+
+        var pos = InternalCanvas.canvas.getMousePos();
+
+        if (pos == null) return null;
+        var tPos = new Point();
+
+        try {
+            transform.inverseTransform(pos, tPos);
+        } catch (NoninvertibleTransformException e) {
+            return null;
+        }
+
+        return tPos;
+    }
+
+    /**
+     * Modify the transform of the graphics context after rotating / translating from the Drawable's position and
+     * rotation.
+     */
+    void postTransform(AffineTransform transform) {
     }
 
     abstract void draw(Graphics2D g);

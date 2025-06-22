@@ -9,6 +9,7 @@ import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Vector;
@@ -64,6 +65,10 @@ public class InternalCanvas {
      */
     public static Dimension startSize = null;
     public static Point2D.Float translation = null;
+    /**
+     * The current mouse position on the canvas, if anything.
+     */
+    public static Point mousePosition = null;
     /**
      * The options for the behavior of the canvas, see {@link CanvasOptions}
      */

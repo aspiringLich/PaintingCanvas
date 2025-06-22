@@ -80,6 +80,8 @@ public class CanvasPanel extends JPanel {
                 }
             }
         }
+        // set mouse position
+        InternalCanvas.mousePosition = InternalCanvas.panel.getMousePosition();
 
         // Render elements onto an image
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);

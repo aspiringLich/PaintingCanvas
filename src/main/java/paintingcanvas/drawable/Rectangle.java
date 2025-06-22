@@ -1,8 +1,12 @@
 package paintingcanvas.drawable;
 
+import paintingcanvas.InternalCanvas;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 
 /**
  * A Rectangle element.
@@ -11,7 +15,7 @@ import java.awt.*;
  * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Rectangle extends DrawableBase.Shape<Rectangle> {
+public class Rectangle extends DrawableBase.Shape<Rectangle> implements Interactable {
     int width, height;
 
     /**
@@ -74,8 +78,8 @@ public class Rectangle extends DrawableBase.Shape<Rectangle> {
     @Override
     void drawOutline(Graphics2D g) {
         g.drawRect(
-                (int) (width * (-0.5 - anchor.x)),
-                (int) (height * (-0.5 - anchor.y)),
+                (int) (width * -0.5),
+                (int) (height * -0.5),
                 width,
                 height
         );
@@ -84,11 +88,25 @@ public class Rectangle extends DrawableBase.Shape<Rectangle> {
     @Override
     void drawFill(Graphics2D g) {
         g.fillRect(
-                (int) (width * (-0.5 - anchor.x)),
-                (int) (height * (-0.5 - anchor.y)),
+                (int) (width * -0.5),
+                (int) (height * -0.5),
                 width,
                 height
         );
+    }
+
+    @Override
+    void postTransform(AffineTransform transform) {
+        transform.translate(-width * anchor.x, -height * anchor.y);
+    }
+
+    @Override
+    public boolean hovered() {
+        var pos = transformedMousePos();
+        if (pos == null) return false;
+
+        return pos.x >= -width / 2 && pos.x <= width / 2
+                && pos.y >= -height / 2 && pos.y <= height / 2;
     }
 
     @Override

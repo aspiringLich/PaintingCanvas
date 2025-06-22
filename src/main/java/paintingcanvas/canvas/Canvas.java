@@ -190,7 +190,7 @@ public class Canvas {
      * @return The mouse position, or {@code null} if the mouse is not hovering over the canvas
      */
     public Point getMousePos() {
-        return InternalCanvas.panel.getMousePosition();
+        return InternalCanvas.mousePosition;
     }
 
     /**
