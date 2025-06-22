@@ -5,6 +5,7 @@ import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.InternalCanvas;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -114,7 +115,7 @@ public class Canvas implements Interactable {
     }
 
     /**
-     * Sleeps until all animations finish.
+     * Sleeps until all animations finish, or, if there are no animations, sleep until the next frame.
      * <pre>{@code
      * Circle c = new Circle(200, 200, 50);
      * c.animate().with(Animation.colorTo(Color.RED), 2)
@@ -227,8 +228,8 @@ public class Canvas implements Interactable {
 
     @Override
     public boolean clicked() {
-        synchronized (InternalCanvas.mouseEvents) {
-            var opt = InternalCanvas.mouseEvents.stream()
+        synchronized (InternalCanvas.mouseClickEvents) {
+            var opt = InternalCanvas.mouseClickEvents.stream()
                     .filter(e -> e.first.getButton() == MouseEvent.BUTTON1)
                     .findFirst();
             if (opt.isPresent() && handled != opt.get().first) {
@@ -237,5 +238,38 @@ public class Canvas implements Interactable {
             }
         }
         return false;
+    }
+
+    /**
+     * <p>
+     * Check if a key is currently held down using the key code, the definitions of which can be found in
+     * {@link java.awt.event.KeyEvent}.
+     * </p>
+     * <pre>{@code
+     * canvas.keyDown(KeyEvent.VK_A); // true if the 'A' key is currently held down
+     * }</pre>
+     *
+     * @param keyCode the key code to check  (e.g. {@link java.awt.event.KeyEvent#VK_A} for the 'A' key)
+     * @return true if the key is currently held down, false otherwise
+     */
+    public boolean keyDown(int keyCode) {
+        synchronized (InternalCanvas.keysHeld) {
+            return InternalCanvas.keysHeld.contains(keyCode);
+        }
+    }
+
+    /**
+     * <p>
+     * Check if a key is currently held down using the character representation of the key.
+     * </p>
+     * <pre>{@code
+     * canvas.keyDown('A'); // true if the 'A' key is currently held down
+     * }</pre>
+     *
+     * @param c the character representation of the key (e.g. 'A' for the 'A' key)
+     * @return true if the key is currently held down, false otherwise
+     */
+    public boolean keyDown(char c) {
+        return keyDown(KeyEvent.getExtendedKeyCodeForChar(c));
     }
 }

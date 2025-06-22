@@ -9,8 +9,10 @@ import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.misc.Tuple;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Vector;
 
@@ -77,9 +79,13 @@ public class InternalCanvas {
      */
     public static Point mousePosition = null;
     /**
-     * The list of mouse events that have been fired
+     * The list of mouse clicked events that have been fired
      */
-    public static final Vector<Tuple<MouseEvent, Integer>> mouseEvents = new Vector<>();
+    public static final Vector<Tuple<MouseEvent, Integer>> mouseClickEvents = new Vector<>();
+    /**
+     * A set of keys that are currently pressed down.
+     */
+    public static final HashSet<Integer> keysHeld = new HashSet<>();
     /**
      * The options for the behavior of the canvas, see {@link CanvasOptions}
      */

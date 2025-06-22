@@ -5,6 +5,8 @@ import paintingcanvas.misc.Tuple;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -37,18 +39,19 @@ public class CanvasPanel extends JPanel {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
         jframe.getContentPane().addMouseListener(new MouseListenerImpl());
+        jframe.addKeyListener(new KeyListenerImpl());
         jframe.setVisible(true);
     }
 
     static class MouseListenerImpl implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
-            synchronized (InternalCanvas.mouseEvents) {
-                if (InternalCanvas.mouseEvents.size() > 100) {
-                    System.err.println("Too many mouse events! Dropping...");
+            synchronized (InternalCanvas.mouseClickEvents) {
+                if (InternalCanvas.mouseClickEvents.size() > 100) {
+                    System.err.println("Too many mouse click events! Dropping...");
                     return;
                 }
-                InternalCanvas.mouseEvents.add(new Tuple<>(e, 2));
+                InternalCanvas.mouseClickEvents.add(new Tuple<>(e, 2));
             }
         }
 
@@ -66,6 +69,28 @@ public class CanvasPanel extends JPanel {
 
         @Override
         public void mouseExited(MouseEvent e) {
+        }
+    }
+
+    static class KeyListenerImpl implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            synchronized (InternalCanvas.keysHeld) {
+                InternalCanvas.keysHeld.add(e.getKeyCode());
+//                System.out.println("Key pressed: " + KeyEvent.getKeyText(e.getKeyCode()));
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            synchronized (InternalCanvas.keysHeld) {
+                InternalCanvas.keysHeld.remove(e.getKeyCode());
+//                System.out.println("Key released: " + KeyEvent.getKeyText(e.getKeyCode()));
+            }
         }
     }
 
@@ -112,6 +137,12 @@ public class CanvasPanel extends JPanel {
                     InternalCanvas.animationSync.notifyAll();
                 }
             }
+            if (animations.isEmpty()) {
+                // if there are no animations, notify the animation sync
+                synchronized (InternalCanvas.animationSync) {
+                    InternalCanvas.animationSync.notifyAll();
+                }
+            }
         }
         // set mouse position
         InternalCanvas.mousePosition = InternalCanvas.panel.getMousePosition();
@@ -143,12 +174,11 @@ public class CanvasPanel extends JPanel {
                 }
             });
         }
-        synchronized (InternalCanvas.mouseEvents) {
-            for (var event : InternalCanvas.mouseEvents) {
+        synchronized (InternalCanvas.mouseClickEvents) {
+            for (var event : InternalCanvas.mouseClickEvents) {
                 event.second--;
             }
-            InternalCanvas.mouseEvents
-                    .removeIf(e -> e.second <= 0);
+            InternalCanvas.mouseClickEvents.removeIf(e -> e.second <= 0);
         }
 
         InternalCanvas.renderLifecycles.forEach(e -> {

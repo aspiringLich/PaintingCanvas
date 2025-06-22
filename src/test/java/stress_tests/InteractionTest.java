@@ -7,6 +7,7 @@ import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.extensions.InfoDisplay;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -53,6 +54,22 @@ public class InteractionTest {
                 c = !c;
                 if (c) canvas.setBackgroundColor(new Color(240, 240, 240));
                 else canvas.setBackgroundColor(new Color(255, 255, 255));
+            }
+            if (canvas.keyDown(KeyEvent.VK_UP)) {
+                shapes.forEach(d -> d.moveVertical(-1));
+                canvas.sleep();
+            }
+            if (canvas.keyDown(KeyEvent.VK_DOWN)) {
+                shapes.forEach(d -> d.moveVertical(1));
+                canvas.sleep();
+            }
+            if (canvas.keyDown(KeyEvent.VK_LEFT)) {
+                shapes.forEach(d -> d.moveHorizontal(-1));
+                canvas.sleep();
+            }
+            if (canvas.keyDown(KeyEvent.VK_RIGHT)) {
+                shapes.forEach(d -> d.moveHorizontal(1));
+                canvas.sleep();
             }
             for (DrawableBase<?> c : shapes) {
                 if (c instanceof Interactable interactable) {

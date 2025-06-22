@@ -228,8 +228,8 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
 
         @Override
         public boolean clicked() {
-            synchronized (InternalCanvas.mouseEvents) {
-                var opt = InternalCanvas.mouseEvents.stream()
+            synchronized (InternalCanvas.mouseClickEvents) {
+                var opt = InternalCanvas.mouseClickEvents.stream()
                         .filter(e -> e.first.getButton() == MouseEvent.BUTTON1)
                         .findFirst();
                 if (opt.isPresent() && handled != opt.get().first) {
