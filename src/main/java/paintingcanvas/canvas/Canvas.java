@@ -1,9 +1,11 @@
 package paintingcanvas.canvas;
 
+import paintingcanvas.drawable.Interactable;
 import paintingcanvas.misc.ElementContainer;
 import paintingcanvas.InternalCanvas;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * The internal canvas component that is used to draw to the screen
  */
-public class Canvas {
+public class Canvas implements Interactable {
     /**
      * Initializes the canvas with a default size of 900x600
      * and a title of "Canvas"
@@ -209,5 +211,31 @@ public class Canvas {
      */
     public void atomic(Runnable r) {
         ElementContainer.atomic(r);
+    }
+
+    @Override
+    public boolean intersects(Point pos) {
+        return pos.x > 0 && pos.x < getWidth() && pos.y > 0 && pos.y < getHeight();
+    }
+
+    @Override
+    public boolean hovered() {
+        return InternalCanvas.initialized && getMousePos() != null;
+    }
+
+    MouseEvent handled = null;
+
+    @Override
+    public boolean clicked() {
+        synchronized (InternalCanvas.mouseEvents) {
+            var opt = InternalCanvas.mouseEvents.stream()
+                    .filter(e -> e.first.getButton() == MouseEvent.BUTTON1)
+                    .findFirst();
+            if (opt.isPresent() && handled != opt.get().first) {
+                handled = opt.get().first;
+                return intersects(handled.getPoint());
+            }
+        }
+        return false;
     }
 }

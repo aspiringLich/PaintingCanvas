@@ -6,23 +6,25 @@ import paintingcanvas.canvas.CanvasOptions;
 import paintingcanvas.canvas.CanvasPanel;
 import paintingcanvas.canvas.RenderLifecycle;
 import paintingcanvas.misc.ElementContainer;
+import paintingcanvas.misc.Tuple;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Vector;
 
 /**
  * <p>
- *     Static class that handles all the internal stuff in the package;
- *     Cleans up documentation for {@link paintingcanvas.canvas.Canvas}
+ * Static class that handles all the internal stuff in the package;
+ * Cleans up documentation for {@link paintingcanvas.canvas.Canvas}
  * </p>
  * <p>
- *     Also yes everything is static under the hood sue me
+ * Also yes everything is static under the hood sue me
  * </p>
  * <p>
- *     An instance of the globally accessible canvas object can simply be
- *     accessed with {@link InternalCanvas#canvas}
+ * An instance of the globally accessible canvas object can simply be
+ * accessed with {@link InternalCanvas#canvas}
  * </p>
  */
 public class InternalCanvas {
@@ -75,6 +77,10 @@ public class InternalCanvas {
      */
     public static Point mousePosition = null;
     /**
+     * The list of mouse events that have been fired
+     */
+    public static final Vector<Tuple<MouseEvent, Integer>> mouseEvents = new Vector<>();
+    /**
      * The options for the behavior of the canvas, see {@link CanvasOptions}
      */
     public static CanvasOptions options = null;
@@ -82,5 +88,6 @@ public class InternalCanvas {
      * A CanvasComponent, which handles all the rendering n stuff
      */
     public static CanvasPanel panel = null;
+
     public static Canvas canvas = null;
 }

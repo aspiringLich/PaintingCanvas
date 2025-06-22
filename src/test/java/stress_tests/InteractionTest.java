@@ -15,6 +15,8 @@ public class InteractionTest {
         return new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
     }
 
+    static boolean c = false;
+
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
         new InfoDisplay().attach();
@@ -47,10 +49,19 @@ public class InteractionTest {
         }
 
         while (true) {
+            if (canvas.clicked()) {
+                c = !c;
+                if (c) canvas.setBackgroundColor(new Color(240, 240, 240));
+                else canvas.setBackgroundColor(new Color(255, 255, 255));
+            }
             for (DrawableBase<?> c : shapes) {
                 if (c instanceof Interactable interactable) {
                     if (interactable.hovered()) {
                         c.setColor(randomColor());
+                    }
+                    if (interactable.clicked()) {
+                        c.setPos((int) (Math.random() * (canvas.getWidth() - 100) + 50), (int) (Math.random() * (canvas.getHeight() - 100) + 50));
+                        c.setRotation(Math.random() * 360);
                     }
                 }
             }

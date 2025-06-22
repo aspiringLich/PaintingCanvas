@@ -6,6 +6,7 @@ import paintingcanvas.misc.Anchor;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 
@@ -188,7 +189,7 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         }
     }
 
-    public abstract static class InteractableShape<T extends Drawable<T>> extends Shape<T> implements Interactable<T> {
+    public abstract static class InteractableShape<T extends Drawable<T>> extends Shape<T> implements Interactable {
         public InteractableShape(int x, int y, Color color) {
             super(x, y, color);
         }
@@ -221,6 +222,22 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
                 throw new CanvasNotInitializedException();
             }
             return intersects(InternalCanvas.canvas.getMousePos());
+        }
+
+        MouseEvent handled = null;
+
+        @Override
+        public boolean clicked() {
+            synchronized (InternalCanvas.mouseEvents) {
+                var opt = InternalCanvas.mouseEvents.stream()
+                        .filter(e -> e.first.getButton() == MouseEvent.BUTTON1)
+                        .findFirst();
+                if (opt.isPresent() && handled != opt.get().first) {
+                    handled = opt.get().first;
+                    return intersects(handled.getPoint());
+                }
+            }
+            return false;
         }
     }
 }

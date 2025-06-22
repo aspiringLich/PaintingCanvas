@@ -1,9 +1,12 @@
 package paintingcanvas.canvas;
 
 import paintingcanvas.InternalCanvas;
+import paintingcanvas.misc.Tuple;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -33,7 +36,37 @@ public class CanvasPanel extends JPanel {
         jframe.setLocationRelativeTo(null);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.addComponentListener(new RenderLifecycle.ResizeListener(this));
+        jframe.getContentPane().addMouseListener(new MouseListenerImpl());
         jframe.setVisible(true);
+    }
+
+    static class MouseListenerImpl implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            synchronized (InternalCanvas.mouseEvents) {
+                if (InternalCanvas.mouseEvents.size() > 100) {
+                    System.err.println("Too many mouse events! Dropping...");
+                    return;
+                }
+                InternalCanvas.mouseEvents.add(new Tuple<>(e, 2));
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
 
     @Override
@@ -110,6 +143,14 @@ public class CanvasPanel extends JPanel {
                 }
             });
         }
+        synchronized (InternalCanvas.mouseEvents) {
+            for (var event : InternalCanvas.mouseEvents) {
+                event.second--;
+            }
+            InternalCanvas.mouseEvents
+                    .removeIf(e -> e.second <= 0);
+        }
+
         InternalCanvas.renderLifecycles.forEach(e -> {
             var ig_temp = (Graphics2D) ig_copy.create();
             e.postRender(ig_temp);
