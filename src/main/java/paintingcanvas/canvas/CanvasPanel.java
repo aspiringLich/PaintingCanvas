@@ -90,7 +90,7 @@ public class CanvasPanel extends JPanel {
 
         ig.setColor(options.backgroundColor);
         ig.fillRect(0, 0, getWidth(), getHeight());
-        synchronized (InternalCanvas.translation) {
+        synchronized (InternalCanvas.translationSync) {
 //            System.out.println(canvas.translation);
             ig.translate((int) InternalCanvas.translation.x, (int) InternalCanvas.translation.y);
         }

@@ -1,12 +1,9 @@
 package paintingcanvas.drawable;
 
-import paintingcanvas.InternalCanvas;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Point2D;
 
 /**
  * A Rectangle element.
@@ -15,6 +12,7 @@ import java.awt.geom.Point2D;
  * Rectangle rectangle = new Rectangle(100, 100, 20, 30);
  * }</pre>
  */
+@SuppressWarnings("unused")
 public class Rectangle extends DrawableBase.Shape<Rectangle> implements Interactable {
     int width, height;
 

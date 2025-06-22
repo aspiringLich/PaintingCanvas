@@ -125,7 +125,7 @@ public interface RenderLifecycle {
                 return;
             }
 
-            synchronized (InternalCanvas.translation) {
+            synchronized (InternalCanvas.translationSync) {
                 InternalCanvas.translation.setLocation(-xDiff / 2f, -yDiff / 2f);
             }
 

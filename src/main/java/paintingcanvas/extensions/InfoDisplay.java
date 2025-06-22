@@ -13,6 +13,7 @@ import java.awt.*;
  * new InfoDisplay().attach();
  * }</pre>
  */
+@SuppressWarnings("unused")
 public class InfoDisplay implements RenderLifecycle {
     private final Stroke dashStroke = new BasicStroke(
             2f,

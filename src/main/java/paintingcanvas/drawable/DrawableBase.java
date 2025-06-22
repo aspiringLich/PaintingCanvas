@@ -8,8 +8,6 @@ import paintingcanvas.misc.ElementContainer;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Point2D;
-import java.util.Optional;
 
 public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>, Positionable<T>, Colorable<T> {
     int layer = 0;

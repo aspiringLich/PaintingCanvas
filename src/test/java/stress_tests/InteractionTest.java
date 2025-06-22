@@ -1,13 +1,10 @@
 package stress_tests;
 
-import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.Canvas;
 import paintingcanvas.drawable.*;
-import paintingcanvas.drawable.Image;
 import paintingcanvas.drawable.Rectangle;
 import paintingcanvas.extensions.FrameCounter;
 import paintingcanvas.extensions.InfoDisplay;
-import paintingcanvas.misc.Anchor;
 
 import java.awt.*;
 import java.util.List;
@@ -43,9 +40,9 @@ public class InteractionTest {
             i++;
 
             if (c instanceof Interactable interactable) {
-            } else {
-                throw new RuntimeException("every shape must implement Interactable");
+                continue;
             }
+            throw new RuntimeException("every shape must implement Interactable");
         }
 
         while (true) {

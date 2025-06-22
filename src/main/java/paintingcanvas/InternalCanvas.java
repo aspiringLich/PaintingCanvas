@@ -5,11 +5,9 @@ import paintingcanvas.canvas.Canvas;
 import paintingcanvas.canvas.CanvasOptions;
 import paintingcanvas.canvas.CanvasPanel;
 import paintingcanvas.canvas.RenderLifecycle;
-import paintingcanvas.drawable.Drawable;
 import paintingcanvas.misc.ElementContainer;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Vector;
@@ -64,7 +62,14 @@ public class InternalCanvas {
      * the initial size of the Canvas
      */
     public static Dimension startSize = null;
+    /**
+     * The translation of the canvas, used for centering and panning
+     */
     public static Point2D.Float translation = null;
+    /**
+     * Sync for translation: Use when modifying the translation
+     */
+    public static final Object translationSync = new Object();
     /**
      * The current mouse position on the canvas, if anything.
      */

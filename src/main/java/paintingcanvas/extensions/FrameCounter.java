@@ -4,7 +4,6 @@ import paintingcanvas.InternalCanvas;
 import paintingcanvas.canvas.RenderLifecycle;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
