@@ -57,28 +57,6 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
     }
 
     /**
-     * @return the mouse position transformed to the same coordinate space as the {@link #draw(Graphics2D)} method, or
-     *         null if the mouse position cannot be determined or the transform is not set.
-     */
-    Point transformedMousePos() {
-        if (this.transform == null || InternalCanvas.canvas == null)
-            return null;
-
-        var pos = InternalCanvas.canvas.getMousePos();
-
-        if (pos == null) return null;
-        var tPos = new Point();
-
-        try {
-            transform.inverseTransform(pos, tPos);
-        } catch (NoninvertibleTransformException e) {
-            return null;
-        }
-
-        return tPos;
-    }
-
-    /**
      * Modify the transform of the graphics context after rotating / translating from the Drawable's position and
      * rotation.
      */
@@ -140,24 +118,6 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         return this.color;
     }
 
-    public abstract static class Shape<T extends Drawable<T>> extends OutlineableDrawableBase<T> implements Anchorable<T> {
-        Anchor anchor = Anchor.CENTER;
-
-        public Shape(int x, int y, Color color) {
-            super(x, y, color);
-        }
-
-        @Override
-        public void internalSetAnchor(Anchor anchor) {
-            this.anchor = anchor;
-        }
-
-        @Override
-        public Anchor getAnchor() {
-            return null;
-        }
-    }
-
     public abstract static class OutlineableDrawableBase<T extends Drawable<T>> extends DrawableBase<T> implements Outlineable<T> {
         Stroke outlineStroke = null;
         Color outlineColor = Color.BLACK;
@@ -207,6 +167,60 @@ public abstract class DrawableBase<T extends Drawable<T>> implements Drawable<T>
         @Override
         public void internalSetFilled(boolean filled) {
             this.filled = filled;
+        }
+    }
+
+    public abstract static class Shape<T extends Drawable<T>> extends OutlineableDrawableBase<T> implements Anchorable<T> {
+        Anchor anchor = Anchor.CENTER;
+
+        public Shape(int x, int y, Color color) {
+            super(x, y, color);
+        }
+
+        @Override
+        public void internalSetAnchor(Anchor anchor) {
+            this.anchor = anchor;
+        }
+
+        @Override
+        public Anchor getAnchor() {
+            return null;
+        }
+    }
+
+    public abstract static class InteractableShape<T extends Drawable<T>> extends Shape<T> implements Interactable<T> {
+        public InteractableShape(int x, int y, Color color) {
+            super(x, y, color);
+        }
+
+        @Override
+        public boolean intersects(Point pos) {
+            if (this.transform == null || pos == null)
+                return false;
+
+            var tPos = new Point();
+
+            try {
+                transform.inverseTransform(pos, tPos);
+            } catch (NoninvertibleTransformException e) {
+                return false;
+            }
+
+            return intersectsInDrawSpace(tPos);
+        }
+
+        /**
+         * Check if the point intersects with the element in the same coordinate space as the {@link #draw(Graphics2D)}
+         * call.
+         */
+        abstract boolean intersectsInDrawSpace(Point pos);
+
+        @Override
+        public boolean hovered() {
+            if (!InternalCanvas.initialized) {;
+                throw new CanvasNotInitializedException();
+            }
+            return intersects(InternalCanvas.canvas.getMousePos());
         }
     }
 }

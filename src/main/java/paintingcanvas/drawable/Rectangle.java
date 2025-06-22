@@ -13,7 +13,7 @@ import java.awt.geom.AffineTransform;
  * }</pre>
  */
 @SuppressWarnings("unused")
-public class Rectangle extends DrawableBase.Shape<Rectangle> implements Interactable {
+public class Rectangle extends DrawableBase.InteractableShape<Rectangle> {
     int width, height;
 
     /**
@@ -99,10 +99,7 @@ public class Rectangle extends DrawableBase.Shape<Rectangle> implements Interact
     }
 
     @Override
-    public boolean hovered() {
-        var pos = transformedMousePos();
-        if (pos == null) return false;
-
+    boolean intersectsInDrawSpace(Point pos) {
         return pos.x >= -width / 2 && pos.x <= width / 2
                 && pos.y >= -height / 2 && pos.y <= height / 2;
     }

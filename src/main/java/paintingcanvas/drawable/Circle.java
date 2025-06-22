@@ -3,6 +3,7 @@ package paintingcanvas.drawable;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * A Circle element.
@@ -11,7 +12,7 @@ import java.awt.*;
  * Circle circle = new Circle(100, 100, 20);
  * }</pre>
  */
-public class Circle extends DrawableBase.Shape<Circle> {
+public class Circle extends DrawableBase.InteractableShape<Circle> {
     int radius;
 
     /**
@@ -68,8 +69,8 @@ public class Circle extends DrawableBase.Shape<Circle> {
     @Override
     protected void drawFill(Graphics2D g) {
         g.fillOval(
-                (int) (radius * (-1 - 2 * anchor.x)),
-                (int) (radius * (-1 - 2 * anchor.y)),
+                -radius,
+                -radius,
                 radius * 2,
                 radius * 2
         );
@@ -78,11 +79,21 @@ public class Circle extends DrawableBase.Shape<Circle> {
     @Override
     protected void drawOutline(Graphics2D g) {
         g.drawOval(
-                (int) (radius * (-1 - 2 * anchor.x)),
-                (int) (radius * (-1 - 2 * anchor.x)),
+                -radius,
+                -radius,
                 radius * 2,
                 radius * 2
         );
+    }
+
+    @Override
+    void postTransform(AffineTransform transform) {
+        transform.translate(-radius * anchor.x * 2, -radius * anchor.y * 2);
+    }
+
+    @Override
+    boolean intersectsInDrawSpace(Point pos) {
+        return pos.x * pos.x + pos.y * pos.y <= radius * radius;
     }
 
     @Override

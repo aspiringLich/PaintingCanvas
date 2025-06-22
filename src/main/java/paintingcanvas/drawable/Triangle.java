@@ -3,6 +3,7 @@ package paintingcanvas.drawable;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * A Triangle element.
@@ -11,7 +12,7 @@ import java.awt.*;
  * Triangle triangle = new Triangle(100, 100, 20, 30);
  * }</pre>
  */
-public class Triangle extends DrawableBase.Shape<Triangle> {
+public class Triangle extends DrawableBase.InteractableShape<Triangle> {
     int width;
     int height;
 
@@ -71,13 +72,23 @@ public class Triangle extends DrawableBase.Shape<Triangle> {
     }
 
     private java.awt.Polygon getPolygon() {
-        var poly = new java.awt.Polygon(
+        return new java.awt.Polygon(
                 new int[]{-width / 2, width / 2, 0},
                 new int[]{height / 2, height / 2, -height / 2},
                 3
         );
-        poly.translate((int) (width * -anchor.x), (int) (height * -anchor.y));
-        return poly;
+    }
+
+    @Override
+    void postTransform(AffineTransform transform) {
+        transform.translate(-width * anchor.x, -height * anchor.y);
+    }
+
+    @Override
+    boolean intersectsInDrawSpace(Point pos) {
+        var y = ((double)pos.y) / height;
+        var x = ((double)pos.x) / width;
+        return (Math.abs(2.0 * x) - 0.5) <= y && y <= 0.5;
     }
 
     /**

@@ -3,6 +3,7 @@ package paintingcanvas.drawable;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * An <a href="https://en.wikipedia.org/wiki/Ellipse">ellipse</a> element.
@@ -11,7 +12,7 @@ import java.awt.*;
  * Ellipse ellipse = new Ellipse(100, 100, 20, 30);
  * }</pre>
  */
-public class Ellipse extends DrawableBase.Shape<Ellipse> {
+public class Ellipse extends DrawableBase.InteractableShape<Ellipse> {
     int width;
     int height;
 
@@ -73,8 +74,8 @@ public class Ellipse extends DrawableBase.Shape<Ellipse> {
     @Override
     protected void drawOutline(Graphics2D gc) {
         gc.drawOval(
-                (int) (width * (-0.5 - anchor.x)),
-                (int) (height * (-0.5 - anchor.y)),
+                (int) (width * -0.5),
+                (int) (height * -0.5),
                 width,
                 height
         );
@@ -83,11 +84,23 @@ public class Ellipse extends DrawableBase.Shape<Ellipse> {
     @Override
     protected void drawFill(Graphics2D gc) {
         gc.fillOval(
-                (int) (width * (-0.5 - anchor.x)),
-                (int) (height * (-0.5 - anchor.y)),
+                (int) (width * -0.5),
+                (int) (height * -0.5),
                 width,
                 height
         );
+    }
+
+    @Override
+    void postTransform(AffineTransform transform) {
+        transform.translate(-width * anchor.x, -height * anchor.y);
+    }
+
+    @Override
+    boolean intersectsInDrawSpace(Point pos) {
+        var rx = width * 0.5;
+        var ry = height * 0.5;
+        return ((pos.x * pos.x) / (rx * rx) + (pos.y * pos.y) / (ry * ry)) <= 1;
     }
 
     @Override

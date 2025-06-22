@@ -3,6 +3,7 @@ package paintingcanvas.drawable;
 import paintingcanvas.misc.Misc;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 /**
  * A Square element.
@@ -11,7 +12,8 @@ import java.awt.*;
  * Square square = new Square(100, 100, 30);
  * }</pre>
  */
-public class Square extends DrawableBase.Shape<Square> {
+@SuppressWarnings("unused")
+public class Square extends DrawableBase.InteractableShape<Square> {
     int size;
 
     /**
@@ -68,8 +70,8 @@ public class Square extends DrawableBase.Shape<Square> {
     @Override
     void drawFill(Graphics2D g) {
         g.fillRect(
-                (int) (size * (-0.5 - anchor.x)),
-                (int) (size * (-0.5 - anchor.y)),
+                (int) (size * -0.5),
+                (int) (size * -0.5),
                 size,
                 size
         );
@@ -78,11 +80,22 @@ public class Square extends DrawableBase.Shape<Square> {
     @Override
     void drawOutline(Graphics2D g) {
         g.drawRect(
-                (int) (size * (-0.5 - anchor.x)),
-                (int) (size * (-0.5 - anchor.y)),
+                (int) (size * -0.5),
+                (int) (size * -0.5),
                 size,
                 size
         );
+    }
+
+    @Override
+    void postTransform(AffineTransform transform) {
+        transform.translate(-size * anchor.x, -size * anchor.y);
+    }
+
+    @Override
+    boolean intersectsInDrawSpace(Point pos) {
+        return pos.x >= -size / 2 && pos.x <= size / 2
+                && pos.y >= -size / 2 && pos.y <= size / 2;
     }
 
     @Override

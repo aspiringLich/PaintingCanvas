@@ -17,21 +17,22 @@ public class InteractionTest {
 
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
+        new InfoDisplay().attach();
         new FrameCounter().lines(() -> new String[]{
                 String.format("Frame: %d", canvas.getFrame()),
                 String.format("Used Memory: %dmb", (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000 / 1000),
         }).attach();
-        new InfoDisplay().attach();
 
         List<DrawableBase<?>> shapes = List.of(new DrawableBase<?>[]{
-                new Rectangle(0, 0, 150, 200, randomColor()),
-//                new Triangle(0, 0, 200, 150, randomColor()),
-//                new Ellipse(0, 0, 100, 200, randomColor()),
+                new Rectangle(0, 0, 60, 100, randomColor()),
+                new Ellipse(0, 0, 100, 200, randomColor()),
+                new Circle(0, 0, 30, randomColor()),
+                new Triangle(0, 0, 100, 150, randomColor()),
         });
 
 //        List<DrawableBase<?>> shapes = List.of(new DrawableBase<?>[]{s1, s5, s6});
 
-        int space = 200;
+        int space = 100;
         int i = 0;
         int cols = canvas.getWidth() / 100 - 2;
         for (DrawableBase<?> c : shapes) {

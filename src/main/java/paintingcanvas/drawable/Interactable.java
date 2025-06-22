@@ -1,9 +1,23 @@
 package paintingcanvas.drawable;
 
-public interface Interactable {
+import java.awt.*;
+
+public interface Interactable<T extends Drawable<T>> extends Drawable<T> {
     /**
-     * Check if the element is currently being hovered over.
-     * @return true if the element is hovered, false otherwise
+     * Check if the point intersects with the element.
+     * @return true if the point intersects with the element, false otherwise.
+     */
+    boolean intersects(Point pos);
+
+    /**
+     * Check if the element is currently being hovered over by the mouse.
+     * @return true if the element is hovered, false otherwise.
      */
     boolean hovered();
+
+//    /**
+//     * Check if the element has been clicked by the mouse.
+//     * @return true if the element is clicked, false otherwise.
+//     */
+//    boolean clicked();
 }
