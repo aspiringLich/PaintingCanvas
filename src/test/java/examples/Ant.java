@@ -13,7 +13,7 @@ public class Ant {
 
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
-        var canvas = new Canvas(2000, 1000, "Langton's Ant");
+        var canvas = new Canvas(800, 400, "Langton's Ant");
 //        var rec = new Recorder().attach().record(Path.of("rec"), "png");
         new FrameCounter().line(() -> String.format("Step: %d", tick)).attach();
         var field = new Field(canvas.getWidth() / PIXEL_SIZE + 1, canvas.getHeight() / PIXEL_SIZE + 1);

@@ -130,12 +130,6 @@ public class CanvasPanel extends JPanel {
                 // remove the animation
                 animations.remove(i);
                 i--;
-
-                // unblock if no more animations
-                if (!animations.isEmpty()) continue;
-                synchronized (InternalCanvas.animationSync) {
-                    InternalCanvas.animationSync.notifyAll();
-                }
             }
             if (animations.isEmpty()) {
                 // if there are no animations, notify the animation sync
