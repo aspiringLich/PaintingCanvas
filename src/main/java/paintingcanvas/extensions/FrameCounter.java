@@ -25,7 +25,7 @@ public class FrameCounter implements RenderLifecycle {
     int dataPoints = 200;
     List<GetLines> lines = new ArrayList<>();
     long lastFrame = System.currentTimeMillis();
-    Font font;
+    Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
 
     /**
      * Create a new FrameCounter with default settings:
@@ -37,7 +37,6 @@ public class FrameCounter implements RenderLifecycle {
      * </ul>
      */
     public FrameCounter() {
-        this.font = new Font(Font.DIALOG, Font.PLAIN, 12);
     }
 
     /**
@@ -102,7 +101,7 @@ public class FrameCounter implements RenderLifecycle {
 
     /**
      * Sets the font used by the overlay UI.
-     * 12pt Dialog is the default.
+     * 6pt Dialog is the default.
      *
      * @param font The font to use
      * @return `this` for method chaining
@@ -135,7 +134,6 @@ public class FrameCounter implements RenderLifecycle {
 
         // Draw UI
         g.setFont(font);
-        g.setTransform(new AffineTransform());
         var fh = g.getFontMetrics().getHeight();
         var text = new ArrayList<String>();
         text.add(String.format("FPS: %d", (int) (1000 / avg)));
@@ -163,10 +161,8 @@ public class FrameCounter implements RenderLifecycle {
             frameY[inc] = (int) (per * -30 + 40 + i * fh);
         }
 
-        var stroke = g.getStroke();
         g.setStroke(new BasicStroke(BasicStroke.JOIN_ROUND));
         g.drawPolyline(frameX, frameY, size);
-        g.setStroke(stroke);
     }
 
     public interface GetLines {

@@ -17,8 +17,8 @@ public class AnchorTest {
 
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
-        new FrameCounter().attach();
         new InfoDisplay().attach();
+        new FrameCounter().attach();
 
         List<DrawableBase<?>> shapes = List.of(new DrawableBase<?>[]{
                 new Rectangle(0, 0, 50, 60, randomColor()).setAnchor(Anchor.BOTTOM_LEFT),

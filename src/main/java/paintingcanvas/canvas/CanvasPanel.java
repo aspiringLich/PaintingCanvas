@@ -48,6 +48,7 @@ public class CanvasPanel extends JPanel {
      */
     public void paintComponent(Graphics g) {
         var gc = (Graphics2D) g;
+        var gc_copy = (Graphics2D) gc.create();
         var animations = InternalCanvas.animations;
         var options = InternalCanvas.options;
 
@@ -83,6 +84,7 @@ public class CanvasPanel extends JPanel {
         // Render elements onto an image
         image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         var ig = (Graphics2D) image.getGraphics();
+        var ig_copy = (Graphics2D) ig.create();
 
         ig.setColor(options.backgroundColor);
         ig.fillRect(0, 0, getWidth(), getHeight());
@@ -91,7 +93,11 @@ public class CanvasPanel extends JPanel {
             ig.translate((int) InternalCanvas.translation.x, (int) InternalCanvas.translation.y);
         }
 
-        InternalCanvas.renderLifecycles.forEach(e -> e.preRender(ig));
+        InternalCanvas.renderLifecycles.forEach(e -> {
+            var ig_temp = (Graphics2D) ig_copy.create();
+            e.preRender(ig_temp);
+            ig_temp.dispose();
+        });
         synchronized (InternalCanvas.drawableSync) {
             InternalCanvas.elements.foreach(element -> {
                 try {
@@ -102,16 +108,30 @@ public class CanvasPanel extends JPanel {
                 }
             });
         }
-        InternalCanvas.renderLifecycles.forEach(e -> e.postRender(ig));
+        InternalCanvas.renderLifecycles.forEach(e -> {
+            var ig_temp = (Graphics2D) ig_copy.create();
+            e.postRender(ig_temp);
+            ig_temp.dispose();
+        });
+        ig_copy.dispose();
 
         // copy the image onto the screen
-        InternalCanvas.renderLifecycles.forEach(e -> e.renderStart(gc));
+        InternalCanvas.renderLifecycles.forEach(e -> {
+            var gc_temp = (Graphics2D) gc_copy.create();
+            e.renderStart(gc_temp);
+            gc_temp.dispose();
+        });
         gc.drawImage(
                 image,
                 0, 0,
                 null
         );
         ig.dispose();
-        InternalCanvas.renderLifecycles.forEach(e -> e.renderEnd(gc));
+        InternalCanvas.renderLifecycles.forEach(e -> {
+            var gc_temp = (Graphics2D) gc_copy.create();
+            e.renderEnd(gc_temp);
+            gc_temp.dispose();
+        });
+        gc_copy.dispose();
     }
 }
